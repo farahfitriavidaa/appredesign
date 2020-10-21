@@ -42,7 +42,7 @@
                                         </div>
 
                                         <div class="p-3">
-                                            <form class="form-horizontal mb-0" action="<?=base_url()?>Create/registerTelkom">
+                                            <form class="form-horizontal mb-0" action="<?=base_url()?>Create/registerTelkom" method="POST">
                                                 <input type="hidden" name="iduser" value="<?=$id?>">
                                                 <div class="form-group row">
                                                     <div class="col-12">

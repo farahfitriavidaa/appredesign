@@ -99,23 +99,38 @@ class Model_created extends CI_Model {
 	 		return $o;
  		}
 
+		public function update_pengelola($id,$data)
+ 		{
+	 		$this->db->where('IDUser',$id);
+	 		$o = $this->db->update('tb_pengelola',$data);
+	 		return $o;
+ 		}
+
+		public function update_user($id,$data)
+ 		{
+	 		$this->db->where('IDUser',$id);
+	 		$o = $this->db->update('tb_user',$data);
+	 		return $o;
+ 		}
+
 		public function update_umkm($id,$data)
  		{
-	 		$this->db->where('IDUMKM',$id);
+	 		$this->db->where('IDUser',$id);
 	 		$o = $this->db->update('tb_umkm',$data);
 	 		return $o;
  		}
 
 		public function update_telkom($id,$data)
 		{
-			$this->db->where('IDTelkom',$id);
+			$this->db->where('IDUser',$id);
 			$o = $this->db->update('tb_telkom',$data);
 			return $o;
 		}
 
 		public function login($username,$password)
- {
-	 return $this->db->query("SELECT * FROM tb_user WHERE username='$username' AND password='$password'")->row();
- }
+ 		{
+	 		return $this->db->query("SELECT * FROM tb_user WHERE username='$username' AND password='$password'")->row();
+ 		}
+
 
 }

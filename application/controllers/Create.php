@@ -155,7 +155,11 @@ class Create extends CI_Controller {
 		$pass = $this->input->post('password');
 		$cek = $this->Model_created->login($user,md5($pass));
 		if($cek->Level=='Pengelola'){
-			//isi bagian dashboard pengelola disini
+			$this->session->user = $user;
+			$data = array(
+				'akun' => $cek
+			);
+			$this->load->view('admin/dashboard',$data);
 		}else if($cek->Level=='UMKM'){
 			//isi bagian dashboard umkm disini
 		}else if($cek->Level=='CDC'){
