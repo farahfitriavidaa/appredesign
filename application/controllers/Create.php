@@ -151,20 +151,26 @@ class Create extends CI_Controller {
 
 	public function cekUser()
 	{
-		$user = $this->input->post('username');
-		$pass = $this->input->post('password');
-		$cek = $this->Model_created->login($user,md5($pass));
-		if($cek->Level=='Pengelola'){
+		$user	= $this->input->post('username');
+		$pass	= $this->input->post('password');
+		$cek	= $this->Model_created->login($user, md5($pass));
+		
+		if( $cek->Level == 'Pengelola' ){
 			$this->session->user = $user;
 			$data = array(
-				'akun' => $cek
+				'user' => $cek
 			);
 			$this->load->view('admin/dashboard',$data);
-		}else if($cek->Level=='UMKM'){
-			//isi bagian dashboard umkm disini
-		}else if($cek->Level=='CDC'){
+		}
+		else if( $cek->Level == 'UMKM' ){
+			$this->session->user = $user;
+
+			redirect('/Umkm');
+		}
+		else if( $cek->Level == 'CDC' ){
 			//isi bagian dashboard cdc disini
-		}else if($cek->Level=='Designer'){
+		}
+		else if( $cek->Level == 'Designer' ){
 			//isi bagian dashboard designer disini
 		}
 	}
