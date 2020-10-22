@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <?php $this->load->view('admin/layout/head'); ?>
+    <?php $this->load->view('umkm/layout/head'); ?>
 
     <body class="fixed-left">
 
@@ -33,7 +33,7 @@
                 <div class="content">
 
                     <!-- Top Bar Start -->
-                    <?php $this->load->view('admin/layout/navbar') ?>
+                    <?php $this->load->view('umkm/layout/navbar') ?>
                     <!-- Top Bar End -->
 
                     <div class="page-content-wrapper dashborad-v">
@@ -44,7 +44,6 @@
                                     <div class="page-title-box">
                                         <div class="btn-group float-right">
                                             <ol class="breadcrumb hide-phone p-0 m-0">
-                                                <li class="breadcrumb-item"><a href="#">Urora</a></li>
                                                 <li class="breadcrumb-item active">Dashboard</li>
                                             </ol>
                                         </div>
@@ -780,4 +779,4 @@
         <!-- END wrapper -->
 
 
-        <?php $this->load->view('admin/layout/footer') ?>
+        <?php $this->load->view('umkm/layout/footer') ?>

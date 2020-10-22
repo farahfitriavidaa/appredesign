@@ -2,19 +2,6 @@
 <div class="topbar">
 
     <nav class="navbar-custom">
-        <div class="dropdown notification-list nav-pro-img">
-
-            <div class="list-inline-item hide-phone app-search">
-                <form role="search" class="">
-                    <div class="form-group pt-1">
-                        <input type="text" class="form-control" placeholder="Search..">
-                        <a href="">
-                            <i class="fa fa-search"></i>
-                        </a>
-                    </div>
-                </form>
-            </div>
-        </div>
 
         <ul class="list-inline float-right mb-0 mr-3">
             <!-- language-->
@@ -76,7 +63,7 @@
                 <a class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown" href="#" role="button" aria-haspopup="false"
                     aria-expanded="false">
                     <i class="ti-bell noti-icon"></i>
-                    <span class="badge badge-success a-animate-blink noti-icon-badge">3</span>
+                    <span class="badge badge-danger heartbit noti-icon-badge">3</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right dropdown-arrow dropdown-menu-lg">
                     <!-- item-->
@@ -129,7 +116,7 @@
             <li class="list-inline-item dropdown notification-list">
                 <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false"
                     aria-expanded="false">
-                    <img src="<?=base_url()?>asset/admin/images/users/avatar-1.jpg" alt="user" class="rounded-circle img-thumbnail">
+                    <img src="<?=base_url()?>uploads/foto_user/umkm(random).png" alt="foto profil umkm" class="rounded-circle img-thumbnail">
                 </a>
                 <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                     <!-- item-->

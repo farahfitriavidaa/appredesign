@@ -2,9 +2,8 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-        <title>Urora - Responsive Bootstrap 4 Admin Dashboard</title>
-        <meta content="Admin Dashboard" name="description" />
-        <meta content="Mannatthemes" name="author" />
+        <title>Umkm</title>
+        <meta content="SMEspedia - Dashboard untuk UMKM yang melakukan redesign kemasan" name="description" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
         <link rel="shortcut icon" href="<?=base_url()?>asset/admin/images/favicon.ico">
