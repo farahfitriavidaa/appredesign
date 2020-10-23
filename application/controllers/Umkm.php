@@ -14,7 +14,8 @@ class Umkm extends CI_Controller {
 
 	public function index()
 	{
-        $user   = $this->Model_umkm->cekAkun( $this->session->user );
+        $this->session->id_umkm = $this->Model_umkm->getIdUmkm($user);
+        $user   = $this->Model_umkm->getUserData( $this->session->user );
         $data   = array(
             'akun' => $user
         );
@@ -32,6 +33,23 @@ class Umkm extends CI_Controller {
 
     public function lihatRequest()
     {
-        $this->load->view('umkm/lihatrequest');
+        $id_umkm        = $this->session->id_umkm;
+        $daftar_request = $this->Model_umkm->getDaftarRequest($id_umkm);
+
+        if( empty($daftar_request) ) {
+            $data = array(
+                'has_request' => false
+            );
+        }
+        else {
+            $data = array(
+                'has_request'   => true,
+                'request'       => $daftar_request
+            );
+        }
+
+        $this->load->view('umkm/lihatrequest', $data);
+
+        // var_dump($data);
     }
 }
