@@ -75,7 +75,7 @@
                                                         <input type="file" class="form-control-file" id="foto">
                                                         <small class="text-muted">Tambahkan gambaran kemasan yang sekarang dimiliki</small>
                                                     </div> -->
-                                                    
+
                                                     <div class="form-group bmd-form-group">
                                                         <button class="btn btn-secondary border-0">Batal</button>
                                                         <button type="submit" class="btn btn-primary btn-raised">Kirim</button>

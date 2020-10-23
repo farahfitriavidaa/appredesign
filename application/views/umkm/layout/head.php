@@ -9,14 +9,17 @@
         <link rel="shortcut icon" href="<?=base_url()?>asset/admin/images/favicon.ico">
 
         <!--Morris Chart CSS -->
-        <link rel="stylesheet" href="<?=base_url()?>asset/admin/plugins/fullcalendar/vanillaCalendar.css"/>
-        <link rel="stylesheet" href="<?=base_url()?>asset/admin/plugins/jvectormap/jquery-jvectormap-2.0.2.css">
-        <link rel="stylesheet" href="<?=base_url()?>asset/admin/plugins/chartist/css/chartist.min.css">
-        <link rel="stylesheet" href="<?=base_url()?>asset/admin/plugins/morris/morris.css">
-        <link rel="stylesheet" href="<?=base_url()?>asset/admin/plugins/metro/MetroJs.min.css">
+        <!-- <link rel="stylesheet" href="<?=base_url()?>asset/admin/plugins/fullcalendar/vanillaCalendar.css"/> -->
+        <!-- <link rel="stylesheet" href="<?=base_url()?>asset/admin/plugins/jvectormap/jquery-jvectormap-2.0.2.css"> -->
+        <!-- <link rel="stylesheet" href="<?=base_url()?>asset/admin/plugins/chartist/css/chartist.min.css"> -->
+        <!-- <link rel="stylesheet" href="<?=base_url()?>asset/admin/plugins/morris/morris.css"> -->
+        <!-- <link rel="stylesheet" href="<?=base_url()?>asset/admin/plugins/metro/MetroJs.min.css"> -->
 
-        <link rel="stylesheet" href="<?=base_url()?>asset/admin/plugins/carousel/owl.carousel.min.css">
-        <link rel="stylesheet" href="<?=base_url()?>asset/admin/plugins/carousel/owl.theme.default.min.css">
+        <!-- <link rel="stylesheet" href="<?=base_url()?>asset/admin/plugins/carousel/owl.carousel.min.css"> -->
+        <!-- <link rel="stylesheet" href="<?=base_url()?>asset/admin/plugins/carousel/owl.theme.default.min.css"> -->
+
+        <link href="<?=base_url()?>asset/admin/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+        <link href="<?=base_url()?>asset/admin/plugins/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
         <link rel="stylesheet" href="<?=base_url()?>asset/admin/plugins/animate/animate.css" type="text/css">
         <link rel="stylesheet" href="<?=base_url()?>asset/admin/css/bootstrap-material-design.min.css" type="text/css">

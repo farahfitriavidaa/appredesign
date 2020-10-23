@@ -26,6 +26,12 @@
 <!-- <script src="<?=base_url()?>asset/admin/plugins/morris/morris.min.js"></script> -->
 <script src="<?=base_url()?>asset/admin/pages/dashborad.js"></script>
 
+<script src="<?=base_url()?>asset/admin/pages/datatables.init.js"></script>
+<script src="<?=base_url()?>asset/admin/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="<?=base_url()?>asset/admin/plugins/datatables/dataTables.bootstrap4.min.js"></script>
+<script src="<?=base_url()?>asset/admin/plugins/datatables/dataTables.responsive.min.js"></script>
+<script src="<?=base_url()?>asset/admin/plugins/datatables/responsive.bootstrap4.min.js"></script>
+
 <!-- App js -->
 <script src="<?=base_url()?>asset/admin/js/app.js"></script>
 
