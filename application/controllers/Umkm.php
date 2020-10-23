@@ -5,8 +5,8 @@ class Umkm extends CI_Controller {
 	public function __construct()
 	{
         parent::__construct();
-        
-        if( !$this->session->has_userdata('user') ) 
+
+        if( !$this->session->has_userdata('user') )
             redirect('Welcome/login');
 
 		$this->load->model('Model_umkm');
@@ -14,20 +14,25 @@ class Umkm extends CI_Controller {
 
 	public function index()
 	{
-        $this->session->id_umkm = $this->Model_umkm->getIdUmkm($user);
+        $id_user    = $this->Model_umkm->getIdUser( $this->session->user );
+        $this->session->id_user = $id_user->IDUser;
+
+        $id_umkm    = $this->Model_umkm->getIdUmkm( $this->session->id_user );
+        $this->session->id_umkm = $id_umkm->IDUMKM;
+
         $user   = $this->Model_umkm->getUserData( $this->session->user );
         $data   = array(
             'akun' => $user
         );
         $this->load->view('umkm/dashboard', $data);
-        
+
         // var_dump($data);
     }
 
     public function buatRequest()
 	{
         $this->load->view('umkm/buatrequest');
-        
+
         // var_dump($data);
     }
 
@@ -51,5 +56,10 @@ class Umkm extends CI_Controller {
         $this->load->view('umkm/lihatrequest', $data);
 
         // var_dump($data);
+    }
+
+    public function cekSession()
+    {
+        print_r($_SESSION);
     }
 }
