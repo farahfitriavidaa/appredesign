@@ -3,7 +3,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
         <title>Umkm</title>
-        <meta content="SMEspedia - Dashboard untuk UMKM yang melakukan redesign kemasan" name="description" />
+        <meta content="SMEspedia - Dashboard untuk UMKM yang melakukan re-design kemasan" name="description" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
         <link rel="shortcut icon" href="<?=base_url()?>asset/admin/images/favicon.ico">

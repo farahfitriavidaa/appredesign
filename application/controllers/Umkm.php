@@ -22,11 +22,7 @@ class Umkm extends CI_Controller {
 
     public function buatRequest()
 	{
-        $user   = $this->Model_umkm->cekAkun( $this->session->user );
-        $data   = array(
-            'user' => $user
-        );
-        $this->load->view('umkm/dashboard', $data);
+        $this->load->view('umkm/buatrequest');
         
         // var_dump($data);
     }

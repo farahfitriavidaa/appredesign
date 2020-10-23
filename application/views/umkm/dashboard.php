@@ -21,7 +21,7 @@
                     </div>
                 </div>
 
-              <?php $this->load->view('umkm/layout/sidebar') ?>
+                <?php $this->load->view('umkm/layout/sidebar') ?>
                 <!-- end sidebarinner -->
             </div>
             <!-- Left Sidebar End -->
@@ -777,6 +777,5 @@
 
         </div>
         <!-- END wrapper -->
-
 
         <?php $this->load->view('umkm/layout/footer') ?>
