@@ -158,7 +158,7 @@ class Create extends CI_Controller {
 		if( $cek->Level == 'Pengelola' ){
 			$this->session->user = $user;
 			$data = array(
-				'user' => $cek
+				'akun' => $cek
 			);
 			$this->load->view('admin/dashboard',$data);
 		}
