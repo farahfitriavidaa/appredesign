@@ -67,6 +67,58 @@ class Model_created extends CI_Model {
          return $id;
        }
 
+			 public function idPesan()
+        {
+          $user = "PS";
+          $nomer = "SELECT MAX(TRIM(REPLACE(IDPesan,'PS',''))) as a FROM tb_pemesanan WHERE IDPesan
+          LIKE '$user%'";
+          $baris = $this->db->query($nomer);
+          $akhir =  $baris->row()->a;
+          $akhir++;
+          $id =str_pad($akhir, 4, "0", STR_PAD_LEFT);
+          $id = "PS".$id;
+          return $id;
+        }
+
+				public function idDiskum()
+				 {
+					 $user = "DD";
+					 $nomer = "SELECT MAX(TRIM(REPLACE(IDDiskum,'DD',''))) as a FROM tb_diskusiumkm WHERE IDDiskum
+					 LIKE '$user%'";
+					 $baris = $this->db->query($nomer);
+					 $akhir =  $baris->row()->a;
+					 $akhir++;
+					 $id =str_pad($akhir, 4, "0", STR_PAD_LEFT);
+					 $id = "DD".$id;
+					 return $id;
+				 }
+
+				 public function idDispro()
+				  {
+				 	 $user = "DR";
+				 	 $nomer = "SELECT MAX(TRIM(REPLACE(IDDispro,'DR',''))) as a FROM tb_diskusiproduk WHERE IDDispro
+				 	 LIKE '$user%'";
+				 	 $baris = $this->db->query($nomer);
+				 	 $akhir =  $baris->row()->a;
+				 	 $akhir++;
+				 	 $id =str_pad($akhir, 4, "0", STR_PAD_LEFT);
+				 	 $id = "DR".$id;
+				 	 return $id;
+				  }
+
+					public function idDataUMKM()
+ 				  {
+ 				 	 $user = "DU";
+ 				 	 $nomer = "SELECT MAX(TRIM(REPLACE(IDDataUMKM,'DU',''))) as a FROM tb_umkm_data WHERE IDDataUMKM
+ 				 	 LIKE '$user%'";
+ 				 	 $baris = $this->db->query($nomer);
+ 				 	 $akhir =  $baris->row()->a;
+ 				 	 $akhir++;
+ 				 	 $id =str_pad($akhir, 4, "0", STR_PAD_LEFT);
+ 				 	 $id = "DU".$id;
+ 				 	 return $id;
+ 				  }
+
 		public function create_user($data)
 		{
 			$this->db->insert('tb_user',$data);

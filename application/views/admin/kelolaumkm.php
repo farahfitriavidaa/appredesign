@@ -79,6 +79,7 @@
                                                   <th>No Telp</th>
                                                   <th>Email</th>
                                                   <th>Regional</th>
+                                                  <th>Data UMKM</th>
                                                   <th>Status</th>
                                                   <th>Aksi</th>
                                               </tr>
@@ -95,9 +96,15 @@
                                                   <td><?php echo $a->No_telp ?></td>
                                                   <td><?php echo $a->Email ?></td>
                                                   <td><?php echo $a->Regional ?></td>
+                                                  <td>
+                                                    <a class="btn btn-raised btn-info" href="" data-toggle="modal" data-target="#dataUMKM<?=$a->IDUser?>">
+                                                      <i class="mdi mdi-information mr-2 text-white-400"></i>
+                                                        Data UMKM
+                                                    </a>
+                                                  </td>
                                                   <td><?php echo $a->Status ?></td>
                                                   <td>
-                                                    <a class="btn btn-raised btn-info" href="<?=base_url()?>Admin/editAdmin/<?=$a->IDUser?>">
+                                                    <a class="btn btn-raised btn-info" href="" data-toggle="modal" data-target="#detail<?=$a->IDUser?>">
                                                       <i class="mdi mdi-information mr-2 text-white-400"></i>
                                                         Detail
                                                     </a>
@@ -274,6 +281,85 @@
                         </div>
                         <!-- /.modal -->
                         <?php } ?>
+
+                        <?php foreach ($umkm as $key) { ?>
+                        <div class="modal fade" id="detail<?=$key->IDUser?>" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="ExampleModalLabel">
+                        <div class="modal-dialog" role="document">
+                         <div class="modal-content">
+                           <div class="modal-header">
+                             <h4 class="modal-title" id="ExampleModalLabel">Detail Data UMKM <?=$key->Nama_umkm?></h4>
+                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                               <span aria-hidden="true">&times;</span>
+                             </button>
+                           </div>
+                           <div class="modal-body">
+                             <form class="" action="">
+                               <table width="100%">
+                                 <tr>
+                                   <td>ID UMKM</td>
+                                   <td>:</td>
+                                   <td><input type="text" class="form-control" name="idumkm" disabled value="<?=$key->IDUMKM?>"></td>
+                                 </tr>
+                                 <tr>
+                                   <td>Username</td>
+                                   <td>:</td>
+                                   <td><input type="text" class="form-control" name="username" value="<?=$key->Username ?>"></td>
+                                 </tr>
+                                 <tr>
+                                   <td>Nama Lengkap</td>
+                                   <td>:</td>
+                                   <td><input type="text" class="form-control" name="namalengkap" value="<?=$key->Nama_lengkap ?>"></td>
+                                 </tr>
+                                 <tr>
+                                   <td>Email</td>
+                                   <td>:</td>
+                                   <td><input type="email" class="form-control" name="email" value="<?=$key->Email ?>"></td>
+                                 </tr>
+                                 <tr>
+                                   <td>Nama UMKM</td>
+                                   <td>:</td>
+                                   <td><input type="text" class="form-control" name="namaumkm" value="<?=$key->Nama_umkm ?>"></td>
+                                 </tr>
+                                 <tr>
+                                   <td>No. Telp</td>
+                                   <td>:</td>
+                                   <td><input type="text" class="form-control" name="notelp" value="<?=$key->No_telp ?>"></td>
+                                 </tr>
+                                 <tr>
+                                   <td>Regional</td>
+                                   <td>:</td>
+                                   <td><input type="text" class="form-control" name="regional" value="<?=$key->Regional ?>"></td>
+                                 </tr>
+                                 <tr>
+                                   <td>Alamat</td>
+                                   <td>:</td>
+                                   <td> <textarea class="form-control" name="alamat" rows="8" cols="80"><?=$key->Alamat?></textarea> </td>
+                                 </tr>
+                                 <tr>
+                                   <td>Status</td>
+                                   <td>:</td>
+                                   <td>
+                                        <select class="form-control" name="status">
+                                          <option value="<?=$key->Status?>"><?=$key->Status?></option>
+                                          <option value="Aktif">Aktif</option>
+                                          <option value="Tidak Aktif">Tidak Aktif</option>
+                                        </select>
+                                   </td>
+                                 </tr>
+                               </table>
+                           </div>
+                           <div class="modal-footer justify-content-between">
+                             <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Tutup</button>
+                           </div>
+                         </form>
+                         </div>
+                         <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                        </div>
+                        <!-- /.modal -->
+                        <?php } ?>
+
 
                         <?php foreach ($umkm as $key) { ?>
                         <div class="modal fade" id="edit<?=$key->IDUser?>" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="ExampleModalLabel">

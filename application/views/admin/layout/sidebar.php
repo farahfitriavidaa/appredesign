@@ -50,7 +50,7 @@
                 </a>
                 <ul class="list-unstyled">
                     <li>
-                        <a href="tables-basic.html">Pengguna</a>
+                        <a href="<?=base_url()?>Admin/kelolaPemesanan">Pengguna</a>
                     </li>
                     <li>
                         <a href="tables-datatable.html">Designer</a>

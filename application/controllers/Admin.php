@@ -312,4 +312,149 @@ class Admin extends CI_Controller {
 			redirect('Admin/kelolaUMKM');
 		}
 
+		public function kelolaPemesanan()
+		{
+			$cek = $this->Model_admin->cekAkun($this->session->user);
+			$data = array(
+				'akun'			 => $cek,
+				'pemesanan'	 => $this->Model_admin->getPemesanan(),
+				'umkm'			 => $this->Model_admin->getUMKM(),
+				'designer'	 => $this->Model_admin->getDesigner()
+			);
+			$this->load->view('admin/kelolapemesanan',$data);
+		}
+
+		public function hapusPemesanan($id)
+		{
+			$hapus = $this->Model_admin->delete_diskum($id);
+			$hapuss = $this->Model_admin->delete_pemesanan($id);
+			redirect('Admin/kelolaPemesanan');
+		}
+
+		public function tambahPemesanan()
+			{
+				if ($this->input->post('status') == 'Ada') {
+					$umkm = $this->Model_admin->getDataUMKM($this->input->post('idumkm'));
+					if (!$umkm) {
+						echo "
+	        	<script type='text/javascript'>
+	        		alert('Isi Data UMKM Terlebih Dahulu');
+	        		history.back(self);
+	        	</script>";
+					}else{
+					$cek = $this->Model_admin->getAkunPengelola($this->session->user);
+					$id 		= $this->Model_created->idPesan();
+					$idD		= $this->Model_created->idDiskum();
+					$data 	= array(
+						'IDPesan'						=> $id,
+						'IDUMKM'						=> $this->input->post('idumkm'),
+						'IDPengelola'				=> $cek->IDPengelola,
+						'IDDesigner'				=> $this->input->post('iddesigner'),
+						'Tgl_mulai'					=> $this->input->post('tglmulai'),
+						'Keterangan_design'	=> $this->input->post('keterangan'),
+						'Status'						=> '0'
+					);
+					$dataa 	= array(
+						'IDDiskum'		=> $idD,
+						'IDPengelola'	=> $cek->IDPengelola,
+						'IDPesan'			=> $id,
+						'Komentar'		=> $this->input->post('keterangan')
+					);
+					$cek	= $this->Model_admin->create_pemesanan($data);
+					$cekk = $this->Model_admin->create_diskum($dataa);
+					redirect('Admin/kelolaPemesanan');
+					}
+				}else if($this->input->post('status') == 'Tidak Ada'){
+					echo "
+        	<script type='text/javascript'>
+        		alert('Isi Data UMKM Terlebih Dahulu');
+        		history.back(self);
+        	</script>";
+				}
+			}
+
+			public function tambahDataUMKM()
+			{
+				$config['upload_path'] = "./uploads/data_umkm/foto_produk";
+				$config['allowed_types'] = "gif|jpg|png";
+				$config['max_size'] = 2000;
+				$config['encrypt_name'] = TRUE;
+
+				$this->load->library('upload',$config);
+
+				if ($this->upload->do_upload('foto_produk')) {
+				$foto = $this->upload->data();
+				$id 		= $this->Model_created->idDataUMKM();
+				$data 	= array(
+					'IDDataUMKM'				=> $id,
+					'IDUMKM'						=> $this->input->post('idumkm'),
+					'Nama_produk'				=> $this->input->post('nama_produk'),
+					'Foto_produk'				=> $foto['file_name'],
+					'Keterangan'				=> $this->input->post('keterangan'),
+				);
+				$cek	= $this->Model_admin->create_dataumkm($data);
+				}else{
+					$data 	= array(
+						'IDDataUMKM'				=> $id,
+						'IDUMKM'						=> $this->input->post('idumkm'),
+						'Nama_produk'				=> $this->input->post('nama_produk'),
+						'Foto_produk'				=> $this->input->post('foto_produk'),
+						'Keterangan'				=> $this->input->post('keterangan'),
+					);
+				}
+				redirect('Admin/kelolaPemesanan');
+				}
+
+				public function editPemesanan($value='')
+				{
+					$config['upload_path'] = "./uploads/hasil_design";
+					$config['allowed_types'] = "rar|jpg|pdf";
+					$config['max_size'] = 2000;
+					$config['encrypt_name'] = TRUE;
+
+					$this->load->library('upload',$config);
+					$id 	= $this->input->post('idpesan');
+
+					if ($this->upload->do_upload('hasil_design')) {
+					$foto = $this->upload->data();
+					$data = array(
+						'IDDesigner' 				=> $this->input->post('iddesigner'),
+						'Tgl_mulai'  				=> $this->input->post('tgl_mulai'),
+						'Tgl_akhir'	 				=> $this->input->post('tgl_akhir'),
+						'Keterangan_design'	=> $this->input->post('keterangan'),
+						'Hasil_design'			=> $foto['file_name'],
+						'Status'					  => $this->input->post('status')
+					);
+					}else{
+						$data = array(
+							'IDDesigner' 				=> $this->input->post('iddesigner'),
+							'Tgl_mulai'  				=> $this->input->post('tgl_mulai'),
+							'Tgl_akhir'	 				=> $this->input->post('tgl_akhir'),
+							'Keterangan_design'	=> $this->input->post('keterangan'),
+							'Hasil_design'			=> 'Belum ada',
+							'Status'					  => $this->input->post('status')
+						);
+					}
+					$cek = $this->Model_admin->update_pemesanan($id,$data);
+					redirect('Admin/kelolaPemesanan');
+				}
+
+				public function kelolaDataUMKM()
+				{
+					$cek = $this->Model_admin->cekAkun($this->session->user);
+					$data = array(
+						'akun'			 => $cek,
+						'dataumkm'	 => $this->Model_admin->getDataaUMKM(),
+						'umkm'			 => $this->Model_admin->getUMKM()
+					);
+					$this->load->view('admin/keloladataumkm',$data);
+				}
+
+				public function hapusDataUMKM($id)
+				{
+					$hapus = $this->Model_admin->delete_dataumkm($id);
+					redirect('Admin/kelolaDataUMKM');
+				}
+
+
 }
