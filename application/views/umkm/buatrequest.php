@@ -45,23 +45,13 @@
                     <div class="page-content-wrapper ">
 
                         <div class="container-fluid">
-
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="page-title-box">
-                                        <h4 class="page-title">Buat Request Baru</h4>
-                                    </div>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <!-- end page title end breadcrumb -->
                             <?php
                                 if($this->session->flashdata('alert')):
                                     $alert = $this->session->flashdata('alert');
                             ?>
                                 <div class="row">
                                     <div class="col-12">
-                                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        <div class="alert alert-danger alert-dismissible fade show  mb-0 mt-3" role="alert">
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
@@ -80,6 +70,16 @@
                                 </div>
                             <?php endif; ?>
                             <!-- end alert -->
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="page-title-box">
+                                        <h4 class="page-title">Buat Request Baru</h4>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <!-- end page title end breadcrumb -->
+
                             <div class="row">
                                 <div class="col-md-12 col-xl-12">
                                     <div class="card m-b-30">
@@ -113,7 +113,7 @@
                                                 <div class="form-group">
                                                     <textarea name="keterangan-desain" class="form-control" rows="3" placeholder="Keterangan mengenai desain yang diinginkan" required></textarea>
                                                 </div>
-                                                
+
                                                 <div class="form-group bmd-form-group">
                                                     <span class="text-secondary">Pilih designer</span>
                                                     <div class="form-check">

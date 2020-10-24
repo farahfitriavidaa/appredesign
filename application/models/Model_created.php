@@ -70,9 +70,9 @@ class Model_created extends CI_Model {
 	public function idDataUmkm()
 	{
 		$user	= "DU";
-		$nomer	= "SELECT MAX(TRIM(REPLACE(IDPesan,'$user',''))) as a FROM tb_pemesanan WHERE IDPesan LIKE '$user%'";
+		$nomer	= "SELECT MAX(TRIM(REPLACE(IDDataUmkm,'$user',''))) as a FROM tb_umkm_data WHERE IDDataUMKM LIKE '$user%'";
 		$baris	= $this->db->query($nomer);
-		$akhir	=  $baris->row()->a;
+		$akhir	= $baris->row()->a;
 		$akhir++;
 		$id		= str_pad($akhir, 4, "0", STR_PAD_LEFT);
 		$id		= $user.$id;
@@ -84,7 +84,7 @@ class Model_created extends CI_Model {
 		$user	= "PS";
 		$nomer	= "SELECT MAX(TRIM(REPLACE(IDPesan,'$user',''))) as a FROM tb_pemesanan WHERE IDPesan LIKE '$user%'";
 		$baris	= $this->db->query($nomer);
-		$akhir	=  $baris->row()->a;
+		$akhir	= $baris->row()->a;
 		$akhir++;
 		$id		= str_pad($akhir, 4, "0", STR_PAD_LEFT);
 		$id		= $user.$id;

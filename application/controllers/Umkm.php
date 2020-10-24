@@ -56,7 +56,7 @@ class Umkm extends CI_Controller {
 		else {
 			$data = array(
 				'has_request'	=> true,
-				'request'		=> $daftar_request
+				'requests'		=> $daftar_request
 			);
 		}
 
@@ -101,6 +101,7 @@ class Umkm extends CI_Controller {
 					'Logo_produk'		=> $logo_produk,
 					'Kemasan_produk'	=> $kemasan_produk
 				);
+
 				$this->Model_umkm->createUmkmData($data_umkm);
 
 				$id_pesan		= $this->Model_created->idPesan();
@@ -110,13 +111,16 @@ class Umkm extends CI_Controller {
 				$data_pemesanan	= array(
 					'IDPesan'			=> $id_pesan,
 					'IDUMKM'			=> $id_umkm,
-					'IDDesigner'		=> $id_designer,
-					'Status'			=> $status
+					'IDDesigner'		=> $id_designer==='0'?NULL:$id_designer,
+					'Status'			=> $status,
+					'Keterangan_design'	=> $keterangan_desain
 				);
 
 				$this->Model_umkm->createPemesanan($data_pemesanan);
 
-				$this->load->view('lihatrequest');
+				$_SESSION['alert'] = true;
+				$this->session->mark_as_flash('alert');
+				redirect('Umkm/lihatRequest');
 
 				// var_dump($alert);
 				// var_dump($data_umkm);

@@ -45,7 +45,21 @@
                     <div class="page-content-wrapper ">
 
                         <div class="container-fluid">
-
+                            <?php
+                                if($this->session->flashdata('alert')):
+                            ?>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="alert alert-primary alert-dismissible fade show mb-0 mt-3" role="alert">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            Request Anda tersimpan dan sekarang menunggu respon Pengelola
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+                            <!-- end alert -->
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="page-title-box">
@@ -78,61 +92,69 @@
                                                         </a>
                                                     </div>
                                                 </div>
-                                                
+
                                                 <table id="datatable" class="table table-striped table-bordered w-100">
                                                     <thead>
                                                     <tr>
                                                         <th>No.</th>
                                                         <th>Keterangan</th>
-                                                        <th>Tgl Request</th>
                                                         <th>Status</th>
                                                         <th>Aksi</th>
                                                     </tr>
                                                     </thead>
 
                                                     <tbody>
-                                                    <tr>
-                                                        <td>Tiger Nixon</td>
-                                                        <td>System Architect</td>
-                                                        <td>Edinburgh</td>
-                                                        <td>61</td>
-                                                        <td>2011/04/25</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Garrett Winters</td>
-                                                        <td>Accountant</td>
-                                                        <td>Tokyo</td>
-                                                        <td>63</td>
-                                                        <td>2011/07/25</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Ashton Cox</td>
-                                                        <td>Junior Technical Author</td>
-                                                        <td>San Francisco</td>
-                                                        <td>66</td>
-                                                        <td>2009/01/12</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Cedric Kelly</td>
-                                                        <td>Senior Javascript Developer</td>
-                                                        <td>Edinburgh</td>
-                                                        <td>22</td>
-                                                        <td>2012/03/29</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Airi Satou</td>
-                                                        <td>Accountant</td>
-                                                        <td>Tokyo</td>
-                                                        <td>33</td>
-                                                        <td>2008/11/28</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Sonya Frost</td>
-                                                        <td>Software Engineer</td>
-                                                        <td>Edinburgh</td>
-                                                        <td>23</td>
-                                                        <td>2008/12/13</td>
-                                                    </tr>
+                                                    <?php
+                                                        $no = 1;
+                                                        foreach ($requests as $request):
+                                                    ?>
+                                                        <tr>
+                                                            <td><?=$no++?></td>
+                                                            <td><?=$request->Keterangan_design?></td>
+                                                            <td>
+                                                                <?php switch($request->Status){
+                                                                    case 0:
+                                                                        echo 'Pending';
+                                                                        break;
+                                                                    case 1:
+                                                                        echo 'Telah didiskusikan';
+                                                                        break;
+                                                                    case 2:
+                                                                        echo 'Mulai dikerjakan desainer';
+                                                                        break;
+                                                                    case 3:
+                                                                        echo 'Selesai didesain';
+                                                                        break;
+                                                                    case 4:
+                                                                        echo 'Review hasil';
+                                                                        break;
+                                                                    case 5:
+                                                                        echo 'Desain disetujui';
+                                                                        break;
+                                                                    case 6:
+                                                                        echo 'Belum dibayar';
+                                                                        break;
+                                                                    case 7:
+                                                                        echo 'Lunas';
+                                                                        break;
+                                                                    default:
+                                                                        echo 'Pending';
+                                                                        break;
+                                                                }?>
+                                                            </td>
+                                                            <td>
+                                                            <a class="btn btn-raised btn-primary" href="#">
+                                                                Lihat Detil
+                                                            </a>
+                                                            <a class="btn btn-raised btn-secondary" href="#">
+                                                                Edit
+                                                            </a>
+                                                            <a class="btn btn-raised btn-danger" href="#">
+                                                                Hapus
+                                                            </a>
+                                                            </td>
+                                                        </tr>
+                                                    <?php endforeach; ?>
                                                     </tbody>
                                                 </table>
                                             </div>
