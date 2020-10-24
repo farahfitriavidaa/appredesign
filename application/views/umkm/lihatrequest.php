@@ -63,7 +63,7 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="page-title-box">
-                                        <h4 class="page-title">Lhat Request</h4>
+                                        <h4 class="page-title">Lihat Request</h4>
                                     </div>
                                 </div>
                                 <div class="clearfix"></div>
@@ -136,6 +136,9 @@
                                                                         break;
                                                                     case 7:
                                                                         echo 'Lunas';
+                                                                        break;
+                                                                    case 8:
+                                                                        echo 'Cancel';
                                                                         break;
                                                                     default:
                                                                         echo 'Pending';
