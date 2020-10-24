@@ -55,33 +55,95 @@
                                 <div class="clearfix"></div>
                             </div>
                             <!-- end page title end breadcrumb -->
+                            <?php
+                                if($this->session->flashdata('alert')):
+                                    $alert = $this->session->flashdata('alert');
+                            ?>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            Maaf, tidak bisa mengunggah foto atau gambar.
+                                            <ul>
+                                            <?php
+                                                foreach($alert as $a):
+                                                    if(!empty($a) && $a!=='sukses'):
+                                            ?>
+                                                        <li><?=$a?>
+                                                    <?php  endif; ?>
+                                                <?php endforeach; ?>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+                            <!-- end alert -->
                             <div class="row">
                                 <div class="col-md-12 col-xl-12">
                                     <div class="card m-b-30">
                                         <div class="card-body">
-                                            <div class="general-label">
-                                                <form class="mb-0">
-                                                    <div class="form-group">
-                                                        <textarea name="keterangan" class="form-control" id="keterangan" rows="3" placeholder="Keterangan mengenai desain yang Anda inginkan"></textarea>
-                                                    </div>
+                                            <form action="<?=base_url();?>Umkm/tambahRequest" method="POST" class="mb-0" enctype="multipart/form-data">
+                                                <div class="form-group">
+                                                    <input type="text" name="nama-produk" class="form-control" placeholder="Nama Produk" required>
+                                                </div>
 
-                                                    <div class="form-group">
-                                                        <input type="text" name="tanggal-akhir" class="form-control" data-mask="99-99-9999" placeholder="Target tanggal jadi">
-                                                        <small class="form-text text-muted">Minimal 7 hari dari hari dibuatnya request</small>
-                                                    </div>
+                                                <div class="form-group">
+                                                    <textarea name="keterangan-produk" class="form-control" rows="3" placeholder="Keterangan singkat mengenai produk Anda" required></textarea>
+                                                </div>
 
-                                                    <!-- <div class="form-group bmd-form-group">
-                                                        <label for="foto">Gambar Kemasan</label>
-                                                        <input type="file" class="form-control-file" id="foto">
-                                                        <small class="text-muted">Tambahkan gambaran kemasan yang sekarang dimiliki</small>
-                                                    </div> -->
+                                                <div class="form-group bmd-form-group">
+                                                    <label for="foto">Foto Produk</label>
+                                                    <input type="file" name="foto-produk" class="form-control-file" id="foto">
+                                                </div>
 
-                                                    <div class="form-group bmd-form-group">
-                                                        <button class="btn btn-secondary border-0">Batal</button>
-                                                        <button type="submit" class="btn btn-primary btn-raised">Kirim</button>
+                                                <div class="form-group bmd-form-group">
+                                                    <label for="logo">Logo Produk</label>
+                                                    <input type="file" name="logo-produk" class="form-control-file" id="logo">
+                                                    <small class="text-muted">Tambahkan logo produk jika ada</small>
+                                                </div>
+
+                                                <div class="form-group bmd-form-group">
+                                                    <label for="kemasan">Kemasan Produk</label>
+                                                    <input type="file" name="kemasan-produk" class="form-control-file" id="kemasan" required>
+                                                    <small class="text-muted">Tambahkan gambar kemasan yang sekarang dimiliki</small>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <textarea name="keterangan-desain" class="form-control" rows="3" placeholder="Keterangan mengenai desain yang diinginkan" required></textarea>
+                                                </div>
+                                                
+                                                <div class="form-group bmd-form-group">
+                                                    <span class="text-secondary">Pilih designer</span>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="desainer" id="tidak-ada" value="0" checked>
+                                                        <label class="form-check-label" for="tidak-ada">
+                                                            Dipilihkan pengelola saja
+                                                        </label>
                                                     </div>
-                                                </form>
-                                            </div>
+                                                    <?php
+                                                        $no = 0;
+                                                        foreach ($desainers as $desainer):
+                                                    ?>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" name="desainer" id="<?='desainer-'.$no?>" value="<?=$desainer->IDDesigner?>">
+                                                            <label class="form-check-label" for="<?='desainer-'.$no?>">
+                                                                <?=$desainer->Nama_lengkap?>
+                                                            </label>
+                                                        </div>
+                                                    <?php
+                                                        $no++;
+                                                        endforeach;
+                                                    ?>
+
+                                                </div>
+
+                                                <div class="form-group bmd-form-group">
+                                                    <button class="btn btn-secondary border-0">Batal</button>
+                                                    <button type="submit" class="btn btn-primary btn-raised">Kirim</button>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div> <!-- end col -->

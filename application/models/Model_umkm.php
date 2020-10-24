@@ -21,4 +21,13 @@ class Model_umkm extends CI_Model {
 	{
 		return $this->db->query("SELECT * FROM tb_pemesanan WHERE IDUMKM='$id'")->result();
 	}
+	
+	public function createUmkmData($data){
+		$this->db->insert('tb_umkm_data', $data);
+	}
+
+	public function createPemesanan($data)
+	{
+		$this->db->insert('tb_pemesanan', $data);
+	}
 }
