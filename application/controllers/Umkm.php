@@ -46,7 +46,11 @@ class Umkm extends CI_Controller {
 	public function lihatRequest()
 	{
 		$id_umkm		= $this->session->id_umkm;
-		$daftar_request	= $this->Model_umkm->getDaftarRequest($id_umkm);
+		// TODO: alter database dan cari beberapa IDDataUMKM dari IDUMKM yang ada
+		$id_data_umkm	= $this->Model_umkm->getIdDataUmkm($id_umkm);
+		$id_data_umkm	= $this->flattenArray($id_data_umkm);
+
+		$daftar_request	= $this->Model_umkm->getDaftarRequest($id_data_umkm);
 
 		if( empty($daftar_request) ) {
 			$data = array(
@@ -59,12 +63,13 @@ class Umkm extends CI_Controller {
 				'requests'		=> $daftar_request
 			);
 		}
+		// echo $id_umkm."<br>";
+		// var_dump($data);
+		// print_r($id_data_umkm);
 
 		$this->load->view('umkm/lihatrequest', $data);
-
-		// var_dump($data);
 	}
-
+	
 	public function tambahRequest()
 	{
 		if($this->input->method() == 'post') {
@@ -110,7 +115,7 @@ class Umkm extends CI_Controller {
 
 				$data_pemesanan	= array(
 					'IDPesan'			=> $id_pesan,
-					'IDUMKM'			=> $id_umkm,
+					'IDDataUMKM'		=> $id_data_umkm,
 					'IDDesigner'		=> $id_designer==='0'?NULL:$id_designer,
 					'Status'			=> $status,
 					'Keterangan_design'	=> $keterangan_desain
@@ -135,6 +140,12 @@ class Umkm extends CI_Controller {
 		}
 		else
 			redirect('Umkm/buatRequest');
+	}
+
+	public function detailRequest($id_pesan)
+	{
+		$detilRequest	= $this->Model_umkm->getRequest($id_pesan);
+		$this->load->view('detailrequest');
 	}
 
 	private function uploadFoto($img)
@@ -178,5 +189,11 @@ class Umkm extends CI_Controller {
 		} else {
 			return 'Maaf, terdapat kesalahan dalam meng-upload file. Coba ulangi lagi';
 		}
+	}
+
+	private function flattenArray(array $old_array) {
+		$new_array = array();
+		array_walk_recursive($old_array, function($a) use (&$new_array) { $new_array[] = $a; });
+		return $new_array;
 	}
 }
