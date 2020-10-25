@@ -46,8 +46,7 @@ class Umkm extends CI_Controller {
 	public function lihatRequest()
 	{
 		$id_umkm		= $this->session->id_umkm;
-		// TODO: alter database dan cari beberapa IDDataUMKM dari IDUMKM yang ada
-		$id_data_umkm	= $this->Model_umkm->getIdDataUmkm($id_umkm);
+		$id_data_umkm	= $this->Model_umkm->getidDataUMKM($id_umkm);
 		$id_data_umkm	= $this->flattenArray($id_data_umkm);
 
 		$daftar_request	= $this->Model_umkm->getDaftarRequest($id_data_umkm);
@@ -91,7 +90,7 @@ class Umkm extends CI_Controller {
 
 				$this->load->model('Model_created');
 
-				$id_data_umkm		= $this->Model_created->idDataUmkm();
+				$id_data_umkm		= $this->Model_created->idDataUMKM();
 				$id_umkm			= $this->session->id_umkm;
 				$foto_produk		= $_FILES['foto-produk']['name'];
 				$logo_produk		= $_FILES['logo-produk']['name'];
@@ -142,10 +141,22 @@ class Umkm extends CI_Controller {
 			redirect('Umkm/buatRequest');
 	}
 
-	public function detailRequest($id_pesan)
+	public function detilRequest($id_pesan)
 	{
-		$detilRequest	= $this->Model_umkm->getRequest($id_pesan);
-		$this->load->view('detailrequest');
+		$id_pesan		= 'PS'.str_pad($id_pesan, 4, '0', STR_PAD_LEFT);
+		$detil_request	= $this->Model_umkm->getRequest($id_pesan);
+
+		$id_data_umkm	= $detil_request->IDDataUMKM;
+		$data_produk	= $this->Model_umkm->getUmkmData($id_data_umkm);
+
+		$data			= array(
+			'detil_request'	=> $detil_request,
+			'data_produk'	=> $data_produk
+		);
+
+		// print_r($data);
+		
+		$this->load->view('umkm/detilrequest', $data);
 	}
 
 	private function uploadFoto($img)
