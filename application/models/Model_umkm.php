@@ -24,10 +24,29 @@ class Model_umkm extends CI_Model {
 
 	public function getDaftarRequest($data)
 	{
-		// return $this->db->query("SELECT * FROM tb_pemesanan WHERE IDUMKM='$id'")->result();
 		$this->db->where_in('IDDataUMKM', $data);
 		$result = $this->db->get('tb_pemesanan');
 		return $result->result();
+	}
+
+	public function getRequest($id_pesan)
+	{
+		return $this->db->query("SELECT * FROM tb_pemesanan WHERE IDPesan='$id_pesan'")->row();
+	}
+
+	public function getUmkmData($id_data_umkm)
+	{
+		return $this->db->query("SELECT * FROM tb_umkm_data WHERE IDDataUMKM='$id_data_umkm'")->row();
+	}
+
+	// public function getDesainer($id_designer)
+	// {
+	// 	return $this->db->query("SELECT * FROM tb_desainer WHERE IDDesigner='$id_designer'")->row();
+	// }
+
+	public function getNamaDesainer($id_desainer)
+	{
+		return $this->db->query("SELECT Nama_lengkap FROM tb_user JOIN tb_desainer USING(IDUser) WHERE IDDesigner='$id_desainer'")->row();
 	}
 	
 	public function createUmkmData($data){

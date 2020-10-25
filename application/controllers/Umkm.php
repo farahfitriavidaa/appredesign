@@ -149,9 +149,12 @@ class Umkm extends CI_Controller {
 		$id_data_umkm	= $detil_request->IDDataUMKM;
 		$data_produk	= $this->Model_umkm->getUmkmData($id_data_umkm);
 
+		$data_desainer 	= $this->Model_umkm->getNamaDesainer($detil_request->IDDesigner);
+
 		$data			= array(
 			'detil_request'	=> $detil_request,
-			'data_produk'	=> $data_produk
+			'data_produk'	=> $data_produk,
+			'data_desainer'	=> $data_desainer,
 		);
 
 		// print_r($data);
