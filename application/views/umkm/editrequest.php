@@ -45,8 +45,8 @@
                     <div class="page-content-wrapper ">
 
                         <div class="container-fluid">
-                            <?php
-                                if($this->session->flashdata('alert')):
+                            <!-- <?php
+                                if( ! is_null($this->session->flashdata('alert'))):
                                     $alert = $this->session->flashdata('alert');
                             ?>
                                 <div class="row">
@@ -68,12 +68,12 @@
                                         </div>
                                     </div>
                                 </div>
-                            <?php endif; ?>
+                            <?php endif; ?> -->
                             <!-- end alert -->
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="page-title-box">
-                                        <h4 class="page-title">Buat Request Baru</h4>
+                                        <h4 class="page-title">Edit Request</h4>
                                     </div>
                                 </div>
                                 <div class="clearfix"></div>
@@ -84,13 +84,18 @@
                                 <div class="col-md-12 col-xl-12">
                                     <div class="card m-b-30">
                                         <div class="card-body">
-                                            <form action="<?=base_url();?>Umkm/tambahRequest" method="POST" class="mb-0" enctype="multipart/form-data">
+                                            <form action="<?=base_url();?>Umkm/updateRequest" method="POST" enctype="multipart/form-data">
+                                                <input type="hidden" name="np" value="<?php echo trimId('PS', $detil_request->IDPesan)?>">
                                                 <div class="form-group">
-                                                    <input type="text" name="nama-produk" class="form-control" placeholder="Nama Produk" required>
+                                                    <input type="text" name="nama-produk" class="form-control" placeholder="Nama Produk" value="<?=$data_produk->Nama_produk?>" required>
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <textarea name="keterangan-produk" class="form-control" rows="3" placeholder="Keterangan singkat mengenai produk Anda" required></textarea>
+                                                    <textarea name="keterangan-produk" class="form-control" rows="3" placeholder="Keterangan singkat mengenai produk Anda" required><?=$data_produk->Keterangan?></textarea>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <textarea name="keterangan-desain" class="form-control" rows="3" placeholder="Keterangan mengenai desain yang diinginkan" required><?=$detil_request->Keterangan_design?></textarea>
                                                 </div>
 
                                                 <div class="form-group bmd-form-group">
@@ -106,42 +111,13 @@
 
                                                 <div class="form-group bmd-form-group">
                                                     <label for="kemasan">Kemasan Produk</label>
-                                                    <input type="file" name="kemasan-produk" class="form-control-file" id="kemasan" required>
+                                                    <input type="file" name="kemasan-produk" class="form-control-file" id="kemasan">
                                                     <small class="text-muted">Tambahkan gambar kemasan yang sekarang dimiliki</small>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <textarea name="keterangan-desain" class="form-control" rows="3" placeholder="Keterangan mengenai desain yang diinginkan" required></textarea>
-                                                </div>
-
-                                                <div class="form-group bmd-form-group">
-                                                    <span class="text-secondary">Pilih designer</span>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="desainer" id="tidak-ada" value="0" checked>
-                                                        <label class="form-check-label" for="tidak-ada">
-                                                            Dipilihkan pengelola saja
-                                                        </label>
-                                                    </div>
-                                                    <?php
-                                                        $no = 0;
-                                                        foreach ($desainers as $desainer):
-                                                    ?>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="radio" name="desainer" id="<?='desainer-'.$no?>" value="<?=$desainer->IDDesigner?>">
-                                                            <label class="form-check-label" for="<?='desainer-'.$no?>">
-                                                                <?=$desainer->Nama_lengkap?>
-                                                            </label>
-                                                        </div>
-                                                    <?php
-                                                        $no++;
-                                                        endforeach;
-                                                    ?>
-
                                                 </div>
 
                                                 <div class="form-group bmd-form-group">
                                                     <a href="<?=base_url();?>Umkm/lihatRequest" class="btn btn-secondary border-0">Batal</a>
-                                                    <button type="submit" class="btn btn-primary btn-raised">Kirim</button>
+                                                    <button type="submit" class="btn btn-primary btn-raised">Simpan Perubahan</button>
                                                 </div>
                                             </form>
                                         </div>

@@ -123,7 +123,7 @@ class Umkm extends CI_Controller {
 
 				$this->Model_umkm->createPemesanan($data_pemesanan);
 
-				$_SESSION['alert'] = true;
+				$_SESSION['alert'] = 'Request Anda tersimpan dan sekarang menunggu respon Pengelola.';
 				$this->session->mark_as_flash('alert');
 				redirect('Umkm/lihatRequest');
 
@@ -156,7 +156,7 @@ class Umkm extends CI_Controller {
 			$data			= array(
 				'detil_request'	=> $detil_request,
 				'data_produk'	=> $data_produk,
-				'data_desainer'	=> $data_desainer,
+				'data_desainer'	=> $data_desainer
 			);
 
 			// print_r($data);
@@ -167,13 +167,90 @@ class Umkm extends CI_Controller {
 		}
 	}
 
-	public function editRequest($id_pesan='0')
+	public function editRequest( $id_pesan='0' )
 	{
 		if ($id_pesan!=='0') {
-			http_response_code('503');
+			$id_pesan		= 'PS'.str_pad($id_pesan, 4, '0', STR_PAD_LEFT);
+			$detil_request	= $this->Model_umkm->getRequest($id_pesan);
+
+			$id_data_umkm	= $detil_request->IDDataUMKM;
+			$data_produk	= $this->Model_umkm->getUmkmData($id_data_umkm);
+
+			$data			= array(
+				'detil_request'	=> $detil_request,
+				'data_produk'	=> $data_produk
+			);
+
+			// print_r($data);
+			// echo "<br>".$data['detil_request']->IDPesan."<br>";
+			$this->load->helper('my_helper');
+			$this->load->view('umkm/editrequest', $data);
 		} else {
 			http_response_code('400');
 		}
+	}
+
+	public function updateRequest()
+	{
+		if($this->input->method() == 'post') {
+			$nama_produk		= $this->input->post('nama-produk');
+			$keterangan_produk	= $this->input->post('keterangan-produk');
+			$keterangan_desain	= $this->input->post('keterangan-desain');
+
+			$alert				= ['sukses','sukses','sukses'];
+			if( $_FILES['foto-produk']['error'] != 4 ){
+				$alert[0]		= $this->uploadFoto('foto-produk');
+				$data_umkm		= array(
+					'Foto_produk' => $_FILES['foto-produk']['name']
+				);
+			}
+			if( $_FILES['logo-produk']['error'] != 4 ){
+				$alert[1]		= $this->uploadFoto('logo-produk');
+				$data_umkm		= array(
+					'Logo_produk' => $_FILES['logo-produk']['name']
+				);
+			}
+			if( $_FILES['kemasan-produk']['error'] != 4 ){
+				$alert[2]		= $this->uploadFoto('kemasan-produk');
+				$data_umkm		= array(
+					'Kemsan_produk' => $_FILES['kemasan-produk']['name']
+				);
+			}
+			if( $alert[0]==='sukses' && $alert[1]==='sukses' && $alert[2]==='sukses'){
+
+				$id_pesan			= 'PS'.str_pad($this->input->post('np'), 4, '0', STR_PAD_LEFT);
+				$id_data_umkm		= $this->Model_umkm->getIdDataUmkmFromPemesanan($id_pesan);
+
+				$data_umkm		= array(
+					'Nama_produk'		=> $nama_produk,
+					'Keterangan'		=> $keterangan_produk
+				);
+
+				$this->Model_umkm->updateUmkmData($id_data_umkm, $data_umkm);
+
+				$data_pemesanan	= array(
+					'Keterangan_design'	=> $keterangan_desain
+				);
+
+				$this->Model_umkm->updatePemesanan($id_pesan, $data_pemesanan);
+
+				// $_SESSION['alert'] = 'Request Anda berhasil diubah.';
+				// $this->session->mark_as_flash('alert');
+				// redirect('Umkm/lihatRequest');
+
+				var_dump($alert);
+				var_dump($data_umkm);
+				var_dump($data_pemesanan);
+
+			}
+			else{
+				$_SESSION['alert'] =$alert;
+				$this->session->mark_as_flash('alert');
+				redirect('Umkm/editRequest/'.$this->input->post('np'));
+			}
+		}
+		else
+			redirect('Umkm');
 	}
 
 	public function deleteRequest($id_pesan='0')

@@ -54,7 +54,7 @@
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
-                                            Request Anda tersimpan dan sekarang menunggu respon Pengelola
+                                            <?=$this->session->flashdata('alert'); ?>
                                         </div>
                                     </div>
                                 </div>
