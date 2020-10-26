@@ -24,7 +24,7 @@ class Model_umkm extends CI_Model {
 
 	public function getIdDataUmkmFromPemesanan($id_pesan)
 	{
-		return $this->db->query("SELECT IDDataUMKM FROM tb_pemesanan WHERE IDPesan='$id_pesan'")-row();
+		return $this->db->query("SELECT IDDataUMKM FROM tb_pemesanan WHERE IDPesan='$id_pesan'")->row();
 	}
 
 	public function getDaftarRequest($data)
@@ -65,13 +65,13 @@ class Model_umkm extends CI_Model {
 
 	public function updatePemesanan($id_pesan, $data)
 	{
-		$this->db->where('IDPesan',$id);
+		$this->db->where('IDPesan',$id_pesan);
 		$this->db->update('tb_pemesanan',$data);
 	}
 
 	public function updateUmkmData($id_data_umkm, $data)
 	{
-		$this->db->where('IDDataUMKM',$id);
+		$this->db->where('IDDataUMKM',$id_data_umkm);
 		$this->db->update('tb_umkm_data',$data);
 	}
 }

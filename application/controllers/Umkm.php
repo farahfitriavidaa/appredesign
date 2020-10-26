@@ -197,23 +197,24 @@ class Umkm extends CI_Controller {
 			$keterangan_produk	= $this->input->post('keterangan-produk');
 			$keterangan_desain	= $this->input->post('keterangan-desain');
 
+			$data_umkm			= array();
 			$alert				= ['sukses','sukses','sukses'];
 			if( $_FILES['foto-produk']['error'] != 4 ){
 				$alert[0]		= $this->uploadFoto('foto-produk');
-				$data_umkm		= array(
+				$data_umkm		+= array(
 					'Foto_produk' => $_FILES['foto-produk']['name']
 				);
 			}
 			if( $_FILES['logo-produk']['error'] != 4 ){
 				$alert[1]		= $this->uploadFoto('logo-produk');
-				$data_umkm		= array(
+				$data_umkm		+= array(
 					'Logo_produk' => $_FILES['logo-produk']['name']
 				);
 			}
 			if( $_FILES['kemasan-produk']['error'] != 4 ){
 				$alert[2]		= $this->uploadFoto('kemasan-produk');
-				$data_umkm		= array(
-					'Kemsan_produk' => $_FILES['kemasan-produk']['name']
+				$data_umkm		+= array(
+					'Kemasan_produk' => $_FILES['kemasan-produk']['name']
 				);
 			}
 			if( $alert[0]==='sukses' && $alert[1]==='sukses' && $alert[2]==='sukses'){
@@ -221,12 +222,12 @@ class Umkm extends CI_Controller {
 				$id_pesan			= 'PS'.str_pad($this->input->post('np'), 4, '0', STR_PAD_LEFT);
 				$id_data_umkm		= $this->Model_umkm->getIdDataUmkmFromPemesanan($id_pesan);
 
-				$data_umkm		= array(
+				$data_umkm		+= array(
 					'Nama_produk'		=> $nama_produk,
 					'Keterangan'		=> $keterangan_produk
 				);
 
-				$this->Model_umkm->updateUmkmData($id_data_umkm, $data_umkm);
+				$this->Model_umkm->updateUmkmData($id_data_umkm->IDDataUMKM, $data_umkm);
 
 				$data_pemesanan	= array(
 					'Keterangan_design'	=> $keterangan_desain
@@ -234,13 +235,13 @@ class Umkm extends CI_Controller {
 
 				$this->Model_umkm->updatePemesanan($id_pesan, $data_pemesanan);
 
-				// $_SESSION['alert'] = 'Request Anda berhasil diubah.';
-				// $this->session->mark_as_flash('alert');
-				// redirect('Umkm/lihatRequest');
+				$_SESSION['alert'] = 'Request Anda berhasil diubah.';
+				$this->session->mark_as_flash('alert');
+				redirect('Umkm/lihatRequest');
 
-				var_dump($alert);
-				var_dump($data_umkm);
-				var_dump($data_pemesanan);
+				// var_dump($alert);
+				// var_dump($data_umkm);
+				// var_dump($data_pemesanan);
 
 			}
 			else{
