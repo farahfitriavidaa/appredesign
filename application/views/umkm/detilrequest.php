@@ -70,8 +70,11 @@
                                             <div style="height: 160px;">
                                                 <img src="<?=base_url()."uploads/foto_kemasan_lama/".$data_produk->Kemasan_produk;?>" alt="kemasan produk" class="img-thumbnail" style="height:inherit">
                                             </div>
-
-                                            <a class="btn btn-raised btn-secondary float-right" href="<?=base_url();?>Umkm/editRequest/#">
+                                            <?php
+                                                $path   = $detil_request->IDPesan;
+                                                $path   = trimId('PS', $path);
+                                            ?>
+                                            <a class="btn btn-raised btn-secondary float-right" href="<?=base_url();?>Umkm/editRequest/<?=$path;?>">
                                                 Edit Produk
                                             </a>
                                         </div>
@@ -155,7 +158,6 @@
                                             <strong class="d-block">Desainer</strong>
                                             <p>
                                             <?php
-                                                // TO DO: ganti jadi nama desainer
                                                 $desainer = $data_desainer->Nama_lengkap;
                                                 echo $ket==NULL?'Ditentukan Pengelola':$desainer;
                                             ?>

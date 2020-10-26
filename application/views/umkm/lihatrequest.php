@@ -146,15 +146,13 @@
                                                                 }?>
                                                             </td>
                                                             <td>
-                                                            <a class="btn btn-raised btn-primary" href="#">
-                                                                Lihat Detil
-                                                            </a>
-                                                            <a class="btn btn-raised btn-secondary" href="#">
-                                                                Edit
-                                                            </a>
-                                                            <a class="btn btn-raised btn-danger" href="#">
-                                                                Hapus
-                                                            </a>
+                                                            <?php
+                                                                $path   = $request->IDPesan;
+                                                                $path   = trimId('PS', $path);
+                                                            ?>
+                                                            <a class="btn btn-raised btn-primary" href="<?=base_url();?>Umkm/detilRequest/<?=$path;?>">Lihat Detil</a>
+                                                            <a class="btn btn-raised btn-secondary" href="<?=base_url();?>Umkm/editRequest/<?=$path;?>">Edit</a>
+                                                            <a class="btn btn-raised btn-danger" href="<?=base_url();?>Umkm/hapusRequest/<?=$path;?>">Hapus</a>
                                                             </td>
                                                         </tr>
                                                     <?php endforeach; ?>

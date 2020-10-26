@@ -66,6 +66,7 @@ class Umkm extends CI_Controller {
 		// var_dump($data);
 		// print_r($id_data_umkm);
 
+		$this->load->helper('my_helper');
 		$this->load->view('umkm/lihatrequest', $data);
 	}
 	
@@ -158,7 +159,7 @@ class Umkm extends CI_Controller {
 		);
 
 		// print_r($data);
-		
+		$this->load->helper('my_helper');
 		$this->load->view('umkm/detilrequest', $data);
 	}
 
