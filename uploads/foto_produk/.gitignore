@@ -1,0 +1,5 @@
+## ignore semua file
+*
+## kecuali file ini
+!.gitignore
+!4a3471e799dc5fa9838fc90051eea2de.png

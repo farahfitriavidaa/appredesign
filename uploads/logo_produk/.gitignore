@@ -1,0 +1,4 @@
+## ignore semua file
+*
+## kecuali file ini
+!.gitignore
