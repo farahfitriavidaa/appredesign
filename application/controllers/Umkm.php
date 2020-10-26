@@ -220,7 +220,7 @@ class Umkm extends CI_Controller {
 			if( $alert[0]==='sukses' && $alert[1]==='sukses' && $alert[2]==='sukses'){
 
 				$id_pesan			= 'PS'.str_pad($this->input->post('np'), 4, '0', STR_PAD_LEFT);
-				$id_data_umkm		= $this->Model_umkm->getIdDataUmkmFromPemesanan($id_pesan);
+				$id_data_umkm		= $this->Model_umkm->getIdDataUmkmFromIdPesan($id_pesan);
 
 				$data_umkm		+= array(
 					'Nama_produk'		=> $nama_produk,
@@ -254,10 +254,18 @@ class Umkm extends CI_Controller {
 			redirect('Umkm');
 	}
 
-	public function deleteRequest($id_pesan='0')
+	public function hapusRequest($id_pesan='0')
 	{
 		if ($id_pesan!=='0') {
-			http_response_code('503');
+			$id_pesan		= 'PS'.str_pad($id_pesan, 4, '0', STR_PAD_LEFT);
+			$id_data_umkm	= $this->Model_umkm->getIdDataUmkmFromIdPesan($id_pesan);
+
+			$this->Model_umkm->deleteRequest($id_pesan);
+			$this->Model_umkm->deleteUmkmData($id_data_umkm->IDDataUMKM);
+
+			$_SESSION['alert'] = 'Request berhasil dihapus.';
+			$this->session->mark_as_flash('alert');
+			redirect('Umkm/lihatRequest');
 		} else {
 			http_response_code('400');
 		}

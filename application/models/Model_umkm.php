@@ -22,7 +22,7 @@ class Model_umkm extends CI_Model {
 		return $this->db->query("SELECT IDDataUMKM FROM tb_umkm_data WHERE IDUMKM='$id_umkm'")->result_array();
 	}
 
-	public function getIdDataUmkmFromPemesanan($id_pesan)
+	public function getIdDataUmkmFromIdPesan($id_pesan)
 	{
 		return $this->db->query("SELECT IDDataUMKM FROM tb_pemesanan WHERE IDPesan='$id_pesan'")->row();
 	}
@@ -73,5 +73,17 @@ class Model_umkm extends CI_Model {
 	{
 		$this->db->where('IDDataUMKM',$id_data_umkm);
 		$this->db->update('tb_umkm_data',$data);
+	}
+
+	public function deleteRequest($id_pesan)
+	{
+		$this->db->where('IDPesan', $id_pesan);
+		$this->db->delete('tb_pemesanan');
+	}
+
+	public function deleteUmkmData($id_data_umkm)
+	{
+		$this->db->where('IDDataUMKM', $id_data_umkm);
+		$this->db->delete('tb_umkm_data');
 	}
 }
