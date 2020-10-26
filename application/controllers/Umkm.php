@@ -142,25 +142,47 @@ class Umkm extends CI_Controller {
 			redirect('Umkm/buatRequest');
 	}
 
-	public function detilRequest($id_pesan)
+	public function detilRequest($id_pesan='0')
 	{
-		$id_pesan		= 'PS'.str_pad($id_pesan, 4, '0', STR_PAD_LEFT);
-		$detil_request	= $this->Model_umkm->getRequest($id_pesan);
+		if ($id_pesan!=='0') {
+			$id_pesan		= 'PS'.str_pad($id_pesan, 4, '0', STR_PAD_LEFT);
+			$detil_request	= $this->Model_umkm->getRequest($id_pesan);
 
-		$id_data_umkm	= $detil_request->IDDataUMKM;
-		$data_produk	= $this->Model_umkm->getUmkmData($id_data_umkm);
+			$id_data_umkm	= $detil_request->IDDataUMKM;
+			$data_produk	= $this->Model_umkm->getUmkmData($id_data_umkm);
 
-		$data_desainer 	= $this->Model_umkm->getNamaDesainer($detil_request->IDDesigner);
+			$data_desainer 	= $this->Model_umkm->getNamaDesainer($detil_request->IDDesigner);
 
-		$data			= array(
-			'detil_request'	=> $detil_request,
-			'data_produk'	=> $data_produk,
-			'data_desainer'	=> $data_desainer,
-		);
+			$data			= array(
+				'detil_request'	=> $detil_request,
+				'data_produk'	=> $data_produk,
+				'data_desainer'	=> $data_desainer,
+			);
 
-		// print_r($data);
-		$this->load->helper('my_helper');
-		$this->load->view('umkm/detilrequest', $data);
+			// print_r($data);
+			$this->load->helper('my_helper');
+			$this->load->view('umkm/detilrequest', $data);
+		} else {
+			http_response_code('400');
+		}
+	}
+
+	public function editRequest($id_pesan='0')
+	{
+		if ($id_pesan!=='0') {
+			http_response_code('503');
+		} else {
+			http_response_code('400');
+		}
+	}
+
+	public function deleteRequest($id_pesan='0')
+	{
+		if ($id_pesan!=='0') {
+			http_response_code('503');
+		} else {
+			http_response_code('400');
+		}
 	}
 
 	private function uploadFoto($img)
