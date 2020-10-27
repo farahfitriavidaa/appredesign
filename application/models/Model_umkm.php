@@ -51,6 +51,11 @@ class Model_umkm extends CI_Model {
 		return $this->db->query("SELECT * FROM tb_umkm_data WHERE IDDataUMKM='$id_data_umkm'")->row();
 	}
 
+	public function getUmkm($id_umkm)
+	{
+		return $this->db->query("SELECT * FROM tb_umkm WHERE IDUMKM='$id_umkm'")->row();
+	}
+
 	// public function getDesainer($id_designer)
 	// {
 	// 	return $this->db->query("SELECT * FROM tb_desainer WHERE IDDesigner='$id_designer'")->row();

@@ -294,6 +294,49 @@ class Umkm extends CI_Controller {
 		}
 	}
 
+	public function lihatProfil()
+	{
+		$detil_umkm	= $this->Model_umkm->getUmkm( $this->session->id_umkm );
+		$detil_user	= $this->Model_umkm->getUserData( $this->session->user );
+
+		unset($detil_user->Password);
+
+		$data	= array(
+			'user'	=> $detil_user,
+			'umkm'	=> $detil_umkm
+		);
+
+		// print_r($data);
+		$this->load->helper('my_helper');
+		$this->load->view('umkm/lihatprofil', $data);
+	}
+
+	public function editProfil($id_umkm='0')
+	{
+		if ($id_pesan!=='0') {
+			/*
+			$id_pesan		= 'PS'.str_pad($id_pesan, 4, '0', STR_PAD_LEFT);
+			$detil_request	= $this->Model_umkm->getRequest($id_pesan);
+
+			$id_data_umkm	= $detil_request->IDDataUMKM;
+			$data_produk	= $this->Model_umkm->getUmkmData($id_data_umkm);
+
+			$data			= array(
+				'detil_request'	=> $detil_request,
+				'data_produk'	=> $data_produk
+			);
+
+			// print_r($data);
+			// echo "<br>".$data['detil_request']->IDPesan."<br>";
+			$this->load->helper('my_helper');
+			$this->load->view('umkm/editrequest', $data);
+			*/
+			http_response_code('500');
+		} else {
+			http_response_code('400');
+		}
+	}
+
 	private function uploadFoto($img)
 	{
 		$jenis_foto		= '';
