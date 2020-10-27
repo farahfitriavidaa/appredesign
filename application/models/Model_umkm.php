@@ -17,7 +17,7 @@ class Model_umkm extends CI_Model {
 		return $this->db->query("SELECT IDUMKM FROM tb_umkm WHERE IDUser='$id_user'")->row();
 	}
 
-	public function getIdDataUmkm($id_umkm)
+	public function getAllIdDataUmkm($id_umkm)
 	{
 		return $this->db->query("SELECT IDDataUMKM FROM tb_umkm_data WHERE IDUMKM='$id_umkm'")->result_array();
 	}
@@ -27,10 +27,17 @@ class Model_umkm extends CI_Model {
 		return $this->db->query("SELECT IDDataUMKM FROM tb_pemesanan WHERE IDPesan='$id_pesan'")->row();
 	}
 
-	public function getDaftarRequest($data)
+	public function getDaftarRequest($id_data_umkm)
 	{
-		$this->db->where_in('IDDataUMKM', $data);
+		$this->db->where_in('IDDataUMKM', $id_data_umkm);
 		$result = $this->db->get('tb_pemesanan');
+		return $result->result();
+	}
+
+	public function getDaftarProduk($id_data_umkm)
+	{
+		$this->db->where_in('IDDataUMKM', $id_data_umkm);
+		$result = $this->db->get('tb_umkm_data');
 		return $result->result();
 	}
 

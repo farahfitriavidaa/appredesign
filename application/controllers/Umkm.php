@@ -46,10 +46,11 @@ class Umkm extends CI_Controller {
 	public function lihatRequest()
 	{
 		$id_umkm		= $this->session->id_umkm;
-		$id_data_umkm	= $this->Model_umkm->getidDataUMKM($id_umkm);
+		$id_data_umkm	= $this->Model_umkm->getAllIdDataUMKM($id_umkm);
 		$id_data_umkm	= $this->flattenArray($id_data_umkm);
 
 		$daftar_request	= $this->Model_umkm->getDaftarRequest($id_data_umkm);
+		$daftar_produk	= $this->Model_umkm->getDaftarProduk($id_data_umkm);
 
 		if( empty($daftar_request) ) {
 			$data = array(
@@ -59,12 +60,13 @@ class Umkm extends CI_Controller {
 		else {
 			$data = array(
 				'has_request'	=> true,
-				'requests'		=> $daftar_request
+				'requests'		=> $daftar_request,
+				'produks'		=> $daftar_produk
 			);
 		}
 		// echo $id_umkm."<br>";
-		// var_dump($data);
 		// print_r($id_data_umkm);
+		// print_r($data);
 
 		$this->load->helper('my_helper');
 		$this->load->view('umkm/lihatrequest', $data);
@@ -123,7 +125,10 @@ class Umkm extends CI_Controller {
 
 				$this->Model_umkm->createPemesanan($data_pemesanan);
 
-				$_SESSION['alert'] = 'Request Anda tersimpan dan sekarang menunggu respon Pengelola.';
+				$_SESSION['alert'] = array (
+					'jenis'	=> 'alert-primary',
+					'isi'	=> 'Request berhasil dibuat dan sekarang menunggu respon dari Pengelola.'
+				);
 				$this->session->mark_as_flash('alert');
 				redirect('Umkm/lihatRequest');
 
@@ -235,7 +240,10 @@ class Umkm extends CI_Controller {
 
 				$this->Model_umkm->updatePemesanan($id_pesan, $data_pemesanan);
 
-				$_SESSION['alert'] = 'Request Anda berhasil diubah.';
+				$_SESSION['alert'] = array (
+					'jenis'	=> 'alert-primary',
+					'isi'	=> 'Request berhasil diubah.'
+				);;
 				$this->session->mark_as_flash('alert');
 				redirect('Umkm/lihatRequest');
 
@@ -258,14 +266,29 @@ class Umkm extends CI_Controller {
 	{
 		if ($id_pesan!=='0') {
 			$id_pesan		= 'PS'.str_pad($id_pesan, 4, '0', STR_PAD_LEFT);
-			$id_data_umkm	= $this->Model_umkm->getIdDataUmkmFromIdPesan($id_pesan);
+			$detil_request	= $this->Model_umkm->getRequest($id_pesan);
 
-			$this->Model_umkm->deleteRequest($id_pesan);
-			$this->Model_umkm->deleteUmkmData($id_data_umkm->IDDataUMKM);
+			if($detil_request->Status == 0){
+				$id_data_umkm	= $this->Model_umkm->getIdDataUmkmFromIdPesan($id_pesan);
 
-			$_SESSION['alert'] = 'Request berhasil dihapus.';
-			$this->session->mark_as_flash('alert');
-			redirect('Umkm/lihatRequest');
+				$this->Model_umkm->deleteRequest($id_pesan);
+				$this->Model_umkm->deleteUmkmData($id_data_umkm->IDDataUMKM);
+
+				$_SESSION['alert'] = array (
+					'jenis'	=> 'alert-primary',
+					'isi'	=> 'Request berhasil dihapus'
+				);
+				$this->session->mark_as_flash('alert');
+				redirect('Umkm/lihatRequest');
+			}
+			else{
+				$_SESSION['alert'] = array (
+					'jenis'	=> 'alert-danger',
+					'isi'	=> 'Request tidak bisa dihapus. Diskusikan dengan Pengelola untuk membatalkan request.'
+				);
+				$this->session->mark_as_flash('alert');
+				redirect('Umkm/lihatRequest');
+			}
 		} else {
 			http_response_code('400');
 		}

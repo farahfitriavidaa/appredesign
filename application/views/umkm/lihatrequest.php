@@ -46,15 +46,16 @@
 
                         <div class="container-fluid">
                             <?php
-                                if($this->session->flashdata('alert')):
+                                $alert = $this->session->flashdata('alert');
+                                if($alert):
                             ?>
                                 <div class="row">
                                     <div class="col-12">
-                                        <div class="alert alert-primary alert-dismissible fade show mb-0 mt-3" role="alert">
+                                        <div class="alert <?=$alert['jenis']?> alert-dismissible fade show mb-0 mt-3" role="alert">
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
-                                            <?=$this->session->flashdata('alert'); ?>
+                                            <?=$alert['isi']?>
                                         </div>
                                     </div>
                                 </div>
@@ -97,7 +98,8 @@
                                                     <thead>
                                                     <tr>
                                                         <th>No.</th>
-                                                        <th>Keterangan</th>
+                                                        <th>Nama Produk</th>
+                                                        <th>Keterangan desain</th>
                                                         <th>Status</th>
                                                         <th>Aksi</th>
                                                     </tr>
@@ -106,13 +108,17 @@
                                                     <tbody>
                                                     <?php
                                                         $no = 1;
-                                                        foreach ($requests as $request):
+                                                        for ($i=0; $i < count($requests);$i++):
                                                     ?>
                                                         <tr>
                                                             <td><?=$no++?></td>
-                                                            <td><?=$request->Keterangan_design?></td>
+                                                            <td><?=$produks[$i]->Nama_produk?></td>
+                                                            <td><?php
+                                                                $tambahan = strlen($requests[$i]->Keterangan_design)>=47?'...':'';
+                                                                echo substr($requests[$i]->Keterangan_design, '0', '47').$tambahan;
+                                                            ?></td>
                                                             <td>
-                                                                <?php switch($request->Status){
+                                                                <?php switch($requests[$i]->Status){
                                                                     case 0:
                                                                         echo 'Pending';
                                                                         break;
@@ -147,15 +153,17 @@
                                                             </td>
                                                             <td>
                                                             <?php
-                                                                $path   = $request->IDPesan;
+                                                                $path   = $requests[$i]->IDPesan;
                                                                 $path   = trimId('PS', $path);
                                                             ?>
                                                             <a class="btn btn-raised btn-primary" href="<?=base_url();?>Umkm/detilRequest/<?=$path;?>">Lihat Detil</a>
                                                             <a class="btn btn-raised btn-secondary" href="<?=base_url();?>Umkm/editRequest/<?=$path;?>">Edit</a>
-                                                            <a class="btn btn-raised btn-danger" href="<?=base_url();?>Umkm/hapusRequest/<?=$path;?>">Hapus</a>
+                                                            <?php if($requests[$i]->Status == 0): ?>
+                                                                <a class="btn btn-raised btn-danger" href="<?=base_url();?>Umkm/hapusRequest/<?=$path;?>">Hapus</a>
                                                             </td>
+                                                            <?php endif; ?>
                                                         </tr>
-                                                    <?php endforeach; ?>
+                                                    <?php endfor; ?>
                                                     </tbody>
                                                 </table>
                                             </div>
