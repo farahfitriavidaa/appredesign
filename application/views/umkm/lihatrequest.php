@@ -157,7 +157,9 @@
                                                                 $path   = trimId('PS', $path);
                                                             ?>
                                                             <a class="btn btn-raised btn-primary" href="<?=base_url();?>Umkm/detilRequest/<?=$path;?>">Lihat Detil</a>
-                                                            <a class="btn btn-raised btn-secondary" href="<?=base_url();?>Umkm/editRequest/<?=$path;?>">Edit</a>
+                                                            <?php if($requests[$i]->Status < 5): ?>
+                                                                <a class="btn btn-raised btn-secondary" href="<?=base_url();?>Umkm/editRequest/<?=$path;?>">Edit</a>
+                                                            <?php endif; ?>
                                                             <?php if($requests[$i]->Status == 0): ?>
                                                                 <a class="btn btn-raised btn-danger" href="<?=base_url();?>Umkm/hapusRequest/<?=$path;?>">Hapus</a>
                                                             </td>

@@ -45,7 +45,7 @@
                     <div class="page-content-wrapper ">
 
                         <div class="container-fluid">
-                            <!-- <?php
+                            <?php
                                 if( ! is_null($this->session->flashdata('alert'))):
                                     $alert = $this->session->flashdata('alert');
                             ?>
@@ -68,7 +68,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            <?php endif; ?> -->
+                            <?php endif; ?>
                             <!-- end alert -->
                             <div class="row">
                                 <div class="col-sm-12">
