@@ -45,10 +45,25 @@
                     <div class="page-content-wrapper ">
 
                         <div class="container-fluid">
+                            <?php
+                                if($this->session->flashdata('alert')):
+                            ?>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="alert alert-primary alert-dismissible fade show mb-0 mt-3" role="alert">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            <?=$this->session->flashdata('alert')?>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+                            <!-- end alert -->
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="page-title-box">
-                                        <h4 class="page-title">Edit Request</h4>
+                                        <h4 class="page-title">Profil Saya</h4>
                                     </div>
                                 </div>
                                 <div class="clearfix"></div>
@@ -85,7 +100,7 @@
                                                 $path   = $umkm->IDUMKM;
                                                 $path   = trimId('UM', $path);
                                             ?>
-                                            <a class="btn btn-raised btn-secondary float-right" href="<?=base_url();?>Umkm/editProfil/<?=$path;?>">
+                                            <a class="btn btn-raised btn-secondary float-right" href="<?=base_url();?>Umkm/editProfil">
                                                 Edit Profil
                                             </a>
                                         </div>                                        

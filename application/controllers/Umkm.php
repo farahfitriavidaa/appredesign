@@ -81,13 +81,13 @@ class Umkm extends CI_Controller {
 
 			$alert				= ['sukses','sukses','sukses'];
 			if( $_FILES['foto-produk']['error'] != 4 )
-				$alert[0]		= $this->uploadFoto('foto-produk');
+				$alert[0]		= $this->uploadFoto('foto-produk', 'foto_produk');
 
 			if( $_FILES['logo-produk']['error'] != 4 )
-				$alert[1]		= $this->uploadFoto('logo-produk');
+				$alert[1]		= $this->uploadFoto('logo-produk', 'logo_produk');
 
 			if( $_FILES['kemasan-produk']['error'] != 4 )
-				$alert[2]		= $this->uploadFoto('kemasan-produk');
+				$alert[2]		= $this->uploadFoto('kemasan-produk', 'foto_kemasan_lama');
 
 			if( $alert[0]==='sukses' && $alert[1]==='sukses' && $alert[2]==='sukses'){
 
@@ -205,19 +205,19 @@ class Umkm extends CI_Controller {
 			$data_umkm			= array();
 			$alert				= ['sukses','sukses','sukses'];
 			if( $_FILES['foto-produk']['error'] != 4 ){
-				$alert[0]		= $this->uploadFoto('foto-produk');
+				$alert[0]		= $this->uploadFoto('foto-produk', 'foto_produk');
 				$data_umkm		+= array(
 					'Foto_produk' => $_FILES['foto-produk']['name']
 				);
 			}
 			if( $_FILES['logo-produk']['error'] != 4 ){
-				$alert[1]		= $this->uploadFoto('logo-produk');
+				$alert[1]		= $this->uploadFoto('logo-produk', 'logo_produk');
 				$data_umkm		+= array(
 					'Logo_produk' => $_FILES['logo-produk']['name']
 				);
 			}
 			if( $_FILES['kemasan-produk']['error'] != 4 ){
-				$alert[2]		= $this->uploadFoto('kemasan-produk');
+				$alert[2]		= $this->uploadFoto('kemasan-produk', 'fto_kemasan_lama');
 				$data_umkm		+= array(
 					'Kemasan_produk' => $_FILES['kemasan-produk']['name']
 				);
@@ -311,51 +311,87 @@ class Umkm extends CI_Controller {
 		$this->load->view('umkm/lihatprofil', $data);
 	}
 
-	public function editProfil($id_umkm='0')
+	public function editProfil()
 	{
-		if ($id_pesan!=='0') {
-			/*
-			$id_pesan		= 'PS'.str_pad($id_pesan, 4, '0', STR_PAD_LEFT);
-			$detil_request	= $this->Model_umkm->getRequest($id_pesan);
+		$detil_umkm	= $this->Model_umkm->getUmkm( $this->session->id_umkm );
+		$detil_user	= $this->Model_umkm->getUserData( $this->session->user );
 
-			$id_data_umkm	= $detil_request->IDDataUMKM;
-			$data_produk	= $this->Model_umkm->getUmkmData($id_data_umkm);
+		unset($detil_user->Password);
 
-			$data			= array(
-				'detil_request'	=> $detil_request,
-				'data_produk'	=> $data_produk
-			);
+		$data	= array(
+			'user'	=> $detil_user,
+			'umkm'	=> $detil_umkm
+		);
 
-			// print_r($data);
-			// echo "<br>".$data['detil_request']->IDPesan."<br>";
-			$this->load->helper('my_helper');
-			$this->load->view('umkm/editrequest', $data);
-			*/
-			http_response_code('500');
-		} else {
-			http_response_code('400');
-		}
+		// print_r($data);
+		// echo "<br>".$data['detil_request']->IDPesan."<br>";
+		$this->load->view('umkm/editprofil', $data);
 	}
 
-	private function uploadFoto($img)
+	public function updateProfil()
 	{
-		$jenis_foto		= '';
-		$target_dir		= '';
+		if($this->input->method() == 'post') {
+			$nama_lengkap	= $this->input->post('nama-lengkap');
+			$username		= $this->input->post('username');
+			$email			= $this->input->post('email');
 
-		switch($img){
-			case 'foto-produk':
-				$jenis_foto = 'foto produk';
-				$target_dir = './uploads/foto_produk/';
-				break;
-			case 'logo-produk':
-				$jenis_foto='logo produk';
-				$target_dir = './uploads/logo_produk/';
-				break;
-			case 'kemasan-produk':
-				$jenis_foto ='kemasan produk';
-				$target_dir = './uploads/foto_kemasan_lama/';
-				break;
+			$nama_umkm		= $this->input->post('nama-umkm');
+			$no_telp		= $this->input->post('no-telp');
+			$alamat			= $this->input->post('alamat');
+
+			$data_user			= array();
+			$alert				= ['sukses'];
+			if( $_FILES['foto-profil']['error'] != 4 ){
+				$alert[0]		= $this->uploadFoto('foto-profil', 'foto_user');
+				$data_user		+= array(
+					'Foto' => $_FILES['foto-profil']['name']
+				);
+			}
+			if( $alert[0]==='sukses'){
+				
+				$data_user		+= array(
+					'Nama_lengkap'	=> $nama_lengkap,
+					'Username'		=> $username,
+					'Email'			=> $email
+				);
+
+				$id_user	= $this->Model_umkm->getIdUser( $this->session->user );
+				$this->Model_umkm->updateUser($id_user->IDUser, $data_user);
+
+				$data_umkm	= array(
+					'Nama_umkm'	=> $nama_umkm,
+					'No_telp'	=> $no_telp,
+					'Alamat'	=> $alamat
+				);
+
+				$id_umkm	= $this->session->id_umkm;
+				$this->Model_umkm->updateUmkm($id_umkm, $data_umkm);
+
+				$_SESSION['alert'] = 'Profil berhasil diubah.';
+				$this->session->mark_as_flash('alert');
+				redirect('Umkm/lihatProfil');
+
+				// var_dump($alert);
+				// var_dump($data_user);
+				// var_dump($data_umkm);
+				// var_dump($id_user);
+				// var_dump($id_umkm);
+
+			}
+			else{
+				$_SESSION['alert'] = $alert;
+				$this->session->mark_as_flash('alert');
+				redirect('Umkm/editProfil');
+			}
 		}
+		else
+			redirect('Umkm');
+	}
+
+	private function uploadFoto($img, $dir)
+	{
+		$jenis_foto		= str_replace('-', ' ', $img);
+		$target_dir 	= './uploads/'.$dir.'/';
 
 		$target_file	= $target_dir.basename($_FILES[$img]['name']);
 		$imageFileType	= strtolower(pathinfo($target_file, PATHINFO_EXTENSION));

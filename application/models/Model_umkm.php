@@ -87,6 +87,18 @@ class Model_umkm extends CI_Model {
 		$this->db->update('tb_umkm_data',$data);
 	}
 
+	public function updateUser($id_user, $data)
+	{
+		$this->db->where('IDUser',$id_user);
+		$this->db->update('tb_user',$data);
+	}
+
+	public function updateUmkm($id_umkm, $data)
+	{
+		$this->db->where('IDUMKM',$id_umkm);
+		$this->db->update('tb_umkm',$data);
+	}
+
 	public function deleteRequest($id_pesan)
 	{
 		$this->db->where('IDPesan', $id_pesan);
