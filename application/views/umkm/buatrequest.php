@@ -90,7 +90,7 @@
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <textarea name="keterangan-produk" class="form-control" rows="3" placeholder="Keterangan singkat mengenai produk Anda" required></textarea>
+                                                    <textarea name="keterangan-produk" class="form-control" placeholder="Keterangan singkat mengenai produk Anda" required></textarea>
                                                 </div>
 
                                                 <div class="form-group bmd-form-group">
@@ -111,7 +111,7 @@
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <textarea name="keterangan-desain" class="form-control" rows="3" placeholder="Keterangan mengenai desain yang diinginkan" required></textarea>
+                                                    <textarea name="keterangan-desain" class="form-control" placeholder="Keterangan mengenai desain yang diinginkan" required></textarea>
                                                 </div>
 
                                                 <div class="form-group bmd-form-group">

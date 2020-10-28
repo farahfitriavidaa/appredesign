@@ -114,13 +114,15 @@ class Umkm extends CI_Controller {
 				$id_pesan		= $this->Model_created->idPesan();
 				$id_designer	= $this->input->post('desainer');
 				$status			= '0';
+				$tanggal_order	= date('Y-m-d');
 
 				$data_pemesanan	= array(
 					'IDPesan'			=> $id_pesan,
 					'IDDataUMKM'		=> $id_data_umkm,
 					'IDDesigner'		=> $id_designer==='0'?NULL:$id_designer,
 					'Status'			=> $status,
-					'Keterangan_design'	=> $keterangan_desain
+					'Keterangan_design'	=> $keterangan_desain,
+					'Tgl_order'			=> $tanggal_order
 				);
 
 				$this->Model_umkm->createPemesanan($data_pemesanan);
