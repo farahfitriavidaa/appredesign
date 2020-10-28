@@ -164,14 +164,16 @@ class Create extends CI_Controller {
 		}
 		else if( $cek->Level == 'UMKM' ){
 			$this->session->user = $user;
-
+			$this->session->level = 'umkm';
 			redirect('/Umkm');
 		}
 		else if( $cek->Level == 'CDC' ){
 			//isi bagian dashboard cdc disini
 		}
 		else if( $cek->Level == 'Designer' ){
-			//isi bagian dashboard designer disini
+			$this->session->user = $user;
+			$this->session->level = 'designer';
+			redirect('/Designer');
 		}
 	}
 }

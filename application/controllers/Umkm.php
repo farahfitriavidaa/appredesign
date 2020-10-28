@@ -6,7 +6,7 @@ class Umkm extends CI_Controller {
 	{
 		parent::__construct();
 
-		if( !$this->session->has_userdata('user') )
+		if( !$this->session->has_userdata('user') || $this->session->level!=='umkm' )
 			redirect('Welcome/login');
 
 		$this->load->model('Model_umkm');
