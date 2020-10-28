@@ -57,19 +57,32 @@
                                             <p><?=$data_produk->Keterangan?></p>
 
                                             <strong class="d-block">Foto Produk</strong>
+                                            <?php if(empty($data_produk->Foto_produk)): ?>
+                                            <p><i class="text-muted">Tidak ada foto produk</i></p>
+                                            <?php else: ?>
                                             <div class="mb-4" style="height: 160px;">
                                                 <img src="<?=base_url()."uploads/foto_produk/".$data_produk->Foto_produk;?>" alt="foto produk" class="img-thumbnail" style="height:inherit">
                                             </div>
+                                            <?php endif; ?>
 
                                             <strong class="d-block">Logo Produk</strong>
+                                            <?php if(empty($data_produk->Logo_produk)): ?>
+                                            <p><i class="text-muted">Tidak ada logo produk</i></p>
+                                            <?php else: ?>
                                             <div class="mb-4" style="height: 160px;">
                                                 <img src="<?=base_url()."uploads/logo_produk/".$data_produk->Logo_produk;?>" alt="logo produk" class="img-thumbnail" style="height:inherit">
                                             </div>
+                                            <?php endif; ?>
 
-                                            <strong class="col-sm-3">Kemasan Produk</strong>
-                                            <div style="height: 160px;">
+                                            <strong class="d-block">Kemasan Produk</strong>
+                                            <?php if(empty($data_produk->Kemasan_produk)): ?>
+                                            <p><i class="text-muted">Tidak ada foto kemasan produk</i></p>
+                                            <?php else: ?>
+                                            <div class="mb-4" style="height: 160px;">
                                                 <img src="<?=base_url()."uploads/foto_kemasan_lama/".$data_produk->Kemasan_produk;?>" alt="kemasan produk" class="img-thumbnail" style="height:inherit">
                                             </div>
+                                            <?php endif; ?>
+
                                             <?php
                                                 $path   = $detil_request->IDPesan;
                                                 $path   = trimId('PS', $path);
@@ -81,7 +94,7 @@
                                     </div>
                                 </div> <!-- end col -->
 
-                                <div class="col-lg-6 mt-4 mb-4 h-100">
+                                <div class="col-lg-6 mt-4 mb-4">
                                     <div class="card">
                                         <div class="card-body">
                                             <strong class="d-block">Tanggal Request</strong>
@@ -131,61 +144,58 @@
                                             <p>
                                             <?php
                                                 $harga = $detil_request->Harga;
-                                                echo $harga==NULL?'Belum ditentukan':$harga;
+                                                echo $harga==NULL?'<i class="text-muted">Belum ditentukan</i>':$harga;
                                             ?>
                                             </p>
                                             <strong class="d-block">Tanggal Mulai Desain</strong>
                                             <p>
                                             <?php
                                                 $tgl_mulai = $detil_request->Tgl_mulai;
-                                                echo $tgl_mulai==NULL?'Belum ditentukan':$tgl_mulai;
+                                                echo $tgl_mulai==NULL?'<i class="text-muted">Belum ditentukan</i>':$tgl_mulai;
                                             ?>
                                             </p>
                                             <strong class="d-block">Rencana Desain Selesai</strong>
                                             <p>
                                             <?php
                                                 $tgl_akhir = $detil_request->Tgl_akhir;
-                                                echo $tgl_akhir==NULL?'Belum ditentukan':$tgl_akhir;
+                                                echo $tgl_akhir==NULL?'<i class="text-muted">Belum ditentukan</i>':$tgl_akhir;
                                             ?>
                                             </p>
                                             <strong class="d-block">Keterangan Desain</strong>
                                             <p>
                                             <?php
                                                 $ket = $detil_request->Keterangan_design;
-                                                echo $ket==NULL?'Tidak Ada Keterangan':$ket;
+                                                echo $ket==NULL?'<i class="text-muted">Tidak Ada Keterangan</i>':$ket;
                                             ?>
                                             </p>
                                             <strong class="d-block">Desainer</strong>
                                             <p>
-                                            <?php
-                                                $desainer = $data_desainer->Nama_lengkap;
-                                                echo $ket==NULL?'Ditentukan Pengelola':$desainer;
-                                            ?>
+                                            <?php if($desainer['ada']): ?>
+                                                <?=$desainer['desainer'];?>
+                                            <?php else: ?>
+                                                <i class="text-muted"><?=$desainer['desainer']?></i>
+                                            <?php endif; ?>
                                             </p>
+
                                             <strong class="d-block">Hasil Desain</strong>
+                                            <!-- TO DO: ganti direktori dan gambar hasil desain asli -->
+                                            <?php if(empty($data_produk->Foto_produk)): ?>
+                                            <p><i class="text-muted">Belum ada hasil desain</i></p>
+                                            <?php else: ?>
                                             <div class="mb-4" style="height: 160px;">
-                                                <!-- TO DO: ganti direktori dan gambar hasil desain asli-->
-                                                <?php
-                                                    $hasil_desain = $data_produk->Logo_produk;
-                                                    if(!empty($hasil_desain)):
-                                                ?>
-                                                <img src="<?=base_url()."uploads/logo_produk/".$hasil_desain;?>" alt="hasil desain" class="img-thumbnail" style="height:inherit">
-                                                <?php else: ?>
-                                                <p>Belum ada</p>
-                                                <?php endif; ?>
+                                                <img src="<?=base_url()."uploads/foto_kemasan_lama/".$data_produk->Foto_produk;?>" alt="hasil desain" class="img-thumbnail" style="height:inherit">
                                             </div>
+                                            <?php endif; ?>
+
                                             <strong class="d-block">Revisi Desain</strong>
-                                            <div class="mb-4" style="height: 160px;">
-                                                <!-- TO DO: ganti direktori dan gambar hasil desain asli-->
-                                                <?php
-                                                    $hasil_desain = $data_produk->Foto_produk;
-                                                    if(!empty($hasil_desain)):
-                                                ?>
-                                                <img src="<?=base_url()."uploads/foto_produk/".$hasil_desain;?>" alt="revisi desain" class="img-thumbnail" style="height:inherit">
-                                                <?php else: ?>
-                                                <p>Belum ada</p>
-                                                <?php endif; ?>
+                                            <!-- TO DO: ganti direktori dan gambar revisi desain asli -->
+                                            <?php if(empty($data_produk->Foto_produk)): ?>
+                                            <p><i class="text-muted">Tidak ada revisi desain</i></p>
+                                            <?php else: ?>
+                                            <div style="height: 160px;">
+                                                <img src="<?=base_url()."uploads/foto_kemasan_lama/".$data_produk->Foto_produk;?>" alt="revisi desain" class="img-thumbnail" style="height:inherit">
                                             </div>
+                                            <?php endif; ?>
                                         </div>
                                     </div>
                                 </div>

@@ -108,7 +108,7 @@
                                                     <tbody>
                                                     <?php
                                                         $no = 1;
-                                                        for ($i=0; $i < count($requests);$i++):
+                                                        for ($i=count($requests)-1; $i >= 0 ;$i--):
                                                     ?>
                                                         <tr>
                                                             <td><?=$no++?></td>
