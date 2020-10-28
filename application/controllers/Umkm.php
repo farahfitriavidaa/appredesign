@@ -71,7 +71,7 @@ class Umkm extends CI_Controller {
 		$this->load->helper('my_helper');
 		$this->load->view('umkm/lihatrequest', $data);
 	}
-	
+
 	public function tambahRequest()
 	{
 		if($this->input->method() == 'post') {
@@ -318,7 +318,6 @@ class Umkm extends CI_Controller {
 		);
 
 		// print_r($data);
-		$this->load->helper('my_helper');
 		$this->load->view('umkm/lihatprofil', $data);
 	}
 
@@ -359,7 +358,7 @@ class Umkm extends CI_Controller {
 				);
 			}
 			if( $alert[0]==='sukses'){
-				
+
 				$data_user		+= array(
 					'Nama_lengkap'	=> $nama_lengkap,
 					'Username'		=> $username,
