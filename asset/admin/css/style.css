@@ -3167,7 +3167,7 @@ select.custom-file-control:not([size]):not([multiple]), select.form-control:not(
   Account Pages
 ===================*/
 .accountbg {
-  background: url("../images/bg-account.jpg");
+  background-color: black;
   position: absolute;
   height: 100%;
   width: 100%;

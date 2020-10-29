@@ -1,9 +1,7 @@
 <!-- Top Bar Start -->
 <div class="topbar">
-
     <nav class="navbar-custom">
         <div class="dropdown notification-list nav-pro-img">
-
         </div>
 
         <ul class="list-inline float-right mb-0 mr-3">
