@@ -20,15 +20,16 @@
 
     <body class="fixed-left">
 
-        <!-- Begin page -->
-        <div class="accountbg"></div>
+      <div class="accountbg" style="background:url('<?=base_url()?>asset/admin/images/background.jpeg');position: absolute;height: 100%;width: 100%;
+        background-position: center center;
+        background-size: cover;"></div>
         <div class="wrapper-page">
             <div class="display-table">
                 <div class="display-table-cell">
                     <diV class="container">
                         <div class="row">
                             <div class="col-md-6">
-                                <img src="<?=base_url()?>asset/admin/images/extra.png" alt="" class="img-fluid">
+                                <img src="<?=base_url()?>asset/admin/images/icon.png" alt="" class="img-fluid">
                             </div>
                             <div class="col-md-6">
                                 <div class="card">
@@ -36,41 +37,40 @@
 
                                         <div class="text-center pt-3">
                                             <a href="index.html">
-                                                <!-- <img src="<?=base_url()?>asset/admin/images/logo-dark.png" alt="logo" height="22" /> -->
-                                                <h1>gDESK</h1>
+                                                <img src="<?=base_url()?>asset/logo.png" alt="logo" width="200px"/>
                                             </a>
                                         </div>
 
                                         <div class="p-3">
                                             <form class="form-horizontal mb-0" action="<?=base_url()?>Create/register" method="POST">
-
+                                                    <?php echo validation_errors('<div class="error">'.'</div>'); ?>
                                                 <div class="form-group row">
                                                     <div class="col-12">
-                                                        <input class="form-control" type="email" required="" name="email" placeholder="Email">
+                                                        <input class="form-control" type="email" name="email" placeholder="Email">
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group row">
                                                     <div class="col-12">
-                                                        <input class="form-control" type="text" required="" name="username" placeholder="Username">
+                                                        <input class="form-control" type="text" name="username" placeholder="Username">
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group row">
                                                     <div class="col-12">
-                                                        <input class="form-control" type="password" required="" name="password" placeholder="Password">
+                                                        <input class="form-control" type="password" name="password" placeholder="Password">
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group row">
                                                     <div class="col-12">
-                                                        <input class="form-control" type="text" required="" name="namalengkap" placeholder="Nama Lengkap">
+                                                        <input class="form-control" type="text" name="namalengkap" placeholder="Nama Lengkap">
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group row">
                                                     <div class="col-12">
-                                                        <input class="form-control" type="text" required="" name="telp" placeholder="No.Telp">
+                                                        <input class="form-control" type="text" name="telp" placeholder="No.Telp">
                                                     </div>
                                                 </div>
 
