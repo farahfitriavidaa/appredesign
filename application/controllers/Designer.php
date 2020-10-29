@@ -47,6 +47,70 @@ class Designer extends CI_Controller {
 
 	public function editProfil()
 	{
-		http_response_code('500');
+		$detil_designer	= $this->Model_designer->getDesigner( $this->session->id_designer );
+
+		unset($detil_designer->Password);
+
+		$data	= array(
+			'designer'	=> $detil_designer
+		);
+
+		// print_r($data);
+		$this->load->view('designer/editprofil', $data);
+	}
+
+	public function updateProfil()
+	{
+		if($this->input->method() == 'post') {
+			$nama_lengkap	= $this->input->post('nama-lengkap');
+			$username		= $this->input->post('username');
+			$email			= $this->input->post('email');
+			$no_telp		= $this->input->post('no-telp');
+			$keterangan		= $this->input->post('keterangan');
+
+			$data_user		= array();
+			$alert			= ['sukses'];
+			if( $_FILES['foto-profil']['error'] != 4 ){
+				$alert[0]	= $this->uploadFoto('foto-profil', 'foto_user');
+				$data_user	+= array(
+					'Foto' => $_FILES['foto-profil']['name']
+				);
+			}
+			if( $alert[0]==='sukses'){
+
+				$data_user	+= array(
+					'Nama_lengkap'	=> $nama_lengkap,
+					'Username'		=> $username,
+					'Email'			=> $email
+				);
+
+				$id_user	= $this->session->id_user;
+				$this->Model_designer->updateUser($id_user, $data_user);
+
+				$data_designer	= array(
+					'No_telp'	=> $no_telp,
+					'Keterangan'=> $keterangan
+				);
+
+				$id_designer	= $this->session->id_designer;
+				$this->Model_designer->updateDesigner($id_designer, $data_designer);
+
+				$_SESSION['alert'] = 'Profil berhasil diubah.';
+				$this->session->mark_as_flash('alert');
+				redirect('Designer/lihatProfil');
+
+				// var_dump($alert);
+				// var_dump($data_user);
+				// var_dump($data_designer);
+
+			}
+			else{
+				$_SESSION['alert'] = $alert;
+				$this->session->mark_as_flash('alert');
+				redirect('Umkm/editProfil');
+			}
+		}
+		else
+			redirect('Designer');
 	}
 }
