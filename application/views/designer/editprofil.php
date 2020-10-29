@@ -55,16 +55,16 @@
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
-                                            Maaf, tidak bisa mengunggah foto atau gambar.
-                                            <ul>
+                                            <p>Maaf, tidak bisa mengunggah foto atau gambar.</p>
+                                            <p>
                                             <?php
                                                 foreach($alert as $a):
                                                     if(!empty($a) && $a!=='sukses'):
                                             ?>
-                                                        <li><?=$a?>
+                                                        <?=$a?>
                                                     <?php  endif; ?>
                                                 <?php endforeach; ?>
-                                            </ul>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>

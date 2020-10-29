@@ -27,7 +27,7 @@ class Designer extends CI_Controller {
 			'akun' => $user
 		);
 		$this->load->view('designer/dashboard', $data);
-		
+
 		// var_dump($data);
 	}
 
@@ -71,7 +71,8 @@ class Designer extends CI_Controller {
 			$data_user		= array();
 			$alert			= ['sukses'];
 			if( $_FILES['foto-profil']['error'] != 4 ){
-				$alert[0]	= $this->uploadFoto('foto-profil', 'foto_user');
+				$this->load->helper('my_helper');
+				$alert[0]	= uploadFoto('foto-profil', 'foto_user');
 				$data_user	+= array(
 					'Foto' => $_FILES['foto-profil']['name']
 				);
@@ -107,7 +108,7 @@ class Designer extends CI_Controller {
 			else{
 				$_SESSION['alert'] = $alert;
 				$this->session->mark_as_flash('alert');
-				redirect('Umkm/editProfil');
+				redirect('Designer/editProfil');
 			}
 		}
 		else
