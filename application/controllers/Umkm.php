@@ -6,19 +6,24 @@ class Umkm extends CI_Controller {
 	{
 		parent::__construct();
 
-		if( !$this->session->has_userdata('user') || $this->session->level!=='umkm' )
+		if( !$this->session->has_userdata('user') || $this->session->level!=='umkm' ){
+			session_destroy();
 			redirect('Welcome/login');
+		}
 
 		$this->load->model('Model_umkm');
 	}
 
 	public function index()
 	{
-		$id_user = $this->Model_umkm->getIdUser( $this->session->user );
+		$id_user	= $this->Model_umkm->getIdUser( $this->session->user );
 		$this->session->id_user = $id_user->IDUser;
 
-		$id_umkm = $this->Model_umkm->getIdUmkm( $this->session->id_user );
+		$id_umkm	= $this->Model_umkm->getIdUmkm( $this->session->id_user );
 		$this->session->id_umkm = $id_umkm->IDUMKM;
+
+		$nama_umkm	= $this->Model_umkm->getNamaUmkm( $this->session->id_umkm );
+		$this->session->nama_umkm = $nama_umkm->Nama_umkm;
 
 		$user	= $this->Model_umkm->getUserData( $this->session->user );
 		$data	= array(

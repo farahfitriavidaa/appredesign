@@ -6,8 +6,10 @@ class Designer extends CI_Controller {
 	{
 		parent::__construct();
 
-		if( !$this->session->has_userdata('user') || $this->session->level!=='designer' )
+		if( !$this->session->has_userdata('user') || $this->session->level!=='designer' ){
+			session_destroy();
 			redirect('Welcome/login');
+		}
 
 		$this->load->model('Model_designer');
 	}
@@ -28,7 +30,7 @@ class Designer extends CI_Controller {
 		);
 		$this->load->view('designer/dashboard', $data);
 
-		// var_dump($data);
+		// var_dump($_SESSION);
 	}
 
 	public function lihatProfil()
