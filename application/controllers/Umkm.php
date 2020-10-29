@@ -406,7 +406,8 @@ class Umkm extends CI_Controller {
 			redirect('Umkm');
 	}
 
-	private function flattenArray(array $old_array) {
+	private function flattenArray(array $old_array)
+	{
 		$new_array = array();
 		array_walk_recursive($old_array, function($a) use (&$new_array) { $new_array[] = $a; });
 		return $new_array;

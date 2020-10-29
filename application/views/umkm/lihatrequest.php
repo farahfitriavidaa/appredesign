@@ -161,7 +161,21 @@
                                                                 <a class="btn btn-raised btn-secondary" href="<?=base_url();?>Umkm/editRequest/<?=$path;?>">Edit</a>
                                                             <?php endif; ?>
                                                             <?php if($requests[$i]->Status == 0): ?>
-                                                                <a class="btn btn-raised btn-danger" href="<?=base_url();?>Umkm/hapusRequest/<?=$path;?>">Hapus</a>
+                                                                <button class="btn btn-raised btn-danger" data-toggle="modal" data-target="#konfirmasi-hapus-<?=$path?>">Hapus</button>
+                                                                <!-- Modal -->
+                                                                <div class="modal fade" id="konfirmasi-hapus-<?=$path?>" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmModal" aria-hidden="true">
+                                                                    <div class="modal-dialog" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-body">
+                                                                                <p>Apakah Anda yakin ingin menghapus request ini?</p>
+                                                                            </div>
+                                                                            <div class="modal-footer">                                                            
+                                                                                <button type="button" class="btn btn-raised btn-primary" data-dismiss="modal">Tidak</button>
+                                                                                <a class="btn btn-raised btn-danger ml-2" href="<?=base_url();?>Umkm/hapusRequest/<?=$path;?>">Iya, Saya yakin</a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             </td>
                                                             <?php endif; ?>
                                                         </tr>
@@ -170,6 +184,7 @@
                                                 </table>
                                             </div>
                                         </div>
+
                                     <?php endif; ?>
                                 </div> <!-- end col -->
                             </div> <!-- end row -->
