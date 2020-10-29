@@ -6,6 +6,8 @@ class Create extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('Model_created');
+		$this->load->model('Model_cdc');
+		$this->load->model('Model_admin');
 		$this->load->library('form_validation');
 	}
 
@@ -168,12 +170,28 @@ class Create extends CI_Controller {
 			redirect('/Umkm');
 		}
 		else if( $cek->Level == 'CDC' ){
-			//isi bagian dashboard cdc disini
+		$this->session->user = $user;
+		$data = array(
+  		'akun' => $cek,
+        'jumlahumkm'      => $this->Model_cdc->getJumlahUMKM(),
+        'jumlahreq'       => $this->Model_cdc->getJumlahReq(),
+        'jumlahongoing'   => $this->Model_cdc->getJumlahOnGoing(),
+        'jumlahselesai'   => $this->Model_cdc->getJumlahSelesai(),
+        'pemesanan'       => $this->Model_cdc->dataPemesanan(),
+        'umkm'            => $this->Model_cdc->dataUMKM()
+  		);
+  		$this->load->view('cdc/Dashboard',$data);
 		}
 		else if( $cek->Level == 'Designer' ){
 			$this->session->user = $user;
 			$this->session->level = 'designer';
 			redirect('/Designer');
 		}
+	}
+	
+	public function logout()
+	{
+		session_destroy();
+		redirect('Create');
 	}
 }
