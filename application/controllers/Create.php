@@ -203,7 +203,16 @@ class Create extends CI_Controller {
 		if( $cek->Level == 'Pengelola' ){
 			$this->session->user = $user;
 			$data = array(
-				'akun' => $cek
+				'akun' => $cek,
+				'umkm'				=> $this->Model_admin->jumlahUMKM(),
+				'designer'		=> $this->Model_admin->jumlahDesigner(),
+				'order'				=> $this->Model_admin->jumlahOrder(),
+				'pesanan'			=> $this->Model_admin->jumlahOrderan(),
+				'pemesanan'		=> $this->Model_admin->dataPemesananPending(),
+				'ongoing'			=> $this->Model_admin->dataOrderOnGoing(),
+				'selesai'			=> $this->Model_admin->dataOrderSelesai(),
+				'transaksi'		=> $this->Model_admin->dataOrderTransaksi(),
+				'dataumkm'		=> $this->Model_admin->dataUMKMNew()
 			);
 			$this->load->view('admin/dashboard',$data);
 		}

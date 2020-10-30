@@ -4,7 +4,52 @@ class Model_admin extends CI_Model {
 
   public function cekAkun($user)
   {
-    return $this->db->query("SELECT * FROM tb_user WHERE username='$user'")->row();
+    return $this->db->query("SELECT * FROM tb_user JOIN tb_pengelola USING(IDUser) WHERE username='$user'")->row();
+  }
+
+  public function jumlahUMKM()
+  {
+    return $this->db->query("SELECT COUNT(IDUMKM) as hasil FROM tb_umkm")->row();
+  }
+
+  public function jumlahDesigner()
+  {
+    return $this->db->query("SELECT COUNT(IDUser) as hasil FROM tb_user JOIN tb_desainer USING(IDUser) WHERE Status = 'Aktif'")->row();
+  }
+
+  public function jumlahOrder()
+  {
+    return $this->db->query("SELECT COUNT(IDPesan) as hasil FROM tb_pemesanan")->row();
+  }
+
+  public function jumlahOrderan()
+  {
+    return $this->db->query("SELECT COUNT(IDPesan) as hasil FROM tb_pemesanan WHERE Status='5'")->row();
+  }
+
+  public function dataPemesananPending()
+  {
+    return $this->db->query("SELECT * FROM tb_pemesanan JOIN tb_umkm_data USING(IDDataUMKM) JOIN tb_umkm USING(IDUMKM) WHERE Status='0' ORDER BY IDPesan DESC limit 5")->result();
+  }
+
+  public function dataOrderOnGoing()
+  {
+    return $this->db->query("SELECT * FROM tb_user JOIN tb_umkm USING(IDUser)JOIN tb_umkm_data USING(IDUMKM) JOIN tb_pemesanan USING(IDDataUMKM) JOIN tb_pengelola USING(IDPengelola) JOIN tb_desainer USING(IDDesigner) WHERE tb_pemesanan.Status BETWEEN '2' AND '4' ORDER BY IDPesan limit 5")->result();
+  }
+
+  public function dataOrderSelesai()
+  {
+    return $this->db->query("SELECT * FROM tb_user JOIN tb_umkm USING(IDUser) JOIN tb_umkm_data USING(IDUMKM) JOIN tb_pemesanan USING(IDDataUMKM) JOIN tb_pengelola USING(IDPengelola) JOIN tb_desainer USING(IDDesigner) WHERE tb_pemesanan.Status = '5'")->result();
+  }
+
+  public function dataOrderTransaksi()
+  {
+    return $this->db->query("SELECT * FROM tb_user JOIN tb_umkm USING(IDUser) JOIN tb_umkm_data USING(IDUMKM) JOIN tb_pemesanan USING(IDDataUMKM) JOIN tb_pengelola USING(IDPengelola) JOIN tb_desainer USING(IDDesigner) WHERE tb_pemesanan.Status BETWEEN '6' AND '7'")->result();
+  }
+
+  public function dataUMKMNew()
+  {
+    return $this->db->query("SELECT * FROM tb_umkm JOIN tb_user USING(IDUser) ORDER BY IDUMKM DESC limit 5")->result();
   }
 
   public function getAkunPengelola($user)
@@ -119,6 +164,20 @@ class Model_admin extends CI_Model {
   {
     $this->db->where('IDPesan',$id);
     $o = $this->db->update('tb_pemesanan',$data);
+    return $o;
+  }
+
+  public function update_profil($id,$data)
+  {
+    $this->db->where('IDUser',$id);
+    $o = $this->db->update('tb_user',$data);
+    return $o;
+  }
+
+  public function update_profil2($id,$data)
+  {
+    $this->db->where('IDUser',$id);
+    $o = $this->db->update('tb_pengelola',$data);
     return $o;
   }
 
