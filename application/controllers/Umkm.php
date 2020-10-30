@@ -427,7 +427,7 @@ class Umkm extends CI_Controller {
 			else{
 				$designer 					= $this->Model_diskusi->getNamaDesainer($detil_pemesanan->IDDesigner);
 				$data_designer['designer']	= $designer->Nama_lengkap;
-				$data_desainer['ada']		= TRUE;
+				$data_designer['ada']		= TRUE;
 			}
 
 			$data			= array(

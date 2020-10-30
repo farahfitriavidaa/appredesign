@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="scroll-behavior:smooth">
 
     <?php $this->load->view('umkm/layout/head'); ?>
 
@@ -45,6 +45,10 @@
                     <div class="page-content-wrapper ">
 
                         <div class="container-fluid">
+                        <a class="btn btn-raised btn-secondary mt-4" href="#diskusi-anchor">
+                        <i class="mdi mdi-arrow-down"></i>
+                            Lihat diskusi
+                        </a>
 
                             <div class="row align-items-stretch mt-4">
                                 <div class="col-lg-6 mb-4">
@@ -205,7 +209,7 @@
                                             <?php endif; ?>
                                         </div>
 
-                                        <div class="card-footer">
+                                        <div class="card-footer"  id="diskusi-anchor">
                                             <a class="btn btn-raised btn-secondary float-right" href="<?=base_url();?>Umkm/editRequest/<?=$path;?>">
                                                 Edit Keterangan
                                             </a>
