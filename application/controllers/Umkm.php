@@ -406,6 +406,46 @@ class Umkm extends CI_Controller {
 			redirect('Umkm');
 	}
 
+	public function diskusi($id_pesan='0')
+	{
+		// Cek IDPesan dan pastikan user tidak input alamat ".../Umkm/diskusi" tanpa IDPesan
+		if ($id_pesan!=='0') {
+
+			// Kembalikan IDPesan sesuai format, 1 -> PS0001
+			$id_pesan			= 'PS'.str_pad($id_pesan, 4, '0', STR_PAD_LEFT);
+
+			// Dapatkan detil pemesanan/request (gabungan tabel tb_pemesanan dan tb_umkm_data)
+			$this->load->model('Model_diskusi');
+			$detil_pemesanan	= $this->Model_diskusi->getPemesanan($id_pesan);
+
+			// Cek designer. Jika ada ambil nama designer, jika tidak beri keterangan 'Ditentukan Pengelola'
+			$data_designer		= array();
+			if( is_null($detil_pemesanan->IDDesigner) ){
+				$data_designer['designer']	= 'Ditentukan Pengelola';
+				$data_designer['ada']		= FALSE;
+			}
+			else{
+				$designer 					= $this->Model_diskusi->getNamaDesainer($detil_pemesanan->IDDesigner);
+				$data_designer['designer']	= $designer->Nama_lengkap;
+				$data_desainer['ada']		= TRUE;
+			}
+
+			$data			= array(
+				'pemesanan'	=> $detil_pemesanan,
+				'designer'	=> $data_designer
+			);
+
+			// Load helper untuk memotong IDPesan (bebas mau dipake atau ngga)
+			$this->load->helper('my_helper');
+
+			// Load view
+			$this->load->view('umkm/diskusi', $data);
+
+		} else {
+			http_response_code('400');
+		}
+	}
+
 	private function flattenArray(array $old_array)
 	{
 		$new_array = array();
