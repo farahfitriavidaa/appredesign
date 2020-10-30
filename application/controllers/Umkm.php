@@ -446,6 +446,23 @@ class Umkm extends CI_Controller {
 		}
 	}
 
+	public function tambahKomentar()
+	{
+		if($this->input->method() == 'post') {
+			$komentar	= $this->input->post('komentar');
+			$foto		= $_FILES['foto-diskusi'];
+
+			$data 		= array(
+				'Komentar'	=> $komentar,
+				'Foto'		=> $foto
+			);
+
+			var_dump($data);
+		}
+		else
+			redirect('Umkm');
+	}
+
 	private function flattenArray(array $old_array)
 	{
 		$new_array = array();

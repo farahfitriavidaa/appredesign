@@ -254,8 +254,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="card-body">
-                                                    <img src="<?=base_url();?>uploads/foto_user/umkm.png" alt="foto untuk diskusi" class="img-thumbnail" style="max-width: 160px; max-height: 320px;">
-                                                    <a href="<?=base_url();?>uploads/foto_user/umkm.png" class="btn btn-secondary ml-2" download>Download gambar</a>
+                                                    <img src="<?=base_url();?>uploads/foto_user/umkm.png" alt="foto untuk diskusi" class="img-thumbnail mr-2" style="max-width: 240px; max-height: 480px;">
+                                                    <a href="<?=base_url();?>uploads/foto_user/umkm.png" class="btn btn-secondary" download>Download gambar</a>
 
                                                     <p class="mt-2 mb-2">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Recusandae accusantium fugit ratione temporibus, eum officiis facilis earum, veniam, eos adipisci voluptas quam. Aperiam rerum obcaecati repellendus nam doloremque sapiente ratione?</p>
                                                 </div>
@@ -268,21 +268,26 @@
 
                                         <!-- Bagian input komentar -->
                                         <div class="card mt-4">
-                                            <form action="#" class="mb-0">
+                                            <div id="preview-wrapper" style="display: none; height: 0;">
+                                                <button class="btn btn-secondary position-absolute" id="hapus-foto" aria-label="Close" style="top: 24px; right: 24px;background-color: #fff">
+                                                    Hapus Foto
+                                                </button>
+                                                <img src="" alt="foto yang di upload" class="img-thumbnail" id="foto-upload" style="max-height: 480px">
+                                            </div>
+
+                                            <form action="<?=base_url();?>Umkm/tambahKomentar" method="post" enctype="multipart/form-data" class="mb-0">
                                                 <div style="display: flex; flex-flow: row nowrap; padding: 8px 16px;">
                                                     <div class="form-group" style="display:inline; padding:0; margin: 0; flex: auto">
                                                         <input type="text" name="komentar" placeholder="Masukan pesan..." class="form-control" style="display: unset;">
                                                     </div>
-                                                    <label for="foto" class="btn btn-secondary mr-2 ml-2"> Tambahkan foto
-                                                        <input type="file" name="foto" id="foto" style="display:none;" aria-hidden="true">
+                                                    <label for="foto" class="btn btn-secondary mr-2 ml-2"><span id="label">Tambahkan Foto</span>
+                                                        <input type="file" name="foto-diskusi" id="foto" style="display:none">
                                                     </label>
                                                     <input type="submit" value="Kirim" class="btn btn-primary">
                                                 </div>
                                             </form>
 
-                                            <div id="preview-wrapper" style="display: none; max-height: 240px; height: 0; transition: height 0.25s ease-in;">
-                                                <img src="" alt="foto yang di upload" class="img-thumbnail" id="foto-upload" style="height: 160px">
-                                            </div>
+                                            
                                         </div>
                                     </div>
 
@@ -309,12 +314,11 @@
         <!-- Custom script untuk menampilkan preview gambar -->
         <script>
             const input = document.getElementById('foto');
-
             input.addEventListener('change', tampilPreview);
 
             function tampilPreview(e) {
                 let wrapper = document.getElementById('preview-wrapper');
-                wrapper.style.height= 'unset';
+                wrapper.style.height= 'auto';
                 wrapper.style.display= 'block';
                 wrapper.classList.add('p-3');
 
@@ -323,6 +327,24 @@
                 preview.onload = function(){
                     URL.revokeObjectURL(preview.src);
                 }
+
+                let label = document.getElementById('label');
+                label.innerText = 'Ganti Foto';
+            }
+
+            const hapus = document.getElementById('hapus-foto');
+            hapus.addEventListener('click', hapusFoto);
+
+            function hapusFoto() {
+                input.value = '';
+
+                let preview = document.getElementById('foto-upload');
+                preview.src = '';
+
+                let wrapper = document.getElementById('preview-wrapper');
+                wrapper.style.height= '0';
+                wrapper.style.display= 'none';
+                wrapper.classList.remove('p-3');
             }
         </script>
 
