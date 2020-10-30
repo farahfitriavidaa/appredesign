@@ -36,11 +36,6 @@ class CDC extends CI_Controller {
 
     public function editProfil($id)
     {
-      // $this->form_validation->set_rules('username','Username','required|is_unique[tb_user.Username]',
-      // array(
-      //   'required' => 'Username tidak boleh kosong',
-      //   'is_unique'=> 'Username sudah ada, coba lagi'
-      // ));
       $this->form_validation->set_rules('nama_lengkap','Nama Lengkap','required',
       array(
         'required' => 'Nama lengkap tidak boleh kosong',
