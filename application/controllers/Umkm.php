@@ -6,19 +6,24 @@ class Umkm extends CI_Controller {
 	{
 		parent::__construct();
 
-		if( !$this->session->has_userdata('user') || $this->session->level!=='umkm' )
+		if( !$this->session->has_userdata('user') || $this->session->level!=='umkm' ){
+			session_destroy();
 			redirect('Welcome/login');
+		}
 
 		$this->load->model('Model_umkm');
 	}
 
 	public function index()
 	{
-		$id_user = $this->Model_umkm->getIdUser( $this->session->user );
+		$id_user	= $this->Model_umkm->getIdUser( $this->session->user );
 		$this->session->id_user = $id_user->IDUser;
 
-		$id_umkm = $this->Model_umkm->getIdUmkm( $this->session->id_user );
+		$id_umkm	= $this->Model_umkm->getIdUmkm( $this->session->id_user );
 		$this->session->id_umkm = $id_umkm->IDUMKM;
+
+		$nama_umkm	= $this->Model_umkm->getNamaUmkm( $this->session->id_umkm );
+		$this->session->nama_umkm = $nama_umkm->Nama_umkm;
 
 		$user	= $this->Model_umkm->getUserData( $this->session->user );
 		$data	= array(
@@ -80,14 +85,15 @@ class Umkm extends CI_Controller {
 			$keterangan_desain	= $this->input->post('keterangan-desain');
 
 			$alert				= ['sukses','sukses','sukses'];
+			$this->load->helper('my_helper');
 			if( $_FILES['foto-produk']['error'] != 4 )
-				$alert[0]		= $this->uploadFoto('foto-produk', 'foto_produk');
+				$alert[0]		= uploadFoto('foto-produk', 'foto_produk');
 
 			if( $_FILES['logo-produk']['error'] != 4 )
-				$alert[1]		= $this->uploadFoto('logo-produk', 'logo_produk');
+				$alert[1]		= uploadFoto('logo-produk', 'logo_produk');
 
 			if( $_FILES['kemasan-produk']['error'] != 4 )
-				$alert[2]		= $this->uploadFoto('kemasan-produk', 'foto_kemasan_lama');
+				$alert[2]		= uploadFoto('kemasan-produk', 'foto_kemasan_lama');
 
 			if( $alert[0]==='sukses' && $alert[1]==='sukses' && $alert[2]==='sukses'){
 
@@ -215,20 +221,21 @@ class Umkm extends CI_Controller {
 
 			$data_umkm			= array();
 			$alert				= ['sukses','sukses','sukses'];
+			$this->load->helper('my_helper');
 			if( $_FILES['foto-produk']['error'] != 4 ){
-				$alert[0]		= $this->uploadFoto('foto-produk', 'foto_produk');
+				$alert[0]		= uploadFoto('foto-produk', 'foto_produk');
 				$data_umkm		+= array(
 					'Foto_produk' => $_FILES['foto-produk']['name']
 				);
 			}
 			if( $_FILES['logo-produk']['error'] != 4 ){
-				$alert[1]		= $this->uploadFoto('logo-produk', 'logo_produk');
+				$alert[1]		= uploadFoto('logo-produk', 'logo_produk');
 				$data_umkm		+= array(
 					'Logo_produk' => $_FILES['logo-produk']['name']
 				);
 			}
 			if( $_FILES['kemasan-produk']['error'] != 4 ){
-				$alert[2]		= $this->uploadFoto('kemasan-produk', 'fto_kemasan_lama');
+				$alert[2]		= uploadFoto('kemasan-produk', 'fto_kemasan_lama');
 				$data_umkm		+= array(
 					'Kemasan_produk' => $_FILES['kemasan-produk']['name']
 				);
@@ -352,7 +359,8 @@ class Umkm extends CI_Controller {
 			$data_user			= array();
 			$alert				= ['sukses'];
 			if( $_FILES['foto-profil']['error'] != 4 ){
-				$alert[0]		= $this->uploadFoto('foto-profil', 'foto_user');
+				$this->load->helper('my_helper');
+				$alert[0]		= uploadFoto('foto-profil', 'foto_user');
 				$data_user		+= array(
 					'Foto' => $_FILES['foto-profil']['name']
 				);
@@ -398,35 +406,65 @@ class Umkm extends CI_Controller {
 			redirect('Umkm');
 	}
 
-	private function uploadFoto($img, $dir)
+	public function diskusi($id_pesan='0')
 	{
-		$jenis_foto		= str_replace('-', ' ', $img);
-		$target_dir 	= './uploads/'.$dir.'/';
+		// Cek IDPesan dan pastikan user tidak input alamat ".../Umkm/diskusi" tanpa IDPesan
+		if ($id_pesan!=='0') {
 
-		$target_file	= $target_dir.basename($_FILES[$img]['name']);
-		$imageFileType	= strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-		$check 			= getimagesize($_FILES[$img]['tmp_name']);
+			// Kembalikan IDPesan sesuai format, 1 -> PS0001
+			$id_pesan			= 'PS'.str_pad($id_pesan, 4, '0', STR_PAD_LEFT);
 
-		if($check == false) {
-			return 'Jenis file '.$jenis_foto.' tidak didukung. Coba ulangi memasukan foto atau gambar.';
-		}
+			// Dapatkan detil pemesanan/request (gabungan tabel tb_pemesanan dan tb_umkm_data)
+			$this->load->model('Model_diskusi');
+			$detil_pemesanan	= $this->Model_diskusi->getPemesanan($id_pesan);
 
-		if($imageFileType != 'jpg' && $imageFileType != 'png' && $imageFileType != 'jpeg' && $imageFileType != 'gif' ) {
-		 	return 'Hanya format JPG, JPEG, PNG, dan GIF yang diperbolehkan untuk file '.$jenis_foto.'.';
-		}
+			// Cek designer. Jika ada ambil nama designer, jika tidak beri keterangan 'Ditentukan Pengelola'
+			$data_designer		= array();
+			if( is_null($detil_pemesanan->IDDesigner) ){
+				$data_designer['designer']	= 'Ditentukan Pengelola';
+				$data_designer['ada']		= FALSE;
+			}
+			else{
+				$designer 					= $this->Model_diskusi->getNamaDesainer($detil_pemesanan->IDDesigner);
+				$data_designer['designer']	= $designer->Nama_lengkap;
+				$data_desainer['ada']		= TRUE;
+			}
 
-		if ($_FILES[$img]['size'] > 65000000) {
-			return 'Ukuran gambar '.$jenis_foto.' Anda terlalu besar(lebih dari 650MB).';
-		}
+			$data			= array(
+				'pemesanan'	=> $detil_pemesanan,
+				'designer'	=> $data_designer
+			);
 
-		if (move_uploaded_file($_FILES[$img]['tmp_name'], $target_file)) {
-			return 'sukses';
+			// Load helper untuk memotong IDPesan (bebas mau dipake atau ngga)
+			$this->load->helper('my_helper');
+
+			// Load view
+			$this->load->view('umkm/diskusi', $data);
+
 		} else {
-			return 'Maaf, terdapat kesalahan dalam meng-upload file. Coba ulangi lagi';
+			http_response_code('400');
 		}
 	}
 
-	private function flattenArray(array $old_array) {
+	public function tambahKomentar()
+	{
+		if($this->input->method() == 'post') {
+			$komentar	= $this->input->post('komentar');
+			$foto		= $_FILES['foto-diskusi'];
+
+			$data 		= array(
+				'Komentar'	=> $komentar,
+				'Foto'		=> $foto
+			);
+
+			var_dump($data);
+		}
+		else
+			redirect('Umkm');
+	}
+
+	private function flattenArray(array $old_array)
+	{
 		$new_array = array();
 		array_walk_recursive($old_array, function($a) use (&$new_array) { $new_array[] = $a; });
 		return $new_array;

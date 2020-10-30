@@ -89,13 +89,14 @@
 
                                             <strong class="d-block">Email</strong>
                                             <p><?=$user->Email?></p>
+                                            <!-- TO DO: buat edit password -->
 
                                             <strong class="d-block">Kontak UMKM</strong>
                                             <p><?=$umkm->No_telp?></p>
 
                                             <strong class="d-block">Alamat UMKM</strong>
                                             <p><?=$umkm->Alamat?></p>
-                                            
+
                                             <a class="btn btn-raised btn-secondary float-right" href="<?=base_url();?>Umkm/editProfil">
                                                 Edit Profil
                                             </a>

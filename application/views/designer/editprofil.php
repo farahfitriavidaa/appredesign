@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <?php $this->load->view('umkm/layout/head'); ?>
+    <?php $this->load->view('designer/layout/head'); ?>
 
     <body class="fixed-left">
 
@@ -27,7 +27,7 @@
                     </div>
                 </div>
 
-                <?php $this->load->view('umkm/layout/sidebar') ?>
+                <?php $this->load->view('designer/layout/sidebar') ?>
                 <!-- end sidebarinner -->
             </div>
             <!-- Left Sidebar End -->
@@ -39,7 +39,7 @@
                 <div class="content">
 
                     <!-- Top Bar Start -->
-                    <?php $this->load->view('umkm/layout/navbar') ?>
+                    <?php $this->load->view('designer/layout/navbar') ?>
                     <!-- Top Bar End -->
 
                     <div class="page-content-wrapper ">
@@ -55,16 +55,16 @@
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
-                                            Maaf, tidak bisa mengunggah foto atau gambar.
-                                            <ul>
+                                            <p>Maaf, tidak bisa mengunggah foto atau gambar.</p>
+                                            <p>
                                             <?php
                                                 foreach($alert as $a):
                                                     if(!empty($a) && $a!=='sukses'):
                                             ?>
-                                                        <li><?=$a?>
+                                                        <?=$a?>
                                                     <?php  endif; ?>
                                                 <?php endforeach; ?>
-                                            </ul>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -84,35 +84,30 @@
                                 <div class="col-md-12 col-xl-12">
                                     <div class="card m-b-30">
                                         <div class="card-body">
-                                            <form action="<?=base_url();?>Umkm/updateProfil" method="POST" enctype="multipart/form-data">
+                                            <form action="<?=base_url();?>Designer/updateProfil" method="POST" enctype="multipart/form-data">
                                                 <div class="form-group">
                                                     <label for="nama-lengkap">Nama Anda</label>
-                                                    <input type="text" name="nama-lengkap" class="form-control" id="nama-lengkap" placeholder="Nama Anda" value="<?=$user->Nama_lengkap?>">
+                                                    <input type="text" name="nama-lengkap" class="form-control" id="nama-lengkap" placeholder="Nama Anda" value="<?=$designer->Nama_lengkap?>">
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label for="username">Username</label>
-                                                    <input type="text" name="username" class="form-control" id="username" placeholder="Username untuk log in/masuk" value="<?=$user->Username?>" required>
+                                                    <input type="text" name="username" class="form-control" id="username" placeholder="Username untuk log in/masuk" value="<?=$designer->Username?>" required>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label for="email">Email</label>
-                                                    <input type="email" name="email" class="form-control" id="email" placeholder="Email" value="<?=$user->Email?>">
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label for="nama-umkm">Nama UMKM</label>
-                                                    <input type="text" name="nama-umkm" class="form-control" id="nama-umkm" placeholder="Nama UMKM" value="<?=$umkm->Nama_umkm?>">
+                                                    <input type="email" name="email" class="form-control" id="email" placeholder="Email" value="<?=$designer->Email?>">
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label for="no-telp">No. Telepon</label>
-                                                    <input type="text" name="no-telp" class="form-control" id="no-telp" placeholder="No. Telp" value="<?=$umkm->No_telp?>" required>
+                                                    <input type="text" name="no-telp" class="form-control" id="no-telp" placeholder="No. Telp" value="<?=$designer->No_telp?>" required>
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label for="alamat">Alamat</label>
-                                                    <textarea name="alamat" class="form-control" id="alamat" placeholder="Alamat UMKM" required><?=$umkm->Alamat?></textarea>
+                                                    <label for="tentang">Tentang Saya</label>
+                                                    <textarea name="keterangan" class="form-control" id="tentang" placeholder="Ceritakan tentang diri Anda sebagai designer" required><?=$designer->Keterangan?></textarea>
                                                 </div>
 
                                                 <div class="form-group bmd-form-group">
@@ -122,7 +117,7 @@
 
                                                 <div class="form-group bmd-form-group">
                                                     <button type="submit" class="btn btn-primary btn-raised float-right">Simpan Perubahan</button>
-                                                    <a href="<?=base_url();?>Umkm/lihatProfil" class="btn btn-secondary border-0 mr-2 float-right">Batal</a>
+                                                    <a href="<?=base_url();?>Designer/lihatProfil" class="btn btn-secondary border-0 mr-2 float-right">Batal</a>
                                                 </div>
                                             </form>
                                         </div>
@@ -147,4 +142,4 @@
         </div>
         <!-- END wrapper -->
 
-        <?php $this->load->view('umkm/layout/footer') ?>
+        <?php $this->load->view('designer/layout/footer') ?>

@@ -27,6 +27,11 @@ class Model_umkm extends CI_Model {
 		return $this->db->query("SELECT IDDataUMKM FROM tb_pemesanan WHERE IDPesan='$id_pesan'")->row();
 	}
 
+	public function getNamaUmkm($id_umkm)
+	{
+		return $this->db->query("SELECT Nama_umkm FROM tb_umkm WHERE IDUMKM='$id_umkm'")->row();
+	}
+
 	public function getDaftarRequest($id_data_umkm)
 	{
 		$this->db->where_in('IDDataUMKM', $id_data_umkm);
