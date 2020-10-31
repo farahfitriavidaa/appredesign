@@ -45,10 +45,26 @@
                     <div class="page-content-wrapper ">
 
                         <div class="container-fluid">
-                        <a class="btn btn-raised btn-secondary mt-4" href="#diskusi-anchor">
-                        <i class="mdi mdi-arrow-down"></i>
-                            Lihat diskusi
-                        </a>
+                            <?php
+                                if( ! is_null($this->session->flashdata('alert'))):
+                            ?>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="alert alert-danger alert-dismissible fade show mb-0 mt-3" role="alert">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            <?=$this->session->flashdata('alert');?>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+
+
+                            <a class="btn btn-raised btn-secondary mt-4" href="#diskusi-anchor">
+                            <i class="mdi mdi-arrow-down"></i>
+                                Lihat diskusi
+                            </a>
 
                             <div class="row align-items-stretch mt-4">
                                 <div class="col-lg-6 mb-4">
@@ -89,13 +105,13 @@
                                             <?php endif; ?>
 
                                             <?php
-                                                $path   = $pemesanan->IDPesan;
-                                                $path   = trimId('PS', $path);
+                                                $id_pesan   = $pemesanan->IDPesan;
+                                                $id_pesan   = trimId('PS', $id_pesan);
                                             ?>
                                         </div>
 
                                         <div class="card-footer">
-                                            <a class="btn btn-raised btn-secondary float-right" href="<?=base_url();?>Umkm/editRequest/<?=$path;?>">
+                                            <a class="btn btn-raised btn-secondary float-right" href="<?=base_url();?>Umkm/editRequest/<?=$id_pesan;?>">
                                                 Edit Produk
                                             </a>
                                         </div>
@@ -210,7 +226,7 @@
                                         </div>
 
                                         <div class="card-footer"  id="diskusi-anchor">
-                                            <a class="btn btn-raised btn-secondary float-right" href="<?=base_url();?>Umkm/editRequest/<?=$path;?>">
+                                            <a class="btn btn-raised btn-secondary float-right" href="<?=base_url();?>Umkm/editRequest/<?=$id_pesan;?>">
                                                 Edit Keterangan
                                             </a>
                                         </div>
@@ -246,8 +262,8 @@
                                                 </div>
                                                 <div class="card-body">
                                                     <?php if( ! is_null($diskusi->Foto_diskum)): ?>
-                                                        <img src="<?=base_url();?>uploads/<?=$diskusi->Foto_diskum?>" alt="foto untuk diskusi" class="img-thumbnail mr-2" style="max-width: 240px; max-height: 480px;">
-                                                        <a href="<?=base_url();?>uploads/<?=$diskusi->Foto_diskum?>" class="btn btn-secondary" download>Download gambar</a>
+                                                        <a href="<?=base_url();?>uploads/foto_diskum/<?=$diskusi->Foto_diskum?>" class="btn btn-secondary" download>Download gambar</a>
+                                                        <img src="<?=base_url();?>uploads/foto_diskum/<?=$diskusi->Foto_diskum?>" alt="foto untuk diskusi" class="img-thumbnail d-block" style="max-width: 240px; max-height: 480px;">
                                                     <?php endif; ?>
                                                    
                                                     <p class="mt-2 mb-2"><?=$diskusi->Komentar?></p>
@@ -270,16 +286,17 @@
                                                 <button class="btn btn-secondary position-absolute" id="hapus-foto" aria-label="Close" style="top: 24px; right: 24px;background-color: #fff">
                                                     Hapus Foto
                                                 </button>
-                                                <img src="" alt="foto yang di upload" class="img-thumbnail" id="foto-upload" style="max-height: 480px">
+                                                <img src="" alt="foto yang di upload" class="img-thumbnail" id="foto-upload" style="max-height: 320px">
                                             </div>
 
                                             <form action="<?=base_url();?>Umkm/tambahKomentar" method="post" enctype="multipart/form-data" class="mb-0">
                                                 <div style="display: flex; flex-flow: row nowrap; padding: 8px 16px;">
                                                     <div class="form-group" style="display:inline; padding:0; margin: 0; flex: auto">
+                                                        <input type="hidden" name="np" value="<?=$id_pesan?>">
                                                         <input type="text" name="komentar" placeholder="Masukan pesan..." class="form-control" style="display: unset;">
                                                     </div>
                                                     <label for="foto" class="btn btn-secondary mr-2 ml-2"><span id="label">Tambahkan Foto</span>
-                                                        <input type="file" name="foto-diskusi" id="foto" style="display:none">
+                                                        <input type="file" name="foto-komentar" id="foto" style="display:none">
                                                     </label>
                                                     <input type="submit" value="Kirim" class="btn btn-primary">
                                                 </div>

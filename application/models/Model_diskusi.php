@@ -48,4 +48,9 @@ class Model_diskusi extends CI_Model {
 
 		return $result->result();
 	}
+
+	public function createDiskum($data)
+	{
+		return $this->db->insert('tb_diskusiumkm', $data);
+	}
 }

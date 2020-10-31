@@ -271,7 +271,7 @@ class Umkm extends CI_Controller {
 
 			}
 			else{
-				$_SESSION['alert'] =$alert;
+				$_SESSION['alert'] = $alert;
 				$this->session->mark_as_flash('alert');
 				redirect('Umkm/editRequest/'.$this->input->post('np'));
 			}
@@ -388,13 +388,6 @@ class Umkm extends CI_Controller {
 				$_SESSION['alert'] = 'Profil berhasil diubah.';
 				$this->session->mark_as_flash('alert');
 				redirect('Umkm/lihatProfil');
-
-				// var_dump($alert);
-				// var_dump($data_user);
-				// var_dump($data_umkm);
-				// var_dump($id_user);
-				// var_dump($id_umkm);
-
 			}
 			else{
 				$_SESSION['alert'] = $alert;
@@ -432,10 +425,6 @@ class Umkm extends CI_Controller {
 				'daftar_diskusi'	=> $daftar_diskusi
 			);
 		}
-
-		// var_dump($data);
-		// var_dump($id_umkm);
-		// var_dump($id_pesan);
 		$this->load->view('umkm/lihatdiskusi', $data);
 	}
 
@@ -489,15 +478,55 @@ class Umkm extends CI_Controller {
 	{
 		// Cek kalo user ke alamat ini dengan method post (tidak mengetik secara langsung alamat "../Umkm/tambahKomentar")
 		if($this->input->method() == 'post') {
-			$komentar	= $this->input->post('komentar');
-			$foto		= $_FILES['foto-diskusi'];
+			// Kembalikan IDPesan sesuai format, 1 -> PS0001
+			$id_terpotong	= $this->input->post('np');
+			$id_pesan		= 'PS'.str_pad($id_terpotong, 4, '0', STR_PAD_LEFT);
 
-			$data 		= array(
-				'Komentar'	=> $komentar,
-				'Foto'		=> $foto
-			);
+			$data			= array();
+			$alert			= '';
+			
+			// Proses upload foto dengan bantuan function uploadFoto() dari my_helper
+			// Jika tidak ada foto yang di-upload maka lewati bagian if() ini
+			$this->load->helper('my_helper');
+			if( $_FILES['foto-komentar']['error'] !== 4 ){
+				$alert	= uploadFoto('foto-komentar', 'foto_diskum');
+				$data	+= array(
+					'Foto_diskum' => $_FILES['foto-komentar']['name']
+				);
+			}
 
-			var_dump($data);
+			// Cek apakah upload foto berhasil
+			// Jika berhasil tambahkan ke database, jika tidak berhasil lempar peringatan ke halaman diskusi
+			if($alert==='sukses' || $alert===''){
+				$this->load->model('Model_created');
+				$id_diskum		= $this->Model_created->idDiskum();
+
+				$komentar		= $this->input->post('komentar');
+				$tanggal_waktu	= date('Y-m-d h:i:s');
+				// Alternatif cara ambil tanggal sekarang jika yg di atas tdk akurat
+				// $now				= new DateTime('now',new DateTimeZone('Asia/Jakarta'));
+				// $tanggal_waktu	= $now->format('Y-m-d H:i:s');
+
+				// IDPengelola dikosongkan karena pengirim komentar adalah UMKM
+				$data 			+= array(
+					'IDDiskum'		=> $id_diskum,
+					'IDUMKM'		=> $this->session->id_umkm,
+					'IDPesan'		=> $id_pesan,
+					'Komentar'		=> $komentar,
+					'Tanggal_waktu'	=> $tanggal_waktu
+				);
+
+				$this->load->model('Model_diskusi');
+				$this->Model_diskusi->createDiskum($data);
+
+				redirect('Umkm/diskusi/'.$id_terpotong);
+
+			}
+			else{
+				$_SESSION['alert'] = $alert;
+				$this->session->mark_as_flash('alert');
+				redirect('Umkm/diskusi/'.$id_terpotong);
+			}
 		}
 		else
 			redirect('Umkm');
