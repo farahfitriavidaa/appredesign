@@ -11,5 +11,21 @@ class Model_diskusi extends CI_Model {
 	{
 		return $this->db->query("SELECT Nama_lengkap FROM tb_user JOIN tb_desainer USING(IDUser) WHERE IDDesigner='$id_desainer'")->row();
 	}
+
+	public function getDaftarDiskumUmkm($id_pesan)
+	{
+		$result = $this->db->query(
+			"SELECT d1.IDPesan, d1.Komentar, d1.Tanggal_waktu, ud.Nama_produk
+			FROM tb_diskusiumkm d1
+			JOIN tb_pemesanan USING (IDPesan)
+			JOIN tb_umkm_data ud USING (IDDataUmkm)
+			JOIN (
+				SELECT IDPesan, MAX(Tanggal_waktu) AS Tanggal_terupdate
+				FROM tb_diskusiumkm
+				GROUP BY IDPesan) AS d2
+			ON d1.IDPesan = d2.IDPesan AND d1.Tanggal_waktu = d2.Tanggal_terupdate
+			ORDER BY Tanggal_waktu DESC");
+
+		return $result->result();
+	}
 }
-	

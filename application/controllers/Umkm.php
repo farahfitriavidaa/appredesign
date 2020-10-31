@@ -406,6 +406,39 @@ class Umkm extends CI_Controller {
 			redirect('Umkm');
 	}
 
+	public function lihatDiskusi()
+	{
+		// Ambil semua IDPesan berdasarkan IDUMKM
+		$id_umkm	= $this->session->id_umkm;
+		$id_pesan	= $this->Model_umkm->getAllIdPesan($id_umkm);
+		// Buat array $id_pesan menjadi lebih sederhana dengan bantuan function flattenArray() dari my_helper
+		$this->load->helper('my_helper');
+		$id_pesan	= $this->flattenArray($id_pesan);
+
+		// Get Daftar diskusi dari tb_diskusiumkm berdasarkan IDPesan tadi
+		$this->load->model('Model_diskusi');
+		$daftar_diskusi = $this->Model_diskusi->getDaftarDiskumUmkm($id_pesan);
+
+		// Cek jika daftar diskusi kosong beri status has_diskum=false
+		// jika ada daftar diskusi maka beri status has_diskum=true dan masukan ke $data
+		if( empty($daftar_diskusi) ) {
+			$data = array(
+				'has_diskum' => false
+			);
+		}
+		else {
+			$data = array(
+				'has_diskum'		=> true,
+				'daftar_diskusi'	=> $daftar_diskusi
+			);
+		}
+
+		// var_dump($data);
+		// var_dump($id_umkm);
+		// var_dump($id_pesan);
+		$this->load->view('umkm/lihatdiskusi', $data);
+	}
+
 	public function diskusi($id_pesan='0')
 	{
 		// Cek IDPesan dan pastikan user tidak input alamat ".../Umkm/diskusi" tanpa IDPesan
@@ -418,7 +451,8 @@ class Umkm extends CI_Controller {
 			$this->load->model('Model_diskusi');
 			$detil_pemesanan	= $this->Model_diskusi->getPemesanan($id_pesan);
 
-			// Cek designer. Jika ada ambil nama designer, jika tidak beri keterangan 'Ditentukan Pengelola'
+			// Cek designer
+			// Jika ada ambil nama designer, jika tidak beri keterangan 'Ditentukan Pengelola'
 			$data_designer		= array();
 			if( is_null($detil_pemesanan->IDDesigner) ){
 				$data_designer['designer']	= 'Ditentukan Pengelola';
@@ -435,7 +469,7 @@ class Umkm extends CI_Controller {
 				'designer'	=> $data_designer
 			);
 
-			// Load helper untuk memotong IDPesan (bebas mau dipake atau ngga)
+			// Load helper untuk memotong IDPesan, PS0015 -> 15. (bebas mau dipake atau ngga)
 			$this->load->helper('my_helper');
 
 			// Load view
@@ -448,6 +482,7 @@ class Umkm extends CI_Controller {
 
 	public function tambahKomentar()
 	{
+		// Cek kalo user ke alamat ini dengan method post (tidak mengetik secara langsung alamat "../Umkm/tambahKomentar")
 		if($this->input->method() == 'post') {
 			$komentar	= $this->input->post('komentar');
 			$foto		= $_FILES['foto-diskusi'];

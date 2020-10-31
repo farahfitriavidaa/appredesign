@@ -100,7 +100,7 @@
                                             <a class="btn btn-raised btn-secondary float-right" href="<?=base_url();?>Umkm/editProfil">
                                                 Edit Profil
                                             </a>
-                                        </div>                                        
+                                        </div>
                                     </div>
                                 </div>
                             </div>
