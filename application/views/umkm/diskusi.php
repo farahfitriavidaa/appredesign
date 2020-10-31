@@ -224,49 +224,43 @@
                                             <strong>Diskusi dengan Pengelola/Designer/UMKM</strong>
                                         </div>
                                         <div class="px-2" style="overflow-y: auto; max-height: 1080px">
-
+                                        <?php foreach($daftar_diskusi as $diskusi): ?>
                                             <div class="card mb-3">
                                                 <div class="card-header">
                                                     <div class="row ml-0">
                                                         <div class="mr-2">
-                                                            <img src="<?=base_url()?>uploads/foto_user/umkm.png" alt="foto profil umkm" class="img-fluid crop-center rounded-circle" style="width:40px;height:40px;"/>
+                                                            <img src="<?=base_url()?>uploads/foto_user/<?=$diskusi->Foto?>" alt="foto profil" class="img-fluid crop-center rounded-circle" style="width:40px;height:40px;"/>
                                                         </div>
                                                         <div>
-                                                            <strong class="d-block">Nama User</strong>
-                                                            <span class="text-muted">UMKM - [Nama UMKM]/Designer/Pengelola</span>
+                                                            <strong class="d-block"><?=$diskusi->Nama_lengkap?></strong>
+                                                            <span class="text-muted">
+                                                                <?php
+                                                                    if($diskusi->Level==="UMKM")
+                                                                        echo $diskusi->Level." - ".$diskusi->Nama_umkm;
+                                                                    else
+                                                                        echo $diskusi->Level;
+                                                                ?>
+                                                            </span>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="card-body">
-                                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magnam eos, ad voluptatum consequuntur dicta ipsa quaerat recusandae sunt excepturi laboriosam doloribus nihil sapiente, at dolorem necessitatibus temporibus odit adipisci et!</p>
+                                                    <?php if( ! is_null($diskusi->Foto_diskum)): ?>
+                                                        <img src="<?=base_url();?>uploads/<?=$diskusi->Foto_diskum?>" alt="foto untuk diskusi" class="img-thumbnail mr-2" style="max-width: 240px; max-height: 480px;">
+                                                        <a href="<?=base_url();?>uploads/<?=$diskusi->Foto_diskum?>" class="btn btn-secondary" download>Download gambar</a>
+                                                    <?php endif; ?>
+                                                   
+                                                    <p class="mt-2 mb-2"><?=$diskusi->Komentar?></p>
                                                 </div>
                                                 <div class="card-footer">
-                                                    <span class="text-13 text-muted float-right"><?=date('d-M-Y', $tgl_order);?></span>
+                                                    <?php
+                                                        $tgl_waktu  = $diskusi->Tanggal_waktu;
+                                                        $tgl_waktu  = strtotime($tgl_waktu);
+                                                    ?>
+                                                    <span class="text-13 text-muted float-right"><?=date('d M, H.i', $tgl_waktu);?></span>
                                                 </div>
                                             </div>
-
-                                            <div class="card mb-3">
-                                                <div class="card-header">
-                                                    <div class="row ml-0">
-                                                        <div class="mr-2">
-                                                            <img src="<?=base_url()?>uploads/foto_user/umkm.png" alt="foto profil umkm" class="img-fluid crop-center rounded-circle" style="width:40px;height:40px;"/>
-                                                        </div>
-                                                        <div>
-                                                            <strong class="d-block">Nama User</strong>
-                                                            <span class="text-muted">UMKM - [Nama UMKM]/Designer/Pengelola</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="card-body">
-                                                    <img src="<?=base_url();?>uploads/foto_user/umkm.png" alt="foto untuk diskusi" class="img-thumbnail mr-2" style="max-width: 240px; max-height: 480px;">
-                                                    <a href="<?=base_url();?>uploads/foto_user/umkm.png" class="btn btn-secondary" download>Download gambar</a>
-
-                                                    <p class="mt-2 mb-2">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Recusandae accusantium fugit ratione temporibus, eum officiis facilis earum, veniam, eos adipisci voluptas quam. Aperiam rerum obcaecati repellendus nam doloremque sapiente ratione?</p>
-                                                </div>
-                                                <div class="card-footer">
-                                                    <span class="text-13 text-muted float-right"><?=date('d-M-Y', $tgl_order);?></span>
-                                                </div>
-                                            </div>
+                                        <?php endforeach; ?>
 
                                         </div>
 

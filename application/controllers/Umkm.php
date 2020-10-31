@@ -417,7 +417,7 @@ class Umkm extends CI_Controller {
 
 		// Get Daftar diskusi dari tb_diskusiumkm berdasarkan IDPesan tadi
 		$this->load->model('Model_diskusi');
-		$daftar_diskusi = $this->Model_diskusi->getDaftarDiskumUmkm($id_pesan);
+		$daftar_diskusi = $this->Model_diskusi->getDaftarDiskum($id_pesan);
 
 		// Cek jika daftar diskusi kosong beri status has_diskum=false
 		// jika ada daftar diskusi maka beri status has_diskum=true dan masukan ke $data
@@ -464,10 +464,15 @@ class Umkm extends CI_Controller {
 				$data_designer['ada']		= TRUE;
 			}
 
+			// Ambil data diskusi berdasarkan IDPesan
+			$daftar_diskusi	= $this->Model_diskusi->getDiskum($id_pesan);
+
 			$data			= array(
-				'pemesanan'	=> $detil_pemesanan,
-				'designer'	=> $data_designer
+				'pemesanan'			=> $detil_pemesanan,
+				'designer'			=> $data_designer,
+				'daftar_diskusi'	=> $daftar_diskusi
 			);
+			// var_dump($data['daftar_diskusi']);
 
 			// Load helper untuk memotong IDPesan, PS0015 -> 15. (bebas mau dipake atau ngga)
 			$this->load->helper('my_helper');
