@@ -17,7 +17,7 @@
                 <!-- LOGO -->
                 <div class="topbar-left">
                     <div class="text-center">
-                      <img src="<?=base_url()?>asset/logo2.png" width="140px" style="margin-top:-10px">
+                        <img src="<?=base_url()?>asset/logo2.png" width="140px" style="margin-top:-10px">
                     </div>
                 </div>
 
@@ -44,11 +44,11 @@
                                   <div class="page-title-box">
                                       <div class="btn-group float-right">
                                           <ol class="breadcrumb hide-phone p-0 m-0">
-                                              <li class="breadcrumb-item"><a href="#">Kelola Order</a></li>
-                                              <li class="breadcrumb-item active">Pengguna</li>
+                                              <li class="breadcrumb-item"><a href="#">Kelola Report</a></li>
+                                              <li class="breadcrumb-item"><a href="#">Kelola Order Selesai</a></li>
                                           </ol>
                                       </div>
-                                      <h4 class="page-title">Kelola Pengguna</h4>
+                                      <h4 class="page-title">Kelola Report</h4>
                                   </div>
                               </div>
                               <div class="clearfix"></div>
@@ -58,28 +58,17 @@
                               <div class="col-12">
                                   <div class="card m-b-30">
                                       <div class="card-body">
-                                          <h4 class="mt-0 header-title">Data Pemesanan UMKM</h4>
+                                          <h4 class="mt-0 header-title">Data Order Selesai</h4>
                                           <p class="text-muted font-14">
-                                            Berikut ini adalah data pemesanan re-design UMKM gDESK
+                                            Berikut adalah data order selesai para UMKM gDESK
                                           </p>
-                                          <a class="btn btn-raised btn-primary" href="<?=base_url()?>Admin/kelolaDataUMKM">
-                                          <i class="mdi mdi-folder mr-2 text-white-400"></i>
-                                            Data UMKM
-                                          </a>
-                                          <a class="btn btn-raised btn-primary" href="" data-toggle="modal" data-target="#tambahumkm">
-                                          <i class="mdi mdi-camera mr-2 text-white-400"></i>
-                                            Tambah Data UMKM
-                                          </a>
-                                          <a class="btn btn-raised btn-primary" href="" data-toggle="modal" data-target="#tambah">
-                                          <i class="mdi mdi-plus mr-2 text-white-400"></i>
-                                            Tambah Pemesanan
-                                          </a>
-                                          <br><br>
                                           <table id="datatable" class="table table-bordered">
                                               <thead>
                                               <tr>
                                                   <th>No.</th>
-                                                  <th>IDPesan</th>
+                                                  <th>ID Pesan</th>
+                                                  <th>ID Pengelola</th>
+                                                  <th>ID Designer</th>
                                                   <th>Nama UMKM</th>
                                                   <th>Data UMKM</th>
                                                   <th>Diskusi</th>
@@ -87,23 +76,22 @@
                                                   <th>Tanggal Akhir</th>
                                                   <th>Hasil Design</th>
                                                   <th>Status</th>
-                                                  <th>Aksi</th>
                                               </tr>
                                               </thead>
                                               <tbody>
                                                 <?php
                                                   $no = 1;
-                                                  foreach($pemesanan as $a): ?>
-                                              <tr>
+                                                  foreach($orderpemesanan as $a): ?>
+                                                  <tr>
                                                   <td><?php echo $no++ ?></td>
                                                   <td><?php echo $a->IDPesan ?></td>
+                                                  <td><?php echo $a->IDPengelola ?></td>
+                                                  <td><?php echo $a->IDDesigner ?></td>
                                                   <td><?php echo $a->Nama_umkm ?></td>
-                                                  <td>
-                                                    <a class="btn btn-raised btn-info" href="<?=base_url()?>Admin/kelolaDataUMKMIo/<?=$a->IDUMKM?>">
-                                                      <i class="mdi mdi-information mr-2 text-white-400"></i>
-                                                        Data UMKM
-                                                    </a>
-                                                  </td>
+                                                  <td> <a class="btn btn-raised btn-info" href="<?=base_url()?>Admin/kelolaDataUMKMIc/<?=$a->IDUMKM?>">
+                                                    <i class="mdi mdi-information mr-2 text-white-400"></i>
+                                                      Data UMKM
+                                                  </a> </td>
                                                   <td> <a href="#">Diskusi</a> </td>
                                                   <td><?php echo $a->Tgl_mulai ?></td>
                                                   <td><?php echo $a->Tgl_akhir ?></td>
@@ -127,22 +115,21 @@
                                                       <button type="button" class="badge badge-pill badge-dark" name="button">Selesai</button>
                                                     <?php } ?>
                                                   </td>
-                                                  <td>
-                                                    <a class="btn btn-raised btn-info" href="" data-toggle="modal" data-target="#detail<?=$a->IDPesan?>">
-                                                      <i class="mdi mdi-information mr-2 text-white-400"></i>
-                                                        Detail
-                                                    </a>
-                                                      <a class="btn btn-raised btn-primary" href="" data-toggle="modal" data-target="#edit<?=$a->IDPesan?>">
-                                                      <i class="mdi mdi-grease-pencil mr-2 text-white-400"></i>
-                                                        Edit
-                                                    </a>
-                                                    <a class="btn btn-raised btn-danger" href="" data-toggle="modal" data-target="#hapus<?=$a->IDPesan?>">
-                                                      <i class="mdi mdi-delete mr-2 text-white-400"></i>
-                                                        Hapus
-                                                    </a>
-                                                  </td>
                                               </tr>
                                             <?php endforeach; ?>
+                                            <tr>
+                                              <td></td>
+                                              <td></td>
+                                              <td></td>
+                                              <td></td>
+                                              <td></td>
+                                              <td></td>
+                                              <td></td>
+                                              <td></td>
+                                              <td></td>
+                                              <td></td>
+                                              <td></td>
+                                            </tr>
                                               </tbody>
                                           </table>
 
@@ -169,7 +156,7 @@
         </div>
         <!-- END wrapper -->
 
-        <?php foreach ($pemesanan as $key) { ?>
+        <?php foreach ($orderpemesanan as $key) { ?>
         <div class="modal fade" id="hasil<?=$key->IDPesan?>" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="ExampleModalLabel">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -204,7 +191,7 @@
         <!-- /.modal -->
         <?php } ?>
 
-        <?php foreach ($pemesanan as $key) { ?>
+        <?php foreach ($orderpemesanan as $key) { ?>
         <div class="modal fade" id="hapus<?=$key->IDPesan?>" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="ExampleModalLabel">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -329,7 +316,12 @@
                             <tr>
                               <td>Foto Produk</td>
                               <td>:</td>
-                              <td><input type="file" name="foto_produk" class="form-control"> </td>
+                              <td>*Pilih salah satu*</td>
+                            </tr>
+                            <tr>
+                              <td><input type="text" name="foto_produk" placeholder="link foto" class="form-control"></td>
+                              <!-- <td>Atau</td>
+                              <td> <input type="file" name="foto_produk" class="form-control"> </td> -->
                             </tr>
                             <tr>
                               <td>Keterangan</td>
@@ -349,7 +341,7 @@
                             <!-- /.modal-dialog -->
               </div>
 
-              <?php foreach ($pemesanan as $key) { ?>
+              <?php foreach ($orderpemesanan as $key) { ?>
               <div class="modal fade" id="edit<?=$key->IDPesan?>" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="ExampleModalLabel">
               <div class="modal-dialog" role="document">
                <div class="modal-content">
@@ -401,8 +393,7 @@
                          <td><textarea class="form-control" name="keterangan" rows="8" cols="80"><?=$key->Keterangan_design?></textarea></td>
                        </tr>
                        <tr>
-                         <td>Hasil Design <br>
-                          <p style="font-size:11px">File harus berupa rar/jpg/pdf</p> </td>
+                         <td>Hasil Design</td>
                          <td>:</td>
                          <td><input type="file" class="form-control" name="hasil_design"></td>
                        </tr>
@@ -453,7 +444,7 @@
               <!-- /.modal -->
               <?php } ?>
 
-              <?php foreach ($pemesanan as $key) { ?>
+              <?php foreach ($orderpemesanan as $key) { ?>
               <div class="modal fade" id="detail<?=$key->IDPesan?>" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="ExampleModalLabel">
               <div class="modal-dialog" role="document">
                <div class="modal-content">

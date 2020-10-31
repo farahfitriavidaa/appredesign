@@ -79,7 +79,7 @@
                                               <tbody>
                                                 <?php
                                                   $no = 1;
-                                                  foreach($dataumkm as $a): ?>
+                                                  foreach($umkm as $a): ?>
                                               <tr>
                                                   <td><?php echo $no++ ?></td>
                                                   <td><?php echo $a->Nama_umkm ?></td>
@@ -100,13 +100,26 @@
                                                   </td>
                                               </tr>
                                             <?php endforeach; ?>
+                                            <tr>
+                                              <td></td>
+                                              <td></td>
+                                              <td></td>
+                                              <td></td>
+                                              <td></td>
+                                              <td></td>
+                                              <td></td>
+                                              <td></td>
+                                            </tr>
                                               </tbody>
                                           </table>
                                       </div>
                                   </div>
-                              </div> <!-- end col -->
-                          </div> <!-- end row -->
-
+                              </div>
+                          </div>
+                          <a class="btn btn-raised btn-danger" href="<?=base_url()?>Admin/kelolaPemesanan">
+                            <i class="mdi mdi-arrow-left-bold-circle mr-2 text-white-400"></i>
+                              Kembali
+                          </a>
                         </div>
                         <!-- container -->
 
@@ -125,7 +138,7 @@
         </div>
         <!-- END wrapper -->
 
-        <?php foreach ($dataumkm as $key) { ?>
+        <?php foreach ($umkm as $key) { ?>
         <div class="modal fade" id="foto<?=$key->IDDataUMKM?>" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="ExampleModalLabel">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -141,7 +154,7 @@
              <?php if (!$key->Foto_produk) { ?>
                <p style="color:red">Belum upload foto produk</p>
              <?php }else if($key->Foto_produk){?>
-              <img src="<?=base_url()?>uploads/foto_produk/<?=$key->Foto_produk?>" width="400px" alt="Design">
+              <img src="<?=base_url()?>uploads/foto_produk/<?=$key->Foto_produk?>" width="450px" alt="Design">
               <a class="btn btn-success" style="margin-left:40%" href="<?=base_url()?>uploads/foto_produk/<?=$key->Foto_produk?>" target="_blank" rel="nofollow">
                 <i class="mdi mdi-arrow-down-bold-circle"></i>
                 Unduh</a>
@@ -181,7 +194,7 @@
         <?php } ?>
 
 
-        <?php foreach ($dataumkm as $key) { ?>
+        <?php foreach ($umkm as $key) { ?>
         <div class="modal fade" id="logo<?=$key->IDDataUMKM?>" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="ExampleModalLabel">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -197,10 +210,7 @@
              <?php if (!$key->Logo_produk) { ?>
                <p style="color:red">Belum upload logo produk</p>
              <?php }else if($key->Logo_produk){ ?>
-              <img src="<?=base_url()?>uploads/logo_produk/<?=$key->Logo_produk?>" width="400px" alt="Design"><br><br>
-              <a class="btn btn-success" style="margin-left:40%" href="<?=base_url()?>uploads/logo_produk/<?=$key->Logo_produk?>" target="_blank" rel="nofollow">
-                <i class="mdi mdi-arrow-down-bold-circle"></i>
-                Unduh</a>
+              <img src="<?=base_url()?>uploads/logo_produk/<?=$key->Logo_produk?>" width="450px" alt="Design"><br><br>
             <?php } ?>
               <table style="margin-left:50px">
                 <tr>
@@ -209,61 +219,6 @@
                 <tr>
                   <td>
                     <input type="file" name="logo_produk" class="btn btn-success">
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <br><br>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <input type="submit" name="submit" value="Submit" class="badge-danger form-control">
-                  </td>
-                </tr>
-              </table>
-          </form>
-           </div>
-           <div class="modal-footer justify-content-between">
-             <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Tutup</button>
-           </div>
-          </div>
-         <!-- /.modal-content -->
-          </div>
-        <!-- /.modal-dialog -->
-        </div>
-        <!-- /.modal -->
-        <?php } ?>
-
-        <?php foreach ($dataumkm as $key) { ?>
-        <div class="modal fade" id="kemasan<?=$key->IDDataUMKM?>" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="ExampleModalLabel">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-             <h4 class="modal-title" id="ExampleModalLabel">Kemasan Produk</h4>
-             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-               <span aria-hidden="true">&times;</span>
-             </button>
-              </div>
-           <div class="modal-body">
-             <form style="margin-left:8px" action="<?=base_url()?>Admin/UpdateKemasan" method="post" enctype="multipart/form-data">
-               <input type="hidden" name="iddataumkm" value="<?=$key->IDDataUMKM?>">
-             <?php if (!$key->Kemasan_produk) { ?>
-               <p style="color:red">Belum upload kemasan produk</p>
-             <?php }else if($key->Kemasan_produk){ ?>
-              <img src="<?=base_url()?>uploads/foto_kemasan_lama/<?=$key->Kemasan_produk?>" width="400px" alt="Design">
-              <br><br>
-              <a class="btn btn-success" style="margin-left:40%" href="<?=base_url()?>uploads/foto_kemasan_lama/<?=$key->Kemasan_produk?>" target="_blank" rel="nofollow">
-                <i class="mdi mdi-arrow-down-bold-circle"></i>
-                Unduh</a>
-            <?php } ?>
-              <table style="margin-left:50px">
-                <tr>
-                  <td>Upload or Edit Kemasan Produk</td>
-                </tr>
-                <tr>
-                  <td>
-                    <input type="file" name="kemasan_produk" class="btn btn-success">
                   </td>
                 </tr>
                 <!-- <tr>
@@ -300,7 +255,58 @@
         <!-- /.modal -->
         <?php } ?>
 
-        <?php foreach ($dataumkm as $key) { ?>
+        <?php foreach ($umkm as $key) { ?>
+        <div class="modal fade" id="kemasan<?=$key->IDDataUMKM?>" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="ExampleModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+             <h4 class="modal-title" id="ExampleModalLabel">Kemasan Produk</h4>
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+             </button>
+              </div>
+           <div class="modal-body">
+             <form style="margin-left:8px" action="<?=base_url()?>Admin/UpdateKemasan" method="post" enctype="multipart/form-data">
+               <input type="hidden" name="iddataumkm" value="<?=$key->IDDataUMKM?>">
+             <?php if (!$key->Kemasan_produk) { ?>
+               <p style="color:red">Belum upload kemasan produk</p>
+             <?php }else if($key->Kemasan_produk){ ?>
+              <img src="<?=base_url()?>uploads/foto_kemasan_lama/<?=$key->Kemasan_produk?>" width="450px" alt="Design"><br><br>
+            <?php } ?>
+              <table style="margin-left:50px">
+                <tr>
+                  <td>Upload or Edit Kemasan Produk</td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="file" name="kemasan_produk" class="btn btn-success">
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <br><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="submit" name="submit" value="Submit" class="badge-danger form-control">
+                  </td>
+                </tr>
+              </table>
+          </form>
+           </div>
+           <div class="modal-footer justify-content-between">
+             <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Tutup</button>
+           </div>
+          </div>
+         <!-- /.modal-content -->
+          </div>
+        <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+        <?php } ?>
+
+        <?php foreach ($umkm as $key) { ?>
         <div class="modal fade" id="hapus<?=$key->IDDataUMKM?>" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="ExampleModalLabel">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -382,7 +388,7 @@
                             <!-- /.modal-dialog -->
               </div>
 
-              <?php foreach ($dataumkm as $key) { ?>
+              <?php foreach ($umkm as $key) { ?>
               <div class="modal fade" id="edit<?=$key->IDDataUMKM?>" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="ExampleModalLabel">
               <div class="modal-dialog" role="document">
                <div class="modal-content">
