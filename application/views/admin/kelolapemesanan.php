@@ -44,9 +44,8 @@
                                   <div class="page-title-box">
                                       <div class="btn-group float-right">
                                           <ol class="breadcrumb hide-phone p-0 m-0">
-                                              <li class="breadcrumb-item"><a href="#">Urora</a></li>
-                                              <li class="breadcrumb-item"><a href="#">Tables</a></li>
-                                              <li class="breadcrumb-item active">Datatable</li>
+                                              <li class="breadcrumb-item"><a href="#">Kelola Order</a></li>
+                                              <li class="breadcrumb-item active">Pengguna</li>
                                           </ol>
                                       </div>
                                       <h4 class="page-title">Kelola Pengguna</h4>
@@ -60,9 +59,8 @@
                                   <div class="card m-b-30">
                                       <div class="card-body">
                                           <h4 class="mt-0 header-title">Data Pemesanan UMKM</h4>
-                                          <p class="text-muted font-14">DataTables has most features enabled by
-                                              default, so all you need to do to use it with your own tables is to call
-                                              the construction function: <code>$().DataTable();</code>.
+                                          <p class="text-muted font-14">
+                                            Berikut ini adalah data pemesanan re-design UMKM gDESK
                                           </p>
                                           <a class="btn btn-raised btn-primary" href="<?=base_url()?>Admin/kelolaDataUMKM">
                                           <i class="mdi mdi-folder mr-2 text-white-400"></i>
@@ -100,7 +98,12 @@
                                                   <td><?php echo $no++ ?></td>
                                                   <td><?php echo $a->IDPesan ?></td>
                                                   <td><?php echo $a->Nama_umkm ?></td>
-                                                  <td> <a href="#">Data UMKM</a> </td>
+                                                  <td>
+                                                    <a class="btn btn-raised btn-info" href="<?=base_url()?>Admin/kelolaDataUMKMIo/<?=$a->IDUMKM?>">
+                                                      <i class="mdi mdi-information mr-2 text-white-400"></i>
+                                                        Data UMKM
+                                                    </a>
+                                                  </td>
                                                   <td> <a href="#">Diskusi</a> </td>
                                                   <td><?php echo $a->Tgl_mulai ?></td>
                                                   <td><?php echo $a->Tgl_akhir ?></td>
@@ -326,12 +329,7 @@
                             <tr>
                               <td>Foto Produk</td>
                               <td>:</td>
-                              <td>*Pilih salah satu*</td>
-                            </tr>
-                            <tr>
-                              <td><input type="text" name="foto_produk" placeholder="link foto" class="form-control"></td>
-                              <td>Atau</td>
-                              <td> <input type="file" name="foto_produk" class="form-control"> </td>
+                              <td><input type="file" name="foto_produk" class="form-control"> </td>
                             </tr>
                             <tr>
                               <td>Keterangan</td>
@@ -403,7 +401,8 @@
                          <td><textarea class="form-control" name="keterangan" rows="8" cols="80"><?=$key->Keterangan_design?></textarea></td>
                        </tr>
                        <tr>
-                         <td>Hasil Design</td>
+                         <td>Hasil Design <br>
+                          <p style="font-size:11px">File harus berupa rar/jpg/pdf</p> </td>
                          <td>:</td>
                          <td><input type="file" class="form-control" name="hasil_design"></td>
                        </tr>

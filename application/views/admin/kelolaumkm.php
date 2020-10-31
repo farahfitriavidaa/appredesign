@@ -44,9 +44,8 @@
                                   <div class="page-title-box">
                                       <div class="btn-group float-right">
                                           <ol class="breadcrumb hide-phone p-0 m-0">
-                                              <li class="breadcrumb-item"><a href="#">Urora</a></li>
-                                              <li class="breadcrumb-item"><a href="#">Tables</a></li>
-                                              <li class="breadcrumb-item active">Datatable</li>
+                                              <li class="breadcrumb-item"><a href="#">Kelola Pengguna</a></li>
+                                              <li class="breadcrumb-item active">UMKM</li>
                                           </ol>
                                       </div>
                                       <h4 class="page-title">Kelola Pengguna</h4>
@@ -60,10 +59,7 @@
                                   <div class="card m-b-30">
                                       <div class="card-body">
                                           <h4 class="mt-0 header-title">Data Akun UMKM</h4>
-                                          <p class="text-muted font-14">DataTables has most features enabled by
-                                              default, so all you need to do to use it with your own tables is to call
-                                              the construction function: <code>$().DataTable();</code>.
-                                          </p>
+                                          <p>Berikut adalah data-data akun para UMKM gDESK</p>
                                           <a class="btn btn-raised btn-primary" href="" data-toggle="modal" data-target="#tambah">
                                           <i class="mdi mdi-plus mr-2 text-white-400"></i>
                                             Tambah Akun
@@ -97,7 +93,7 @@
                                                   <td><?php echo $a->Email ?></td>
                                                   <td><?php echo $a->Regional ?></td>
                                                   <td>
-                                                    <a class="btn btn-raised btn-info" href="" data-toggle="modal" data-target="#dataUMKM<?=$a->IDUser?>">
+                                                    <a class="btn btn-raised btn-info" href="<?=base_url()?>Admin/kelolaDataUMKMId/<?=$a->IDUMKM?>">
                                                       <i class="mdi mdi-information mr-2 text-white-400"></i>
                                                         Data UMKM
                                                     </a>
@@ -191,6 +187,7 @@
                </button>
                </div>
                <div class="modal-body">
+                  <?php echo validation_errors('<div class="error">'.'</div>'); ?>
                  <form class="" action="<?=base_url()?>Admin/tambahUMKM" method="POST">
                    <table width="100%">
                      <tr>

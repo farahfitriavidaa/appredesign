@@ -78,7 +78,7 @@ class Model_admin extends CI_Model {
 
   public function getPemesanan()
   {
-    return $this->db->query("SELECT * FROM tb_user JOIN tb_umkm USING(IDUser) JOIN tb_pemesanan USING(IDUMKM) JOIN tb_pengelola USING(IDPengelola) JOIN tb_desainer USING(IDDesigner)")->result();
+    return $this->db->query("SELECT * FROM tb_user JOIN tb_umkm USING(IDUser) JOIN tb_umkm_data USING(IDUMKM) JOIN tb_pemesanan USING(IDDataUMKM) JOIN tb_pengelola USING(IDPengelola) JOIN tb_desainer USING(IDDesigner)")->result();
   }
 
   public function getDataaUMKM()
@@ -88,7 +88,17 @@ class Model_admin extends CI_Model {
 
   public function getDataUMKM($idumkm)
   {
-    return $this->db->query("SELECT * FROM tb_umkm_data WHERE IDUMKM = '$idumkm'")->result();
+    return $this->db->query("SELECT * FROM tb_umkm_data JOIN tb_umkm USING(IDUMKM) WHERE IDUMKM = '$idumkm'")->result();
+  }
+
+  public function getDesignerId($id)
+  {
+    return $this->db->query("SELECT * FROM tb_user JOIN tb_desainer USING(IDUser) WHERE IDUser='$id'")->row();
+  }
+
+  public function getPortofolio($id)
+  {
+    return $this->db->query("SELECT * FROM tb_user JOIN tb_desainer USING(IDUser) JOIN tb_portofolio USING(IDDesigner) WHERE IDUser='$id'")->result();
   }
 
   public function delete_user($id)
@@ -185,5 +195,30 @@ class Model_admin extends CI_Model {
   {
     $this->db->where('IDDataUMKM',$id);
     return $this->db->delete('tb_umkm_data');
+  }
+
+  public function getOrderPemesanan()
+  {
+    return $this->db->query("SELECT * FROM tb_user JOIN tb_umkm USING(IDUser) JOIN tb_umkm_data USING(IDUMKM) JOIN tb_pemesanan USING(IDDataUMKM) JOIN tb_pengelola USING(IDPengelola) JOIN tb_desainer USING(IDDesigner) WHERE tb_pemesanan.Status BETWEEN '1' AND '5'")->result();
+  }
+
+  public function getOrderPermintaan()
+  {
+    return $this->db->query("SELECT * FROM tb_user JOIN tb_umkm USING(IDUser)JOIN tb_umkm_data USING(IDUMKM) JOIN tb_pemesanan USING(IDDataUMKM) JOIN tb_pengelola USING(IDPengelola) JOIN tb_desainer USING(IDDesigner) WHERE tb_pemesanan.Status BETWEEN '0' AND '1'")->result();
+  }
+
+  public function getOrderOnGoing()
+  {
+    return $this->db->query("SELECT * FROM tb_user JOIN tb_umkm USING(IDUser)JOIN tb_umkm_data USING(IDUMKM) JOIN tb_pemesanan USING(IDDataUMKM) JOIN tb_pengelola USING(IDPengelola) JOIN tb_desainer USING(IDDesigner) WHERE tb_pemesanan.Status BETWEEN '2' AND '4'")->result();
+  }
+
+  public function getOrderSelesai()
+  {
+    return $this->db->query("SELECT * FROM tb_user JOIN tb_umkm USING(IDUser) JOIN tb_umkm_data USING(IDUMKM) JOIN tb_pemesanan USING(IDDataUMKM) JOIN tb_pengelola USING(IDPengelola) JOIN tb_desainer USING(IDDesigner) WHERE tb_pemesanan.Status = '5'")->result();
+  }
+
+  public function getOrderTransaksi()
+  {
+    return $this->db->query("SELECT * FROM tb_user JOIN tb_umkm USING(IDUser) JOIN tb_umkm_data USING(IDUMKM) JOIN tb_pemesanan USING(IDDataUMKM) JOIN tb_pengelola USING(IDPengelola) JOIN tb_desainer USING(IDDesigner) WHERE tb_pemesanan.Status BETWEEN '6' AND '7'")->result();
   }
 }

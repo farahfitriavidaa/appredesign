@@ -170,6 +170,39 @@ class Admin extends CI_Controller {
 
 	public function tambahPengelola()
 	{
+		$this->form_validation->set_rules('username','Username','required|is_unique[tb_user.Username]',
+		array(
+			'required' => 'Username tidak boleh kosong',
+			'is_unique'=> 'Username sudah ada, coba lagi'
+		));
+		$this->form_validation->set_rules('namalengkap','Nama Lengkap','required',
+		array(
+			'required' => 'Nama lengkap tidak boleh kosong',
+		));
+		$this->form_validation->set_rules('password','Password','required|min_length[8]',
+		array(
+			'required'      => '%s tidak boleh kosong',
+			'min_length'    => 'Masukan password minimal 8 character',
+		));
+		$this->form_validation->set_rules('notelp','Nomor Telp','required|min_length[10]|numeric|greater_than[0]',
+		array(
+			'required'    => '%s tidak boleh kosong',
+			'min_length'  => '%s diisi minimal 10angka',
+			'numeric'     => '%s wajib menggunakan angka',
+			'greater_than'=> '%s tidak boleh minus'
+		));
+		$this->form_validation->set_rules('email','Email','required|valid_email',
+		array(
+		'required'      => 'Email tidak boleh kosong',
+		'valid_email'   => 'Harus berformat email yang valid (contoh : email@gmail.com)'
+		));
+		$this->form_validation->set_rules('status','Status','required',
+		array(
+		'required'      => 'Status harus diisi',
+		));
+		if($this->form_validation->run() == FALSE){
+			$this->kelolaAkun();
+		}else{
 		$id 		= $this->Model_created->idUser();
 		$idP		= $this->Model_created->idPengelola();
 		$data 	= array(
@@ -190,6 +223,7 @@ class Admin extends CI_Controller {
 		$cek	= $this->Model_created->create_user($data);
 		$cekk = $this->Model_created->create_pengelola($dataa);
 		redirect('Admin/kelolaAkun');
+		}
 	}
 
 	public function editPengelola($id)
@@ -241,6 +275,43 @@ class Admin extends CI_Controller {
 
 	public function tambahTelkom()
 	{
+		$this->form_validation->set_rules('username','Username','required|is_unique[tb_user.Username]',
+		array(
+			'required' => 'Username tidak boleh kosong',
+			'is_unique'=> 'Username sudah ada, coba lagi'
+		));
+		$this->form_validation->set_rules('namalengkap','Nama Lengkap','required',
+		array(
+			'required' => 'Nama lengkap tidak boleh kosong',
+		));
+		$this->form_validation->set_rules('password','Password','required|min_length[8]',
+		array(
+			'required'      => '%s tidak boleh kosong',
+			'min_length'    => 'Masukan password minimal 8 character',
+		));
+		$this->form_validation->set_rules('notelp','Nomor Telp','required|min_length[10]|numeric|greater_than[0]',
+		array(
+			'required'    => '%s tidak boleh kosong',
+			'min_length'  => '%s diisi minimal 10angka',
+			'numeric'     => '%s wajib menggunakan angka',
+			'greater_than'=> '%s tidak boleh minus'
+		));
+		$this->form_validation->set_rules('email','Email','required|valid_email',
+		array(
+		'required'      => 'Email tidak boleh kosong',
+		'valid_email'   => 'Harus berformat email yang valid (contoh : email@gmail.com)'
+		));
+		$this->form_validation->set_rules('status','Status','required',
+		array(
+		'required'      => 'Status harus diisi',
+		));
+		$this->form_validation->set_rules('regional','Regional','required',
+		array(
+		'required'      => 'Regional harus diisi',
+		));
+		if($this->form_validation->run() == FALSE){
+			$this->kelolaTelkom();
+		}else{
 		$id 		= $this->Model_created->idUser();
 		$idP		= $this->Model_created->idTelkom();
 		$data 	= array(
@@ -256,12 +327,13 @@ class Admin extends CI_Controller {
 		$dataa 	= array(
 			'IDTelkom' => $idP,
 			'IDUser'			=> $id,
-			'No_telp'			=> $this->input->post('notelp'),
-			'Regional'		=> $this->input->post('regional')
+			'Regional'		=> $this->input->post('regional'),
+			'No_telp'			=> $this->input->post('notelp')
 		);
 		$cek	= $this->Model_created->create_user($data);
 		$cekk = $this->Model_created->create_telkom($dataa);
 		redirect('Admin/kelolaTelkom');
+		}
 	}
 
 	public function statusAktif($id)
@@ -291,6 +363,43 @@ class Admin extends CI_Controller {
 
 	public function tambahDesigner()
 	{
+		$this->form_validation->set_rules('username','Username','required|is_unique[tb_user.Username]',
+		array(
+			'required' => 'Username tidak boleh kosong',
+			'is_unique'=> 'Username sudah ada, coba lagi'
+		));
+		$this->form_validation->set_rules('namalengkap','Nama Lengkap','required',
+		array(
+			'required' => 'Nama lengkap tidak boleh kosong',
+		));
+		$this->form_validation->set_rules('password','Password','required|min_length[8]',
+		array(
+			'required'      => '%s tidak boleh kosong',
+			'min_length'    => 'Masukan password minimal 8 character',
+		));
+		$this->form_validation->set_rules('notelp','Nomor Telp','required|min_length[10]|numeric|greater_than[0]',
+		array(
+			'required'    => '%s tidak boleh kosong',
+			'min_length'  => '%s diisi minimal 10angka',
+			'numeric'     => '%s wajib menggunakan angka',
+			'greater_than'=> '%s tidak boleh minus'
+		));
+		$this->form_validation->set_rules('email','Email','required|valid_email',
+		array(
+		'required'      => 'Email tidak boleh kosong',
+		'valid_email'   => 'Harus berformat email yang valid (contoh : email@gmail.com)'
+		));
+		$this->form_validation->set_rules('status','Status','required',
+		array(
+		'required'      => 'Status harus diisi',
+		));
+		$this->form_validation->set_rules('keterangan','Keterangan','required',
+		array(
+		'required'      => 'Keterangan harus diisi',
+		));
+		if($this->form_validation->run() == FALSE){
+			$this->kelolaDesigner();
+		}else{
 		$id 		= $this->Model_created->idUser();
 		$idP		= $this->Model_created->idDesigner();
 		$data 	= array(
@@ -312,6 +421,7 @@ class Admin extends CI_Controller {
 		$cek	= $this->Model_created->create_user($data);
 		$cekk = $this->Model_created->create_design($dataa);
 		redirect('Admin/kelolaDesigner');
+		}
 	}
 
 	public function editDesigner($id)
@@ -374,8 +484,48 @@ class Admin extends CI_Controller {
 		redirect('Admin/kelolaUMKM');
 	}
 
+	public function kelolaDataUMKMId($id)
+	{
+		$cek = $this->Model_admin->cekAkun($this->session->user);
+		$data = array(
+			'akun'			 => $cek,
+			'umkm'			 => $this->Model_admin->getDataUMKM($id)
+		);
+		$this->load->view('admin/keloladataumkm2',$data);
+	}
+
+	public function kelolaDataUMKMIo($id)
+	{
+		$cek = $this->Model_admin->cekAkun($this->session->user);
+		$data = array(
+			'akun'			 => $cek,
+			'umkm'			 => $this->Model_admin->getDataUMKM($id)
+		);
+		$this->load->view('admin/keloladataumkm3',$data);
+	}
+
+	public function kelolaDataUMKMIp($id)
+	{
+		$cek = $this->Model_admin->cekAkun($this->session->user);
+		$data = array(
+			'akun'			 => $cek,
+			'umkm'			 => $this->Model_admin->getDataUMKM($id)
+		);
+		$this->load->view('admin/keloladataumkm4',$data);
+	}
+
+	public function kelolaDataUMKMIc($id)
+	{
+		$cek = $this->Model_admin->cekAkun($this->session->user);
+		$data = array(
+			'akun'			 => $cek,
+			'umkm'			 => $this->Model_admin->getDataUMKM($id)
+		);
+		$this->load->view('admin/keloladataumkm5',$data);
+	}
+
 	public function tambahUMKM()
-		{
+	{
 			$id 		= $this->Model_created->idUser();
 			$idP		= $this->Model_created->idUMKM();
 			$data 	= array(
@@ -401,8 +551,8 @@ class Admin extends CI_Controller {
 			redirect('Admin/kelolaUMKM');
 		}
 
-		public function editUMKM($id)
-		{
+	public function editUMKM($id)
+	{
 			$data 	= array(
 				'Username'		=> $this->input->post('username'),
 				'Nama_lengkap'=> $this->input->post('namalengkap'),
@@ -420,8 +570,8 @@ class Admin extends CI_Controller {
 			redirect('Admin/kelolaUMKM');
 		}
 
-		public function kelolaPemesanan()
-		{
+	public function kelolaPemesanan()
+	{
 			$cek = $this->Model_admin->cekAkun($this->session->user);
 			$data = array(
 				'akun'			 => $cek,
@@ -430,17 +580,28 @@ class Admin extends CI_Controller {
 				'designer'	 => $this->Model_admin->getDesigner()
 			);
 			$this->load->view('admin/kelolapemesanan',$data);
-		}
+	}
 
-		public function hapusPemesanan($id)
-		{
+	public function createPortofolio($id)
+	{
+			$cek = $this->Model_admin->cekAkun($this->session->user);
+			$data = array(
+				'akun'			 => $cek,
+				'desainer'	 => $this->Model_admin->getDesignerId($id),
+				'portofolio' => $this->Model_admin->getPortofolio($id),
+			);
+			$this->load->view('admin/kelolaportofolio',$data);
+	}
+
+	public function hapusPemesanan($id)
+	{
 			$hapus = $this->Model_admin->delete_diskum($id);
 			$hapuss = $this->Model_admin->delete_pemesanan($id);
 			redirect('Admin/kelolaPemesanan');
-		}
+	}
 
-		public function tambahPemesanan()
-			{
+	public function tambahPemesanan()
+	{
 				if ($this->input->post('status') == 'Ada') {
 					$umkm = $this->Model_admin->getDataUMKM($this->input->post('idumkm'));
 					if (!$umkm) {
@@ -479,11 +640,11 @@ class Admin extends CI_Controller {
         		history.back(self);
         	</script>";
 				}
-			}
+	}
 
-			public function tambahDataUMKM()
-			{
-				$config['upload_path'] = "./uploads/data_umkm/foto_produk";
+	public function tambahDataUMKM()
+	{
+				$config['upload_path'] = "./uploads/foto_produk";
 				$config['allowed_types'] = "gif|jpg|png";
 				$config['max_size'] = 2000;
 				$config['encrypt_name'] = TRUE;
@@ -511,10 +672,10 @@ class Admin extends CI_Controller {
 					);
 				}
 				redirect('Admin/kelolaPemesanan');
-				}
+	}
 
-				public function editPemesanan($value='')
-				{
+	public function editPemesanan()
+	{
 					$config['upload_path'] = "./uploads/hasil_design";
 					$config['allowed_types'] = "rar|jpg|pdf";
 					$config['max_size'] = 2000;
@@ -545,10 +706,10 @@ class Admin extends CI_Controller {
 					}
 					$cek = $this->Model_admin->update_pemesanan($id,$data);
 					redirect('Admin/kelolaPemesanan');
-				}
+	}
 
-				public function kelolaDataUMKM()
-				{
+	public function kelolaDataUMKM()
+	{
 					$cek = $this->Model_admin->cekAkun($this->session->user);
 					$data = array(
 						'akun'			 => $cek,
@@ -556,13 +717,144 @@ class Admin extends CI_Controller {
 						'umkm'			 => $this->Model_admin->getUMKM()
 					);
 					$this->load->view('admin/keloladataumkm',$data);
-				}
+	}
 
-				public function hapusDataUMKM($id)
-				{
+	public function hapusDataUMKM($id)
+	{
 					$hapus = $this->Model_admin->delete_dataumkm($id);
 					redirect('Admin/kelolaDataUMKM');
-				}
+	}
+
+	public function UpdateFoto()
+	{
+		$config['upload_path'] = "./uploads/foto_produk";
+		$config['allowed_types'] = "png|jpg|pdf";
+		$config['max_size'] = 2000;
+		$config['encrypt_name'] = TRUE;
+
+		$this->load->library('upload',$config);
+		$id 	= $this->input->post('iddataumkm');
+
+		if ($this->upload->do_upload('foto_produk')) {
+		$foto = $this->upload->data();
+		$data = array(
+			'Foto_produk'				=> $foto['file_name'],
+		);
+		}else{
+			$data = array(
+				'Foto_produk' 		=> $this->input->post('foto_produk'),
+			);
+		}
+		$cek = $this->Model_admin->update_dataumkm($id,$data);
+		redirect('Admin/kelolaDataUMKM');
+	}
+
+	public function UpdateLogo()
+	{
+		$config['upload_path'] = "./uploads/logo_produk";
+		$config['allowed_types'] = "png|jpg|pdf";
+		$config['max_size'] = 2000;
+		$config['encrypt_name'] = TRUE;
+
+		$this->load->library('upload',$config);
+		$id 	= $this->input->post('iddataumkm');
+
+		if ($this->upload->do_upload('logo_produk')) {
+		$foto = $this->upload->data();
+		$data = array(
+			'Logo_produk'				=> $foto['file_name'],
+		);
+		}else{
+			$data = array(
+				'Logo_produk' 		=> $this->input->post('logo_produk'),
+			);
+		}
+		$cek = $this->Model_admin->update_dataumkm($id,$data);
+		redirect('Admin/kelolaDataUMKM');
+	}
+
+	public function UpdateKemasan()
+	{
+		$config['upload_path'] = "./uploads/foto_kemasan_lama";
+		$config['allowed_types'] = "png|jpg|pdf";
+		$config['max_size'] = 2000;
+		$config['encrypt_name'] = TRUE;
+
+		$this->load->library('upload',$config);
+		$id 	= $this->input->post('iddataumkm');
+
+		if ($this->upload->do_upload('kemasan_produk')) {
+		$foto = $this->upload->data();
+		$data = array(
+			'Kemasan_produk'				=> $foto['file_name'],
+		);
+		}else{
+			$data = array(
+				'Kemasan_produk' 		=> $this->input->post('kemasan_produk'),
+			);
+		}
+		$cek = $this->Model_admin->update_dataumkm($id,$data);
+		redirect('Admin/kelolaDataUMKM');
+	}
+
+	public function editDataUMKM($id)
+	{
+		$data 	= array(
+			'Nama_produk'		=> $this->input->post('nama_produk'),
+			'Keterangan'		=> $this->input->post('keterangan')
+		);
+		$cek	= $this->Model_admin->update_dataumkm($id,$data);
+		redirect('Admin/kelolaDataUMKM');
+	}
 
 
+	public function kelolaOrderDesigner()
+	{
+			$cek = $this->Model_admin->cekAkun($this->session->user);
+			$data = array(
+				'akun'			 			=> $cek,
+				'orderpemesanan'	=> $this->Model_admin->getOrderPemesanan()
+			);
+			$this->load->view('admin/kelolaorderdesigner',$data);
+	}
+
+	public function kelolaOrderPermintaan()
+	{
+		$cek = $this->Model_admin->cekAkun($this->session->user);
+		$data = array(
+			'akun'			 			=> $cek,
+			'orderpemesanan'	=> $this->Model_admin->getOrderPermintaan()
+		);
+		$this->load->view('admin/kelolaorderpermintaan',$data);
+	}
+
+	public function kelolaOrderOnGoing()
+	{
+		$cek = $this->Model_admin->cekAkun($this->session->user);
+		$data = array(
+			'akun'			 			=> $cek,
+			'orderpemesanan'	=> $this->Model_admin->getOrderOnGoing()
+		);
+		$this->load->view('admin/kelolaongoing',$data);
+	}
+
+	public function kelolaOrderSelesai()
+	{
+		$cek = $this->Model_admin->cekAkun($this->session->user);
+		$data = array(
+			'akun'			 			=> $cek,
+			'orderpemesanan'	=> $this->Model_admin->getOrderSelesai()
+		);
+		$this->load->view('admin/kelolaorderselesai',$data);
+	}
+
+	public function kelolaTransaksi()
+	{
+		$cek = $this->Model_admin->cekAkun($this->session->user);
+		$data = array(
+			'akun'			 			=> $cek,
+			'orderpemesanan'	=> $this->Model_admin->getOrderTransaksi()
+		);
+		$this->load->view('admin/kelolatransaksi',$data);
+	}
 }

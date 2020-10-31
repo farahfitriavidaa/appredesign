@@ -44,9 +44,9 @@
                                   <div class="page-title-box">
                                       <div class="btn-group float-right">
                                           <ol class="breadcrumb hide-phone p-0 m-0">
-                                              <li class="breadcrumb-item"><a href="#">Urora</a></li>
-                                              <li class="breadcrumb-item"><a href="#">Tables</a></li>
-                                              <li class="breadcrumb-item active">Datatable</li>
+                                              <li class="breadcrumb-item"><a href="#">Kelola Pengguna</a></li>
+                                              <li class="breadcrumb-item"><a href="#">UMKM</a></li>
+                                              <li class="breadcrumb-item active">Data UMKM</li>
                                           </ol>
                                       </div>
                                       <h4 class="page-title">Kelola Pengguna</h4>
@@ -60,15 +60,9 @@
                                   <div class="card m-b-30">
                                       <div class="card-body">
                                           <h4 class="mt-0 header-title">Data UMKM-UMKM</h4>
-                                          <p class="text-muted font-14">DataTables has most features enabled by
-                                              default, so all you need to do to use it with your own tables is to call
-                                              the construction function: <code>$().DataTable();</code>.
+                                          <p class="text-muted font-14">
+                                            Berikut ini adalah data UMKM-UMKM gDESK
                                           </p>
-                                          <a class="btn btn-raised btn-primary" href="" data-toggle="modal" data-target="#tambahumkm">
-                                          <i class="mdi mdi-camera mr-2 text-white-400"></i>
-                                            Tambah Data UMKM
-                                          </a>
-                                          <br><br>
                                           <table id="datatable" class="table table-bordered">
                                               <thead>
                                               <tr>
@@ -142,15 +136,37 @@
              </button>
               </div>
            <div class="modal-body">
-             <form class="" action="<?=base_url()?>UpdateFoto" method="post" enctype="multipart/form-data">
+             <form style="margin-left:8px" action="<?=base_url()?>Admin/UpdateFoto" method="post" enctype="multipart/form-data">
+               <input type="hidden" name="iddataumkm" value="<?=$key->IDDataUMKM?>">
              <?php if (!$key->Foto_produk) { ?>
                <p style="color:red">Belum upload foto produk</p>
-              <input type="file" name="foto_produk" class="btn btn-warning">
-             <?php }else if($key->Foto_produk){ ?>
-               <img src="<?=base_url()?>uploads/data_umkm/foto_produk/<?=$key->Foto_produk?>" width="450px" alt="Design"><br><br>
-              <input type="file" name="foto_produk" class="btn btn-success">
+             <?php }else if($key->Foto_produk){?>
+              <img src="<?=base_url()?>uploads/foto_produk/<?=$key->Foto_produk?>" width="400px" alt="Design">
+              <a class="btn btn-success" style="margin-left:40%" href="<?=base_url()?>uploads/foto_produk/<?=$key->Foto_produk?>" target="_blank" rel="nofollow">
+                <i class="mdi mdi-arrow-down-bold-circle"></i>
+                Unduh</a>
+                <br><br>
             <?php } ?>
-            <input type="submit" name="submit" value="Submit" class="badge-danger">
+              <table style="margin-left:50px">
+                <tr>
+                  <td>Upload or Edit Foto Produk</td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="file" name="foto_produk" class="btn btn-success">
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <br><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="submit" name="submit" value="Submit" class="badge-danger form-control">
+                  </td>
+                </tr>
+              </table>
           </form>
            </div>
            <div class="modal-footer justify-content-between">
@@ -176,15 +192,36 @@
              </button>
               </div>
            <div class="modal-body">
-             <form class="" action="<?=base_url()?>UpdateLogo" method="post" enctype="multipart/form-data">
-             <?php if (!$key->Foto_produk) { ?>
+             <form style="margin-left:8px" action="<?=base_url()?>Admin/UpdateLogo" method="post" enctype="multipart/form-data">
+               <input type="hidden" name="iddataumkm" value="<?=$key->IDDataUMKM?>">
+             <?php if (!$key->Logo_produk) { ?>
                <p style="color:red">Belum upload logo produk</p>
-              <input type="file" name=",ogo_produk" class="btn btn-warning">
-             <?php }else if($key->Foto_produk){ ?>
-               <img src="<?=base_url()?>uploads/data_umkm/logo_produk/<?=$key->Logo_produk?>" width="450px" alt="Design"><br><br>
-              <input type="file" name="logo_produk" class="btn btn-success">
+             <?php }else if($key->Logo_produk){ ?>
+              <img src="<?=base_url()?>uploads/logo_produk/<?=$key->Logo_produk?>" width="400px" alt="Design"><br><br>
+              <a class="btn btn-success" style="margin-left:40%" href="<?=base_url()?>uploads/logo_produk/<?=$key->Logo_produk?>" target="_blank" rel="nofollow">
+                <i class="mdi mdi-arrow-down-bold-circle"></i>
+                Unduh</a>
             <?php } ?>
-            <input type="submit" name="submit" value="Submit" class="badge-danger">
+              <table style="margin-left:50px">
+                <tr>
+                  <td>Upload or Edit Logo Produk</td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="file" name="logo_produk" class="btn btn-success">
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <br><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="submit" name="submit" value="Submit" class="badge-danger form-control">
+                  </td>
+                </tr>
+              </table>
           </form>
            </div>
            <div class="modal-footer justify-content-between">
@@ -209,15 +246,47 @@
              </button>
               </div>
            <div class="modal-body">
-             <form class="" action="<?=base_url()?>UpdateKemasan" method="post" enctype="multipart/form-data">
-             <?php if ($key->Foto_produk = NULL) { ?>
+             <form style="margin-left:8px" action="<?=base_url()?>Admin/UpdateKemasan" method="post" enctype="multipart/form-data">
+               <input type="hidden" name="iddataumkm" value="<?=$key->IDDataUMKM?>">
+             <?php if (!$key->Kemasan_produk) { ?>
                <p style="color:red">Belum upload kemasan produk</p>
-              <input type="file" name="kemasan_produk" class="btn btn-warning">
-             <?php }else if($key->Foto_produk){ ?>
-               <img src="<?=base_url()?>uploads/data_umkm/kemasan_produk/<?=$key->Foto_produk?>" width="450px" alt="Design"><br><br>
-              <input type="file" name="kemasan_produk" class="btn btn-success">
+             <?php }else if($key->Kemasan_produk){ ?>
+              <img src="<?=base_url()?>uploads/foto_kemasan_lama/<?=$key->Kemasan_produk?>" width="400px" alt="Design">
+              <br><br>
+              <a class="btn btn-success" style="margin-left:40%" href="<?=base_url()?>uploads/foto_kemasan_lama/<?=$key->Kemasan_produk?>" target="_blank" rel="nofollow">
+                <i class="mdi mdi-arrow-down-bold-circle"></i>
+                Unduh</a>
             <?php } ?>
-            <input type="submit" name="submit" value="Submit" class="badge-danger">
+              <table style="margin-left:50px">
+                <tr>
+                  <td>Upload or Edit Kemasan Produk</td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="file" name="kemasan_produk" class="btn btn-success">
+                  </td>
+                </tr>
+                <!-- <tr>
+                  <td>
+                    <p>Atau</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="text" name="logo_produk" class="form-control" placeholder="Link logo">
+                  </td>
+                </tr> -->
+                <tr>
+                  <td>
+                    <br><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="submit" name="submit" value="Submit" class="badge-danger form-control">
+                  </td>
+                </tr>
+              </table>
           </form>
            </div>
            <div class="modal-footer justify-content-between">
@@ -266,7 +335,7 @@
                        </button>
                      </div>
                      <div class="modal-body">
-                     <form class="" action="<?=base_url()?>Admin/tambahDataUMKM" method="POST" enctype="multipart/form-data">
+                     <form class="" action="<?=base_url()?>Admin/tambahDataUMKMM" method="POST" enctype="multipart/form-data">
                          <table width="100%">
                            <tr>
                              <td>Nama UMKM</td>
