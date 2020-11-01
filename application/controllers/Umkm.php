@@ -425,6 +425,7 @@ class Umkm extends CI_Controller {
 				'daftar_diskusi'	=> $daftar_diskusi
 			);
 		}
+		// var_dump($data);
 		$this->load->view('umkm/lihatdiskusi', $data);
 	}
 

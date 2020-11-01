@@ -28,6 +28,13 @@
                 </a>
             </li>
 
+            <li>
+                <a href="<?=base_url()?>Umkm/lihatDiskusi" class="waves-effect">
+                    <i class="mdi mdi-comment-text-outline"></i>
+                    <span> Lihat Diskusi </span>
+                </a>
+            </li>
+
             <li class="menu-title">Menu Profil</li>
 
             <li>
