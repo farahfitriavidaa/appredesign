@@ -404,11 +404,12 @@ class Umkm extends CI_Controller {
 		// Ambil semua IDPesan berdasarkan IDUMKM
 		$id_umkm	= $this->session->id_umkm;
 		$id_pesan	= $this->Model_umkm->getAllIdPesan($id_umkm);
+
 		// Buat array $id_pesan menjadi lebih sederhana dengan bantuan function flattenArray() dari my_helper
 		$this->load->helper('my_helper');
 		$id_pesan	= $this->flattenArray($id_pesan);
 
-		// Get Daftar diskusi dari tb_diskusiumkm berdasarkan IDPesan tadi
+		// Ambil daftar diskusi dari tb_diskusiumkm berdasarkan IDPesan tadi
 		$this->load->model('Model_diskusi');
 		$daftar_diskusi = $this->Model_diskusi->getDaftarDiskum($id_pesan);
 
