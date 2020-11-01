@@ -105,15 +105,17 @@
 
                                         </div>
 
+                                        <?php
+                                            $id_pesan   = $pemesanan->IDPesan;
+                                            $id_pesan   = trimId('PS', $id_pesan);
+                                        ?>
+                                        <?php if($pemesanan->Status < 5): ?>
                                         <div class="card-footer">
-                                            <?php
-                                                $id_pesan   = $pemesanan->IDPesan;
-                                                $id_pesan   = trimId('PS', $id_pesan);
-                                            ?>
                                             <a class="btn btn-raised btn-secondary float-right" href="<?=base_url();?>Umkm/editRequest/<?=$id_pesan;?>">
                                                 Edit Produk
                                             </a>
                                         </div>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
 
