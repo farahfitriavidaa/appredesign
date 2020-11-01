@@ -3,7 +3,7 @@
 if( ! function_exists('trimId')){
 	/**
 	 * Function untuk memotong id, contoh: US0015 menjadi 15
-	 * 
+	 *
 	 * @param string Prefiks(awalan) id: US/PS/UM/PG/dll
 	 * @param string Id yang mau dipotong
 	 * @return string
@@ -18,13 +18,13 @@ if( ! function_exists('trimId')){
 				break;
 		}
 		return $return;
-	}   
+	}
 }
 
 if ( ! function_exists('uploadFoto')) {
 	/**
 	 * Function untuk upload file gambar
-	 * 
+	 *
 	 * @param string Isi atribut <pre>name</pre> pada input file. <input name="...">
 	 * @param string Nama folder yang dituju untuk menyimpan file
 	 * @return string Pesan sukses atau error
@@ -55,5 +55,36 @@ if ( ! function_exists('uploadFoto')) {
 		} else {
 			return 'Maaf, terdapat kesalahan dalam meng-upload file. Coba ulangi lagi';
 		}
+	}
+}
+
+if ( ! function_exists('cetakWaktu')) {
+	/**
+	 * Function untuk mencetak timestamp/waktu yang sudah diformat. Contoh: 07.30, Kemarin, 31 Oct
+	 *
+	 * @param string waktu yang mau dicetak
+	 * @return string waktu yang sudah terformat
+	 */
+	function cetakWaktu(String $timestamp)
+	{
+		$timestamp 		= strtotime($timestamp);
+
+		$tgl_waktu  	= date_create(date('Y-m-d', $timestamp));
+		$hari_ini   	= date_create('today');
+		$jarak_waktu	= date_diff($hari_ini, $tgl_waktu);
+		$waktu			= '';
+
+		switch ($jarak_waktu->format('%R%a')) {
+			case 0:
+				$waktu = date('H.i', $timestamp);
+				break;
+			case -1:
+				$waktu = "Kemarin";
+				break;
+			default:
+				$waktu = date('d M', $timestamp);
+				break;
+		}
+		return $waktu;
 	}
 }

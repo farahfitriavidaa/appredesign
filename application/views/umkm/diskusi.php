@@ -269,11 +269,7 @@
                                                     <p class="mt-2 mb-2"><?=$diskusi->Komentar?></p>
                                                 </div>
                                                 <div class="card-footer">
-                                                    <?php
-                                                        $tgl_waktu  = $diskusi->Tanggal_waktu;
-                                                        $tgl_waktu  = strtotime($tgl_waktu);
-                                                    ?>
-                                                    <span class="text-13 text-muted float-right"><?=date('d M, H.i', $tgl_waktu);?></span>
+                                                    <span class="text-13 text-muted float-right"><?=cetakWaktu($diskusi->Tanggal_waktu);?></span>
                                                 </div>
                                             </div>
                                         <?php endforeach; ?>

@@ -73,15 +73,7 @@
                                                 ?>
                                             </p>
                                             <div class="mt-2">
-                                                <?php
-                                                    $timestamp  = strtotime($diskusi->Tanggal_waktu);
-                                                    $tgl_waktu  = date('d M', $timestamp);
-                                                    $hari_ini   = date('d M');
-                                                    
-                                                    if($tgl_waktu == $hari_ini)
-                                                        $tgl_waktu = date('H.i', $timestamp);
-                                                ?>
-                                                <span class="text-muted"><?=$tgl_waktu?></span>
+                                                <span class="text-muted"><?=cetakWaktu($diskusi->Tanggal_waktu)?></span>
                                             </div>
                                         </div>
                                     </div>
