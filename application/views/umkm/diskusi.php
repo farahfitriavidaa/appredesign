@@ -60,15 +60,14 @@
                                 </div>
                             <?php endif; ?>
 
-
-                            <a class="btn btn-raised btn-secondary mt-4" href="#diskusi-anchor">
-                            <i class="mdi mdi-arrow-down"></i>
-                                Lihat diskusi
-                            </a>
+                            <button class="btn btn-raised btn-secondary mt-4" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="detilProduk detilRequest">
+                            <i class="mdi mdi-format-align-left"></i>
+                                Deskripsi Request
+                            </button>
 
                             <div class="row align-items-stretch mt-4">
-                                <div class="col-lg-6 mb-4">
-                                    <!-- Data bagian kiri -->
+                                <!-- Data bagian kiri -->
+                                <div class="col-lg-6 mb-4 collapse multi-collapse" id="detilProduk">
                                     <div class="card" style="height:100%;">
                                         <div class="card-body">
                                             <strong class="d-block">Nama Produk</strong>
@@ -119,7 +118,7 @@
                                 </div>
 
                                 <!-- Data bagian kanan -->
-                                <div class="col-lg-6 mb-4">
+                                <div class="col-lg-6 mb-4 collapse multi-collapse" id="detilRequest">
                                     <div class="card" style="height:100%;">
                                         <div class="card-body">
                                             <strong class="d-block">Tanggal Request</strong>
@@ -225,7 +224,7 @@
                                             <?php endif; ?>
                                         </div>
 
-                                        <div class="card-footer"  id="diskusi-anchor">
+                                        <div class="card-footer">
                                             <a class="btn btn-raised btn-secondary float-right" href="<?=base_url();?>Umkm/editRequest/<?=$id_pesan;?>">
                                                 Edit Keterangan
                                             </a>
@@ -237,9 +236,10 @@
                                 <div class="col-12">
                                     <div class="mb-4">
                                         <div class="mb-4">
+                                            <!-- TO DO: ganti judulnya sesuai halaman dan level user -->
                                             <strong>Diskusi dengan Pengelola/Designer/UMKM</strong>
                                         </div>
-                                        <div class="px-2" style="overflow-y: auto; max-height: 1080px">
+                                        <div class="px-2" style="overflow-y: auto; max-height: 1920px">
                                         <?php foreach($daftar_diskusi as $diskusi): ?>
                                             <div class="card mb-3">
                                                 <div class="card-header">

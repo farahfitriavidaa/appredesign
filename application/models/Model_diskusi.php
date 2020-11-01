@@ -42,6 +42,7 @@ class Model_diskusi extends CI_Model {
 		$this->db->join("tb_pengelola AS pengelola", "IDPengelola", "left");
 		$this->db->join("tb_user AS user", "user.IDUser = umkm.IDUser OR user.IDUser = pengelola.IDUser");
 		$this->db->where("IDPesan", $id_pesan);
+		$this->db->order_by("diskum.Tanggal_waktu", "DESC");
 		$result = $this->db->get();
 
 		return $result->result();
