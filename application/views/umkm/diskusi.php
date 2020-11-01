@@ -103,13 +103,13 @@
                                             </div>
                                             <?php endif; ?>
 
+                                        </div>
+
+                                        <div class="card-footer">
                                             <?php
                                                 $id_pesan   = $pemesanan->IDPesan;
                                                 $id_pesan   = trimId('PS', $id_pesan);
                                             ?>
-                                        </div>
-
-                                        <div class="card-footer">
                                             <a class="btn btn-raised btn-secondary float-right" href="<?=base_url();?>Umkm/editRequest/<?=$id_pesan;?>">
                                                 Edit Produk
                                             </a>
@@ -133,36 +133,47 @@
                                             <p>
                                             <?php switch($pemesanan->Status){
                                                 case 0:
-                                                    echo 'Pending';
+                                                    $status = "Pending";
+                                                    $badge  = "light";
                                                     break;
                                                 case 1:
-                                                    echo 'Telah didiskusikan';
+                                                    $status = "Telah didiskusikan";
+                                                    $badge  = "light";
                                                     break;
                                                 case 2:
-                                                    echo 'Mulai dikerjakan desainer';
+                                                    $status = "Mulai dikerjakan desainer";
+                                                    $badge  = "light";
                                                     break;
                                                 case 3:
-                                                    echo 'Selesai didesain';
+                                                    $status = "Selesai didesain";
+                                                    $badge  = "info";
                                                     break;
                                                 case 4:
-                                                    echo 'Review hasil';
+                                                    $status = "Review hasil";
+                                                    $badge  = "info";
                                                     break;
                                                 case 5:
-                                                    echo 'Desain disetujui';
+                                                    $status = "Desain disetujui";
+                                                    $badge  = "info";
                                                     break;
                                                 case 6:
-                                                    echo 'Belum dibayar';
+                                                    $status = "Belum dibayar";
+                                                    $badge  = "warning";
                                                     break;
                                                 case 7:
-                                                    echo 'Lunas';
+                                                    $status = "Lunas";
+                                                    $badge  = "success";
                                                     break;
                                                 case 8:
-                                                    echo 'Cancel';
+                                                    $status = "Cancel";
+                                                    $badge  = "danger";
                                                     break;
                                                 default:
-                                                    echo 'Pending';
+                                                    $status = "Pending";
+                                                    $badge  = "light";
                                                     break;
                                             }?>
+                                                <span class="badge badge-<?=$badge?>" style="font-size:unset"><?=$status?></span>
                                             </p>
                                             <strong class="d-block">Harga</strong>
                                             <p>
@@ -265,7 +276,7 @@
                                                         <a href="<?=base_url();?>uploads/foto_diskum/<?=$diskusi->Foto_diskum?>" class="btn btn-secondary" download>Download gambar</a>
                                                         <img src="<?=base_url();?>uploads/foto_diskum/<?=$diskusi->Foto_diskum?>" alt="foto untuk diskusi" class="img-thumbnail d-block" style="max-width: 240px; max-height: 480px;">
                                                     <?php endif; ?>
-                                                   
+
                                                     <p class="mt-2 mb-2"><?=$diskusi->Komentar?></p>
                                                 </div>
                                                 <div class="card-footer">
@@ -298,7 +309,7 @@
                                                 </div>
                                             </form>
 
-                                            
+
                                         </div>
                                     </div>
 
@@ -321,7 +332,7 @@
 
         </div>
         <!-- END wrapper -->
-        
+
         <!-- Custom script untuk menampilkan preview gambar -->
         <script>
             const input = document.getElementById('foto');

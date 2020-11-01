@@ -46,9 +46,9 @@
 
                         <div class="container-fluid">
 
-                            <div class="row">
-                                <div class="col-lg-6 mt-4 mb-4">
-                                    <div class="card">
+                            <div class="row align-items-stretch mt-4">
+                                <div class="col-lg-6 mb-4">
+                                    <div class="card" style="height:100%;">
                                         <div class="card-body">
                                             <strong class="d-block">Nama Produk</strong>
                                             <p><?=$data_produk->Nama_produk?></p>
@@ -82,63 +82,79 @@
                                                 <img src="<?=base_url()."uploads/foto_kemasan_lama/".$data_produk->Kemasan_produk;?>" alt="kemasan produk" class="img-thumbnail" style="height:inherit">
                                             </div>
                                             <?php endif; ?>
-
+                                        </div>
+                                        <div class="card-footer">
                                             <?php
                                                 $path   = $detil_request->IDPesan;
                                                 $path   = trimId('PS', $path);
                                             ?>
                                             <a class="btn btn-raised btn-secondary float-right" href="<?=base_url();?>Umkm/editRequest/<?=$path;?>">
-                                                Edit Produk
+                                                Edit Data Produk
                                             </a>
                                         </div>
                                     </div>
                                 </div> <!-- end col -->
 
-                                <div class="col-lg-6 mt-4 mb-4">
-                                    <div class="card">
+                                <div class="col-lg-6 mb-4">
+                                    <div class="card" style="height:100%;">
                                         <div class="card-body">
                                             <strong class="d-block">Tanggal Request</strong>
                                             <p>
                                             <?php
                                                 $tgl_order  = $detil_request->Tgl_order;
-                                                $tgl_order  = strtotime($tgl_order);
-                                                echo date('d-M-Y', $tgl_order);
+                                                if(!is_null($tgl_order)){
+                                                    $tgl_order  = strtotime($tgl_order);
+                                                    echo date('d M Y', $tgl_order);
+                                                }
+                                                else
+                                                    echo "<i class=\"text-muted\">Tidak ada</i>"
                                             ?>
                                             </p>
                                             <strong class="d-block">Status</strong>
                                             <p>
                                             <?php switch($detil_request->Status){
                                                 case 0:
-                                                    echo 'Pending';
+                                                    $status = "Pending";
+                                                    $badge  = "light";
                                                     break;
                                                 case 1:
-                                                    echo 'Telah didiskusikan';
+                                                    $status = "Telah didiskusikan";
+                                                    $badge  = "light";
                                                     break;
                                                 case 2:
-                                                    echo 'Mulai dikerjakan desainer';
+                                                    $status = "Mulai dikerjakan desainer";
+                                                    $badge  = "light";
                                                     break;
                                                 case 3:
-                                                    echo 'Selesai didesain';
+                                                    $status = "Selesai didesain";
+                                                    $badge  = "info";
                                                     break;
                                                 case 4:
-                                                    echo 'Review hasil';
+                                                    $status = "Review hasil";
+                                                    $badge  = "info";
                                                     break;
                                                 case 5:
-                                                    echo 'Desain disetujui';
+                                                    $status = "Desain disetujui";
+                                                    $badge  = "info";
                                                     break;
                                                 case 6:
-                                                    echo 'Belum dibayar';
+                                                    $status = "Belum dibayar";
+                                                    $badge  = "warning";
                                                     break;
                                                 case 7:
-                                                    echo 'Lunas';
+                                                    $status = "Lunas";
+                                                    $badge  = "success";
                                                     break;
                                                 case 8:
-                                                    echo 'Cancel';
+                                                    $status = "Cancel";
+                                                    $badge  = "danger";
                                                     break;
                                                 default:
-                                                    echo 'Pending';
+                                                    $status = "Pending";
+                                                    $badge  = "light";
                                                     break;
                                             }?>
+                                                <span class="badge badge-<?=$badge?>" style="font-size:unset"><?=$status?></span>
                                             </p>
                                             <strong class="d-block">Harga</strong>
                                             <p>
@@ -196,6 +212,11 @@
                                                 <img src="<?=base_url()."uploads/foto_kemasan_lama/".$data_produk->Foto_produk;?>" alt="revisi desain" class="img-thumbnail" style="height:inherit">
                                             </div>
                                             <?php endif; ?>
+                                        </div>
+                                        <div class="card-footer">
+                                            <a class="btn btn-raised btn-secondary float-right" href="<?=base_url();?>Umkm/editRequest/<?=$path;?>">
+                                                Edit Keterangan Desain
+                                            </a>
                                         </div>
                                     </div>
                                 </div>

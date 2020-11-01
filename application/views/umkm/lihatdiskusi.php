@@ -57,7 +57,10 @@
                             <!-- end page title end breadcrumb -->
 
                             <?php if(!$has_diskum): ?>
-                                <p>Belum ada diskusi. Anda akan melihat daftar diskusi di sini jika Anda memberi komentar atau mendapat respon dari Pengelola mengenai <i>re-design</i> produk Anda.</p>
+                                <p>Belum ada diskusi. Anda akan melihat daftar diskusi di sini jika Anda memberi komentar atau mendapat respon dari Pengelola mengenai <i>redesign</i> produk Anda.</p>
+                                <a class="btn btn-raised btn-primary" href="<?=base_url();?>Umkm/lihatRequest">
+                                    Lihat Request dan Beri Komentar
+                                </a>
                             <?php else: ?>
 
                             <div class="mb-4">
