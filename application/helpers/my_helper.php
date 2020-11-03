@@ -8,7 +8,7 @@ if( ! function_exists('trimId')){
 	 * @param string Id yang mau dipotong
 	 * @return string
 	 */
-	function trimId($prefix, $id)
+	function trimId(String $prefix, String $id)
 	{
 		$return   = str_replace($prefix, '', $id);
 		for ($i=0; $i < strlen($return); $i++) {
@@ -29,7 +29,7 @@ if ( ! function_exists('uploadFoto')) {
 	 * @param string Nama folder yang dituju untuk menyimpan file
 	 * @return string Pesan sukses atau error
 	 */
-	function uploadFoto($img, $dir)
+	function uploadFoto(String $img, String $dir)
 	{
 		$jenis_foto		= str_replace('-', ' ', $img);
 		$target_dir 	= './uploads/'.$dir.'/';
@@ -55,6 +55,23 @@ if ( ! function_exists('uploadFoto')) {
 		} else {
 			return 'Maaf, terdapat kesalahan dalam meng-upload file. Coba ulangi lagi';
 		}
+	}
+}
+
+if ( ! function_exists('flattenArray')) {
+	/**
+	 * Function untuk menyederhanakan array
+	 *
+	 * Membuat array associative atau object result() dari database menjadi array numeric
+	 *
+	 * @param array Array yang ingin disederhanakan
+	 * @return array
+	 */
+	function flattenArray(array $old_array)
+	{
+		$new_array = array();
+		array_walk_recursive($old_array, function($a) use (&$new_array) { $new_array[] = $a; });
+		return $new_array;
 	}
 }
 

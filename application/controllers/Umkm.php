@@ -52,7 +52,9 @@ class Umkm extends CI_Controller {
 	{
 		$id_umkm		= $this->session->id_umkm;
 		$id_data_umkm	= $this->Model_umkm->getAllIdDataUMKM($id_umkm);
-		$id_data_umkm	= $this->flattenArray($id_data_umkm);
+
+		$this->load->helper('my_helper');
+		$id_data_umkm	= flattenArray($id_data_umkm);
 
 		$daftar_request	= $this->Model_umkm->getDaftarRequest($id_data_umkm);
 		$daftar_produk	= $this->Model_umkm->getDaftarProduk($id_data_umkm);
@@ -407,7 +409,7 @@ class Umkm extends CI_Controller {
 
 		// Buat array $id_pesan menjadi lebih sederhana dengan bantuan function flattenArray() dari my_helper
 		$this->load->helper('my_helper');
-		$id_pesan	= $this->flattenArray($id_pesan);
+		$id_pesan	= flattenArray($id_pesan);
 
 		// Ambil daftar diskusi dari tb_diskusiumkm berdasarkan IDPesan tadi
 		$this->load->model('Model_diskusi');
@@ -538,12 +540,5 @@ class Umkm extends CI_Controller {
 	{
 		session_destroy();
 		redirect('Welcome/login');
-	}
-
-	private function flattenArray(array $old_array)
-	{
-		$new_array = array();
-		array_walk_recursive($old_array, function($a) use (&$new_array) { $new_array[] = $a; });
-		return $new_array;
 	}
 }
