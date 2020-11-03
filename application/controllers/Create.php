@@ -246,5 +246,6 @@ class Create extends CI_Controller {
 	{
 		session_destroy();
 		redirect('Create');
+		// Ngga ke halaman log in aja?
 	}
 }

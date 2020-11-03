@@ -534,6 +534,12 @@ class Umkm extends CI_Controller {
 			redirect('Umkm');
 	}
 
+	public function logout()
+	{
+		session_destroy();
+		redirect('Welcome/login');
+	}
+
 	private function flattenArray(array $old_array)
 	{
 		$new_array = array();

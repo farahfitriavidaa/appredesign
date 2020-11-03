@@ -20,10 +20,7 @@
                 <!-- LOGO -->
                 <div class="topbar-left">
                     <div class="text-center">
-                        <!--<a href="index.html" class="logo"><i class="mdi mdi-assistant"></i> Urora</a>-->
-                        <a href="index.html" class="logo">
-                            <img src="assets/images/logo-lg.png" alt="" class="logo-large">
-                        </a>
+                        <img src="<?=base_url()?>asset/logo2.png" alt="logo gDESK" style="height:100%;">
                     </div>
                 </div>
 

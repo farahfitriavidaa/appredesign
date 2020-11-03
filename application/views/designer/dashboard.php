@@ -17,7 +17,7 @@
                 <!-- LOGO -->
                 <div class="topbar-left">
                     <div class="text-center">
-                        <a href="#" class="logo" style="font-size:40px" >gDesk</a>
+                        <img src="<?=base_url()?>asset/logo2.png" alt="logo gDESK" style="height:100%;">
                     </div>
                 </div>
 

@@ -116,4 +116,10 @@ class Designer extends CI_Controller {
 		else
 			redirect('Designer');
 	}
+
+	public function logout()
+	{
+		session_destroy();
+		redirect('Welcome/login');
+	}
 }
