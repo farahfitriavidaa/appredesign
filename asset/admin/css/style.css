@@ -2208,7 +2208,7 @@ table.focus-on tbody tr.focused td {
 }
 
 .table-rep-plugin .checkbox-row input[type="checkbox"]:checked + label::before {
-  background-color: #3f51b5;
+  background-color: #cbd1f3;
   border-color: #3f51b5;
 }
 
@@ -3770,6 +3770,29 @@ body.fixed-left .side-menu.left {
   -o-animation: a-animate-blink 1s step-start 0s infinite;
   animation: a-animate-blink 1s step-start 0s infinite;
   animation-fill-mode: initial;
+}
+
+/* Custom style */
+.overflow-auto {
+  overflow: auto;
+}
+
+.crop-center {
+  object-fit: cover;
+  object-position: center;
+}
+
+.list-diskusi {
+  display: block;
+  color: #2d3b48;
+}
+
+.list-diskusi:hover {
+  color: #3f51b5;
+}
+
+.list-diskusi:hover .card {
+  background-color: rgba(63, 81, 181, 0.1);
 }
 
 @-webkit-keyframes a-animate-blink {
