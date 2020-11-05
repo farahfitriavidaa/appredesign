@@ -857,4 +857,16 @@ class Admin extends CI_Controller {
 		);
 		$this->load->view('admin/kelolatransaksi',$data);
 	}
+
+	public function kelolaDiskUM($id)
+	{
+		$cek = $this->Model_admin->cekAkun($this->session->user);
+		$data = array(
+			'akun'			 			=> $cek,
+			'pemesanan'				=> $this->Model_admin->getDataUMKMId($id),
+			'daftar_diskusi'	=> $this->Model_admin->getDaftarDiskum($id)
+		);
+		$this->load->view('admin/diskusi',$data);
+	}
+
 }

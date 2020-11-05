@@ -221,4 +221,22 @@ class Model_admin extends CI_Model {
   {
     return $this->db->query("SELECT * FROM tb_user JOIN tb_umkm USING(IDUser) JOIN tb_umkm_data USING(IDUMKM) JOIN tb_pemesanan USING(IDDataUMKM) JOIN tb_pengelola USING(IDPengelola) JOIN tb_desainer USING(IDDesigner) WHERE tb_pemesanan.Status BETWEEN '6' AND '7'")->result();
   }
+
+  public function getDataUMKMId($id)
+  {
+    return $this->db->query("SELECT * FROM tb_umkm_data JOIN tb_pemesanan USING(IDDataUMKM) WHERE IDPesan ='$id'")->row();
+  }
+
+  public function getDaftarDiskum($id_pesan)
+	{
+		$this->db->select("diskum1.*, umkmdata.Nama_produk");
+		$this->db->from("tb_diskusiumkm AS diskum1");
+		$this->db->join("tb_pemesanan", "IDPesan");
+		$this->db->join("tb_umkm_data AS umkmdata", "IDDataUMKM");
+		$this->db->join("(SELECT IDPesan, MAX(Tanggal_waktu) AS Tanggal_terupdate FROM tb_diskusiumkm GROUP BY IDPesan) AS diskum2",
+			"diskum1.IDPesan = diskum2.IDPesan AND diskum1.Tanggal_waktu = diskum2.Tanggal_terupdate");
+		$this->db->where_in("diskum1.IDPesan", $id_pesan);
+		$this->db->order_by("diskum1.Tanggal_waktu", "DESC");
+		$result	= $this->db->get();
+  }
 }

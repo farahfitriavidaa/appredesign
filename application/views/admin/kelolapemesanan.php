@@ -104,7 +104,7 @@
                                                         Data UMKM
                                                     </a>
                                                   </td>
-                                                  <td> <a href="#">Diskusi</a> </td>
+                                                  <td> <a href="<?=base_url()?>Admin/kelolaDiskUM/<?=$a->IDPesan?>">Diskusi</a> </td>
                                                   <td><?php echo $a->Tgl_mulai ?></td>
                                                   <td><?php echo $a->Tgl_akhir ?></td>
                                                   <td><a class="btn btn-primary" data-toggle="modal" data-target="#hasil<?=$a->IDPesan?>">Hasil</a></td>

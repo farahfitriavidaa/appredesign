@@ -17,4 +17,14 @@ class Landingpage extends CI_Controller {
     $this->load->view('landingpage/Lp');
   }
 
+	public function kontak()
+	{
+		$this->load->view('landingpage/Kontak');
+	}
+
+	public function tentang()
+	{
+		$this->load->view('landingpage/Tentang');
+	}
+
 }
