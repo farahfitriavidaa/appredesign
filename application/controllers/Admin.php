@@ -858,15 +858,126 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/kelolatransaksi',$data);
 	}
 
+	/**
+	 * Ini function untuk lihat detil diskusinya kah atau daftar diskusi?
+	 * 
+	 * Penyebab utama kenapa halaman kosong:
+	 * function getDaftarDiskum() di model Model_admin ga ada "return"
+	 * 
+	 * Catatan tambahan
+	 * - Function ini manggil view "admin/diskusi.php" berarti mau nampilin **detil diskusi**,
+	 * - View "admin/diskusi.php" perlu nge-load helper "my_helper"(baris 884) biar ga ada error
+	 * - Juga, getDaftarDiskum(baris 880) itu buat halaman yang nampilin daftar-daftar diskum(bukan detil diskusi)
+	 * 
+	 */
 	public function kelolaDiskUM($id)
 	{
-		$cek = $this->Model_admin->cekAkun($this->session->user);
-		$data = array(
-			'akun'			 			=> $cek,
-			'pemesanan'				=> $this->Model_admin->getDataUMKMId($id),
-			'daftar_diskusi'	=> $this->Model_admin->getDaftarDiskum($id)
+		$cek	= $this->Model_admin->cekAkun($this->session->user);
+
+		$data	= array(
+			'akun'				=> $cek,
+			'pemesanan'			=> $this->Model_admin->getDataUMKMId($id),
+			'daftar_diskusi'	=> $this->Model_admin->getDaftarDiskum($id) // <--- Kalo mau pake Model_diskusi aja yang emang dibuat khusus buat nanganin data diskum atau dispro
 		);
+		// var_dump($data);
+
+		$this->load->helper('my_helper');
 		$this->load->view('admin/diskusi',$data);
 	}
+	
 
+	/**
+	 * Function ini untuk lihat daftar-daftar diskum
+	 * 
+	 * Daftar diskum diambil berdasarkan IDPengelola di tb_pemesanan.
+	 * 
+	 * Boleh dipake atau ngga
+	 */
+	public function lihatDiskum()
+	{
+		$cek 			= $this->Model_admin->cekAkun($this->session->user);
+
+		// Ambil semua IDPesan berdasarkan IDPengelola di tb_pemesanan
+		$pengelola		= $this->Model_admin->getAkunPengelola($this->session->user);
+		$id_pengelola	= $pengelola->IDPengelola;
+		$id_pesan		= $this->Model_admin->getAllIdPesan($id_pengelola);
+
+		// Buat array $id_pesan menjadi array numeric dengan bantuan function flattenArray() dari my_helper
+		$this->load->helper('my_helper');
+		$id_pesan	= flattenArray($id_pesan);
+
+		// Ambil daftar diskusi dari tb_diskusiumkm berdasarkan IDPesan tadi
+		$this->load->model('Model_diskusi');
+		$daftar_diskusi = $this->Model_diskusi->getDaftarDiskum($id_pesan);
+
+		// Cek jika $daftar_diskusi kosong beri status has_diskum=false
+		// jika ada $daftar_diskusi maka beri status has_diskum=true dan masukan ke $data
+		if( empty($daftar_diskusi) ) {
+			$data = array(
+				'has_diskum'	=> false,
+				'akun'			=> $cek
+			);
+		}
+		else {
+			$data = array(
+				'has_diskum'		=> true,
+				'akun'				=> $cek,
+				'daftar_diskusi'	=> $daftar_diskusi
+			);
+		}
+		// var_dump($data); // lihat isi array $data
+
+		$this->load->view('admin/lihatdiskum', $data);
+	}
+
+	/**
+	 * Function untuk melihat detil diskum
+	 * 
+	 * Boleh ganti nama function-nya nanti
+	 */
+	public function diskum($id_pesan='0')
+	{
+		// Cek IDPesan dan pastikan user tidak input alamat "appredesign/Admin/diskusi" tanpa IDPesan
+		if ($id_pesan!=='0') {
+			// Ambil data user
+			$cek 				= $this->Model_admin->cekAkun($this->session->user);
+
+			// Dapatkan detil pemesanan/request (gabungan tabel tb_pemesanan dan tb_umkm_data)
+			$this->load->model('Model_diskusi');
+			$detil_pemesanan	= $this->Model_diskusi->getPemesanan($id_pesan);
+
+			// Cek designer
+			// Jika designer ada, ambil nama designer. Jika tidak, beri keterangan 'Ditentukan Pengelola'
+			$data_designer		= array();
+			if( is_null($detil_pemesanan->IDDesigner) ){
+				$data_designer['designer']	= 'Ditentukan Pengelola';
+				$data_designer['ada']		= FALSE;
+			}
+			else{
+				$designer 					= $this->Model_diskusi->getNamaDesainer($detil_pemesanan->IDDesigner);
+				$data_designer['designer']	= $designer->Nama_lengkap;
+				$data_designer['ada']		= TRUE;
+			}
+
+			// Ambil data diskusi(komentar-komentar) berdasarkan IDPesan
+			$daftar_komentar = $this->Model_diskusi->getDiskum($id_pesan);
+
+			$data = array(
+				'akun'				=> $cek,
+				'pemesanan'			=> $detil_pemesanan,
+				'designer'			=> $data_designer,
+				'daftar_komentar'	=> $daftar_komentar
+			);
+			// var_dump($data['daftar_diskusi']); // untuk liat isi array $data
+
+			// Load helper untuk memformat tanggal di view "admin/diskum"
+			$this->load->helper('my_helper');
+
+			// Load view
+			$this->load->view('admin/diskum', $data);
+
+		} else {
+			http_response_code('400');
+		}
+	}
 }

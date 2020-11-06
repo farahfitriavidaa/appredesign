@@ -85,13 +85,9 @@
 
                                         </div>
 
-                                        <?php
-                                            $id_pesan   = $pemesanan->IDPesan;
-                                            $id_pesan   = trimId('PS', $id_pesan);
-                                        ?>
                                         <?php if($pemesanan->Status < 5): ?>
                                         <div class="card-footer">
-                                            <a class="btn btn-raised btn-secondary float-right" href="<?=base_url();?>Umkm/editRequest/<?=$id_pesan;?>">
+                                            <a class="btn btn-raised btn-secondary float-right" href="#">
                                                 Edit Produk
                                             </a>
                                         </div>
@@ -218,7 +214,7 @@
                                         </div>
 
                                         <div class="card-footer">
-                                            <a class="btn btn-raised btn-secondary float-right" href="<?=base_url();?>Umkm/editRequest/<?=$id_pesan;?>">
+                                            <a class="btn btn-raised btn-secondary float-right" href="#">
                                                 Edit Keterangan
                                             </a>
                                         </div>
@@ -229,11 +225,10 @@
                                 <div class="col-12">
                                     <div class="mb-4">
                                         <div class="mb-4">
-                                            <!-- TO DO: ganti judulnya sesuai halaman dan level user -->
-                                            <strong>Diskusi dengan Pengelola/Designer/UMKM</strong>
+                                            <strong>Diskusi dengan UMKM</strong>
                                         </div>
                                         <div class="px-2" style="overflow-y: auto; max-height: 1920px">
-                                        <?php foreach($daftar_diskusi as $diskusi): ?>
+                                        <?php foreach($daftar_komentar as $diskusi): ?>
                                             <div class="card mb-3">
                                                 <div class="card-header">
                                                     <div class="row ml-0">
@@ -281,6 +276,10 @@
                                             <form action="<?=base_url();?>Umkm/tambahKomentar" method="post" enctype="multipart/form-data" class="mb-0">
                                                 <div style="display: flex; flex-flow: row nowrap; padding: 8px 16px;">
                                                     <div class="form-group" style="display:inline; padding:0; margin: 0; flex: auto">
+                                                        <?php
+                                                            $id_pesan   = $pemesanan->IDPesan;
+                                                            $id_pesan   = trimId('PS', $id_pesan);
+                                                        ?>
                                                         <input type="hidden" name="np" value="<?=$id_pesan?>">
                                                         <input type="text" name="komentar" placeholder="Masukan pesan..." class="form-control" style="display: unset;">
                                                     </div>
