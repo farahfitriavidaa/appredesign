@@ -980,4 +980,65 @@ class Admin extends CI_Controller {
 			http_response_code('400');
 		}
 	}
+
+	public function tambahKomentar()
+	{
+		// Cek kalo user ke alamat ini dengan method post (tidak mengetik secara langsung alamat "../Umkm/tambahKomentar")
+		if($this->input->method() == 'post') {
+			// Ambil IDPengelola
+			$pengelola		= $this->Model_admin->getAkunPengelola($this->session->user);
+			$id_pengelola	= $pengelola->IDPengelola;
+
+			// Kembalikan IDPesan sesuai format, 1 -> PS0001
+			$id_terpotong	= $this->input->post('np');
+			$id_pesan		= 'PS'.str_pad($id_terpotong, 4, '0', STR_PAD_LEFT);
+
+			$data			= array();
+			$alert			= '';
+			
+			// Proses upload foto dengan bantuan function uploadFoto() dari my_helper
+			// Jika tidak ada foto yang di-upload maka lewati bagian if() ini
+			$this->load->helper('my_helper');
+			if( $_FILES['foto-komentar']['error'] !== 4 ){
+				$alert	= uploadFoto('foto-komentar', 'foto_diskum');
+				$data	+= array(
+					'Foto_diskum' => $_FILES['foto-komentar']['name']
+				);
+			}
+
+			// Cek apakah upload foto berhasil
+			// Jika berhasil tambahkan ke database, jika tidak berhasil lempar peringatan ke halaman diskusi
+			if($alert==='sukses' || $alert===''){
+				$this->load->model('Model_created');
+				$id_diskum		= $this->Model_created->idDiskum();
+
+				$komentar		= $this->input->post('komentar');
+				$now			= new DateTime('now',new DateTimeZone('Asia/Jakarta'));
+				$tanggal_waktu	= $now->format('Y-m-d H:i:s');
+
+				// IDUMKM dikosongkan karena pengirim komentar adalah Pengelola
+				$data 			+= array(
+					'IDDiskum'		=> $id_diskum,
+					'IDPengelola'	=> $id_pengelola,
+					'IDPesan'		=> $id_pesan,
+					'Komentar'		=> $komentar,
+					'Tanggal_waktu'	=> $tanggal_waktu
+				);
+				// var_dump($data);
+
+				$this->load->model('Model_diskusi');
+				$this->Model_diskusi->createDiskum($data);
+
+				redirect('Admin/diskum/'.$id_pesan);
+
+			}
+			else{
+				$_SESSION['alert'] = $alert;
+				$this->session->mark_as_flash('alert');
+				redirect('Admin/diskum/'.$id_terpotong);
+			}
+		}
+		else
+			redirect('Admin');
+	}
 }
