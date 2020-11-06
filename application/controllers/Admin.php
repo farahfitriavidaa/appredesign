@@ -606,10 +606,10 @@ class Admin extends CI_Controller {
 					$umkm = $this->Model_admin->getDataUMKM($this->input->post('idumkm'));
 					if (!$umkm) {
 						echo "
-	        	<script type='text/javascript'>
-	        		alert('Isi Data UMKM Terlebih Dahulu');
-	        		history.back(self);
-	        	</script>";
+				<script type='text/javascript'>
+					alert('Isi Data UMKM Terlebih Dahulu');
+					history.back(self);
+				</script>";
 					}else{
 					$cek = $this->Model_admin->getAkunPengelola($this->session->user);
 					$id 		= $this->Model_created->idPesan();
@@ -635,10 +635,10 @@ class Admin extends CI_Controller {
 					}
 				}else if($this->input->post('status') == 'Tidak Ada'){
 					echo "
-        	<script type='text/javascript'>
-        		alert('Isi Data UMKM Terlebih Dahulu');
-        		history.back(self);
-        	</script>";
+			<script type='text/javascript'>
+				alert('Isi Data UMKM Terlebih Dahulu');
+				history.back(self);
+			</script>";
 				}
 	}
 
@@ -860,15 +860,15 @@ class Admin extends CI_Controller {
 
 	/**
 	 * Ini function untuk lihat detil diskusinya kah atau daftar diskusi?
-	 * 
+	 *
 	 * Penyebab utama kenapa halaman kosong:
 	 * function getDaftarDiskum() di model Model_admin ga ada "return"
-	 * 
+	 *
 	 * Catatan tambahan
 	 * - Function ini manggil view "admin/diskusi.php" berarti mau nampilin **detil diskusi**,
 	 * - View "admin/diskusi.php" perlu nge-load helper "my_helper"(baris 884) biar ga ada error
 	 * - Juga, getDaftarDiskum(baris 880) itu buat halaman yang nampilin daftar-daftar diskum(bukan detil diskusi)
-	 * 
+	 *
 	 */
 	public function kelolaDiskUM($id)
 	{
@@ -884,18 +884,34 @@ class Admin extends CI_Controller {
 		$this->load->helper('my_helper');
 		$this->load->view('admin/diskusi',$data);
 	}
-	
+
 
 	/**
 	 * Function ini untuk lihat daftar-daftar diskum
-	 * 
+	 *
 	 * Daftar diskum diambil berdasarkan IDPengelola di tb_pemesanan.
-	 * 
+	 * Cuma Pemesanan/order yang sudah dikomentari yang bakal muncul, kalau belum dikomentari ga bakal muncul di sini
+	 *
 	 * Boleh dipake atau ngga
 	 */
-	public function lihatDiskum()
+	public function lihatDiskum($filter='belum-selesai', $page=1)
 	{
 		$cek 			= $this->Model_admin->cekAkun($this->session->user);
+
+		// Set $status sesuai parameter $filter
+		// Jika ada yang mengisi $filter dengan hal lain maka redirect ke halaman default lihatDiskum
+		if ($filter==='belum-selesai') {
+			$status = ['0', '1', '2', '3' ,'4', '5', '6'];
+		}
+		elseif ($filter==='semua') {
+			$status = ['0', '1', '2', '3' ,'4', '5', '6', '7'];
+		}
+		elseif ($filter==='telah-selesai') {
+			$status = ['7'];
+		}
+		else {
+			return redirect('Admin/lihatDiskum');
+		}
 
 		// Ambil semua IDPesan berdasarkan IDPengelola di tb_pemesanan
 		$pengelola		= $this->Model_admin->getAkunPengelola($this->session->user);
@@ -904,35 +920,64 @@ class Admin extends CI_Controller {
 
 		// Buat array $id_pesan menjadi array numeric dengan bantuan function flattenArray() dari my_helper
 		$this->load->helper('my_helper');
-		$id_pesan	= flattenArray($id_pesan);
+		$id_pesan		= flattenArray($id_pesan);
+
+		$this->load->model('Model_diskusi');
+		$jumlah_diskum	= $this->Model_diskusi->getJumlahDiskum($id_pesan, $status);
+		$jumlah_diskum	= $jumlah_diskum->jumlah;
+		// Algoritma pembagian halaman (satu halaman berisi maks. 50 daftar diskum)
+		if ($page > ($jumlah_diskum/50)+1 || $page < 0) {
+			return redirect('Admin/lihatDiskum');
+		}
+
+		$hal_selanjutnya	= false;
+		$hal_sebelumnya		= false;
+
+		if ($page < ($jumlah_diskum/50))
+			$hal_selanjutnya	= true;
+		if($page > 1)
+			$hal_sebelumnya		= true;
+
+		$limit			= $page*50;
+		$baris			= ($page-1)*50;
 
 		// Ambil daftar diskusi dari tb_diskusiumkm berdasarkan IDPesan tadi
-		$this->load->model('Model_diskusi');
-		$daftar_diskusi = $this->Model_diskusi->getDaftarDiskum($id_pesan);
+		$daftar_diskusi = $this->Model_diskusi->getDaftarDiskum($id_pesan, $status, $baris, $limit);
 
 		// Cek jika $daftar_diskusi kosong beri status has_diskum=false
 		// jika ada $daftar_diskusi maka beri status has_diskum=true dan masukan ke $data
-		if( empty($daftar_diskusi) ) {
+		if( empty($daftar_diskusi) && $filter!=='telah-selesai') {
 			$data = array(
-				'has_diskum'	=> false,
-				'akun'			=> $cek
+				'has_diskum'		=> false,
+				'akun'				=> $cek,
+				'filter'			=> $filter,
+				'page'				=> $page,
+				'hal_selanjutnya'	=> $hal_selanjutnya,
+				'hal_sebelumnya'	=> $hal_sebelumnya
 			);
 		}
 		else {
 			$data = array(
 				'has_diskum'		=> true,
 				'akun'				=> $cek,
-				'daftar_diskusi'	=> $daftar_diskusi
+				'daftar_diskusi'	=> $daftar_diskusi,
+				'filter'			=> $filter,
+				'page'				=> $page,
+				'hal_selanjutnya'	=> $hal_selanjutnya,
+				'hal_sebelumnya'	=> $hal_sebelumnya
 			);
 		}
 		// var_dump($data); // lihat isi array $data
+		// var_dump($jumlah_diskum);
+		// var_dump($status);
+		// var_dump($limit);
 
 		$this->load->view('admin/lihatdiskum', $data);
 	}
 
 	/**
 	 * Function untuk melihat detil diskum
-	 * 
+	 *
 	 * Boleh ganti nama function-nya nanti
 	 */
 	public function diskum($id_pesan='0')
@@ -981,9 +1026,12 @@ class Admin extends CI_Controller {
 		}
 	}
 
+	/**
+	 * Function untuk menambah komentar di diskum
+	 */
 	public function tambahKomentar()
 	{
-		// Cek kalo user ke alamat ini dengan method post (tidak mengetik secara langsung alamat "../Umkm/tambahKomentar")
+		// Cek kalo user ke alamat ini dengan method post (tidak mengetik secara langsung alamat "appredesign/Admin/tambahKomentar")
 		if($this->input->method() == 'post') {
 			// Ambil IDPengelola
 			$pengelola		= $this->Model_admin->getAkunPengelola($this->session->user);
@@ -995,7 +1043,7 @@ class Admin extends CI_Controller {
 
 			$data			= array();
 			$alert			= '';
-			
+
 			// Proses upload foto dengan bantuan function uploadFoto() dari my_helper
 			// Jika tidak ada foto yang di-upload maka lewati bagian if() ini
 			$this->load->helper('my_helper');
@@ -1013,8 +1061,9 @@ class Admin extends CI_Controller {
 				$id_diskum		= $this->Model_created->idDiskum();
 
 				$komentar		= $this->input->post('komentar');
-				$now			= new DateTime('now',new DateTimeZone('Asia/Jakarta'));
-				$tanggal_waktu	= $now->format('Y-m-d H:i:s');
+				$tanggal_waktu	= date('Y-m-d h:i:s');
+				// $now			= new DateTime('now',new DateTimeZone('Asia/Jakarta'));
+				// $tanggal_waktu	= $now->format('Y-m-d H:i:s');
 
 				// IDUMKM dikosongkan karena pengirim komentar adalah Pengelola
 				$data 			+= array(

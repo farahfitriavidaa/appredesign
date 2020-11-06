@@ -61,6 +61,23 @@
                             <?php else: ?>
 
                             <div class="mb-4">
+                                <div class="row" style="justify-content: flex-end;">
+                                    <div>
+                                        <a class="btn btn-secondary <?=$filter==="semua"?"":"border-0"?>" href="<?=base_url();?>Admin/lihatDiskum/semua">
+                                            Semua diskusi
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a class="btn btn-secondary <?=$filter==="belum-selesai"?"":"border-0"?>" href="<?=base_url();?>Admin/lihatDiskum/">
+                                            Belum selesai
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a class="btn btn-secondary <?=$filter==="telah-selesai"?"":"border-0"?>" href="<?=base_url();?>Admin/lihatDiskum/telah-selesai">
+                                            Telah selesai
+                                        </a>
+                                    </div>
+                                </div>
                             <?php foreach($daftar_diskusi as $diskusi): ?>
                                 <a href="<?=base_url();?>Admin/diskum/<?=$diskusi->IDPesan?>" target="_blank" class="list-diskusi mb-2" noopener noreferer>
                                     <div class="card">
@@ -74,6 +91,49 @@
                                             </p>
                                             <div class="mt-2">
                                                 <span class="text-muted"><?=cetakWaktu($diskusi->Tanggal_waktu)?></span>
+                                                <?php switch($diskusi->Status){
+                                                case 0:
+                                                    $status = "Pending";
+                                                    $badge  = "light";
+                                                    break;
+                                                case 1:
+                                                    $status = "Telah didiskusikan";
+                                                    $badge  = "light";
+                                                    break;
+                                                case 2:
+                                                    $status = "Mulai dikerjakan desainer";
+                                                    $badge  = "light";
+                                                    break;
+                                                case 3:
+                                                    $status = "Selesai didesain";
+                                                    $badge  = "info";
+                                                    break;
+                                                case 4:
+                                                    $status = "Review hasil";
+                                                    $badge  = "info";
+                                                    break;
+                                                case 5:
+                                                    $status = "Desain disetujui";
+                                                    $badge  = "info";
+                                                    break;
+                                                case 6:
+                                                    $status = "Belum dibayar";
+                                                    $badge  = "warning";
+                                                    break;
+                                                case 7:
+                                                    $status = "Lunas";
+                                                    $badge  = "success";
+                                                    break;
+                                                case 8:
+                                                    $status = "Cancel";
+                                                    $badge  = "danger";
+                                                    break;
+                                                default:
+                                                    $status = "Pending";
+                                                    $badge  = "light";
+                                                    break;
+                                            }?>
+                                                <span class="float-right badge badge-<?=$badge?>" style="font-size:unset"><?=$status?></span>
                                             </div>
                                         </div>
                                     </div>
@@ -83,6 +143,21 @@
 
                             <?php endif; ?>
 
+                            <div class="mt-4">
+                                <?php if ($hal_selanjutnya): ?>
+                                    <a class="float-right btn btn-raised btn-info" href="<?=base_url();?>Admin/lihatDiskum/<?=$filter."/".(int)$page++?>">
+                                        Daftar selanjutnya
+                                        <i class="mdi mdi-arrow-right"></i>
+                                    </a>
+                                <?php endif; ?>
+
+                                <?php if ($hal_sebelumnya): ?>
+                                    <a class="float-left btn btn-raised btn-info" href="<?=base_url();?>Admin/lihatDiskum/<?=$filter."/".(int)$page--?>">
+                                        <i class="mdi mdi-arrow-right"></i>
+                                        Daftar sebelumnya
+                                    </a>
+                                <?php endif; ?>
+                            </div>
                         </div><!-- container -->
 
                     </div> <!-- Page content Wrapper -->
