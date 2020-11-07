@@ -19,6 +19,13 @@
                 </a>
             </li>
 
+            <li>
+                <a href="<?=base_url()?>Designer/lihatPortofolio" class="waves-effect">
+                    <i class="mdi mdi-account-card-details"></i>
+                    <span> Portofolio </span>
+                </a>
+            </li>
+
         </ul>
     </div>
     <div class="clearfix"></div>

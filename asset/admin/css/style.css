@@ -3782,16 +3782,17 @@ body.fixed-left .side-menu.left {
   object-position: center;
 }
 
-.list-diskusi {
+.list-diskusi, .hoverable {
   display: block;
   color: #2d3b48;
+  cursor: pointer;
 }
 
-.list-diskusi:hover {
+.list-diskusi:hover, .hoverable:hover {
   color: #3f51b5;
 }
 
-.list-diskusi:hover .card {
+.list-diskusi:hover .card, .hoverable:hover {
   background-color: rgba(63, 81, 181, 0.1);
 }
 

@@ -117,6 +117,18 @@ class Designer extends CI_Controller {
 			redirect('Designer');
 	}
 
+	public function lihatPortofolio()
+	{
+		$daftar_portofolio	= $this->Model_designer->getDaftarPortofolio( $this->session->id_designer );
+
+		$data	= array(
+			'daftar_portofolio'	=> $daftar_portofolio
+		);
+
+		$this->load->helper('my_helper');
+		$this->load->view('designer/lihatportofolio', $data);
+	}
+
 	public function logout()
 	{
 		session_destroy();

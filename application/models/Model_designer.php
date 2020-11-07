@@ -22,6 +22,11 @@ class Model_designer extends CI_Model {
         return $this->db->query("SELECT * FROM tb_user JOIN tb_desainer USING(IDUser) WHERE IDDesigner='$id_designer'")->row();
     }
 
+    public function getDaftarPortofolio($id_designer)
+    {
+        return $this->db->query("SELECT * FROM tb_portofolio WHERE IDDesigner='$id_designer'")->result();
+    }
+
     public function updateUser($id_user, $data)
 	{
 		$this->db->where('IDUser',$id_user);
@@ -32,5 +37,5 @@ class Model_designer extends CI_Model {
 	{
 		$this->db->where('IDDesigner',$id_designer);
 		$this->db->update('tb_desainer',$data);
-	}
+    }
 }
