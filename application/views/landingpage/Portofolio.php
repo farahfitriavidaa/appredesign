@@ -15,10 +15,10 @@
       <section class="page-title text-center">
         <div class="container">
           <div class="page-title__holder">
-            <h1 class="page-title__title">Designer
+            <h1 class="page-title__title">Portofolio design ID <?=$design->IDDesigner?>
               <img src="<?=base_url()?>asset/logo.png" width="350px">
             </h1>
-            <p class="page-title__subtitle">Berikut ini adalah designer-designer yang sudah bekerja sama dengan pihak kami</p>
+            <p class="page-title__subtitle">Berikut ini adalah portofolio design</p>
           </div>
         </div>
       </section> <!-- end page title -->
@@ -29,24 +29,25 @@
         <div class="container">
           <div class="row">
 
-            <?php foreach ($designer as $a): ?>
+            <?php foreach ($portofolio as $a): ?>
             <div class="col-lg-4">
               <div class="pricing box-shadow hover-up hover-line pricing--best">
                 <div class="pricing__price-box">
-                  <h3 class="pricing__title"><?=$a->Nama_lengkap?></h3>
+                  <h3 class="pricing__title"><?=$a->Judul?></h3>
                   <center>
-                  <img src="<?=base_url()?>uploads/foto_user/<?=$a->Foto?>" width="250px">
+                  <a data-fancybox="gallery" href="<?=base_url()?>uploads/bukti_portofolio/<?=$a->Bukti_portofolio?>">  <img src="<?=base_url()?>uploads/bukti_portofolio/<?=$a->Bukti_portofolio?>" width="250px"></a>
                 </center>
                 </div>
                 <p class="pricing__text">
-                   <?php echo $a->Keterangan ?>
+                   <?php echo $a->Detail_portofolio ?>
                 </p>
-                <a href="<?=base_url()?>Landingpage/ambilPortofolio/<?=$a->IDDesigner?>" class="pricing__button btn btn--lg btn--color"><span>Lihat portofolio</span></a>
               </div>
             </div>
           <?php endforeach; ?>
-
           </div>
+          <a href="<?=base_url()?>Landingpage/designer" class="btn btn--lg btn--color">
+            <span>Kembali</span>
+          </a>
         </div>
       </section> <!-- end pricing tables -->
 

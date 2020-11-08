@@ -96,7 +96,7 @@ class Model_created extends CI_Model {
 	public function idDispro()
 	{
 		$user = "DR";
-		$nomer = "SELECT MAX(TRIM(REPLACE(IDDispro,'DR',''))) as a FROM tb_diskusiproduk WHERE IDDispro
+		$nomer = "SELECT MAX(TRIM(REPLACE(IDDispro,'DR',''))) as a FROM tb_diskusiproduksi WHERE IDDispro
 		LIKE '$user%'";
 		$baris = $this->db->query($nomer);
 		$akhir =  $baris->row()->a;
@@ -183,6 +183,5 @@ class Model_created extends CI_Model {
 	{
 		return $this->db->query("SELECT * FROM tb_user WHERE username='$username' AND password='$password'")->row();
 	}
-
 
 }

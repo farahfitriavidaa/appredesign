@@ -78,7 +78,7 @@ class Model_admin extends CI_Model {
 
   public function getPemesanan()
   {
-    return $this->db->query("SELECT * FROM tb_user JOIN tb_umkm USING(IDUser) JOIN tb_umkm_data USING(IDUMKM) JOIN tb_pemesanan USING(IDDataUMKM) JOIN tb_pengelola USING(IDPengelola) JOIN tb_desainer USING(IDDesigner)")->result();
+    return $this->db->query("SELECT * FROM tb_user JOIN tb_umkm USING(IDUser) JOIN tb_umkm_data USING(IDUMKM) JOIN tb_pemesanan USING(IDDataUMKM) JOIN tb_pengelola USING(IDPengelola)")->result();
   }
 
   public function getDataaUMKM()

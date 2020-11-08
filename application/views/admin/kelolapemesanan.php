@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <?php $this->load->view('admin/layout/head'); ?>
+    <?php $this->load->view('admin/layout/Head'); ?>
 
     <body class="fixed-left">
 
@@ -21,7 +21,7 @@
                     </div>
                 </div>
 
-              <?php $this->load->view('admin/layout/sidebar') ?>
+              <?php $this->load->view('admin/layout/Sidebar') ?>
                 <!-- end sidebarinner -->
             </div>
             <!-- Left Sidebar End -->
@@ -33,7 +33,7 @@
                 <div class="content">
 
                     <!-- Top Bar Start -->
-                    <?php $this->load->view('admin/layout/navbar') ?>
+                    <?php $this->load->view('admin/layout/Navbar') ?>
                     <!-- Top Bar End -->
 
                     <div class="page-content-wrapper dashborad-v">
@@ -87,6 +87,7 @@
                                                   <th>Tanggal Akhir</th>
                                                   <th>Hasil Design</th>
                                                   <th>Status</th>
+                                                  <th>ID Pengelola</th>
                                                   <th>Aksi</th>
                                               </tr>
                                               </thead>
@@ -105,8 +106,18 @@
                                                     </a>
                                                   </td>
                                                   <td> <a href="<?=base_url()?>Admin/diskum/<?=$a->IDPesan?>">Diskusi</a> </td>
-                                                  <td><?php echo $a->Tgl_mulai ?></td>
-                                                  <td><?php echo $a->Tgl_akhir ?></td>
+                                                  <td>
+                                                    <?php
+                                                    if (!$a->Tgl_mulai) {?>
+                                                      <p style="color:red">Belum ada</p>
+                                                    <?php }
+                                                    echo $a->Tgl_mulai ?></td>
+                                                  <td>
+                                                    <?php
+                                                    if (!$a->Tgl_akhir) {?>
+                                                      <p style="color:red">Belum ada</p>
+                                                    <?php }
+                                                    echo $a->Tgl_akhir ?></td>
                                                   <td><a class="btn btn-primary" data-toggle="modal" data-target="#hasil<?=$a->IDPesan?>">Hasil</a></td>
                                                   <td>
                                                     <?php if ($a->Status == '0'){ ?>
@@ -127,6 +138,7 @@
                                                       <button type="button" class="badge badge-pill badge-dark" name="button">Selesai</button>
                                                     <?php } ?>
                                                   </td>
+                                                  <td><?=$a->IDPengelola?></td>
                                                   <td>
                                                     <a class="btn btn-raised btn-info" href="" data-toggle="modal" data-target="#detail<?=$a->IDPesan?>">
                                                       <i class="mdi mdi-information mr-2 text-white-400"></i>
@@ -247,9 +259,9 @@
                        <td>:</td>
                        <td>
                          <select class="form-control" name="idumkm">
-                           <option value="">-- Pilih UMKM --</option>
-                           <?php foreach ($umkm as $u): ?>
-                             <option value="<?=$u->IDUMKM?>"><?=$u->Nama_umkm?></option>
+                           <option value="">-- Pilih Data UMKM --</option>
+                           <?php foreach ($dataumkm as $u): ?>
+                             <option value="<?=$u->IDDataUMKM?>"><?=$u->IDDataUMKM?> - <?=$u->Nama_umkm?></option>
                            <?php endforeach; ?>
                          </select>
                        </td>
@@ -267,23 +279,16 @@
                        </td>
                      </tr>
                      <tr>
-                       <td>Tanggal Mulai</td>
+                       <td>Tanggal Order</td>
                        <td>:</td>
-                       <td><input type="date" class="form-control" name="tglmulai"></td>
-                     </tr>
-                     <tr>
-                       <td>Apakah sudah ada data UMKM nya?</td>
-                       <td>:</td>
-                       <td>
-                         <input type="radio" name="status" value="Ada"> Ada
-                         <input type="radio" name="status" value="Tidak Ada"> Tidak Ada
-                      </td>
+                       <td><input type="date" class="form-control" name="tglorder"></td>
                      </tr>
                      <tr>
                        <td>Permintaan Design</td>
                        <td>:</td>
-                       <td><textarea class="form-control" name="keterangan" rows="8" cols="80" placeholder="Tuliskan ID Data UMKM"></textarea> </td>
+                       <td><textarea class="form-control" name="keterangan" rows="8" cols="80"></textarea> </td>
                      </tr>
+                     <input type="datetime" name="tgl" value="">
                    </table>
                </div>
                <div class="modal-footer justify-content-between">
@@ -378,6 +383,9 @@
                          <td>:</td>
                          <td>
                            <select class="form-control" name="iddesigner">
+                             <?php if (!$key->IDDesigner){ ?>
+                               <option value=""> -- Memilih Designer --</option>
+                             <?php }?>
                              <option value="<?=$key->IDDesigner?>"><?=$key->IDDesigner?></option>
                              <?php foreach ($designer as $k): ?>
                               <option value="<?=$k->IDDesigner?>"><?=$k->Nama_lengkap?> - <?=$k->IDDesigner?></option>
@@ -481,6 +489,9 @@
                          <td>ID Designer</td>
                          <td>:</td>
                          <td>
+                           <?php if (!$key->IDDesigner) { ?>
+                             <span style="color:red">Belum Memiliki Designer</span>
+                           <?php } ?>
                            <input type="text" class="form-control" name="iddesigner" value="<?=$key->IDDesigner?>">
                          </td>
                        </tr>
@@ -538,4 +549,4 @@
               <!-- /.modal -->
               <?php } ?>
 
-        <?php $this->load->view('admin/layout/footer') ?>
+        <?php $this->load->view('admin/layout/Footer') ?>

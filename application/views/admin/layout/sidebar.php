@@ -54,6 +54,12 @@
                     <li>
                         <a href="<?=base_url()?>Admin/kelolaOrderDesigner">Designer</a>
                     </li>
+                    <li>
+                        <a href="<?=base_url()?>Admin/lihatDiskum">Diskusi UMKM</a>
+                    </li>
+                    <li>
+                        <a href="<?=base_url()?>Admin/lihatDispro">Diskusi Produk</a>
+                    </li>
                 </ul>
             </li>
 

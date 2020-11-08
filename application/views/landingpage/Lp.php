@@ -382,7 +382,7 @@
         <div class="container">
           <div class="title-row title-row--boxed text-center">
             <h2 class="section-title">Mari gabung dengan <img src="<?=base_url()?>asset/logo.png" alt=""> </h2>
-            <p class="subtitle">CDC Telkom</p>
+            <img src="<?=base_url()?>asset/telkom.png" alt="">
           </div>
           <div class="row justify-content-center text-center">
             <div class="col-lg-10">

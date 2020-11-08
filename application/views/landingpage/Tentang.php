@@ -8,62 +8,7 @@
   <main class="main-wrapper">
 
     <!-- Navigation -->
-    <header class="nav">
-      <div class="nav__holder nav--sticky">
-        <div class="container-fluid container-semi-fluid nav__container">
-          <div class="flex-parent">
-
-            <div class="nav__header">
-              <!-- Logo -->
-              <a href="index.html" class="logo-container flex-child">
-                <img class="logo" src="<?=base_url()?>asset/logo.png" srcset="<?=base_url()?>asset/logo.png 1x, <?=base_url()?>asset/logo.png 2x" alt="logooo">
-              </a>
-
-              <!-- Mobile toggle -->
-              <button type="button" class="nav__icon-toggle" id="nav__icon-toggle" data-toggle="collapse" data-target="#navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="nav__icon-toggle-bar"></span>
-                <span class="nav__icon-toggle-bar"></span>
-                <span class="nav__icon-toggle-bar"></span>
-              </button>
-            </div>
-
-            <!-- Navbar -->
-            <nav id="navbar-collapse" class="nav__wrap collapse navbar-collapse">
-              <ul class="nav__menu">
-                <li class="active">
-                  <a href="index.html">Beranda</a>
-                </li>
-                <li>
-                  <a href="index.html">Designer</a>
-                </li>
-                <li>
-                  <a href="index.html">Tentang Kami</a>
-                </li>
-                <li>
-                  <a href="index.html">Kontak Kami</a>
-                </li>
-                <li>
-                  <a href="<?=base_url()?>Create/login">Login</a>
-                </li>
-                <li>
-                  <a href="<?=base_url()?>Create">Register
-                </li>
-              </ul>
-            </nav>
-
-            <div class="nav__btn-holder nav--align-right">
-              <a href="#" class="btn nav__btn">
-                <span class="nav__btn-text">Call us for Free</span>
-                <span class="nav__btn-phone">63-995-3959</span>
-              </a>
-            </div>
-
-          </div> <!-- end flex-parent -->
-        </div> <!-- end container -->
-
-      </div>
-    </header> <!-- end navigation -->
+    <?php $this->load->view('landingpage/Navbar') ?>
 
     <!-- Triangle Image -->
     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -74,7 +19,7 @@
       </g>
       <defs>
         <pattern id="img1" patternUnits="userSpaceOnUse" width="500" height="500">
-          <image xlink:href="img/hero/hero.jpg" x="50" y="70" width="500" height="500"></image>
+          <image xlink:href="<?=base_url()?>asset/logo.png" x="50" y="70" width="500" height="500"></image>
         </pattern>
 
         <linearGradient id="triangle-gradient" y2="100%" x2="0" y1="50%" gradientUnits="userSpaceOnUse" >
@@ -91,7 +36,7 @@
         <div class="container">
           <div class="page-title__holder">
             <h1 class="page-title__title">Tentang Kami</h1>
-            <p class="page-title__subtitle">Focus on engaging, reusable content that decrease the cost per leads while helps you to increase profits margin. Margin strives to deliver the tools and support that helps companies grow with unparalleled success.</p>
+            <p class="page-title__subtitle">Kami hadir untuk membangun UMKM Anda lebih maju dalam branding produk, maka dari itu marilah bergabung bersama kami disini</p>
           </div>
         </div>
       </section> <!-- end page title -->
@@ -102,17 +47,17 @@
           <div class="row justify-content-center">
             <div class="col-lg-10">
               <div class="benefits box-shadow-large offset-top-171">
-                <h3 class="benefits__title">Sales organisations are able to set and manage performance goals</h3>
+                <h3 class="benefits__title">Keuntungan di gDESK</h3>
                 <div class="row">
                   <div class="col-lg-6">
                     <ul class="benefits__list">
                       <li class="benefits__item">
                         <i class="ui-check benefits__item-icon"></i>
-                        <span class="benefits__item-title">Develop a comprehensive paid search strategy</span>
+                        <span class="benefits__item-title">Dapat melakukan request kemasan sesuai dengan keinginan</span>
                       </li>
                       <li class="benefits__item">
                         <i class="ui-check benefits__item-icon"></i>
-                        <span class="benefits__item-title">Monitor performance throughout each sales</span>
+                        <span class="benefits__item-title">Mendapat kemasan yang sesuai dengan trend saat ini</span>
                       </li>
                     </ul>
                   </div>
@@ -120,11 +65,11 @@
                     <ul class="benefits__list">
                       <li class="benefits__item">
                         <i class="ui-check benefits__item-icon"></i>
-                        <span class="benefits__item-title">Develop a comprehensive paid search strategy</span>
+                        <span class="benefits__item-title">Dapat memilih desainer kemasan sesuai dengan selera Anda</span>
                       </li>
                       <li class="benefits__item">
                         <i class="ui-check benefits__item-icon"></i>
-                        <span class="benefits__item-title">Monitor performance throughout each sales</span>
+                        <span class="benefits__item-title">Dapat dicetak dengan vendor termurah</span>
                       </li>
                     </ul>
                   </div>
@@ -141,25 +86,25 @@
           <div class="row">
             <div class="col-lg-3">
               <div class="statistic">
-                <span class="statistic__number">36</span>
+                <span class="statistic__number"><?=$user->hasil?></span>
                 <h5 class="statistic__title">User</h5>
               </div>
             </div>
             <div class="col-lg-3">
               <div class="statistic">
-                <span class="statistic__number">100%</span>
+                <span class="statistic__number"><?=$umkm->hasil?></span>
                 <h5 class="statistic__title">UMKM</h5>
               </div>
             </div>
             <div class="col-lg-3">
               <div class="statistic">
-                <span class="statistic__number">550</span>
+                <span class="statistic__number"><?=$designer->hasil?></span>
                 <h5 class="statistic__title">Designer</h5>
               </div>
             </div>
             <div class="col-lg-3">
               <div class="statistic">
-                <span class="statistic__number">3x</span>
+                <span class="statistic__number"><?=$order->hasil?></span>
                 <h5 class="statistic__title">Order Fix</h5>
               </div>
             </div>
@@ -167,73 +112,19 @@
         </div>
       </section> <!-- end statistic -->
 
-      <!-- Team -->
-      <section class="section-wrap">
-        <div class="container">
-          <div class="title-row title-row--boxed text-center">
-            <h2 class="section-title">Meet Our Experts</h2>
-            <p class="subtitle">Margin strives to deliver the tools and support that helps companies grow with unparalleled success.</p>
-          </div>
-          <div class="row">
-
-            <div class="col-md-4">
-              <div class="team">
-                <img src="img/team/1.jpg" alt="" class="team__img">
-                <h5 class="team__name">Philip Green</h5>
-                <span class="team__occupation">CEO</span>
-                <p class="team__text">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters.</p>
-                <div class="socials">
-                  <a href="#" class="social social-twitter" aria-label="twitter" title="twitter" target="_blank"><i class="ui-twitter"></i></a>
-                  <a href="#" class="social social-facebook" aria-label="facebook" title="facebook" target="_blank"><i class="ui-facebook"></i></a>
-                  <a href="#" class="social social-google-plus" aria-label="google plus" title="google plus" target="_blank"><i class="ui-google"></i></a>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-4">
-              <div class="team">
-                <img src="img/team/2.jpg" alt="" class="team__img">
-                <h5 class="team__name">Melissa Shredinger</h5>
-                <span class="team__occupation">Email Marketing</span>
-                <p class="team__text">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters.</p>
-                <div class="socials">
-                  <a href="#" class="social social-twitter" aria-label="twitter" title="twitter" target="_blank"><i class="ui-twitter"></i></a>
-                  <a href="#" class="social social-facebook" aria-label="facebook" title="facebook" target="_blank"><i class="ui-facebook"></i></a>
-                  <a href="#" class="social social-google-plus" aria-label="google plus" title="google plus" target="_blank"><i class="ui-google"></i></a>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-4">
-              <div class="team">
-                <img src="img/team/3.jpg" alt="" class="team__img">
-                <h5 class="team__name">Alexander Samokhin</h5>
-                <span class="team__occupation">Developer</span>
-                <p class="team__text">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters.</p>
-                <div class="socials">
-                  <a href="#" class="social social-twitter" aria-label="twitter" title="twitter" target="_blank"><i class="ui-twitter"></i></a>
-                  <a href="#" class="social social-facebook" aria-label="facebook" title="facebook" target="_blank"><i class="ui-facebook"></i></a>
-                  <a href="#" class="social social-google-plus" aria-label="google plus" title="google plus" target="_blank"><i class="ui-google"></i></a>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section> <!-- end team -->
-
       <!-- CTA -->
       <div class="call-to-action text-center">
         <div class="call-to-action__container">
           <h3 class="call-to-action__title">
-            Get, keep and grow more customers. We’re here to help.
+            Mari bergabung dengan gDESK
           </h3>
-          <a href="#" class="btn btn--lg btn--color">
-            <span>Let’s Work Together</span>
+          <a href="<?=base_url()?>Create" class="btn btn--lg btn--color">
+            <span>Gabung</span>
           </a>
         </div>
       </div> <!-- end cta -->
 
+      <?php $this->load->view('landingpage/Footer'); ?>
       <!-- Footer -->
       <div id="back-to-top">
         <a href="#top"><i class="ui-arrow-up"></i></a>
@@ -241,6 +132,5 @@
 
     </div> <!-- end content wrapper -->
 
-<?php $this->load->view('landingpage/Footer'); ?>
 </body>
 </html>

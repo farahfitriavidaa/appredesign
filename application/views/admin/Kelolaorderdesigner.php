@@ -90,9 +90,19 @@
                                                     <i class="mdi mdi-information mr-2 text-white-400"></i>
                                                       Data UMKM
                                                   </a> </td>
-                                                  <td> <a href="#">Diskusi</a> </td>
-                                                  <td><?php echo $a->Tgl_mulai ?></td>
-                                                  <td><?php echo $a->Tgl_akhir ?></td>
+                                                  <td> <a href="<?=base_url()?>Admin/dispro/<?=$a->IDPesan?>">Diskusi</a> </td>
+                                                  <td>
+                                                    <?php
+                                                    if (!$a->Tgl_mulai) {?>
+                                                      <p style="color:red">Belum ada</p>
+                                                    <?php }
+                                                    echo $a->Tgl_mulai ?></td>
+                                                  <td>
+                                                    <?php
+                                                    if (!$a->Tgl_akhir) {?>
+                                                      <p style="color:red">Belum ada</p>
+                                                    <?php }
+                                                    echo $a->Tgl_akhir ?></td>
                                                   <td><a class="btn btn-primary" data-toggle="modal" data-target="#hasil<?=$a->IDPesan?>">Hasil</a></td>
                                                   <td>
                                                     <?php if ($a->Status == '1'){ ?>

@@ -8,62 +8,7 @@
   <main class="main-wrapper">
 
     <!-- Navigation -->
-    <header class="nav">
-      <div class="nav__holder nav--sticky">
-        <div class="container-fluid container-semi-fluid nav__container">
-          <div class="flex-parent">
-
-            <div class="nav__header">
-              <!-- Logo -->
-              <a href="index.html" class="logo-container flex-child">
-                <img class="logo" src="<?=base_url()?>asset/logo.png" srcset="<?=base_url()?>asset/logo.png 1x, <?=base_url()?>asset/logo.png 2x" alt="logooo">
-              </a>
-
-              <!-- Mobile toggle -->
-              <button type="button" class="nav__icon-toggle" id="nav__icon-toggle" data-toggle="collapse" data-target="#navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="nav__icon-toggle-bar"></span>
-                <span class="nav__icon-toggle-bar"></span>
-                <span class="nav__icon-toggle-bar"></span>
-              </button>
-            </div>
-
-            <!-- Navbar -->
-            <nav id="navbar-collapse" class="nav__wrap collapse navbar-collapse">
-              <ul class="nav__menu">
-                <li class="active">
-                  <a href="index.html">Beranda</a>
-                </li>
-                <li>
-                  <a href="index.html">Designer</a>
-                </li>
-                <li>
-                  <a href="index.html">Tentang Kami</a>
-                </li>
-                <li>
-                  <a href="index.html">Kontak Kami</a>
-                </li>
-                <li>
-                  <a href="<?=base_url()?>Create/login">Login</a>
-                </li>
-                <li>
-                  <a href="<?=base_url()?>Create">Register
-                </li>
-              </ul>
-            </nav>
-
-            <div class="nav__btn-holder nav--align-right">
-              <a href="#" class="btn nav__btn">
-                <span class="nav__btn-text">Call us for Free</span>
-                <span class="nav__btn-phone">63-995-3959</span>
-              </a>
-            </div>
-
-          </div> <!-- end flex-parent -->
-        </div> <!-- end container -->
-
-      </div>
-    </header> <!-- end navigation -->
+    <?php $this->load->view('landingpage/Navbar') ?>
 
     <!-- Triangle Image -->
     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -110,7 +55,7 @@
                     <address>Bangkit Building 3rd floor, Jl. Telekomunikasi Terusan Buah Batu Bandung</address>
                   </li>
                   <li class="contact__item">
-                    <span class="contact__item-label">No. tlp: </span>
+                    <span class="contact__item-label">No. telp: </span>
                     <a href="tel:+1-800-1554-456-123">Isti : 081320451745 | Sari : 081223951658</a>
                   </li>
                   <li class="contact__item">

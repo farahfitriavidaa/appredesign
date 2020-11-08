@@ -225,7 +225,7 @@
                                 <div class="col-12">
                                     <div class="mb-4">
                                         <div class="mb-4">
-                                            <strong>Diskusi dengan UMKM</strong>
+                                            <strong>Diskusi dengan Desainer </strong>
                                         </div>
                                         <div class="px-2" style="overflow-y: auto; max-height: 1920px">
                                         <?php foreach($daftar_komentar as $diskusi): ?>
@@ -239,8 +239,8 @@
                                                             <strong class="d-block"><?=$diskusi->Nama_lengkap?></strong>
                                                             <span class="text-muted">
                                                                 <?php
-                                                                    if($diskusi->Level==="UMKM")
-                                                                        echo $diskusi->Level." - ".$diskusi->Nama_umkm;
+                                                                    if($diskusi->Level==="Designer")
+                                                                        echo $diskusi->Level." - ".$diskusi->Nama_lengkap;
                                                                     else
                                                                         echo $diskusi->Level;
                                                                 ?>
@@ -249,9 +249,9 @@
                                                     </div>
                                                 </div>
                                                 <div class="card-body">
-                                                    <?php if( ! is_null($diskusi->Foto_diskum)): ?>
-                                                        <a href="<?=base_url();?>uploads/foto_diskum/<?=$diskusi->Foto_diskum?>" class="btn btn-secondary" download>Download gambar</a>
-                                                        <img src="<?=base_url();?>uploads/foto_diskum/<?=$diskusi->Foto_diskum?>" alt="foto untuk diskusi" class="img-thumbnail d-block" style="max-width: 240px; max-height: 480px;">
+                                                    <?php if( ! is_null($diskusi->Foto_dispro)): ?>
+                                                        <a href="<?=base_url();?>uploads/foto_dispro/<?=$diskusi->Foto_dispro?>" class="btn btn-secondary" download>Download gambar</a>
+                                                        <img src="<?=base_url();?>uploads/foto_dispro/<?=$diskusi->Foto_dispro?>" alt="foto untuk diskusi" class="img-thumbnail d-block" style="max-width: 240px; max-height: 480px;">
                                                     <?php endif; ?>
 
                                                     <p class="mt-2 mb-2"><?=$diskusi->Komentar?></p>
@@ -273,7 +273,7 @@
                                                 <img src="" alt="foto yang di upload" class="img-thumbnail" id="foto-upload" style="max-height: 320px">
                                             </div>
 
-                                            <form action="<?=base_url();?>Admin/tambahKomentar" method="post" enctype="multipart/form-data" class="mb-0">
+                                            <form action="<?=base_url();?>Admin/tambahKomen" method="post" enctype="multipart/form-data" class="mb-0">
                                                 <div style="display: flex; flex-flow: row nowrap; padding: 8px 16px;">
                                                     <div class="form-group" style="display:inline; padding:0; margin: 0; flex: auto">
                                                         <?php
