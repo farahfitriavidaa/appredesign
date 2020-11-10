@@ -21,4 +21,8 @@
   <link rel="apple-touch-icon" sizes="72x72" href="<?=base_url()?>asset/landingpage/img/apple-touch-icon-72x72.png">
   <link rel="apple-touch-icon" sizes="114x114" href="<?=base_url()?>asset/landingpage/img/apple-touch-icon-114x114.png">
 
+  <script src="<?=base_url()?>asset/landingpage/js/jquery.js"></script>
+  <link rel="stylesheet" href="<?=base_url()?>asset/landingpage/js/distss/jquery.fancybox.min.css">
+  <script src="<?=base_url()?>asset/landingpage/js/distss/jquery.fancybox.min.js"></script>
+
 </head>

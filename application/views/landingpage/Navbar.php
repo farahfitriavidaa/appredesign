@@ -21,17 +21,17 @@
         <!-- Navbar -->
         <nav id="navbar-collapse" class="nav__wrap collapse navbar-collapse">
           <ul class="nav__menu">
-            <li class="active">
-              <a href="index.html">Beranda</a>
+            <li>
+              <a href="<?=base_url()?>Landingpage">Beranda</a>
             </li>
             <li>
-              <a href="index.html">Designer</a>
+              <a href="<?=base_url()?>Landingpage/designer">Designer</a>
             </li>
             <li>
-              <a href="index.html">Tentang Kami</a>
+              <a href="<?=base_url()?>Landingpage/tentang">Tentang Kami</a>
             </li>
             <li>
-              <a href="index.html">Kontak Kami</a>
+              <a href="<?=base_url()?>Landingpage/kontak">Kontak Kami</a>
             </li>
             <li>
               <a href="<?=base_url()?>Create/login">Login</a>

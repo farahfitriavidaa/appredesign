@@ -23,28 +23,28 @@
           <div class="widget widget_nav_menu">
             <h5 class="widget-title">Main Menu</h5>
             <ul>
-              <li><a href="#">Beranda</a></li>
-              <li><a href="#">Designer</a></li>
-              <li><a href="#">Tentang Kami</a></li>
-              <li><a href="#">Kontak Kami</a></li>
-              <li><a href="#">Login</a></li>
-              <li><a href="#">Register</a></li>
+              <li><a href="<?=base_url()?>Landingpage">Beranda</a></li>
+              <li><a href="<?=base_url()?>Landingpage/designer">Designer</a></li>
+              <li><a href="<?=base_url()?>Landingpage/tentang">Tentang Kami</a></li>
+              <li><a href="<?=base_url()?>Landingpage/kontak">Kontak Kami</a></li>
+              <li><a href="<?=base_url()?>Create/login">Login</a></li>
+              <li><a href="<?=base_url()?>Create">Register</a></li>
             </ul>
           </div>
         </div>
 
         <div class="col-lg-2 col-md-6">
           <div class="widget widget-address">
-            <h5 class="widget-title">Company</h5>
+            <h5 class="widget-title">Kontak Kami</h5>
             <ul>
-              <li><address>8910 University Center Lane Suite 620 San Diego, CA 92102</address></li>
+              <li><address>Bangkit Building 3rd floor, Jl. Telekomunikasi Terusan Buah Batu Bandung</address></li>
               <li>
-                <span>Phone: </span>
-                <a href="tel:+1-800-1554-456-123">+ 1 (800) 155 4561</a>
+                <span>No Telp: </span>
+                <a href="tel:+1-800-1554-456-123">Isti : 081320451745 | Sari : 081223951658</a>
               </li>
               <li>
                 <span>Email: </span>
-                <a href="mailto:hi@margin.com">hi@margin.com</a>
+                <a href="mailto:cdc@telkomuniversity.ac.id">cdc@telkomuniversity.ac.id</a>
               </li>
             </ul>
           </div>

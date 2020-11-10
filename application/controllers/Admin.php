@@ -8,6 +8,7 @@ class Admin extends CI_Controller {
 		parent::__construct();
 		$this->load->model('Model_created');
 		$this->load->model('Model_admin');
+		$this->load->model('Model_diskusi');
 		$this->load->library('form_validation');
 	}
 
@@ -577,9 +578,10 @@ class Admin extends CI_Controller {
 				'akun'			 => $cek,
 				'pemesanan'	 => $this->Model_admin->getPemesanan(),
 				'umkm'			 => $this->Model_admin->getUMKM(),
-				'designer'	 => $this->Model_admin->getDesigner()
+				'designer'	 => $this->Model_admin->getDesigner(),
+				'dataumkm'   => $this->Model_admin->getDataaUMKM()
 			);
-			$this->load->view('admin/kelolapemesanan',$data);
+			$this->load->view('admin/Kelolapemesanan',$data);
 	}
 
 	public function createPortofolio($id)
@@ -602,24 +604,16 @@ class Admin extends CI_Controller {
 
 	public function tambahPemesanan()
 	{
-				if ($this->input->post('status') == 'Ada') {
-					$umkm = $this->Model_admin->getDataUMKM($this->input->post('idumkm'));
-					if (!$umkm) {
-						echo "
-				<script type='text/javascript'>
-					alert('Isi Data UMKM Terlebih Dahulu');
-					history.back(self);
-				</script>";
-					}else{
 					$cek = $this->Model_admin->getAkunPengelola($this->session->user);
 					$id 		= $this->Model_created->idPesan();
 					$idD		= $this->Model_created->idDiskum();
+					$tanggal_waktu	= date('Y-m-d H:i:s');
 					$data 	= array(
 						'IDPesan'						=> $id,
-						'IDUMKM'						=> $this->input->post('idumkm'),
+						'IDDataUMKM'						=> $this->input->post('idumkm'),
 						'IDPengelola'				=> $cek->IDPengelola,
 						'IDDesigner'				=> $this->input->post('iddesigner'),
-						'Tgl_mulai'					=> $this->input->post('tglmulai'),
+						'Tgl_order'					=> $this->input->post('tglorder'),
 						'Keterangan_design'	=> $this->input->post('keterangan'),
 						'Status'						=> '0'
 					);
@@ -627,19 +621,12 @@ class Admin extends CI_Controller {
 						'IDDiskum'		=> $idD,
 						'IDPengelola'	=> $cek->IDPengelola,
 						'IDPesan'			=> $id,
-						'Komentar'		=> $this->input->post('keterangan')
+						'Komentar'		=> $this->input->post('keterangan'),
+						'Tanggal_waktu'=> $tanggal_waktu
 					);
 					$cek	= $this->Model_admin->create_pemesanan($data);
 					$cekk = $this->Model_admin->create_diskum($dataa);
 					redirect('Admin/kelolaPemesanan');
-					}
-				}else if($this->input->post('status') == 'Tidak Ada'){
-					echo "
-			<script type='text/javascript'>
-				alert('Isi Data UMKM Terlebih Dahulu');
-				history.back(self);
-			</script>";
-				}
 	}
 
 	public function tambahDataUMKM()
@@ -859,34 +846,6 @@ class Admin extends CI_Controller {
 	}
 
 	/**
-	 * Ini function untuk lihat detil diskusinya kah atau daftar diskusi?
-	 *
-	 * Penyebab utama kenapa halaman kosong:
-	 * function getDaftarDiskum() di model Model_admin ga ada "return"
-	 *
-	 * Catatan tambahan
-	 * - Function ini manggil view "admin/diskusi.php" berarti mau nampilin **detil diskusi**,
-	 * - View "admin/diskusi.php" perlu nge-load helper "my_helper"(baris 884) biar ga ada error
-	 * - Juga, getDaftarDiskum(baris 880) itu buat halaman yang nampilin daftar-daftar diskum(bukan detil diskusi)
-	 *
-	 */
-	public function kelolaDiskUM($id)
-	{
-		$cek	= $this->Model_admin->cekAkun($this->session->user);
-
-		$data	= array(
-			'akun'				=> $cek,
-			'pemesanan'			=> $this->Model_admin->getDataUMKMId($id),
-			'daftar_diskusi'	=> $this->Model_admin->getDaftarDiskum($id) // <--- Kalo mau pake Model_diskusi aja yang emang dibuat khusus buat nanganin data diskum atau dispro
-		);
-		// var_dump($data);
-
-		$this->load->helper('my_helper');
-		$this->load->view('admin/diskusi',$data);
-	}
-
-
-	/**
 	 * Function ini untuk lihat daftar-daftar diskum
 	 *
 	 * Daftar diskum diambil berdasarkan IDPengelola di tb_pemesanan.
@@ -972,7 +931,7 @@ class Admin extends CI_Controller {
 		// var_dump($status);
 		// var_dump($limit);
 
-		$this->load->view('admin/lihatdiskum', $data);
+		$this->load->view('admin/Lihatdiskum', $data);
 	}
 
 	/**
@@ -1019,7 +978,7 @@ class Admin extends CI_Controller {
 			$this->load->helper('my_helper');
 
 			// Load view
-			$this->load->view('admin/diskum', $data);
+			$this->load->view('admin/Diskum', $data);
 
 		} else {
 			http_response_code('400');
@@ -1090,4 +1049,192 @@ class Admin extends CI_Controller {
 		else
 			redirect('Admin');
 	}
+
+	public function dispro($id_pesan='0')
+	{
+		// Cek IDPesan dan pastikan user tidak input alamat "appredesign/Admin/diskusi" tanpa IDPesan
+		if ($id_pesan!=='0') {
+			// Ambil data user
+			$cek 				= $this->Model_admin->cekAkun($this->session->user);
+
+			// Dapatkan detil pemesanan/request (gabungan tabel tb_pemesanan dan tb_umkm_data)
+			$detil_pemesanan	= $this->Model_diskusi->getPemesanan($id_pesan);
+
+			// Cek designer
+			// Jika designer ada, ambil nama designer. Jika tidak, beri keterangan 'Ditentukan Pengelola'
+			$data_designer		= array();
+			if( is_null($detil_pemesanan->IDDesigner) ){
+				$data_designer['designer']	= 'Ditentukan Pengelola';
+				$data_designer['ada']		= FALSE;
+			}
+			else{
+				$designer 					= $this->Model_diskusi->getNamaDesainer($detil_pemesanan->IDDesigner);
+				$data_designer['designer']	= $designer->Nama_lengkap;
+				$data_designer['ada']		= TRUE;
+			}
+
+			// Ambil data diskusi(komentar-komentar) berdasarkan IDPesan
+			$daftar_komentar = $this->Model_diskusi->getDispro($id_pesan);
+
+			$data = array(
+				'akun'				=> $cek,
+				'pemesanan'			=> $detil_pemesanan,
+				'designer'			=> $data_designer,
+				'daftar_komentar'	=> $daftar_komentar
+			);
+			// var_dump($data['daftar_diskusi']); // untuk liat isi array $data
+
+			$this->load->helper('my_helper');
+
+			// Load view
+			$this->load->view('admin/Dispro', $data);
+
+		} else {
+			http_response_code('400');
+		}
+	}
+
+	public function tambahKomen()
+	{
+		// Cek kalo user ke alamat ini dengan method post (tidak mengetik secara langsung alamat "appredesign/Admin/tambahKomentar")
+		if($this->input->method() == 'post') {
+			// Ambil IDPengelola
+			$pengelola		= $this->Model_admin->getAkunPengelola($this->session->user);
+			$id_pengelola	= $pengelola->IDPengelola;
+
+			// Kembalikan IDPesan sesuai format, 1 -> PS0001
+			$id_terpotong	= $this->input->post('np');
+			$id_pesan		= 'PS'.str_pad($id_terpotong, 4, '0', STR_PAD_LEFT);
+
+			$data			= array();
+			$alert			= '';
+
+			// Proses upload foto dengan bantuan function uploadFoto() dari my_helper
+			// Jika tidak ada foto yang di-upload maka lewati bagian if() ini
+			$this->load->helper('my_helper');
+			if( $_FILES['foto-komentar']['error'] !== 4 ){
+				$alert	= uploadFoto('foto-komentar', 'foto_dispro');
+				$data	+= array(
+					'Foto_dispro' => $_FILES['foto-komentar']['name']
+				);
+			}
+
+			// Cek apakah upload foto berhasil
+			// Jika berhasil tambahkan ke database, jika tidak berhasil lempar peringatan ke halaman diskusi
+			if($alert==='sukses' || $alert===''){
+				$this->load->model('Model_created');
+				$id_diskum		= $this->Model_created->idDispro();
+
+				$komentar		= $this->input->post('komentar');
+				$tanggal_waktu	= date('Y-m-d h:i:s');
+				// $now			= new DateTime('now',new DateTimeZone('Asia/Jakarta'));
+				// $tanggal_waktu	= $now->format('Y-m-d H:i:s');
+
+				// IDUMKM dikosongkan karena pengirim komentar adalah Pengelola
+				$data 			+= array(
+					'IDDispro'		=> $id_diskum,
+					'IDPengelola'	=> $id_pengelola,
+					'IDPesan'		=> $id_pesan,
+					'Komentar'		=> $komentar,
+					'Tanggal_waktu'	=> $tanggal_waktu
+				);
+				// var_dump($data);
+
+				$this->load->model('Model_diskusi');
+				$this->Model_diskusi->createDispro($data);
+
+				redirect('Admin/dispro/'.$id_pesan);
+
+			}
+			else{
+				$_SESSION['alert'] = $alert;
+				$this->session->mark_as_flash('alert');
+				redirect('Admin/dispro/'.$id_terpotong);
+			}
+		}
+		else
+			redirect('Admin');
+	}
+
+	public function lihatDispro($filter='belum-selesai', $page=1)
+	{
+		$cek 			= $this->Model_admin->cekAkun($this->session->user);
+
+		// Set $status sesuai parameter $filter
+		// Jika ada yang mengisi $filter dengan hal lain maka redirect ke halaman default lihatDiskum
+		if ($filter==='belum-selesai') {
+			$status = ['0', '1', '2', '3' ,'4', '5', '6'];
+		}
+		elseif ($filter==='semua') {
+			$status = ['0', '1', '2', '3' ,'4', '5', '6', '7'];
+		}
+		elseif ($filter==='telah-selesai') {
+			$status = ['7'];
+		}
+		else {
+			return redirect('Admin/lihatDispro');
+		}
+
+		// Ambil semua IDPesan berdasarkan IDPengelola di tb_pemesanan
+		$pengelola		= $this->Model_admin->getAkunPengelola($this->session->user);
+		$id_pengelola	= $pengelola->IDPengelola;
+		$id_pesan		= $this->Model_admin->getAllIdPesan($id_pengelola);
+
+		// Buat array $id_pesan menjadi array numeric dengan bantuan function flattenArray() dari my_helper
+		$this->load->helper('my_helper');
+		$id_pesan		= flattenArray($id_pesan);
+
+		$this->load->model('Model_diskusi');
+		$jumlah_diskum	= $this->Model_diskusi->getJumlahDispro($id_pesan, $status);
+		$jumlah_diskum	= $jumlah_diskum->jumlah;
+		// Algoritma pembagian halaman (satu halaman berisi maks. 50 daftar diskum)
+		if ($page > ($jumlah_diskum/50)+1 || $page < 0) {
+			return redirect('Admin/lihatDiskum');
+		}
+
+		$hal_selanjutnya	= false;
+		$hal_sebelumnya		= false;
+
+		if ($page < ($jumlah_diskum/50))
+			$hal_selanjutnya	= true;
+		if($page > 1)
+			$hal_sebelumnya		= true;
+
+		$limit			= $page*50;
+		$baris			= ($page-1)*50;
+
+		// Ambil daftar diskusi dari tb_diskusiumkm berdasarkan IDPesan tadi
+		$daftar_diskusi = $this->Model_diskusi->getDaftarDispro($id_pesan, $status, $baris, $limit);
+
+		// Cek jika $daftar_diskusi kosong beri status has_diskum=false
+		// jika ada $daftar_diskusi maka beri status has_diskum=true dan masukan ke $data
+		if( empty($daftar_diskusi) && $filter!=='telah-selesai') {
+			$data = array(
+				'has_diskum'		=> false,
+				'akun'				=> $cek,
+				'filter'			=> $filter,
+				'page'				=> $page,
+				'hal_selanjutnya'	=> $hal_selanjutnya,
+				'hal_sebelumnya'	=> $hal_sebelumnya
+			);
+		}
+		else {
+			$data = array(
+				'has_diskum'		=> true,
+				'akun'				=> $cek,
+				'daftar_diskusi'	=> $daftar_diskusi,
+				'filter'			=> $filter,
+				'page'				=> $page,
+				'hal_selanjutnya'	=> $hal_selanjutnya,
+				'hal_sebelumnya'	=> $hal_sebelumnya
+			);
+		}
+		// var_dump($data); // lihat isi array $data
+		// var_dump($jumlah_diskum);
+		// var_dump($status);
+		// var_dump($limit);
+
+		$this->load->view('admin/Lihatdispro', $data);
+	}
+
 }
