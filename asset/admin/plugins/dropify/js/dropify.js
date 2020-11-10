@@ -31,7 +31,7 @@ function Dropify(element, options) {
 
     var defaults = {
         defaultFile: '',
-        maxFileSize: 0,
+        maxFileSize: '65M',
         minWidth: 0,
         maxWidth: 0,
         minHeight: 0,
@@ -44,7 +44,7 @@ function Dropify(element, options) {
         imgFileExtensions: ['png', 'jpg', 'jpeg', 'gif', 'bmp'],
         maxFileSizePreview: "5M",
         allowedFormats: ['portrait', 'square', 'landscape'],
-        allowedFileExtensions: ['*'],
+        allowedFileExtensions: ['pdf'],
         messages: {
             'default': 'Drag and drop a file here or click',
             'replace': 'Drag and drop or click to replace',

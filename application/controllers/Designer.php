@@ -129,6 +129,11 @@ class Designer extends CI_Controller {
 		$this->load->view('designer/lihatportofolio', $data);
 	}
 
+	public function buatPortofolio()
+	{
+		$this->load->view('designer/buatportofolio');
+	}
+
 	public function logout()
 	{
 		session_destroy();
