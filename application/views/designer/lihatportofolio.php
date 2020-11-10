@@ -42,7 +42,22 @@
                     <div class="page-content-wrapper ">
 
                         <div class="container-fluid">
-
+                            <?php
+                                $alert = $this->session->flashdata('alert');
+                                if($alert):
+                            ?>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="alert <?=$alert['jenis']?> alert-dismissible fade show mb-0 mt-3" role="alert">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            <?=$alert['isi']?>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+                            <!-- end alert -->
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="page-title-box">

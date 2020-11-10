@@ -134,6 +134,53 @@ class Designer extends CI_Controller {
 		$this->load->view('designer/buatportofolio');
 	}
 
+	public function tambahPortofolio()
+	{
+		if ($this->input->method()!=='post') {
+			redirect('Designer');
+		}
+
+		$judul	= $this->input->post('judul-portofolio');
+		$detil	= $this->input->post('detil-portofolio');
+		$bukti	= '';
+
+		if ( isset($_FILES['bukti-portofolio']) && $_FILES['bukti-portofolio']['error'] != 4 ) {
+			$this->load->helper('my_helper');
+			$alert[0]	= uploadFoto('bukti-portofolio', 'bukti_portofolio');
+
+			if ($alert[0]!=='sukses') {
+				$_SESSION['alert'] = $alert[0];
+				$this->session->mark_as_flash('alert');
+				redirect('Designer/buatPortofolio');
+			}
+			else
+				$bukti	= $_FILES['bukti-portofolio']['name'];
+		}
+		else {
+			$bukti	= $this->input->post('link-portofolio');
+		}
+
+		$this->load->model('Model_created');
+		
+		$data	= array(
+			'IDPortofolio'		=> $this->Model_created->idPortofolio(),
+			'IDDesigner'		=> $this->session->id_designer,
+			'Judul'			 	=> $judul,
+			'Bukti_portofolio'	=> $bukti,
+			'Detail_portofolio'	=> $detil
+		);
+		// var_dump($data);
+
+		$this->Model_designer->createPortofolio($data);
+
+		$_SESSION['alert'] = array (
+			'jenis'	=> 'alert-primary',
+			'isi'	=> 'Portofolio berhasil dibuat'
+		);
+		$this->session->mark_as_flash('alert');
+		redirect('Designer/lihatPortofolio');
+	}
+
 	public function logout()
 	{
 		session_destroy();

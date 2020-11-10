@@ -109,13 +109,26 @@ class Model_created extends CI_Model {
 	public function idDataUMKM()
 	{
 		$user	= "DU";
-		$nomer	= "SELECT MAX(TRIM(REPLACE(IDDataUMKM,'DU',''))) as a FROM tb_umkm_data WHERE IDDataUMKM
+		$nomer	= "SELECT MAX(TRIM(REPLACE(IDDataUMKM,'$user',''))) as a FROM tb_umkm_data WHERE IDDataUMKM
 		LIKE '$user%'";
 		$baris	= $this->db->query($nomer);
 		$akhir	= $baris->row()->a;
 		$akhir++;
 		$id		= str_pad($akhir, 4, "0", STR_PAD_LEFT);
-		$id		= "DU".$id;
+		$id		= $user.$id;
+		return $id;
+	}
+
+	public function idPortofolio()
+	{
+		$user	= "PRT";
+		$nomer	= "SELECT MAX(TRIM(REPLACE(IDPortofolio,'$user',''))) as a FROM tb_portofolio WHERE IDPortofolio
+		LIKE '$user%'";
+		$baris	= $this->db->query($nomer);
+		$akhir	= $baris->row()->a;
+		$akhir++;
+		$id		= str_pad($akhir, 4, "0", STR_PAD_LEFT);
+		$id		= $user.$id;
 		return $id;
 	}
 
