@@ -21,7 +21,7 @@
             'minHeight': 'The image height is too small ({{ value }}}px min).',
             'maxHeight': 'The image height is too big ({{ value }}px max).',
             'imageFormat': 'Format gambar tidak dibolehkan (hanya {{ value }}).',
-            'fileExtension': 'Format file tidak dibolehkan (hanya {{ value }} atau png, jpg).'
+            'fileExtension': 'Format file tidak dibolehkan (hanya {{ value }}).'
         }
     });
 
@@ -70,42 +70,46 @@ window.onload=()=>{
     var remove_button   = document.getElementsByClassName('dropify-clear')[0];
     var change_button   = document.getElementById('change');
 
-    input_link.addEventListener('input', function(){
+    if(input_link) {
+        input_link.addEventListener('input', function(){
+            if( input_link.value ) {
+                input_file.setAttribute('disabled', 'disabled');
+                input_file.parentElement.classList.add('disabled');
+            }
+            else {
+                input_file.removeAttribute('disabled');
+                input_file.parentElement.classList.remove('disabled');
+            }
+        });
+    
+        input_file.addEventListener('change', function() {
+            if( input_file.files.length != 0 ) {
+                input_link.setAttribute('disabled', 'disabled');
+            }
+        });
+    
+        remove_button.addEventListener('click', function () {
+            input_file.value  ='';
+            input_link.removeAttribute('disabled');
+        });
+
         if( input_link.value ) {
             input_file.setAttribute('disabled', 'disabled');
             input_file.parentElement.classList.add('disabled');
         }
-        else {
-            input_file.removeAttribute('disabled');
-            input_file.parentElement.classList.remove('disabled');
-        }
-    });
+    }
 
-    input_file.addEventListener('change', function() {
-        if( input_file.files.length != 0 ) {
-            input_link.setAttribute('disabled', 'disabled');
-        }
-    });
+    if(change_button) {
+        var idx = 1;
+        var button_text = ['Ganti portofolio dengan file', 'Batalkan dan tetap pakai link'];
+        change_button.addEventListener('click', function () {
+            input_link.toggleAttribute('disabled');
 
-    remove_button.addEventListener('click', function () {
-        input_file.value  ='';
-        input_link.removeAttribute('disabled');
-    });
+            input_file.toggleAttribute('disabled');
+            input_file.parentElement.classList.toggle('disabled');
 
-    var idx = 1;
-    var button_text = ['Ganti portofolio dengan file', 'Batalkan dan tetap pakai link'];
-    change_button.addEventListener('click', function () {
-        input_link.toggleAttribute('disabled');
-
-        input_file.toggleAttribute('disabled');
-        input_file.parentElement.classList.toggle('disabled');
-
-        change_button.innerText = button_text[(idx%2)];
-        idx++;
-    });
-
-    if( input_link.value ) {
-        input_file.setAttribute('disabled', 'disabled');
-        input_file.parentElement.classList.add('disabled');
+            change_button.innerText = button_text[(idx%2)];
+            idx++;
+        });
     }
 }
