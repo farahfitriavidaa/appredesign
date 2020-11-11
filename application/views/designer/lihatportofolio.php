@@ -77,7 +77,7 @@
                                 <?php foreach($daftar_portofolio as $portofolio): ?>
                                     <div class="col-lg-4 col-md-6">
                                         <div class="card mb-4">
-                                            <?php if( isset($portofolio->Bukti_portofolio) ): ?>
+                                            <?php if( ! strchr($portofolio->Bukti_portofolio, '/') ): ?>
                                                 <img class="card-img-top img-fluid crop-center" src="<?=base_url();?>Uploads/bukti_portofolio/<?=$portofolio->Bukti_portofolio?>" alt="Gambar portofolio" style="max-height:240px;">
                                             <?php endif; ?>
                                             <?php
