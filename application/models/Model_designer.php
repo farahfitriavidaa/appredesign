@@ -29,7 +29,7 @@ class Model_designer extends CI_Model {
 
     public function getPortofolio($id_portofolio)
     {
-        return $this->db->query("SELECT * FROM tb_portofolio WHERE IDPOrtofolio='$id_portofolio'")->row();
+        return $this->db->query("SELECT * FROM tb_portofolio WHERE IDPortofolio='$id_portofolio'")->row();
     }
 
     public function createPortofolio($data)

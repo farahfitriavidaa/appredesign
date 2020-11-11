@@ -97,7 +97,7 @@
                                             <a class="btn btn-raised btn-secondary float-right mt-4" href="<?=base_url();?>Designer/editProfil">
                                                 Edit Profil
                                             </a>
-                                        </div>                                        
+                                        </div>
                                     </div>
                                 </div>
                             </div>

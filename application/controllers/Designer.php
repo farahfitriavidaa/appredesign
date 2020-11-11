@@ -125,6 +125,27 @@ class Designer extends CI_Controller {
 		$this->load->view('designer/lihatportofolio', $data);
 	}
 
+	public function portofolio($id_portofolio='0')
+	{
+		if ($id_portofolio=='0') {
+			return http_response_code('400');
+		}
+
+		$id_portofolio		= 'PRT'.str_pad($id_portofolio, 4, '0', STR_PAD_LEFT);
+		$data_portofolio	= $this->Model_designer->getPortofolio($id_portofolio);
+
+		$bukti				= $this->cekBuktiPortofolio($data_portofolio->Bukti_portofolio);
+
+		$data				= array(
+			'bukti'				=> $bukti,
+			'portofolio'	=> $data_portofolio
+		);
+		// var_dump($data);
+
+		$this->load->helper('my_helper');
+		$this->load->view('designer/detilportofolio', $data);
+	}
+
 	public function buatPortofolio()
 	{
 		$this->load->view('designer/buatportofolio');
