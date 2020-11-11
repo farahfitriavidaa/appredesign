@@ -140,6 +140,8 @@ class Designer extends CI_Controller {
 		$detil	= $this->input->post('detil-portofolio');
 		$bukti	= '';
 
+		// TO DO: tambah kondisional jika user mengirim link dan gambar
+
 		if ( isset($_FILES['bukti-portofolio']) && $_FILES['bukti-portofolio']['error'] != 4 ) {
 			$this->load->helper('my_helper');
 			$alert[0]	= uploadFoto('bukti-portofolio', 'bukti_portofolio');
@@ -175,6 +177,32 @@ class Designer extends CI_Controller {
 		);
 		$this->session->mark_as_flash('alert');
 		redirect('Designer/lihatPortofolio');
+	}
+
+	public function editPortofolio($id_portofolio='0')
+	{
+		if ($id_portofolio=='0') {
+			return http_response_code('400');
+		}
+		
+		$id_prt_asli		= 'PRT'.str_pad($id_portofolio, 4, '0', STR_PAD_LEFT);
+		
+		$data_portofolio	= $this->Model_designer->getPortofolio($id_prt_asli);
+		
+		if (strchr($data_portofolio->Bukti_portofolio, '/'))
+			$bukti = 'link';
+		else
+			$bukti = 'image';
+
+		$data				= array(
+			'id_portofolio'	=> $id_portofolio,
+			'bukti'			=> $bukti,
+			'portofolio'	=> $data_portofolio
+		);
+		// var_dump($data);
+		// var_dump($bukti);
+		
+		$this->load->view('designer/editportofolio', $data);
 	}
 
 	public function logout()

@@ -81,7 +81,7 @@
                                                 <img class="card-img-top img-fluid crop-center" src="<?=base_url();?>Uploads/bukti_portofolio/<?=$portofolio->Bukti_portofolio?>" alt="Gambar portofolio" style="max-height:240px;">
                                             <?php endif; ?>
                                             <?php
-                                                $path = trimID('PRT', $portofolio->IDPortofolio);
+                                                $path = trimId('PRT', $portofolio->IDPortofolio);
                                             ?>
                                             <a href="<?=base_url();?>Designer/portofolio/<?=$path?>" class="hoverable">
                                                 <div class="card-body">

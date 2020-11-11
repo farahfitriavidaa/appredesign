@@ -60,16 +60,18 @@
             drDestroy.init();
         }
     })
+}
+(window.jQuery);
 
+window.onload=()=>{
     // disable input file jika input link terisi
     var input_link      = document.getElementById('link');
     var input_file      = document.querySelector('input[type=file]');
-    var is_upload       = false;
     var remove_button   = document.getElementsByClassName('dropify-clear')[0];
+    var change_button   = document.getElementById('change');
 
-    input_link.addEventListener('input', function()
-    {
-        if( $(this).val() ) {
+    input_link.addEventListener('input', function(){
+        if( input_link.value ) {
             input_file.setAttribute('disabled', 'disabled');
             input_file.parentElement.classList.add('disabled');
         }
@@ -79,23 +81,33 @@
         }
     });
 
-    input_file.addEventListener('change', function()
-    {
+    input_file.addEventListener('change', function() {
         // input_link.toggleAttribute('disabled', 'disabled');
         if( input_file.files.length != 0 ) {
             input_link.setAttribute('disabled', 'disabled');
-            is_upload = true;
-            console.log( ' disabled');
         }
     });
 
     remove_button.addEventListener('click', function () {
-        input_file.val  ='';
+        input_file.value  ='';
         input_link.removeAttribute('disabled');
-    })
+    });
+
+    var idx = 1;
+    var button_text = ['Ganti portofolio dengan file', 'Batalkan dan tetap pakai link'];
+    change_button.addEventListener('click', function () {
+        input_link.toggleAttribute('disabled');
+
+        input_file.toggleAttribute('disabled');
+        input_file.parentElement.classList.toggle('disabled');
+
+        change_button.innerText = button_text[(idx%2)];
+        console.log((idx%2));
+        idx++;
+    });
+
+    if( input_link.value ) {
+        input_file.setAttribute('disabled', 'disabled');
+        input_file.parentElement.classList.add('disabled');
+    }
 }
-(window.jQuery);
-
-
-
-

@@ -27,6 +27,11 @@ class Model_designer extends CI_Model {
         return $this->db->query("SELECT * FROM tb_portofolio WHERE IDDesigner='$id_designer'")->result();
     }
 
+    public function getPortofolio($id_portofolio)
+    {
+        return $this->db->query("SELECT * FROM tb_portofolio WHERE IDPOrtofolio='$id_portofolio'")->row();
+    }
+
     public function createPortofolio($data)
     {
         $this->db->insert('tb_portofolio', $data);
