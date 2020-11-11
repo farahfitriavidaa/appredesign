@@ -48,4 +48,10 @@ class Model_designer extends CI_Model {
 		$this->db->where('IDDesigner',$id_designer);
 		$this->db->update('tb_desainer',$data);
     }
+
+    public function updatePortofolio($id_portofolio, $data)
+    {
+        $this->db->where('IDPortofolio', $id_portofolio);
+        $this->db->update('tb_portofolio', $data);
+    }
 }

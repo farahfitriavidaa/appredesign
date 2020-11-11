@@ -140,8 +140,6 @@ class Designer extends CI_Controller {
 		$detil	= $this->input->post('detil-portofolio');
 		$bukti	= '';
 
-		// TO DO: tambah kondisional jika user mengirim link dan gambar
-
 		if ( isset($_FILES['bukti-portofolio']) && $_FILES['bukti-portofolio']['error'] != 4 ) {
 			$this->load->helper('my_helper');
 			$alert[0]	= uploadFoto('bukti-portofolio', 'bukti_portofolio');
@@ -189,25 +187,72 @@ class Designer extends CI_Controller {
 		
 		$data_portofolio	= $this->Model_designer->getPortofolio($id_prt_asli);
 		
-		if (strchr($data_portofolio->Bukti_portofolio, '/'))
-			$bukti = 'link';
-		else
-			$bukti = 'image';
+		$bukti				= $this->cekBuktiPortofolio($data_portofolio->Bukti_portofolio);
 
 		$data				= array(
 			'id_portofolio'	=> $id_portofolio,
 			'bukti'			=> $bukti,
 			'portofolio'	=> $data_portofolio
 		);
-		// var_dump($data);
-		// var_dump($bukti);
-		
+
 		$this->load->view('designer/editportofolio', $data);
+	}
+
+	public function updatePortofolio()
+	{
+		if ($this->input->method()!=='post') {
+			redirect ('Designer');
+		}
+
+		$judul	= $this->input->post('judul-portofolio');
+		$detil	= $this->input->post('detil-portofolio');
+		$bukti	= '';
+
+		if ( isset($_FILES['bukti-portofolio']) && $_FILES['bukti-portofolio']['error'] != 4 ) {
+			$this->load->helper('my_helper');
+			$alert[0]	= uploadFoto('bukti-portofolio', 'bukti_portofolio');
+
+			if ($alert[0]==='sukses')
+				$bukti	= $_FILES['bukti-portofolio']['name'];
+			else {
+				$_SESSION['alert'] = $alert;
+				$this->session->mark_as_flash('alert');
+				redirect('Designer/buatPortofolio');
+			}
+		}
+		else {
+			$bukti	= $this->input->post('link-portofolio');
+		}
+
+		$id_portofolio	= 'PRT'.str_pad($this->input->post('np'), 4, '0', STR_PAD_LEFT);
+		$data			= array(
+			'Judul'			 	=> $judul,
+			'Bukti_portofolio'	=> $bukti,
+			'Detail_portofolio'	=> $detil
+		);
+
+		$this->Model_designer->updatePortofolio($id_portofolio, $data);
+
+		$_SESSION['alert'] = array (
+			'jenis'	=> 'alert-primary',
+			'isi'	=> 'Portofolio berhasil diubah'
+		);
+		$this->session->mark_as_flash('alert');
+		redirect('Designer/lihatPortofolio');
+
 	}
 
 	public function logout()
 	{
 		session_destroy();
 		redirect('Welcome/login');
+	}
+
+	private function cekBuktiPortofolio(String $bukti)
+	{
+		if (strchr($bukti, '/'))
+			return 'link';
+		else
+			return 'image';
 	}
 }

@@ -82,7 +82,6 @@ window.onload=()=>{
     });
 
     input_file.addEventListener('change', function() {
-        // input_link.toggleAttribute('disabled', 'disabled');
         if( input_file.files.length != 0 ) {
             input_link.setAttribute('disabled', 'disabled');
         }
@@ -102,7 +101,6 @@ window.onload=()=>{
         input_file.parentElement.classList.toggle('disabled');
 
         change_button.innerText = button_text[(idx%2)];
-        console.log((idx%2));
         idx++;
     });
 
