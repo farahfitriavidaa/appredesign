@@ -22,6 +22,11 @@ class Model_designer extends CI_Model {
         return $this->db->query("SELECT * FROM tb_user JOIN tb_desainer USING(IDUser) WHERE IDDesigner='$id_designer'")->row();
     }
 
+    public function getSimpleDesigner($id_designer)
+    {
+        return $this->db->query("SELECT Nama_lengkap, Keterangan FROM tb_desainer JOIN tb_user USING(IDUser) WHERE IDDesigner='$id_designer'")->row();
+    }
+
     public function getDaftarPortofolio($id_designer)
     {
         return $this->db->query("SELECT * FROM tb_portofolio WHERE IDDesigner='$id_designer'")->result();

@@ -115,9 +115,12 @@ class Designer extends CI_Controller {
 
 	public function lihatPortofolio()
 	{
-		$daftar_portofolio	= $this->Model_designer->getDaftarPortofolio( $this->session->id_designer );
+		$id_designer		= $this->session->id_designer;
+		$daftar_portofolio	= $this->Model_designer->getDaftarPortofolio($id_designer);
+		$detil_designer		= $this->Model_designer->getSimpleDesigner($id_designer);
 
-		$data	= array(
+		$data				= array(
+			'designer'			=> $detil_designer,
 			'daftar_portofolio'	=> $daftar_portofolio
 		);
 
@@ -125,6 +128,7 @@ class Designer extends CI_Controller {
 		$this->load->view('designer/lihatportofolio', $data);
 	}
 
+	// deprecated function and view it loaded
 	public function portofolio($id_portofolio='0')
 	{
 		if ($id_portofolio=='0') {

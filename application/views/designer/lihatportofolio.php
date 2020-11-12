@@ -68,11 +68,78 @@
                             </div>
                             <!-- end page title end breadcrumb -->
 
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <span class="d-block h4 mb-3"><?=$designer->Nama_lengkap?></span>
+
+                                    <p><?=$designer->Keterangan?></p>
+                                </div>
+                            </div>
+
                             <a class="btn btn-raised btn-primary mb-4" href="<?=base_url();?>Designer/buatPortofolio">
                                 <i class="mdi mdi-plus"></i>
                                 Tambah Portofolio
                             </a>
 
+                            <?php if(empty($daftar_portofolio)): ?>
+                                <i>Belum ada portofolio</i>
+                            <?php else: ?>
+                            <div class="row">
+                                <?php foreach($daftar_portofolio as $portofolio): ?>
+                                <div class="col-lg-6 col-md-12 mb-4">
+                                    <div class="card">
+                                        <div class="card-body"  style="min-height:285px;">
+                                            <h4 class="d-block h5 mt-0 mb-4"><?=$portofolio->Judul?></h4>
+
+                                            <p><?=$portofolio->Detail_portofolio?></p>
+
+                                            <div>
+                                                <?php
+                                                    $bukti = cekPortofolio($portofolio->Bukti_portofolio);
+                                                    if ($bukti==='image'):
+                                                ?>
+                                                    <div style="height:160px;">
+                                                        <img src="<?=base_url()."uploads/bukti_portofolio/".$portofolio->Bukti_portofolio;?>" alt="bukti portofolio" class="img-thumbnail" style="height:inherit">
+                                                    </div>
+                                                <?php elseif($bukti==='link'): ?>
+                                                    <a href="<?=$portofolio->Bukti_portofolio?>" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
+                                                        <i class="mdi mdi-link"></i>
+                                                        Link portofolio
+                                                    </a>
+                                                <?php endif; ?>
+                                            </div>
+                                        </div>
+
+                                        <?php $path = trimId('PRT', $portofolio->IDPortofolio); ?>
+                                        <div class="card-footer">
+                                            <button class="btn btn-danger border-0 float-right ml-2" data-toggle="modal" data-target="#konfirmasi-hapus-<?=$path?>" style="font-size:1.25rem">
+                                                <i class="mdi mdi-delete"></i>
+                                            </button>
+                                            <a href="<?=base_url();?>Designer/editPortofolio/<?=$path?>" class="btn btn-secondary border-0 float-right" style="font-size:1.25rem">
+                                                <i class="mdi mdi-pencil"></i>
+                                            </a>
+                                        </div>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="konfirmasi-hapus-<?=$path?>" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmModal" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <p>Hapus data portofolio ini?</p>
+                                                    </div>
+                                                    <div class="modal-footer">                                                            
+                                                        <button type="button" class="btn btn-raised btn-secondary" data-dismiss="modal">Tidak</button>
+                                                        <a class="btn btn-raised btn-danger ml-2" href="<?=base_url();?>Designer/hapusPortofolio/<?=$path;?>">Iya</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php endforeach; ?>
+                            </div>
+                            <?php endif; ?>
+
+<!--
                             <div class="row">
                                 <?php foreach($daftar_portofolio as $portofolio): ?>
                                     <div class="col-lg-4 col-md-6">
@@ -103,7 +170,7 @@
                                                     <div class="dropdown-divider"></div>
                                                     <button class="dropdown-item hoverable" data-toggle="modal" data-target="#konfirmasi-hapus-<?=$path?>">Hapus</button>
                                                 </div>
-                                                <!-- Modal -->
+                                                
                                                 <div class="modal fade" id="konfirmasi-hapus-<?=$path?>" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmModal" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
@@ -120,7 +187,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                <?php endforeach; ?>
+                                <?php endforeach; ?> -->
                             </div> <!-- end of row --->
 
                         </div><!-- container -->
