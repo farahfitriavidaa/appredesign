@@ -59,4 +59,10 @@ class Model_designer extends CI_Model {
         $this->db->where('IDPortofolio', $id_portofolio);
         $this->db->update('tb_portofolio', $data);
     }
+
+    public function deletePortofolio($id_portofolio)
+    {
+        $this->db->where('IDPortofolio', $id_portofolio);
+        return $this->db->delete('tb_portofolio');
+    }
 }

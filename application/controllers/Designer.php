@@ -267,6 +267,25 @@ class Designer extends CI_Controller {
 
 	}
 
+	public function hapusPortofolio($id_portofolio='0')
+	{
+		if($id_portofolio==='0'){
+			return http_response_code('400');
+		}
+
+		$id_prt_asli	= 'PRT'.str_pad($id_portofolio, 4, '0', STR_PAD_LEFT);
+
+		$this->Model_designer->deletePortofolio($id_prt_asli);
+
+		$_SESSION['alert'] = array (
+			'jenis'	=> 'alert-primary',
+			'isi'	=> 'Portofolio berhasil dihapus'
+		);
+		$this->session->mark_as_flash('alert');
+		redirect('Designer/lihatPortofolio');
+
+	}
+
 	public function logout()
 	{
 		session_destroy();
