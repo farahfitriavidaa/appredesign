@@ -81,7 +81,7 @@
                                 <div class="col-md-12 col-xl-12">
                                     <div class="card m-b-30">
                                         <div class="card-body">
-                                            <form action="<?=base_url();?>Umkm/tambahRequest" method="POST" class="mb-0" enctype="multipart/form-data">
+                                            <form action="<?=base_url();?>Umkm/tambahRequest" method="POST" class="mb-0" enctype="multipart/form-data" autocomplete="off">
                                                 <div class="form-group">
                                                     <input type="text" name="nama-produk" class="form-control" placeholder="Nama Produk" required>
                                                 </div>

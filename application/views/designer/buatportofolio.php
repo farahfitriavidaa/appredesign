@@ -81,7 +81,7 @@
                                 <div class="col-md-12 col-xl-12">
                                     <div class="card m-b-30">
                                         <div class="card-body">
-                                            <form action="<?=base_url();?>Designer/tambahPortofolio" method="POST" class="mb-0" enctype="multipart/form-data">
+                                            <form action="<?=base_url();?>Designer/tambahPortofolio" method="POST" class="mb-0" enctype="multipart/form-data" autocomplete="off">
                                                 <div class="form-group">
                                                     <label for="judul" class="bmd-label-floating">Judul Protofolio</label>
                                                     <input type="text" name="judul-portofolio" class="form-control" id="judul" required>

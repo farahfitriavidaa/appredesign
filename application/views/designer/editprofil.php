@@ -81,7 +81,7 @@
                                 <div class="col-md-12 col-xl-12">
                                     <div class="card m-b-30">
                                         <div class="card-body">
-                                            <form action="<?=base_url();?>Designer/updateProfil" method="POST" enctype="multipart/form-data">
+                                            <form action="<?=base_url();?>Designer/updateProfil" method="POST" enctype="multipart/form-data" autocomplete="off">
                                                 <div class="form-group">
                                                     <label for="nama-lengkap">Nama Anda</label>
                                                     <input type="text" name="nama-lengkap" class="form-control" id="nama-lengkap" placeholder="Nama Anda" value="<?=$designer->Nama_lengkap?>">

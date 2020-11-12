@@ -81,7 +81,7 @@
                                 <div class="col-md-12 col-xl-12">
                                     <div class="card m-b-30">
                                         <div class="card-body">
-                                            <form action="<?=base_url();?>Umkm/updateRequest" method="POST" enctype="multipart/form-data">
+                                            <form action="<?=base_url();?>Umkm/updateRequest" method="POST" enctype="multipart/form-data" autocomplete="off">
                                                 <input type="hidden" name="np" value="<?php echo trimId('PS', $detil_request->IDPesan)?>">
                                                 <div class="form-group">
                                                     <input type="text" name="nama-produk" class="form-control" placeholder="Nama Produk" value="<?=$data_produk->Nama_produk?>" required>
