@@ -113,21 +113,23 @@
 
                                                 <div class="form-group bmd-form-group">
                                                     <span class="text-secondary">Pilih designer</span>
-                                                    <div class="form-check">
+                                                    <div class="form-check mb-2">
                                                         <input class="form-check-input" type="radio" name="desainer" id="tidak-ada" value="0" checked>
-                                                        <label class="form-check-label" for="tidak-ada">
+                                                        <label class="form-check-label text-dark" for="tidak-ada">
                                                             Dipilihkan pengelola saja
                                                         </label>
                                                     </div>
                                                     <?php
                                                         $no = 0;
                                                         foreach ($desainers as $desainer):
+                                                            $path   = trimId('DG', $desainer->IDDesigner);
                                                     ?>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="radio" name="desainer" id="<?='desainer-'.$no?>" value="<?=$desainer->IDDesigner?>">
-                                                            <label class="form-check-label" for="<?='desainer-'.$no?>">
+                                                        <div class="form-check mb-2">
+                                                            <input class="form-check-input" type="radio" name="desainer" id="<?='desainer-'.$no?>" value="<?=$path?>">
+                                                            <label class="form-check-label text-dark" for="<?='desainer-'.$no?>">
                                                                 <?=$desainer->Nama_lengkap?>
                                                             </label>
+                                                            <a href="<?=base_url();?>Umkm/lihatPortofolio/<?=$path?>" class="ml-2 text-muted">(Lihat Portofolio)</a>
                                                         </div>
                                                     <?php
                                                         $no++;

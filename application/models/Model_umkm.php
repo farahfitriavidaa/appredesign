@@ -66,10 +66,15 @@ class Model_umkm extends CI_Model {
 		return $this->db->query("SELECT * FROM tb_umkm WHERE IDUMKM='$id_umkm'")->row();
 	}
 
-	// public function getDesainer($id_designer)
-	// {
-	// 	return $this->db->query("SELECT * FROM tb_desainer WHERE IDDesigner='$id_designer'")->row();
-	// }
+	public function getDaftarDesainer()
+	{
+		return $this->db->query("SELECT IDDesigner, Nama_lengkap FROM tb_desainer JOIN tb_user USING(IDUser)")->result();
+	}
+
+	public function getDesainer($id_designer)
+	{
+		return $this->db->query("SELECT Nama_lengkap, Keterangan FROM tb_desainer JOIN tb_user USING(IDUser) WHERE IDDesigner='$id_designer'")->row();
+	}
 
 	public function getNamaDesainer($id_desainer)
 	{

@@ -36,16 +36,14 @@ class Umkm extends CI_Controller {
 
 	public function buatRequest()
 	{
-		$this->load->model('Model_admin');
-		$desainer	= $this->Model_admin->getDesigner();
+		$desainer	= $this->Model_umkm->getDaftarDesainer();
 
 		$data		= array(
 			'desainers' => $desainer
 		);
 
+		$this->load->helper('my_helper');
 		$this->load->view('umkm/buatrequest', $data);
-
-		// var_dump($data);
 	}
 
 	public function lihatRequest()
@@ -121,13 +119,14 @@ class Umkm extends CI_Controller {
 
 				$id_pesan		= $this->Model_created->idPesan();
 				$id_designer	= $this->input->post('desainer');
+				$id_designer	= $id_designer==='0'?NULL:'DG'.str_pad($id_designer, 4, '0', STR_PAD_LEFT);
 				$status			= '0';
 				$tanggal_order	= date('Y-m-d');
 
 				$data_pemesanan	= array(
 					'IDPesan'			=> $id_pesan,
 					'IDDataUMKM'		=> $id_data_umkm,
-					'IDDesigner'		=> $id_designer==='0'?NULL:$id_designer,
+					'IDDesigner'		=> $id_designer,
 					'Status'			=> $status,
 					'Keterangan_design'	=> $keterangan_desain,
 					'Tgl_order'			=> $tanggal_order
@@ -312,6 +311,28 @@ class Umkm extends CI_Controller {
 		} else {
 			http_response_code('400');
 		}
+	}
+
+	public function lihatPortofolio($id_designer='0')
+	{
+		if($id_designer==='0') {
+			redirect('Umkm');
+		}
+
+		$id_designer_asli	= 'DG'.str_pad($id_designer, 4, '0', STR_PAD_LEFT);
+
+		$this->load->model('Model_designer');
+		$daftar_portofolio	= $this->Model_designer->getDaftarPortofolio($id_designer_asli);
+		$daftar_designer	= $this->Model_umkm->getDaftarDesainer();
+		$data_designer		= $this->Model_umkm->getDesainer($id_designer_asli);
+
+		$data				= array(
+			'data_designer'		=> $data_designer,
+			'daftar_portofolio'	=> $daftar_portofolio,
+			'daftar_designer'	=> $daftar_designer
+		);
+
+		var_dump($data);
 	}
 
 	public function lihatProfil()
