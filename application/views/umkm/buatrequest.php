@@ -129,7 +129,7 @@
                                                             <label class="form-check-label text-dark" for="<?='desainer-'.$no?>">
                                                                 <?=$desainer->Nama_lengkap?>
                                                             </label>
-                                                            <a href="<?=base_url();?>Umkm/lihatPortofolio/<?=$path?>" class="ml-2 text-muted">(Lihat Portofolio)</a>
+                                                            <a href="<?=base_url();?>Umkm/lihatPortofolio/<?=$path?>" target="_blank" class="ml-2 text-muted" noopener noreferer>(Lihat Portofolio)</a>
                                                         </div>
                                                     <?php
                                                         $no++;

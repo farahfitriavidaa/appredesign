@@ -327,12 +327,41 @@ class Umkm extends CI_Controller {
 		$data_designer		= $this->Model_umkm->getDesainer($id_designer_asli);
 
 		$data				= array(
-			'data_designer'		=> $data_designer,
+			'designer'			=> $data_designer,
 			'daftar_portofolio'	=> $daftar_portofolio,
 			'daftar_designer'	=> $daftar_designer
 		);
 
-		var_dump($data);
+		/*
+		$nama_produk		= $this->input->post('nama-produk');
+		$keterangan_produk	= $this->input->post('keterangan-produk');
+		$keterangan_desain	= $this->input->post('keterangan-desain');
+		$foto_produk		= '';
+		$logo_produk		= '';
+		$kemasan_produk		= '';
+		$temp_input			= array();
+
+		if( isset($_FILES['foto-produk']) )
+			$foto_produk	= $_FILES['foto-produk'];
+		if( isset($_FILES['logo-produk']) )
+			$logo_produk	= $_FILES['logo-produk'];
+		if( isset($_FILES['kemasan-produk']) )
+			$kemasan_produk	= $_FILES['kemasan-produk'];
+
+		$temp_input			= array(
+			'nama-produk'			=> $nama_produk,
+			'keterangan-produk'		=> $keterangan_produk,
+			'keterangan-design'		=> $keterangan_desain,
+			'foto-produk'			=> $foto_produk,
+			'logo-produk'			=> $logo_produk,
+			'kemasan-produk'		=> $kemasan_produk,
+		);
+		*/
+
+		// var_dump($data);
+
+		$this->load->helper('my_helper');
+		$this->load->view('umkm/lihatportofolio', $data);
 	}
 
 	public function lihatProfil()

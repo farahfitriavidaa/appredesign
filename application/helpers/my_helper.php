@@ -105,3 +105,19 @@ if ( ! function_exists('cetakWaktu')) {
 		return $waktu;
 	}
 }
+
+if ( ! function_exists('cekPortofolio')) {
+	/**
+	 * Function untuk mendeteksi jenis portofolio (link web/image/file)
+	 * 
+	 * @param string
+	 * @return string
+	 */
+	function cekPortofolio(String $bukti)
+	{
+		if (strchr($bukti, '/'))
+			return 'link';
+		else
+			return 'image';
+	}
+}
