@@ -232,7 +232,7 @@ class Model_admin extends CI_Model {
    */
   public function getAllIdPesan($id_pengelola)
 	{
-		return $this->db->query("SELECT IDPesan FROM tb_pemesanan JOIN tb_pengelola USING(IDPengelola) WHERE IDPengelola='$id_pengelola'")->result_array();
+		return $this->db->query("SELECT IDPesan FROM tb_pemesanan WHERE IDPengelola='$id_pengelola'")->result_array();
 	}
 
   /**
@@ -250,7 +250,6 @@ class Model_admin extends CI_Model {
     $this->db->order_by("diskum1.Tanggal_waktu", "DESC");
     $result	= $this->db->get();
 
-    //kurang return
     return $result->result();
   }
 }
