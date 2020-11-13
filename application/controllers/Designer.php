@@ -113,6 +113,57 @@ class Designer extends CI_Controller {
 		redirect('Designer/lihatProfil');
 	}
 
+	public function editPwd()
+	{
+		if ($this->input->method()!=='post') {
+			return $this->load->view('designer/editpassword');
+		}
+
+		$this->load->library('form_validation');
+		$this->load->language('form_validation','indonesian');
+
+		$this->form_validation->set_rules('password-lama', 'Password Lama', 'htmlspecialchars|required');
+		$this->form_validation->set_rules('password-baru', 'Password Baru', 'htmlspecialchars|required|min_length[5]|differs[password-lama]');
+		$this->form_validation->set_rules('konfirmasi', 'Konfirmasi Password Baru', 'htmlspecialchars|required|min_length[5]|matches[password-baru]');
+
+		$this->form_validation->set_message('required', $this->lang->line('form_validation_required'));
+		$this->form_validation->set_message('min_length', $this->lang->line('form_validation_min_length'));
+		$this->form_validation->set_message('matches', $this->lang->line('form_validation_matches'));
+		$this->form_validation->set_message('differs', $this->lang->line('form_validation_differs'));
+
+		if ($this->form_validation->run() == FALSE)
+		{
+			$this->load->view('designer/editpassword');
+		}
+		else
+		{
+			$user			= $this->Model_designer->getUserData( $this->session->user );
+			$id_user		= $user->IDUser;
+			$db_pwd_lama	= $user->Password;
+			$input_pwd_lama	= md5($this->input->post('password-lama'));
+
+			if ($input_pwd_lama === $db_pwd_lama) {
+
+				$password = md5($this->input->post('password-baru'));
+
+				$this->Model_designer->updatePassword($id_user, $password);
+
+				$_SESSION['alert'] = 'Password berhasil diubah.';
+				$this->session->mark_as_flash('alert');
+				redirect('designer/lihatProfil');
+			}
+			else {
+				$data		= array(
+					'pesan_error'	=> 'Password Lama tidak tepat'
+				);
+
+				$this->load->view('designer/editpassword', $data);
+			}
+
+		}
+
+	}
+
 	public function lihatPortofolio()
 	{
 		$id_designer		= $this->session->id_designer;

@@ -85,7 +85,9 @@
 
                                             <strong class="d-block">Email</strong>
                                             <p><?=$designer->Email?></p>
-                                            <!-- TO DO: buat edit password -->
+                                            
+                                            <strong class="d-block">Password</strong>
+                                            <p><a href="<?=base_url();?>designer/editPwd">(Ubah password)</a></p>
 
                                             <strong class="d-block">No. Telepon</strong>
                                             <p><?=$designer->No_telp?></p>

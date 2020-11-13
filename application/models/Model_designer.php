@@ -60,6 +60,13 @@ class Model_designer extends CI_Model {
         $this->db->update('tb_portofolio', $data);
     }
 
+    public function updatePassword($id_user, $password)
+	{
+		$this->db->set('Password', $password);
+		$this->db->where('IDUser',$id_user);
+		$this->db->update('tb_user');
+	}
+
     public function deletePortofolio($id_portofolio)
     {
         $this->db->where('IDPortofolio', $id_portofolio);
