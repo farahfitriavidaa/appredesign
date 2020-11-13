@@ -337,6 +337,76 @@ class Designer extends CI_Controller {
 
 	}
 
+	public function lihatDiskusi($filter='belum-selesai', $page=1)
+	{
+		if ($filter==='belum-selesai') {
+			$status = ['0', '1', '2', '3' ,'4', '5', '6'];
+		}
+		elseif ($filter==='semua') {
+			$status = ['0', '1', '2', '3' ,'4', '5', '6', '7'];
+		}
+		elseif ($filter==='telah-selesai') {
+			$status = ['7'];
+		}
+		else {
+			redirect('Designer/lihatDiskusi');
+		}
+
+		// Ambil semua IDPesan berdasarkan IDPengelola di tb_pemesanan
+		$id_designer	= $this->session->id_designer;
+		$id_pesan		= $this->Model_designer->getAllIdPesan($id_designer);
+
+		// Buat array $id_pesan menjadi array numeric dengan bantuan function flattenArray() dari my_helper
+		$this->load->helper('my_helper');
+		$id_pesan		= flattenArray($id_pesan);
+
+		$this->load->model('Model_diskusi');
+		$jumlah_dispro	= $this->Model_diskusi->getJumlahDispro($id_pesan, $status);
+		$jumlah_dispro	= $jumlah_dispro->jumlah;
+		// Algoritma pembagian halaman (satu halaman berisi maks. 50 daftar diskum)
+		$maks 			= 50;
+		if ($page > ($jumlah_dispro/$maks)+1 || $page < 0) {
+			redirect('Designer/lihatDiskum');
+		}
+
+		$hal_selanjutnya	= $page < ($jumlah_dispro/$maks);
+		$hal_sebelumnya		= $page>1;
+
+		$limit			= $page*$maks;
+		$baris			= ($page-1)*$maks;
+
+		// Ambil daftar diskusi dari tb_diskusiproduk berdasarkan IDPesan tadi
+		$daftar_diskusi = $this->Model_diskusi->getDaftarDispro($id_pesan, $status, $baris, $limit);
+
+		// Cek jika $daftar_diskusi kosong beri status has_dispro=false
+		// jika ada $daftar_diskusi maka beri status has_dispro=true dan masukan ke $data
+		if( empty($daftar_diskusi) && $filter!=='telah-selesai') {
+			$data = array(
+				'has_dispro'		=> false,
+				'filter'			=> $filter,
+				'page'				=> $page,
+				'hal_selanjutnya'	=> $hal_selanjutnya,
+				'hal_sebelumnya'	=> $hal_sebelumnya
+			);
+		}
+		else {
+			$data = array(
+				'has_dispro'		=> true,
+				'daftar_diskusi'	=> $daftar_diskusi,
+				'filter'			=> $filter,
+				'page'				=> $page,
+				'hal_selanjutnya'	=> $hal_selanjutnya,
+				'hal_sebelumnya'	=> $hal_sebelumnya
+			);
+		}
+		// var_dump($data); // lihat isi array $data
+		// var_dump($jumlah_dispro);
+		// var_dump($status);
+		// var_dump($limit);
+
+		$this->load->view('designer/lihatdiskusi', $data);
+	}
+
 	public function logout()
 	{
 		session_destroy();

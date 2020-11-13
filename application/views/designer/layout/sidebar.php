@@ -13,6 +13,13 @@
             </li>
 
             <li>
+                <a href="<?=base_url()?>Designer/lihatDiskusi" class="waves-effect">
+                    <i class="mdi mdi-comment-text-outline"></i>
+                    <span> Lihat Diskusi </span>
+                </a>
+            </li>
+
+            <li>
                 <a href="<?=base_url()?>Designer/lihatProfil" class="waves-effect">
                     <i class="mdi mdi-account"></i>
                     <span> Profil Saya </span>

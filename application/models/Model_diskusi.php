@@ -34,12 +34,43 @@ class Model_diskusi extends CI_Model {
 		return $result->result();
 	}
 
+	public function getDaftarDispro($id_pesan, $status, $baris, $limit)
+	{
+		$this->db->select("dispro1.*, umkmdata.Nama_produk, pemesanan.Status");
+		$this->db->from("tb_diskusiproduksi AS dispro1");
+		$this->db->join("tb_pemesanan AS pemesanan", "IDPesan");
+		$this->db->join("tb_umkm_data AS umkmdata", "IDDataUMKM");
+		$this->db->join("(SELECT IDPesan, MAX(Tanggal_waktu) AS Tanggal_terupdate FROM tb_diskusiproduksi GROUP BY IDPesan) AS dispro2",
+			"dispro1.IDPesan = dispro2.IDPesan AND dispro1.Tanggal_waktu = dispro2.Tanggal_terupdate");
+		$this->db->where_in("dispro1.IDPesan", $id_pesan);
+		$this->db->where_in("pemesanan.Status", $status);
+		$this->db->order_by("dispro1.Tanggal_waktu", "DESC");
+		$this->db->limit($limit, $baris);
+		$result	= $this->db->get();
+
+		return $result->result();
+	}
+
 	public function getJumlahDiskum($id_pesan, $status)
 	{
 		$this->db->select("count(diskum1.IDDiskum) AS jumlah");
 		$this->db->from("tb_diskusiumkm AS diskum1");
 		$this->db->join("tb_pemesanan AS pemesanan", "IDPesan");
 		$this->db->join("(SELECT IDPesan, MAX(Tanggal_waktu) AS Tanggal_terupdate FROM tb_diskusiumkm GROUP BY IDPesan) AS diskum2",
+			"diskum1.IDPesan = diskum2.IDPesan AND diskum1.Tanggal_waktu = diskum2.Tanggal_terupdate");
+		$this->db->where_in("diskum1.IDPesan", $id_pesan);
+		$this->db->where_in("pemesanan.Status", $status);
+		$result	= $this->db->get();
+
+		return $result->row();
+	}
+
+	public function getJumlahDispro($id_pesan, $status)
+	{
+		$this->db->select("count(diskum1.IDDispro) AS jumlah");
+		$this->db->from("tb_diskusiproduksi AS diskum1");
+		$this->db->join("tb_pemesanan AS pemesanan", "IDPesan");
+		$this->db->join("(SELECT IDPesan, MAX(Tanggal_waktu) AS Tanggal_terupdate FROM tb_diskusiproduksi GROUP BY IDPesan) AS diskum2",
 			"diskum1.IDPesan = diskum2.IDPesan AND diskum1.Tanggal_waktu = diskum2.Tanggal_terupdate");
 		$this->db->where_in("diskum1.IDPesan", $id_pesan);
 		$this->db->where_in("pemesanan.Status", $status);
@@ -64,16 +95,6 @@ class Model_diskusi extends CI_Model {
 		return $result->result();
 	}
 
-	public function createDiskum($data)
-	{
-		return $this->db->insert('tb_diskusiumkm', $data);
-	}
-
-	public function createDispro($data)
-	{
-		return $this->db->insert('tb_diskusiproduksi', $data);
-	}
-
 	public function getDispro($id_pesan)
 	{
 
@@ -89,34 +110,13 @@ class Model_diskusi extends CI_Model {
 		return $result->result();
 	}
 
-	public function getDaftarDispro($id_pesan, $status, $baris, $limit)
+	public function createDiskum($data)
 	{
-		$this->db->select("diskum1.*, umkmdata.Nama_produk, pemesanan.Status");
-		$this->db->from("tb_diskusiproduksi AS diskum1");
-		$this->db->join("tb_pemesanan AS pemesanan", "IDPesan");
-		$this->db->join("tb_umkm_data AS umkmdata", "IDDataUMKM");
-		$this->db->join("(SELECT IDPesan, MAX(Tanggal_waktu) AS Tanggal_terupdate FROM tb_diskusiproduksi GROUP BY IDPesan) AS diskum2",
-			"diskum1.IDPesan = diskum2.IDPesan AND diskum1.Tanggal_waktu = diskum2.Tanggal_terupdate");
-		$this->db->where_in("diskum1.IDPesan", $id_pesan);
-		$this->db->where_in("pemesanan.Status", $status);
-		$this->db->order_by("diskum1.Tanggal_waktu", "DESC");
-		$this->db->limit($limit, $baris);
-		$result	= $this->db->get();
-
-		return $result->result();
+		return $this->db->insert('tb_diskusiumkm', $data);
 	}
 
-	public function getJumlahDispro($id_pesan, $status)
+	public function createDispro($data)
 	{
-		$this->db->select("count(diskum1.IDDispro) AS jumlah");
-		$this->db->from("tb_diskusiproduksi AS diskum1");
-		$this->db->join("tb_pemesanan AS pemesanan", "IDPesan");
-		$this->db->join("(SELECT IDPesan, MAX(Tanggal_waktu) AS Tanggal_terupdate FROM tb_diskusiproduksi GROUP BY IDPesan) AS diskum2",
-			"diskum1.IDPesan = diskum2.IDPesan AND diskum1.Tanggal_waktu = diskum2.Tanggal_terupdate");
-		$this->db->where_in("diskum1.IDPesan", $id_pesan);
-		$this->db->where_in("pemesanan.Status", $status);
-		$result	= $this->db->get();
-
-		return $result->row();
+		return $this->db->insert('tb_diskusiproduksi', $data);
 	}
 }
