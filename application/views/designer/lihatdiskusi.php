@@ -76,7 +76,7 @@
                                     </div>
                                 </div>
                             <?php foreach($daftar_diskusi as $diskusi): ?>
-                                <a href="<?=base_url();?>Designer/diskusi/<?=$diskusi->IDPesan?>" target="_blank" class="list-diskusi mb-2" noopener noreferer>
+                                <a href="<?=base_url();?>Designer/diskusi/<?=trimId('PS',$diskusi->IDPesan);?>" target="_blank" class="list-diskusi mb-2" noopener noreferer>
                                     <div class="card">
                                         <div class="card-body">
                                             <strong><?=$diskusi->Nama_produk?></strong>

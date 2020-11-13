@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" style="scroll-behavior:smooth">
 
-    <?php $this->load->view('admin/layout/Head'); ?>
+    <?php $this->load->view('designer/layout/Head'); ?>
 
     <body class="fixed-left">
 
@@ -21,7 +21,7 @@
                     </div>
                 </div>
 
-                <?php $this->load->view('admin/layout/Sidebar') ?>
+                <?php $this->load->view('designer/layout/Sidebar') ?>
                 <!-- end sidebarinner -->
             </div>
             <!-- Left Sidebar End -->
@@ -33,7 +33,7 @@
                 <div class="content">
 
                     <!-- Top Bar Start -->
-                    <?php $this->load->view('admin/layout/Navbar') ?>
+                    <?php $this->load->view('designer/layout/Navbar') ?>
                     <!-- Top Bar End -->
 
                     <div class="page-content-wrapper ">
@@ -225,7 +225,7 @@
                                 <div class="col-12">
                                     <div class="mb-4">
                                         <div class="mb-4">
-                                            <strong>Diskusi dengan UMKM</strong>
+                                            <strong>Diskusi dengan Pengelola</strong>
                                         </div>
                                         <div class="px-2" style="overflow-y: auto; max-height: 1920px">
                                         <?php foreach($daftar_komentar as $diskusi): ?>
@@ -249,9 +249,9 @@
                                                     </div>
                                                 </div>
                                                 <div class="card-body">
-                                                    <?php if( ! is_null($diskusi->Foto_diskum)): ?>
-                                                        <a href="<?=base_url();?>uploads/foto_diskum/<?=$diskusi->Foto_diskum?>" class="btn btn-secondary" download>Download gambar</a>
-                                                        <img src="<?=base_url();?>uploads/foto_diskum/<?=$diskusi->Foto_diskum?>" alt="foto untuk diskusi" class="img-thumbnail d-block" style="max-width: 240px; max-height: 480px;">
+                                                    <?php if( ! is_null($diskusi->Foto_dispro)): ?>
+                                                        <a href="<?=base_url();?>uploads/foto_dispro/<?=$diskusi->Foto_dispro?>" class="btn btn-secondary" download>Download gambar</a>
+                                                        <img src="<?=base_url();?>uploads/foto_dispro/<?=$diskusi->Foto_dispro?>" alt="foto untuk diskusi" class="img-thumbnail d-block" style="max-width: 240px; max-height: 480px;">
                                                     <?php endif; ?>
 
                                                     <p class="mt-2 mb-2"><?=$diskusi->Komentar?></p>
@@ -273,7 +273,7 @@
                                                 <img src="" alt="foto yang di upload" class="img-thumbnail" id="foto-upload" style="max-height: 320px">
                                             </div>
 
-                                            <form action="<?=base_url();?>Admin/tambahKomentar" method="post" enctype="multipart/form-data" class="mb-0" autocomplete="off">
+                                            <form action="<?=base_url();?>Designer/tambahKomentar" method="post" enctype="multipart/form-data" class="mb-0" autocomplete="off">
                                                 <div style="display: flex; flex-flow: row nowrap; padding: 8px 16px;">
                                                     <div class="form-group" style="display:inline; padding:0; margin: 0; flex: auto">
                                                         <?php
@@ -351,4 +351,4 @@
             }
         </script>
 
-        <?php $this->load->view('admin/layout/Footer') ?>
+        <?php $this->load->view('designer/layout/Footer') ?>

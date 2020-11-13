@@ -399,12 +399,46 @@ class Designer extends CI_Controller {
 				'hal_sebelumnya'	=> $hal_sebelumnya
 			);
 		}
-		// var_dump($data); // lihat isi array $data
-		// var_dump($jumlah_dispro);
-		// var_dump($status);
-		// var_dump($limit);
 
 		$this->load->view('designer/lihatdiskusi', $data);
+	}
+
+	public function diskusi($id_pesan='0')
+	{
+		if ($id_pesan==='0') {
+			return http_response_code('400');
+		}
+
+		$id_pesan 			='PS'.str_pad($id_pesan, 4, '0', STR_PAD_LEFT);
+		// Dapatkan detil pemesanan/request (gabungan tabel tb_pemesanan dan tb_umkm_data)
+		$this->load->model('Model_diskusi');
+		$detil_pemesanan	= $this->Model_diskusi->getPemesanan($id_pesan);
+
+		// Cek designer
+		// Jika designer ada, ambil nama designer. Jika tidak, beri keterangan 'Ditentukan Pengelola'
+		$data_designer		= array();
+		if( is_null($detil_pemesanan->IDDesigner) ){
+			$data_designer['designer']	= 'Ditentukan Pengelola';
+			$data_designer['ada']		= FALSE;
+		}
+		else{
+			$designer 					= $this->Model_diskusi->getNamaDesainer($detil_pemesanan->IDDesigner);
+			$data_designer['designer']	= $designer->Nama_lengkap;
+			$data_designer['ada']		= TRUE;
+		}
+
+		// Ambil data diskusi(komentar-komentar) berdasarkan IDPesan
+		$daftar_komentar = $this->Model_diskusi->getDispro($id_pesan);
+
+		$data = array(
+			'pemesanan'			=> $detil_pemesanan,
+			'designer'			=> $data_designer,
+			'daftar_komentar'	=> $daftar_komentar
+		);
+		// var_dump($data); // untuk liat isi array $data
+
+		$this->load->helper('my_helper');
+		$this->load->view('designer/diskusi', $data);
 	}
 
 	public function logout()
