@@ -86,7 +86,9 @@
 
                                             <strong class="d-block">Email</strong>
                                             <p><?=$user->Email?></p>
-                                            <!-- TO DO: buat edit password -->
+                                            
+                                            <strong class="d-block">Password</strong>
+                                            <p><a href="<?=base_url();?>Umkm/editPwd">(Ubah password)</a></p>
 
                                             <strong class="d-block">Kontak UMKM</strong>
                                             <p><?=$umkm->No_telp?></p>

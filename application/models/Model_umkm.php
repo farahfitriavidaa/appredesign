@@ -80,6 +80,11 @@ class Model_umkm extends CI_Model {
 	{
 		return $this->db->query("SELECT Nama_lengkap FROM tb_user JOIN tb_desainer USING(IDUser) WHERE IDDesigner='$id_desainer'")->row();
 	}
+
+	public function getPassword($id_user)
+	{
+		return $this->db->query("SELECT Password FROM tb_user WHERE IDUser='$id_user'")->row();
+	}
 	
 	public function createUmkmData($data){
 		$this->db->insert('tb_umkm_data', $data);
@@ -112,6 +117,13 @@ class Model_umkm extends CI_Model {
 	{
 		$this->db->where('IDUMKM',$id_umkm);
 		$this->db->update('tb_umkm',$data);
+	}
+
+	public function updatePassword($id_user, $password)
+	{
+		$this->db->set('Password', $password);
+		$this->db->where('IDUser',$id_user);
+		$this->db->update('tb_user');
 	}
 
 	public function deleteRequest($id_pesan)
