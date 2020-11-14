@@ -409,6 +409,8 @@ class Designer extends CI_Controller {
 			return http_response_code('400');
 		}
 
+		// TO DO: Tambah prevensi jika ada IDPesan yang tidak ada hubungannya dengan designer. (Update juga milik admin)
+
 		$id_pesan 			='PS'.str_pad($id_pesan, 4, '0', STR_PAD_LEFT);
 		// Dapatkan detil pemesanan/request (gabungan tabel tb_pemesanan dan tb_umkm_data)
 		$this->load->model('Model_diskusi');
@@ -439,6 +441,64 @@ class Designer extends CI_Controller {
 
 		$this->load->helper('my_helper');
 		$this->load->view('designer/diskusi', $data);
+	}
+
+	public function tambahKomentar()
+	{
+		if($this->input->method() == 'post') {
+
+			// Kembalikan IDPesan sesuai format, 1 -> PS0001
+			$id_pesan		= $this->input->post('np');
+			$id_pesan_asli	= 'PS'.str_pad($id_pesan, 4, '0', STR_PAD_LEFT);
+
+			$data			= array();
+			$alert			= '';
+
+			// Proses upload foto dengan bantuan function uploadFoto() dari my_helper
+			// Jika tidak ada foto yang di-upload maka lewati bagian if() ini
+			$this->load->helper('my_helper');
+			if( $_FILES['foto-komentar']['error'] !== 4 ){
+				$alert	= uploadFoto('foto-komentar', 'foto_diskum');
+				$data	+= array(
+					'Foto_dispro' => $_FILES['foto-komentar']['name']
+				);
+			}
+
+			// Cek apakah upload foto berhasil
+			// Jika berhasil tambahkan ke database, jika tidak berhasil lempar peringatan ke halaman diskusi
+			if($alert==='sukses' || $alert===''){
+				$this->load->model('Model_created');
+				$id_dispro		= $this->Model_created->idDispro();
+
+				$komentar		= $this->input->post('komentar');
+				$tanggal_waktu	= date('Y-m-d h:i:s');
+				// $now			= new DateTime('now',new DateTimeZone('Asia/Jakarta'));
+				// $tanggal_waktu	= $now->format('Y-m-d H:i:s');
+
+				// IDUMKM dikosongkan karena pengirim komentar adalah Pengelola
+				$data 			+= array(
+					'IDDispro'		=> $id_dispro,
+					'IDDesigner'	=> $this->session->id_designer,
+					'IDPesan'		=> $id_pesan_asli,
+					'Komentar'		=> $komentar,
+					'Tanggal_waktu'	=> $tanggal_waktu
+				);
+				// var_dump($data);
+
+				$this->load->model('Model_diskusi');
+				$this->Model_diskusi->createDispro($data);
+
+				redirect('Designer/diskusi/'.$id_pesan);
+
+			}
+			else{
+				$_SESSION['alert'] = $alert;
+				$this->session->mark_as_flash('alert');
+				redirect('Designer/diskusi/'.$id_pesan);
+			}
+		}
+		else
+			redirect('Designer');
 	}
 
 	public function logout()
