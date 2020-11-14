@@ -53,31 +53,31 @@
                             </div>
                             <!-- end page title end breadcrumb -->
 
+                            <div class="row" style="justify-content: flex-end;">
+                                <div>
+                                    <a class="btn btn-secondary <?=$filter==="semua"?"":"border-0"?>" href="<?=base_url();?>Admin/lihatDispro/semua">
+                                        Semua diskusi
+                                    </a>
+                                </div>
+                                <div>
+                                    <a class="btn btn-secondary <?=$filter==="belum-selesai"?"":"border-0"?>" href="<?=base_url();?>Admin/lihatDispro/">
+                                        Belum selesai
+                                    </a>
+                                </div>
+                                <div>
+                                    <a class="btn btn-secondary <?=$filter==="telah-selesai"?"":"border-0"?>" href="<?=base_url();?>Admin/lihatDispro/telah-selesai">
+                                        Telah selesai
+                                    </a>
+                                </div>
+                            </div>
+
                             <?php if(!$has_diskum): ?>
-                                <p>Belum ada diskusi. Anda akan melihat daftar diskusi di sini jika Anda memberi komentar mengenai order <i>redesign</i> produk UMKM.</p>
+                                <p class="mt-4">Belum ada diskusi. Anda akan melihat daftar diskusi di sini jika Anda memberi komentar mengenai order <i>redesign</i> produk UMKM.</p>
                                 <a class="btn btn-raised btn-primary" href="<?=base_url();?>Admin/kelolaPemesanan">
                                     Lihat Pemesanan dan Beri Komentar
                                 </a>
                             <?php else: ?>
 
-                            <div class="mb-4">
-                                <div class="row" style="justify-content: flex-end;">
-                                    <div>
-                                        <a class="btn btn-secondary <?=$filter==="semua"?"":"border-0"?>" href="<?=base_url();?>Admin/lihatDispro/semua">
-                                            Semua diskusi
-                                        </a>
-                                    </div>
-                                    <div>
-                                        <a class="btn btn-secondary <?=$filter==="belum-selesai"?"":"border-0"?>" href="<?=base_url();?>Admin/lihatDispro/">
-                                            Belum selesai
-                                        </a>
-                                    </div>
-                                    <div>
-                                        <a class="btn btn-secondary <?=$filter==="telah-selesai"?"":"border-0"?>" href="<?=base_url();?>Admin/lihatDispro/telah-selesai">
-                                            Telah selesai
-                                        </a>
-                                    </div>
-                                </div>
                             <?php foreach($daftar_diskusi as $diskusi): ?>
                                 <a href="<?=base_url();?>Admin/dispro/<?=$diskusi->IDPesan?>" target="_blank" class="list-diskusi mb-2" noopener noreferer>
                                     <div class="card">
@@ -139,21 +139,20 @@
                                     </div>
                                 </a>
                             <?php endforeach; ?>
-                            </div>
 
                             <?php endif; ?>
 
                             <div class="mt-4">
                                 <?php if ($hal_selanjutnya): ?>
-                                    <a class="float-right btn btn-raised btn-info" href="<?=base_url();?>Admin/lihatDiskum/<?=$filter."/".(int)$page++?>">
+                                    <a class="float-right btn btn-raised btn-info" href="<?=base_url();?>Admin/lihatDiskum/<?=$filter."/".(int)++$page?>">
                                         Daftar selanjutnya
                                         <i class="mdi mdi-arrow-right"></i>
                                     </a>
                                 <?php endif; ?>
 
                                 <?php if ($hal_sebelumnya): ?>
-                                    <a class="float-left btn btn-raised btn-info" href="<?=base_url();?>Admin/lihatDiskum/<?=$filter."/".(int)$page--?>">
-                                        <i class="mdi mdi-arrow-right"></i>
+                                    <a class="float-left btn btn-raised btn-info" href="<?=base_url();?>Admin/lihatDiskum/<?=$filter."/".(int)--$page?>">
+                                        <i class="mdi mdi-arrow-left"></i>
                                         Daftar sebelumnya
                                     </a>
                                 <?php endif; ?>

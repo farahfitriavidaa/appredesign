@@ -53,11 +53,7 @@
                             </div>
                             <!-- end page title end breadcrumb -->
 
-                            <?php if(!$has_dispro): ?>
-                                <p>Belum ada diskusi. Anda akan melihat daftar diskusi di sini jika ada UMKM atau Pengelola yang memilih Anda untuk mengerjakan <i>redesign</i></p>
-                            <?php else: ?>
-
-                            <div class="mb-4">
+                            <!-- <div class="mb-4"> -->
                                 <div class="row" style="justify-content: flex-end;">
                                     <div>
                                         <a class="btn btn-secondary <?=$filter==="semua"?"":"border-0"?>" href="<?=base_url();?>Designer/lihatDiskusi/semua">
@@ -75,7 +71,14 @@
                                         </a>
                                     </div>
                                 </div>
-                            <?php foreach($daftar_diskusi as $diskusi): ?>
+
+                            <?php if(!$has_dispro): ?>
+                                <p class="mt-4">Belum ada diskusi untuk kategori ini.
+                                    <?=$filter==="belum-selesai"?"Anda akan melihat daftar diskusi di sini jika ada UMKM atau Pengelola yang memilih Anda untuk mengerjakan redesign":""?>
+                                </p>
+                            <?php else: ?>
+                                
+                                <?php foreach($daftar_diskusi as $diskusi): ?>
                                 <a href="<?=base_url();?>Designer/diskusi/<?=trimId('PS',$diskusi->IDPesan);?>" target="_blank" class="list-diskusi mb-2" noopener noreferer>
                                     <div class="card">
                                         <div class="card-body">
@@ -123,22 +126,22 @@
                                         </div>
                                     </div>
                                 </a>
-                            <?php endforeach; ?>
-                            </div>
+                                <?php endforeach; ?>
+                            <!-- </div> -->
 
                             <?php endif; ?>
 
                             <div class="mt-4">
                                 <?php if ($hal_selanjutnya): ?>
-                                    <a class="float-right btn btn-raised btn-info" href="<?=base_url();?>Designer/lihatDispro/<?=$filter."/".(int)$page++?>">
+                                    <a class="float-right btn btn-raised btn-info" href="<?=base_url();?>Designer/lihatDispro/<?=$filter."/".(int)++$page?>">
                                         Daftar selanjutnya
                                         <i class="mdi mdi-arrow-right"></i>
                                     </a>
                                 <?php endif; ?>
 
                                 <?php if ($hal_sebelumnya): ?>
-                                    <a class="float-left btn btn-raised btn-info" href="<?=base_url();?>Designer/lihatDispro/<?=$filter."/".(int)$page--?>">
-                                        <i class="mdi mdi-arrow-right"></i>
+                                    <a class="float-left btn btn-raised btn-info" href="<?=base_url();?>Designer/lihatDispro/<?=$filter."/".(int)--$page?>">
+                                        <i class="mdi mdi-arrow-left"></i>
                                         Daftar sebelumnya
                                     </a>
                                 <?php endif; ?>
