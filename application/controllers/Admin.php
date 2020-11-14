@@ -869,7 +869,7 @@ class Admin extends CI_Controller {
 			$status = ['7'];
 		}
 		else {
-			return redirect('Admin/lihatDiskum');
+			redirect('Admin/lihatDiskum');
 		}
 
 		// Ambil semua IDPesan berdasarkan IDPengelola di tb_pemesanan
@@ -885,20 +885,16 @@ class Admin extends CI_Controller {
 		$jumlah_diskum	= $this->Model_diskusi->getJumlahDiskum($id_pesan, $status);
 		$jumlah_diskum	= $jumlah_diskum->jumlah;
 		// Algoritma pembagian halaman (satu halaman berisi maks. 50 daftar diskum)
-		if ($page > ($jumlah_diskum/50)+1 || $page < 0) {
-			return redirect('Admin/lihatDiskum');
+		$maks			= 50;
+		if ($page > ($jumlah_diskum/$maks)+1 || $page < 0) {
+			redirect('Admin/lihatDiskum');
 		}
 
-		$hal_selanjutnya	= false;
-		$hal_sebelumnya		= false;
+		$hal_selanjutnya	= $page < ($jumlah_diskum/$maks);
+		$hal_sebelumnya		= $page > 1;
 
-		if ($page < ($jumlah_diskum/50))
-			$hal_selanjutnya	= true;
-		if($page > 1)
-			$hal_sebelumnya		= true;
-
-		$limit			= $page*50;
-		$baris			= ($page-1)*50;
+		$limit			= $page*$maks;
+		$baris			= ($page-1)*$maks;
 
 		// Ambil daftar diskusi dari tb_diskusiumkm berdasarkan IDPesan tadi
 		$daftar_diskusi = $this->Model_diskusi->getDaftarDiskum($id_pesan, $status, $baris, $limit);
@@ -926,10 +922,6 @@ class Admin extends CI_Controller {
 				'hal_sebelumnya'	=> $hal_sebelumnya
 			);
 		}
-		// var_dump($data); // lihat isi array $data
-		// var_dump($jumlah_diskum);
-		// var_dump($status);
-		// var_dump($limit);
 
 		$this->load->view('admin/Lihatdiskum', $data);
 	}
@@ -1172,7 +1164,7 @@ class Admin extends CI_Controller {
 			$status = ['7'];
 		}
 		else {
-			return redirect('Admin/lihatDispro');
+			redirect('Admin/lihatDispro');
 		}
 
 		// Ambil semua IDPesan berdasarkan IDPengelola di tb_pemesanan
@@ -1185,23 +1177,19 @@ class Admin extends CI_Controller {
 		$id_pesan		= flattenArray($id_pesan);
 
 		$this->load->model('Model_diskusi');
-		$jumlah_diskum	= $this->Model_diskusi->getJumlahDispro($id_pesan, $status);
-		$jumlah_diskum	= $jumlah_diskum->jumlah;
+		$jumlah_dispro	= $this->Model_diskusi->getJumlahDispro($id_pesan, $status);
+		$jumlah_dispro	= $jumlah_dispro->jumlah;
 		// Algoritma pembagian halaman (satu halaman berisi maks. 50 daftar diskum)
-		if ($page > ($jumlah_diskum/50)+1 || $page < 0) {
-			return redirect('Admin/lihatDiskum');
+		$maks			= 50;
+		if ($page > ($jumlah_dispro/$maks)+1 || $page < 0) {
+			redirect('Admin/lihatDispro');
 		}
 
-		$hal_selanjutnya	= false;
-		$hal_sebelumnya		= false;
+		$hal_selanjutnya	= $page < ($jumlah_dispro/$maks);
+		$hal_sebelumnya		= $page > 1;
 
-		if ($page < ($jumlah_diskum/50))
-			$hal_selanjutnya	= true;
-		if($page > 1)
-			$hal_sebelumnya		= true;
-
-		$limit			= $page*50;
-		$baris			= ($page-1)*50;
+		$limit			= $page*$maks;
+		$baris			= ($page-1)*$maks;
 
 		// Ambil daftar diskusi dari tb_diskusiumkm berdasarkan IDPesan tadi
 		$daftar_diskusi = $this->Model_diskusi->getDaftarDispro($id_pesan, $status, $baris, $limit);
@@ -1229,10 +1217,6 @@ class Admin extends CI_Controller {
 				'hal_sebelumnya'	=> $hal_sebelumnya
 			);
 		}
-		// var_dump($data); // lihat isi array $data
-		// var_dump($jumlah_diskum);
-		// var_dump($status);
-		// var_dump($limit);
 
 		$this->load->view('admin/Lihatdispro', $data);
 	}
