@@ -125,17 +125,13 @@
                                             <strong class="d-block">Status</strong>
                                             <p>
                                             <?php switch($pemesanan->Status){
-                                                case 0:
-                                                    $status = "Pending";
-                                                    $badge  = "light";
-                                                    break;
                                                 case 1:
-                                                    $status = "Telah didiskusikan";
+                                                    $status = "Request baru";
                                                     $badge  = "light";
                                                     break;
                                                 case 2:
-                                                    $status = "Mulai dikerjakan desainer";
-                                                    $badge  = "light";
+                                                    $status = "Mulai dikerjakan";
+                                                    $badge  = "warning";
                                                     break;
                                                 case 3:
                                                     $status = "Selesai didesain";
@@ -147,14 +143,6 @@
                                                     break;
                                                 case 5:
                                                     $status = "Desain disetujui";
-                                                    $badge  = "info";
-                                                    break;
-                                                case 6:
-                                                    $status = "Belum dibayar";
-                                                    $badge  = "warning";
-                                                    break;
-                                                case 7:
-                                                    $status = "Lunas";
                                                     $badge  = "success";
                                                     break;
                                                 case 8:
@@ -162,7 +150,7 @@
                                                     $badge  = "danger";
                                                     break;
                                                 default:
-                                                    $status = "Pending";
+                                                    $status = "Unknown";
                                                     $badge  = "light";
                                                     break;
                                             }?>

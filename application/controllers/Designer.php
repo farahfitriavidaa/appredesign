@@ -340,13 +340,13 @@ class Designer extends CI_Controller {
 	public function lihatDiskusi($filter='belum-selesai', $page=1)
 	{
 		if ($filter==='belum-selesai') {
-			$status = ['0', '1', '2', '3' ,'4', '5', '6'];
+			$status = ['1', '2', '3' ,'4'];
 		}
 		elseif ($filter==='semua') {
-			$status = ['0', '1', '2', '3' ,'4', '5', '6', '7'];
+			$status = ['1', '2', '3' ,'4', '5'];
 		}
 		elseif ($filter==='telah-selesai') {
-			$status = ['7'];
+			$status = ['5'];
 		}
 		else {
 			redirect('Designer/lihatDiskusi');

@@ -60,17 +60,17 @@
                             <div class="mb-4">
                                 <div class="row" style="justify-content: flex-end;">
                                     <div>
-                                        <a class="btn btn-secondary <?=$filter==="semua"?"":"border-0"?>" href="<?=base_url();?>Designer/lihatDispro/semua">
+                                        <a class="btn btn-secondary <?=$filter==="semua"?"":"border-0"?>" href="<?=base_url();?>Designer/lihatDiskusi/semua">
                                             Semua diskusi
                                         </a>
                                     </div>
                                     <div>
-                                        <a class="btn btn-secondary <?=$filter==="belum-selesai"?"":"border-0"?>" href="<?=base_url();?>Designer/lihatDispro/">
+                                        <a class="btn btn-secondary <?=$filter==="belum-selesai"?"":"border-0"?>" href="<?=base_url();?>Designer/lihatDiskusi/">
                                             Belum selesai
                                         </a>
                                     </div>
                                     <div>
-                                        <a class="btn btn-secondary <?=$filter==="telah-selesai"?"":"border-0"?>" href="<?=base_url();?>Designer/lihatDispro/telah-selesai">
+                                        <a class="btn btn-secondary <?=$filter==="telah-selesai"?"":"border-0"?>" href="<?=base_url();?>Designer/lihatDiskusi/telah-selesai">
                                             Telah selesai
                                         </a>
                                     </div>
@@ -89,17 +89,13 @@
                                             <div class="mt-2">
                                                 <span class="text-muted"><?=cetakWaktu($diskusi->Tanggal_waktu)?></span>
                                                 <?php switch($diskusi->Status){
-                                                case 0:
-                                                    $status = "Pending";
-                                                    $badge  = "light";
-                                                    break;
                                                 case 1:
-                                                    $status = "Telah didiskusikan";
+                                                    $status = "Request baru";
                                                     $badge  = "light";
                                                     break;
                                                 case 2:
-                                                    $status = "Mulai dikerjakan desainer";
-                                                    $badge  = "light";
+                                                    $status = "Mulai dikerjakan";
+                                                    $badge  = "warning";
                                                     break;
                                                 case 3:
                                                     $status = "Selesai didesain";
@@ -111,14 +107,6 @@
                                                     break;
                                                 case 5:
                                                     $status = "Desain disetujui";
-                                                    $badge  = "info";
-                                                    break;
-                                                case 6:
-                                                    $status = "Belum dibayar";
-                                                    $badge  = "warning";
-                                                    break;
-                                                case 7:
-                                                    $status = "Lunas";
                                                     $badge  = "success";
                                                     break;
                                                 case 8:
@@ -126,7 +114,7 @@
                                                     $badge  = "danger";
                                                     break;
                                                 default:
-                                                    $status = "Pending";
+                                                    $status = "Unknown";
                                                     $badge  = "light";
                                                     break;
                                             }?>
