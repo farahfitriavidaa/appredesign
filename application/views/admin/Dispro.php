@@ -40,6 +40,21 @@
 
                         <div class="container-fluid">
 
+                            <?php
+                                if( ! is_null($this->session->flashdata('alert'))):
+                            ?>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="alert alert-danger alert-dismissible fade show mb-0 mt-3" role="alert">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            <?=$this->session->flashdata('alert');?>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+
                             <button class="btn btn-raised btn-secondary mt-4" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="detilProduk detilRequest">
                             <i class="mdi mdi-format-align-left"></i>
                                 Deskripsi Request
