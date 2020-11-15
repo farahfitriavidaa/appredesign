@@ -16,11 +16,20 @@ class Designer extends CI_Controller {
 
 	public function index()
 	{
-		$id_user = $this->Model_designer->getIdUser( $this->session->user );
-		$this->session->id_user = $id_user->IDUser;
+		if ( ! $this->session->has_userdata('id_user')) {
+			$id_user = $this->Model_designer->getIdUser( $this->session->user );
+			$this->session->id_user = $id_user->IDUser;
 
-		$id_designer = $this->Model_designer->getIdDesigner( $this->session->id_user );
-		$this->session->id_designer = $id_designer->IDDesigner;
+			$id_designer = $this->Model_designer->getIdDesigner( $this->session->id_user );
+			$this->session->id_designer = $id_designer->IDDesigner;
+		}
+		/** 
+		 * Data yg mau ditampilin di dashboard:
+		 * - jumlah request yang didapat
+		 * - jumlah request yang terselesaikan
+		 * - Request yang belum selesai/request terbaru
+		 * - Aktivitas diskusi terakhir
+		 */
 
 		$user	= $this->Model_designer->getUserData( $this->session->user );
 		unset($user->Password);
@@ -29,8 +38,6 @@ class Designer extends CI_Controller {
 			'akun' => $user
 		);
 		$this->load->view('designer/dashboard', $data);
-
-		// var_dump($_SESSION);
 	}
 
 	public function lihatProfil()
@@ -409,8 +416,6 @@ class Designer extends CI_Controller {
 			return http_response_code('400');
 		}
 
-		// TO DO: Tambah prevensi jika ada IDPesan yang tidak ada hubungannya dengan designer. (Update juga milik admin)
-
 		$id_pesan 			= 'PS'.str_pad($id_pesan, 4, '0', STR_PAD_LEFT);
 		$id_designer		= $this->session->id_designer;
 		// Dapatkan detil pemesanan/request (gabungan tabel tb_pemesanan dan tb_umkm_data)
@@ -428,7 +433,7 @@ class Designer extends CI_Controller {
 		}
 		else{
 			unset($_SESSION['alert']);
-			
+
 			// Cek designer
 			// Jika designer ada, ambil nama designer. Jika tidak, beri keterangan 'Ditentukan Pengelola'
 			$data_designer		= array();
