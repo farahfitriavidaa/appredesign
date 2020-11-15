@@ -7,9 +7,21 @@
 
 class Model_diskusi extends CI_Model {
 
-	public function getPemesanan($id_pesan)
+	// public function getPemesanan($id_pesan)
+	// {
+    //     return $this->db->query("SELECT * FROM tb_pemesanan JOIN tb_umkm_data USING(IDDataUMKM) WHERE IDPesan='$id_pesan'")->row();
+	// }
+	
+	public function getPemesanan($id_pesan, $id_level, $level)
 	{
-        return $this->db->query("SELECT * FROM tb_pemesanan JOIN tb_umkm_data USING(IDDataUMKM) WHERE IDPesan='$id_pesan'")->row();
+		if ($level=='pengelola')
+			return $this->db->query("SELECT * FROM tb_pemesanan JOIN tb_umkm_data USING(IDDataUMKM) WHERE IDPesan='$id_pesan' AND IDPengelola='$id_level'")->row();
+
+		elseif ($level=='designer')
+			return $this->db->query("SELECT * FROM tb_pemesanan JOIN tb_umkm_data USING(IDDataUMKM) WHERE IDPesan='$id_pesan' AND IDDesigner='$id_level'")->row();
+
+		elseif ($level=='umkm')
+			return $this->db->query("SELECT * FROM tb_pemesanan JOIN tb_umkm_data USING(IDDataUMKM) WHERE IDPesan='$id_pesan' AND IDUMKM='$id_level'")->row();
     }
 
     public function getNamaDesainer($id_desainer)

@@ -937,35 +937,52 @@ class Admin extends CI_Controller {
 		if ($id_pesan!=='0') {
 			// Ambil data user
 			$cek 				= $this->Model_admin->cekAkun($this->session->user);
+			$pengelola			= $this->Model_admin->getAkunPengelola($this->session->user);
+			$id_pengelola		= $pengelola->IDPengelola;
 
 			// Dapatkan detil pemesanan/request (gabungan tabel tb_pemesanan dan tb_umkm_data)
 			$this->load->model('Model_diskusi');
-			$detil_pemesanan	= $this->Model_diskusi->getPemesanan($id_pesan);
+			$detil_pemesanan	= $this->Model_diskusi->getPemesanan($id_pesan, $id_pengelola, 'pengelola');
 
-			// Cek designer
-			// Jika designer ada, ambil nama designer. Jika tidak, beri keterangan 'Ditentukan Pengelola'
-			$data_designer		= array();
-			if( is_null($detil_pemesanan->IDDesigner) ){
-				$data_designer['designer']	= 'Ditentukan Pengelola';
-				$data_designer['ada']		= FALSE;
+			// Cek jika pemesanan ada hubungannya dengan designer
+			if ( is_null($detil_pemesanan) ) {
+				$data = array(
+					'akun'				=> $cek,
+					'pemesanan'			=> null
+				);
+
+				$_SESSION['alert'] = 'Diskusi tidak ditemukan';
+				$this->session->mark_as_flash('alert');
 			}
 			else{
-				$designer 					= $this->Model_diskusi->getNamaDesainer($detil_pemesanan->IDDesigner);
-				$data_designer['designer']	= $designer->Nama_lengkap;
-				$data_designer['ada']		= TRUE;
+				unset($_SESSION['alert']);
+
+				// Cek designer
+				// Jika designer ada, ambil nama designer. Jika tidak, beri keterangan 'Ditentukan Pengelola'
+				$data_designer		= array();
+				if( is_null($detil_pemesanan->IDDesigner) ){
+					$data_designer['designer']	= 'Ditentukan Pengelola';
+					$data_designer['ada']		= FALSE;
+				}
+				else{
+					$designer 					= $this->Model_diskusi->getNamaDesainer($detil_pemesanan->IDDesigner);
+					$data_designer['designer']	= $designer->Nama_lengkap;
+					$data_designer['ada']		= TRUE;
+				}
+	
+				// Ambil data diskusi(komentar-komentar) berdasarkan IDPesan
+				$daftar_komentar = $this->Model_diskusi->getDiskum($id_pesan);
+	
+				$data = array(
+					'akun'				=> $cek,
+					'pemesanan'			=> $detil_pemesanan,
+					'designer'			=> $data_designer,
+					'daftar_komentar'	=> $daftar_komentar
+				);
 			}
-
-			// Ambil data diskusi(komentar-komentar) berdasarkan IDPesan
-			$daftar_komentar = $this->Model_diskusi->getDiskum($id_pesan);
-
-			$data = array(
-				'akun'				=> $cek,
-				'pemesanan'			=> $detil_pemesanan,
-				'designer'			=> $data_designer,
-				'daftar_komentar'	=> $daftar_komentar
-			);
-			// var_dump($data['daftar_diskusi']); // untuk liat isi array $data
-
+			
+			// var_dump($data); // untuk liat isi array $data
+			
 			// Load helper untuk memformat tanggal di view "admin/diskum"
 			$this->load->helper('my_helper');
 
@@ -1048,32 +1065,49 @@ class Admin extends CI_Controller {
 		if ($id_pesan!=='0') {
 			// Ambil data user
 			$cek 				= $this->Model_admin->cekAkun($this->session->user);
+			$pengelola			= $this->Model_admin->getAkunPengelola($this->session->user);
+			$id_pengelola		= $pengelola->IDPengelola;
 
 			// Dapatkan detil pemesanan/request (gabungan tabel tb_pemesanan dan tb_umkm_data)
-			$detil_pemesanan	= $this->Model_diskusi->getPemesanan($id_pesan);
+			$this->load->model('Model_diskusi');
+			$detil_pemesanan	= $this->Model_diskusi->getPemesanan($id_pesan, $id_pengelola, 'pengelola');
 
-			// Cek designer
-			// Jika designer ada, ambil nama designer. Jika tidak, beri keterangan 'Ditentukan Pengelola'
-			$data_designer		= array();
-			if( is_null($detil_pemesanan->IDDesigner) ){
-				$data_designer['designer']	= 'Ditentukan Pengelola';
-				$data_designer['ada']		= FALSE;
+			// Cek jika pemesanan ada hubungannya dengan designer
+			if ( is_null($detil_pemesanan) ) {
+				$data = array(
+					'akun'				=> $cek,
+					'pemesanan'			=> null
+				);
+
+				$_SESSION['alert'] = 'Diskusi tidak ditemukan';
+				$this->session->mark_as_flash('alert');
 			}
 			else{
-				$designer 					= $this->Model_diskusi->getNamaDesainer($detil_pemesanan->IDDesigner);
-				$data_designer['designer']	= $designer->Nama_lengkap;
-				$data_designer['ada']		= TRUE;
+				unset($_SESSION['alert']);
+
+				// Cek designer
+				// Jika designer ada, ambil nama designer. Jika tidak, beri keterangan 'Ditentukan Pengelola'
+				$data_designer		= array();
+				if( is_null($detil_pemesanan->IDDesigner) ){
+					$data_designer['designer']	= 'Ditentukan Pengelola';
+					$data_designer['ada']		= FALSE;
+				}
+				else{
+					$designer 					= $this->Model_diskusi->getNamaDesainer($detil_pemesanan->IDDesigner);
+					$data_designer['designer']	= $designer->Nama_lengkap;
+					$data_designer['ada']		= TRUE;
+				}
+
+				// Ambil data diskusi(komentar-komentar) berdasarkan IDPesan
+				$daftar_komentar = $this->Model_diskusi->getDispro($id_pesan);
+
+				$data = array(
+					'akun'				=> $cek,
+					'pemesanan'			=> $detil_pemesanan,
+					'designer'			=> $data_designer,
+					'daftar_komentar'	=> $daftar_komentar
+				);
 			}
-
-			// Ambil data diskusi(komentar-komentar) berdasarkan IDPesan
-			$daftar_komentar = $this->Model_diskusi->getDispro($id_pesan);
-
-			$data = array(
-				'akun'				=> $cek,
-				'pemesanan'			=> $detil_pemesanan,
-				'designer'			=> $data_designer,
-				'daftar_komentar'	=> $daftar_komentar
-			);
 			// var_dump($data['daftar_diskusi']); // untuk liat isi array $data
 
 			$this->load->helper('my_helper');

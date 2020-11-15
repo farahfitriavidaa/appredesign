@@ -55,6 +55,7 @@
                                 </div>
                             <?php endif; ?>
 
+                            <?php if( ! is_null($pemesanan)): ?>
                             <button class="btn btn-raised btn-secondary mt-4" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="detilProduk detilRequest">
                             <i class="mdi mdi-format-align-left"></i>
                                 Deskripsi Request
@@ -300,6 +301,7 @@
                                 </div>
 
                             </div> <!-- end row -->
+                            <?php endif; ?>
 
                         </div><!-- container -->
 
