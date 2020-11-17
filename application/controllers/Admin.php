@@ -944,7 +944,7 @@ class Admin extends CI_Controller {
 			$this->load->model('Model_diskusi');
 			$detil_pemesanan	= $this->Model_diskusi->getPemesanan($id_pesan, $id_pengelola, 'pengelola');
 
-			// Cek jika pemesanan ada hubungannya dengan designer
+			// Cek jika pemesanan ada hubungannya dengan pengelola
 			if ( is_null($detil_pemesanan) ) {
 				$data = array(
 					'akun'				=> $cek,
@@ -1072,7 +1072,7 @@ class Admin extends CI_Controller {
 			$this->load->model('Model_diskusi');
 			$detil_pemesanan	= $this->Model_diskusi->getPemesanan($id_pesan, $id_pengelola, 'pengelola');
 
-			// Cek jika pemesanan ada hubungannya dengan designer
+			// Cek jika pemesanan ada hubungannya dengan pengelola
 			if ( is_null($detil_pemesanan) ) {
 				$data = array(
 					'akun'				=> $cek,

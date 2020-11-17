@@ -52,13 +52,34 @@
                                 <div class="clearfix"></div>
                             </div>
                             <!-- end page title end breadcrumb -->
+                            <div class="row mb-3" style="justify-content: flex-end;">
+                                <div>
+                                    <a class="btn btn-secondary btn-sm <?=$filter==="semua"?"":"border-0"?>" href="<?=base_url();?>Umkm/lihatDiskusi/semua">
+                                        Semua diskusi
+                                    </a>
+                                </div>
+                                <div>
+                                    <a class="btn btn-secondary btn-sm <?=$filter==="belum-selesai"?"btn-outline-secondary":"border-0"?>" href="<?=base_url();?>Umkm/lihatDiskusi/">
+                                        Belum selesai
+                                    </a>
+                                </div>
+                                <div>
+                                    <a class="btn btn-secondary btn-sm <?=$filter==="telah-selesai"?"btn-outline-secondary":"border-0"?>" href="<?=base_url();?>Umkm/lihatDiskusi/telah-selesai">
+                                        Telah selesai
+                                    </a>
+                                </div>
+                            </div>
 
                             <?php if(!$has_diskum): ?>
-                                <p>Belum ada diskusi. Anda akan melihat daftar diskusi di sini jika Anda memberi komentar atau mendapat respon dari Pengelola mengenai <i>redesign</i> produk Anda.</p>
-                                <a class="btn btn-raised btn-primary" href="<?=base_url();?>Umkm/lihatRequest">
-                                    Lihat Request dan Beri Komentar
-                                </a>
+                                <p class="mt-4">Belum ada diskusi untuk kategori ini.</p>
+                                <?php if($filter==="belum-selesai"): ?>
+                                    <p>Anda akan melihat daftar diskusi di sini jika Anda memberi komentar atau mendapat respon dari Pengelola mengenai <i>redesign</i> produk Anda.</p>
+                                    <a class="btn btn-raised btn-primary" href="<?=base_url();?>Umkm/lihatRequest">
+                                        Lihat Request dan Beri Komentar
+                                    </a>
+                                <?php endif; ?>
                             <?php else: ?>
+
 
                             <div class="mb-4">
                             <?php foreach($daftar_diskusi as $diskusi): ?>
@@ -83,6 +104,21 @@
 
                             <?php endif; ?>
 
+                            <div class="mt-4">
+                                <?php if ($hal_selanjutnya): ?>
+                                    <a class="float-right btn btn-raised btn-info" href="<?=base_url();?>Umkm/lihatDiskusi/<?=$filter."/".(int)++$page?>">
+                                        Daftar selanjutnya
+                                        <i class="mdi mdi-arrow-right"></i>
+                                    </a>
+                                <?php endif; ?>
+
+                                <?php if ($hal_sebelumnya): ?>
+                                    <a class="float-left btn btn-raised btn-info" href="<?=base_url();?>Umkm/lihatDiskusi/<?=$filter."/".(int)--$page?>">
+                                        <i class="mdi mdi-arrow-left"></i>
+                                        Daftar sebelumnya
+                                    </a>
+                                <?php endif; ?>
+                            </div>
                         </div><!-- container -->
 
                     </div> <!-- Page content Wrapper -->

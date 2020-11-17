@@ -373,7 +373,7 @@ class Designer extends CI_Controller {
 		// Algoritma pembagian halaman (satu halaman berisi maks. 50 daftar diskum)
 		$maks 			= 50;
 		if ($page > ($jumlah_dispro/$maks)+1 || $page < 0) {
-			redirect('Designer/lihatDiskum');
+			redirect('Designer/lihatDiskusi');
 		}
 
 		$hal_selanjutnya	= $page < ($jumlah_dispro/$maks);

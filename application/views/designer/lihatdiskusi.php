@@ -53,24 +53,23 @@
                             </div>
                             <!-- end page title end breadcrumb -->
 
-                            <!-- <div class="mb-4"> -->
-                                <div class="row" style="justify-content: flex-end;">
-                                    <div>
-                                        <a class="btn btn-secondary <?=$filter==="semua"?"":"border-0"?>" href="<?=base_url();?>Designer/lihatDiskusi/semua">
-                                            Semua diskusi
-                                        </a>
-                                    </div>
-                                    <div>
-                                        <a class="btn btn-secondary <?=$filter==="belum-selesai"?"":"border-0"?>" href="<?=base_url();?>Designer/lihatDiskusi/">
-                                            Belum selesai
-                                        </a>
-                                    </div>
-                                    <div>
-                                        <a class="btn btn-secondary <?=$filter==="telah-selesai"?"":"border-0"?>" href="<?=base_url();?>Designer/lihatDiskusi/telah-selesai">
-                                            Telah selesai
-                                        </a>
-                                    </div>
+                            <div class="row" style="justify-content: flex-end;">
+                                <div>
+                                    <a class="btn btn-secondary <?=$filter==="semua"?"":"border-0"?>" href="<?=base_url();?>Designer/lihatDiskusi/semua">
+                                        Semua diskusi
+                                    </a>
                                 </div>
+                                <div>
+                                    <a class="btn btn-secondary <?=$filter==="belum-selesai"?"":"border-0"?>" href="<?=base_url();?>Designer/lihatDiskusi/">
+                                        Belum selesai
+                                    </a>
+                                </div>
+                                <div>
+                                    <a class="btn btn-secondary <?=$filter==="telah-selesai"?"":"border-0"?>" href="<?=base_url();?>Designer/lihatDiskusi/telah-selesai">
+                                        Telah selesai
+                                    </a>
+                                </div>
+                            </div>
 
                             <?php if(!$has_dispro): ?>
                                 <p class="mt-4">Belum ada diskusi untuk kategori ini.
@@ -127,20 +126,19 @@
                                     </div>
                                 </a>
                                 <?php endforeach; ?>
-                            <!-- </div> -->
 
                             <?php endif; ?>
 
                             <div class="mt-4">
                                 <?php if ($hal_selanjutnya): ?>
-                                    <a class="float-right btn btn-raised btn-info" href="<?=base_url();?>Designer/lihatDispro/<?=$filter."/".(int)++$page?>">
+                                    <a class="float-right btn btn-raised btn-info" href="<?=base_url();?>Designer/lihatDiskusi/<?=$filter."/".(int)++$page?>">
                                         Daftar selanjutnya
                                         <i class="mdi mdi-arrow-right"></i>
                                     </a>
                                 <?php endif; ?>
 
                                 <?php if ($hal_sebelumnya): ?>
-                                    <a class="float-left btn btn-raised btn-info" href="<?=base_url();?>Designer/lihatDispro/<?=$filter."/".(int)--$page?>">
+                                    <a class="float-left btn btn-raised btn-info" href="<?=base_url();?>Designer/lihatDiskusi/<?=$filter."/".(int)--$page?>">
                                         <i class="mdi mdi-arrow-left"></i>
                                         Daftar sebelumnya
                                     </a>

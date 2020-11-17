@@ -501,8 +501,21 @@ class Umkm extends CI_Controller {
 
 	}
 
-	public function lihatDiskusi()
+	public function lihatDiskusi($filter='belum-selesai', $page=1)
 	{
+		if ($filter==='belum-selesai') {
+			$status = ['0', '1', '2', '3' ,'4', '5', '6'];
+		}
+		elseif ($filter==='semua') {
+			$status = ['0', '1', '2', '3' ,'4', '5', '6', '7'];
+		}
+		elseif ($filter==='telah-selesai') {
+			$status = ['7'];
+		}
+		else {
+			redirect('Umkm/lihatDiskusi');
+		}
+
 		// Ambil semua IDPesan berdasarkan IDUMKM
 		$id_umkm	= $this->session->id_umkm;
 		$id_pesan	= $this->Model_umkm->getAllIdPesan($id_umkm);
@@ -511,21 +524,43 @@ class Umkm extends CI_Controller {
 		$this->load->helper('my_helper');
 		$id_pesan	= flattenArray($id_pesan);
 
-		// Ambil daftar diskusi dari tb_diskusiumkm berdasarkan IDPesan tadi
 		$this->load->model('Model_diskusi');
-		$daftar_diskusi = $this->Model_diskusi->getDaftarDiskum($id_pesan);
+		$jumlah_diskusi	= $this->Model_diskusi->getJumlahDiskum($id_pesan, $status);
+		$jumlah_diskusi	= $jumlah_diskusi->jumlah;
+		// Algoritma pembagian halaman (satu halaman berisi maks. 10 daftar diskum)
+		$maks			= 10;
+		if ($page > ($jumlah_diskusi/$maks)+1 || $page < 0) {
+			redirect('Umkm/lihatDiskusi');
+		}
+
+		$hal_selanjutnya	= $page < ($jumlah_diskusi/$maks);
+		$hal_sebelumnya		= $page > 1;
+
+		$limit			= $page*$maks;
+		$baris			= ($page-1)*$maks;
+
+		// Ambil daftar diskusi dari tb_diskusiumkm berdasarkan IDPesan tadi
+		$daftar_diskusi = $this->Model_diskusi->getDaftarDiskum($id_pesan, $status, $baris, $limit);
 
 		// Cek jika daftar diskusi kosong beri status has_diskum=false
 		// jika ada daftar diskusi maka beri status has_diskum=true dan masukan ke $data
 		if( empty($daftar_diskusi) ) {
 			$data = array(
-				'has_diskum' => false
+				'has_diskum' 		=> false, 
+				'filter'			=> $filter,
+				'page'				=> $page,
+				'hal_selanjutnya'	=> $hal_selanjutnya,
+				'hal_sebelumnya'	=> $hal_sebelumnya
 			);
 		}
 		else {
 			$data = array(
 				'has_diskum'		=> true,
-				'daftar_diskusi'	=> $daftar_diskusi
+				'daftar_diskusi'	=> $daftar_diskusi,
+				'filter'			=> $filter,
+				'page'				=> $page,
+				'hal_selanjutnya'	=> $hal_selanjutnya,
+				'hal_sebelumnya'	=> $hal_sebelumnya
 			);
 		}
 		// var_dump($data);
@@ -536,38 +571,51 @@ class Umkm extends CI_Controller {
 	{
 		// Cek IDPesan dan pastikan user tidak input alamat ".../Umkm/diskusi" tanpa IDPesan
 		if ($id_pesan!=='0') {
+			$id_umkm			= $this->session->id_umkm;
 
 			// Kembalikan IDPesan sesuai format, 1 -> PS0001
 			$id_pesan			= 'PS'.str_pad($id_pesan, 4, '0', STR_PAD_LEFT);
 
 			// Dapatkan detil pemesanan/request (gabungan tabel tb_pemesanan dan tb_umkm_data)
 			$this->load->model('Model_diskusi');
-			$detil_pemesanan	= $this->Model_diskusi->getPemesanan($id_pesan);
+			$detil_pemesanan	= $this->Model_diskusi->getPemesanan($id_pesan, $id_umkm, 'umkm');
 
-			// Cek designer
-			// Jika ada ambil nama designer, jika tidak beri keterangan 'Ditentukan Pengelola'
-			$data_designer		= array();
-			if( is_null($detil_pemesanan->IDDesigner) ){
-				$data_designer['designer']	= 'Ditentukan Pengelola';
-				$data_designer['ada']		= FALSE;
+			// Cek jika pemesanan ada hubungannya dengan designer
+			if ( is_null($detil_pemesanan) ) {
+				$data = array(
+					'pemesanan'			=> null
+				);
+
+				$_SESSION['alert'] = 'Diskusi tidak ditemukan';
+				$this->session->mark_as_flash('alert');
 			}
 			else{
-				$designer 					= $this->Model_diskusi->getNamaDesainer($detil_pemesanan->IDDesigner);
-				$data_designer['designer']	= $designer->Nama_lengkap;
-				$data_designer['ada']		= TRUE;
+				unset($_SESSION['alert']);
+
+				// Cek designer
+				// Jika ada ambil nama designer, jika tidak beri keterangan 'Ditentukan Pengelola'
+				$data_designer		= array();
+				if( is_null($detil_pemesanan->IDDesigner) ){
+					$data_designer['designer']	= 'Ditentukan Pengelola';
+					$data_designer['ada']		= FALSE;
+				}
+				else{
+					$designer 					= $this->Model_diskusi->getNamaDesainer($detil_pemesanan->IDDesigner);
+					$data_designer['designer']	= $designer->Nama_lengkap;
+					$data_designer['ada']		= TRUE;
+				}
+
+				// Ambil data diskusi berdasarkan IDPesan
+				$daftar_diskusi	= $this->Model_diskusi->getDiskum($id_pesan);
+
+				$data			= array(
+					'pemesanan'			=> $detil_pemesanan,
+					'designer'			=> $data_designer,
+					'daftar_diskusi'	=> $daftar_diskusi
+				);
 			}
-
-			// Ambil data diskusi berdasarkan IDPesan
-			$daftar_diskusi	= $this->Model_diskusi->getDiskum($id_pesan);
-
-			$data			= array(
-				'pemesanan'			=> $detil_pemesanan,
-				'designer'			=> $data_designer,
-				'daftar_diskusi'	=> $daftar_diskusi
-			);
-			// var_dump($data['daftar_diskusi']);
-
-			// Load helper untuk memotong IDPesan, PS0015 -> 15. (bebas mau dipake atau ngga)
+			// var_dump($data);
+			// Load helper untuk memotong IDPesan, PS0015 -> 15.
 			$this->load->helper('my_helper');
 
 			// Load view
