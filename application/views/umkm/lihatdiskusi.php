@@ -54,7 +54,7 @@
                             <!-- end page title end breadcrumb -->
                             <div class="row mb-3" style="justify-content: flex-end;">
                                 <div>
-                                    <a class="btn btn-secondary btn-sm <?=$filter==="semua"?"":"border-0"?>" href="<?=base_url();?>Umkm/lihatDiskusi/semua">
+                                    <a class="btn btn-secondary btn-sm <?=$filter==="semua"?"btn-outline-secondary":"border-0"?>" href="<?=base_url();?>Umkm/lihatDiskusi/semua">
                                         Semua diskusi
                                     </a>
                                 </div>

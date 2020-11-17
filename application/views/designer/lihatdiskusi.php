@@ -53,19 +53,19 @@
                             </div>
                             <!-- end page title end breadcrumb -->
 
-                            <div class="row" style="justify-content: flex-end;">
+                            <div class="row mb-3" style="justify-content: flex-end;">
                                 <div>
-                                    <a class="btn btn-secondary <?=$filter==="semua"?"":"border-0"?>" href="<?=base_url();?>Designer/lihatDiskusi/semua">
+                                    <a class="btn btn-secondary btn-sm <?=$filter==="semua"?"btn-outline-secondary":"border-0"?>" href="<?=base_url();?>Designer/lihatDiskusi/semua">
                                         Semua diskusi
                                     </a>
                                 </div>
                                 <div>
-                                    <a class="btn btn-secondary <?=$filter==="belum-selesai"?"":"border-0"?>" href="<?=base_url();?>Designer/lihatDiskusi/">
+                                    <a class="btn btn-secondary btn-sm <?=$filter==="belum-selesai"?"btn-outline-secondary":"border-0"?>" href="<?=base_url();?>Designer/lihatDiskusi/">
                                         Belum selesai
                                     </a>
                                 </div>
                                 <div>
-                                    <a class="btn btn-secondary <?=$filter==="telah-selesai"?"":"border-0"?>" href="<?=base_url();?>Designer/lihatDiskusi/telah-selesai">
+                                    <a class="btn btn-secondary btn-sm <?=$filter==="telah-selesai"?"btn-outline-secondary":"border-0"?>" href="<?=base_url();?>Designer/lihatDiskusi/telah-selesai">
                                         Telah selesai
                                     </a>
                                 </div>
