@@ -72,7 +72,13 @@
                                 <div class="card-body">
                                     <span class="d-block h4 mb-3"><?=$designer->Nama_lengkap?></span>
 
-                                    <p><?=$designer->Keterangan?></p>
+                                    <p><?php
+                                        if( ! is_null($designer->Keterangan) )
+                                            echo $designer->Keterangan;
+                                        else
+                                    ?>
+                                        <span class="text-muted">Belum ada bio/keterangan</span>
+                                    </p>
                                 </div>
                             </div>
 
@@ -126,7 +132,7 @@
                                                     <div class="modal-body">
                                                         <p>Hapus data portofolio ini?</p>
                                                     </div>
-                                                    <div class="modal-footer">                                                            
+                                                    <div class="modal-footer">
                                                         <button type="button" class="btn btn-raised btn-secondary" data-dismiss="modal">Tidak</button>
                                                         <a class="btn btn-raised btn-danger ml-2" href="<?=base_url();?>Designer/hapusPortofolio/<?=$path;?>">Iya</a>
                                                     </div>
@@ -170,14 +176,14 @@
                                                     <div class="dropdown-divider"></div>
                                                     <button class="dropdown-item hoverable" data-toggle="modal" data-target="#konfirmasi-hapus-<?=$path?>">Hapus</button>
                                                 </div>
-                                                
+
                                                 <div class="modal fade" id="konfirmasi-hapus-<?=$path?>" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmModal" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-body">
                                                                 <p>Hapus data portofolio ini?</p>
                                                             </div>
-                                                            <div class="modal-footer">                                                            
+                                                            <div class="modal-footer">
                                                                 <button type="button" class="btn btn-raised btn-secondary" data-dismiss="modal">Tidak</button>
                                                                 <a class="btn btn-raised btn-danger ml-2" href="<?=base_url();?>Designer/hapusPortofolio/<?=$path;?>">Iya</a>
                                                             </div>
