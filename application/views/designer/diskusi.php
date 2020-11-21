@@ -355,6 +355,9 @@
                 wrapper.style.height= '0';
                 wrapper.style.display= 'none';
                 wrapper.classList.remove('p-3');
+
+                let label = document.getElementById('label');
+                label.innerText = 'Tambahkan Foto';
             }
         </script>
 
