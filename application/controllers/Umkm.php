@@ -72,8 +72,6 @@ class Umkm extends CI_Controller {
 		// echo $id_umkm."<br>";
 		// print_r($id_data_umkm);
 		// print_r($data);
-
-		$this->load->helper('my_helper');
 		$this->load->view('umkm/lihatrequest', $data);
 	}
 
