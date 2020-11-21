@@ -28,9 +28,9 @@
 <script src="<?=base_url()?>asset/admin/plugins/dropify/js/dropify.min.js"></script>
 <script src="<?=base_url()?>asset/admin/pages/dropify-untuk-designer.js"></script>
 
-<!-- <script src="<?=base_url()?>asset/admin/pages/datatables.init.js"></script> -->
-<!-- <script src="<?=base_url()?>asset/admin/plugins/datatables/jquery.dataTables.min.js"></script> -->
-<!-- <script src="<?=base_url()?>asset/admin/plugins/datatables/dataTables.bootstrap4.min.js"></script> -->
+<script src="<?=base_url()?>asset/admin/pages/datatables.init.js"></script>
+<script src="<?=base_url()?>asset/admin/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="<?=base_url()?>asset/admin/plugins/datatables/dataTables.bootstrap4.min.js"></script>
 <!-- <script src="<?=base_url()?>asset/admin/plugins/datatables/dataTables.responsive.min.js"></script> -->
 <!-- <script src="<?=base_url()?>asset/admin/plugins/datatables/responsive.bootstrap4.min.js"></script> -->
 

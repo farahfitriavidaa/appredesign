@@ -13,6 +13,13 @@
             </li>
 
             <li>
+                <a href="<?=base_url()?>Designer/lihatRequest" class="waves-effect">
+                    <i class="mdi mdi-format-list-bulleted"></i>
+                    <span> Lihat Request </span>
+                </a>
+            </li>
+
+            <li>
                 <a href="<?=base_url()?>Designer/lihatDiskusi" class="waves-effect">
                     <i class="mdi mdi-comment-text-outline"></i>
                     <span> Lihat Diskusi </span>

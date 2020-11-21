@@ -40,7 +40,16 @@ class Model_designer extends CI_Model {
     public function getAllIdPesan($id_designer)
 	{
 		return $this->db->query("SELECT IDPesan FROM tb_pemesanan WHERE IDDesigner='$id_designer'")->result_array();
-	}
+    }
+    
+    public function getAllRequest($id_designer)
+    {
+        return $this->db->query("SELECT IDPesan, IDDataUMKM, IDDesigner, Status, Tgl_akhir, Keterangan_design, Nama_produk 
+            FROM tb_pemesanan 
+            JOIN tb_umkm_data USING (IDDataUMKM)
+            WHERE IDDesigner='$id_designer' AND Status>=1
+            ORDER BY Tgl_order DESC")->result();
+    }
 
     public function createPortofolio($data)
     {

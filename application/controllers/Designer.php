@@ -40,6 +40,30 @@ class Designer extends CI_Controller {
 		$this->load->view('designer/dashboard', $data);
 	}
 
+	public function lihatRequest()
+	{
+		$id_designer	= $this->session->id_designer;
+		$daftar_request	= $this->Model_designer->getAllRequest($id_designer);
+
+		if( empty($daftar_request) ) {
+			$data = array(
+				'has_request' => false
+			);
+		}
+		else {
+			$data = array(
+				'has_request'		=> true,
+				'daftar_request'	=> $daftar_request,
+			);
+		}
+		// echo $id_umkm."<br>";
+		// print_r($id_data_umkm);
+		// print_r($data);
+
+		$this->load->helper('my_helper');
+		$this->load->view('designer/lihatrequest', $data);
+	}
+
 	public function lihatProfil()
 	{
 		$detil_designer	= $this->Model_designer->getDesigner( $this->session->id_designer );

@@ -18,8 +18,8 @@
         <!-- <link rel="stylesheet" href="<?=base_url()?>asset/admin/plugins/carousel/owl.carousel.min.css"> -->
         <!-- <link rel="stylesheet" href="<?=base_url()?>asset/admin/plugins/carousel/owl.theme.default.min.css"> -->
 
-        <!-- <link href="<?=base_url()?>asset/admin/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" /> -->
-        <!-- <link href="<?=base_url()?>asset/admin/plugins/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" /> -->
+        <link href="<?=base_url()?>asset/admin/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+        <link href="<?=base_url()?>asset/admin/plugins/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
         <!-- Dropzone css -->
         <link href="<?=base_url()?>asset/admin/plugins/dropify/css/dropify.min.css" rel="stylesheet"> 

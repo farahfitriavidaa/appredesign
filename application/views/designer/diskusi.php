@@ -216,12 +216,14 @@
                                                 </div>
                                             <?php endif; ?>
                                         </div>
-
+                                        
+                                        <?php if($pemesanan->Status<=4): ?>
                                         <div class="card-footer">
                                             <a class="btn btn-raised btn-secondary float-right" href="#">
                                                 Edit Keterangan
                                             </a>
                                         </div>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
 
