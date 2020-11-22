@@ -62,6 +62,43 @@ class Model_designer extends CI_Model {
         return $query->Status;
     }
 
+    public function getSumRequest($id_designer)
+    {
+        $q1 = $this->db->query("SELECT COUNT(IDPesan) AS total FROM tb_pemesanan WHERE IDDesigner='$id_designer' AND Status>1")->row();
+        $q2 = $this->db->query("SELECT COUNT(IDPesan) AS selesai FROM tb_pemesanan WHERE IDDesigner='$id_designer' AND Status>4")->row();
+        $q3 = $this->db->query("SELECT COUNT(IDPesan) AS belum FROM tb_pemesanan WHERE IDDesigner='$id_designer' AND Status IN('1', '2')")->row();
+
+        $data = array(
+            'total'     => $q1->total,
+            'selesai'   => $q2->selesai,
+            'belum'     => $q3->belum
+        );
+
+        return $data;
+    }
+
+    public function getKomenTerakhir($id_designer)
+    {
+        return $this->db->query("SELECT dispro.*, pemesanan.Status, dataumkm.Nama_produk
+            FROM tb_diskusiproduksi AS dispro
+            JOIN tb_pemesanan AS pemesanan USING(IDPesan)
+            JOIN tb_umkm_data AS dataumkm USING(IDDataUMKM)
+            WHERE dispro.IDDesigner='$id_designer' 
+            ORDER BY Tanggal_waktu DESC 
+            LIMIT 3")->result();
+    }
+
+    public function getRequestTerbaru($id_designer)
+    {
+        return $this->db->query("SELECT pemesanan.IDPesan, pemesanan.Status, dataumkm.Nama_produk 
+            FROM tb_pemesanan AS pemesanan
+            JOIN tb_umkm_data AS dataumkm USING(IDDataUMKM)
+            WHERE IDdesigner='$id_designer'
+            AND Status IN('1','2') 
+            ORDER BY Tgl_order DESC
+            LIMIT 3")->result();
+    }
+
     public function createPortofolio($data)
     {
         $this->db->insert('tb_portofolio', $data);

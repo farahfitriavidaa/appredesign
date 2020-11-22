@@ -6,9 +6,7 @@
             <li>
                 <a href="<?=base_url()?>Designer" class="waves-effect">
                     <i class="mdi mdi-view-dashboard"></i>
-                    <span> Dashboard
-                        <span class="badge badge-pill badge-primary float-right">7</span>
-                    </span>
+                    <span> Dashboard </span>
                 </a>
             </li>
 

@@ -22,21 +22,23 @@ class Designer extends CI_Controller {
 
 			$id_designer = $this->Model_designer->getIdDesigner( $this->session->id_user );
 			$this->session->id_designer = $id_designer->IDDesigner;
-		}
-		/**
-		 * Data yg mau ditampilin di dashboard:
-		 * - jumlah request yang didapat
-		 * - jumlah request yang terselesaikan
-		 * - Request yang belum selesai/request terbaru
-		 * - Aktivitas diskusi terakhir
-		 */
 
-		$user	= $this->Model_designer->getUserData( $this->session->user );
-		unset($user->Password);
+			$foto_profil = $this->Model_designer->getUserData($this->session->user);
+			$this->session->foto_profil	= $foto_profil->Foto;
+		}
+
+		$id_designer	 	= $this->session->id_designer;
+		$ringkasan_request	= $this->Model_designer->getSumRequest($id_designer);
+		$komen_terakhir		= $this->Model_designer->getKomenTerakhir($id_designer);
+		$request_terbaru	= $this->Model_designer->getRequestTerbaru($id_designer);
 
 		$data	= array(
-			'akun' => $user
+			'ringkasan' 		=> $ringkasan_request,
+			'diskusi_terakhir'	=> $komen_terakhir,
+			'request_terbaru'	=> $request_terbaru
 		);
+		
+		$this->load->helper('my_helper');
 		$this->load->view('designer/dashboard', $data);
 	}
 
