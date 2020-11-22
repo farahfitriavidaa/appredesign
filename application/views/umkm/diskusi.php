@@ -246,11 +246,14 @@
                                 <div class="col-12">
                                     <div class="mb-4">
                                         <div class="mb-4">
-                                            <!-- TO DO: ganti judulnya sesuai halaman dan level user -->
-                                            <strong>Diskusi dengan Pengelola/Designer/UMKM</strong>
+                                            <strong>Diskusi dengan Pengelola</strong>
                                         </div>
                                         <div class="px-2" style="overflow-y: auto; max-height: 1920px">
-                                        <?php foreach($daftar_diskusi as $diskusi): ?>
+                                        <?php 
+                                        if(empty($daftar_diskusi)):
+                                            echo "Belum ada diskusi untuk request ini.";
+                                        else:
+                                            foreach($daftar_diskusi as $diskusi): ?>
                                             <div class="card mb-3">
                                                 <div class="card-header">
                                                     <div class="row ml-0">
@@ -282,7 +285,10 @@
                                                     <span class="text-13 text-muted float-right"><?=cetakWaktu($diskusi->Tanggal_waktu);?></span>
                                                 </div>
                                             </div>
-                                        <?php endforeach; ?>
+                                        <?php 
+                                            endforeach;
+                                        endif; 
+                                        ?>
 
                                         </div>
 

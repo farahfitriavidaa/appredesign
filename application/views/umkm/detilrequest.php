@@ -43,6 +43,12 @@
 
                         <div class="container-fluid">
 
+                            <?php $id_pesan = trimId('PS', $detil_request->IDPesan);?>
+                            <a href="<?=base_url();?>Umkm/diskusi/<?=$id_pesan?>" class="btn btn-raised btn-secondary mt-4">
+                            <i class="mdi mdi-comment"></i>
+                                Diskusi dengan Pengelola
+                            </a>
+
                             <div class="row align-items-stretch mt-4">
                                 <div class="col-lg-6 mb-4">
                                     <div class="card" style="height:100%;">

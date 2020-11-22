@@ -83,7 +83,7 @@
 
                             <div class="mb-4">
                             <?php foreach($daftar_diskusi as $diskusi): ?>
-                                <a href="<?=base_url();?>Umkm/diskusi/<?=trimId('PS', $diskusi->IDPesan)?>" target="_blank" class="list-diskusi mb-2" noopener noreferer>
+                                <a href="<?=base_url();?>Umkm/diskusi/<?=trimId('PS', $diskusi->IDPesan)?>" target="_blank" class="list-diskusi mb-2">
                                     <div class="card">
                                         <div class="card-body">
                                             <strong><?=$diskusi->Nama_produk?></strong>
