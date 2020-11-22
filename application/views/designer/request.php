@@ -49,7 +49,7 @@
                             ?>
                                 <div class="row">
                                     <div class="col-12">
-                                        <div class="alert alert-<?=$alert['jenis']?> alert-dismissible fade show mb-0 mt-3" role="alert">
+                                        <div class="alert <?=$alert['jenis']?> alert-dismissible fade show mb-0 mt-3" role="alert">
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
@@ -181,7 +181,7 @@
                                                 <div class="form-group">
                                                     <strong class="mb-0">Unggah <?=$status_rq<=3?'hasil desain':'revisi'?></strong>
                                                     <p class="text-muted"><?php
-                                                        if($status_rq<=3)
+                                                        if($status_rq <= 3)
                                                             echo 'Dengan mengunggah hasil desain maka akan mengubah status request menjadi "Selesai didesain".'
                                                     ?></p>
                                                 </div>
@@ -207,6 +207,24 @@
                                             <?php 
                                                 else:
                                                     $hasil_design = explode(',', $hasil_design); ?>
+                                                    <?php if($status_rq<=3): ?>
+                                                        <button class="btn btn-danger" data-toggle="modal" data-target="#konfirmasi-hapus-hasil">Hapus hasil desain</button>
+                                                        <!-- Modal -->
+                                                        <div class="modal fade" id="konfirmasi-hapus-hasil" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmModal" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-body">
+                                                                        <span class="header-title">Apakah Anda yakin ingin menghapus hasil desain?</span>
+                                                                        <p class="text-muted mt-3">Tindakan ini akan <strong>menghapus semua</strong> hasil desain yang pernah Anda unggah dan status request ini.</p>
+                                                                    </div>
+                                                                    <div class="modal-footer">                                                            
+                                                                        <button type="button" class="btn btn-raised btn-primary" data-dismiss="modal">Batalkan</button>
+                                                                        <a class="btn btn-raised btn-danger ml-2" href="<?=base_url();?>Designer/hapusDesain/<?=trimId('PS', $request->IDPesan);?>">Iya, Saya yakin</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    <?php endif;?>
                                                     <div class="mb-4">
                                                     <?php foreach($hasil_design as $img):?>
                                                         <img src="<?=base_url()."uploads/hasil_design/".$img?>" alt="hasil desain" class="img-thumbnail mr-2 mb-2">
@@ -222,6 +240,24 @@
                                             <?php
                                                 else: 
                                                     $revisi = explode(',', $revisi)?>
+                                                    <?php if($status_rq==4): ?>
+                                                        <button class="btn btn-danger" data-toggle="modal" data-target="#konfirmasi-hapus-revisi">Hapus revisi</button>
+                                                        <!-- Modal -->
+                                                        <div class="modal fade" id="konfirmasi-hapus-revisi" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmModal" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-body">
+                                                                        <span class="header-title">Apakah Anda yakin ingin menghapus revisi?</span>
+                                                                        <p class="text-muted mt-3">Tindakan ini akan <strong>menghapus semua</strong> revisi yang telah Anda unggah.</p>
+                                                                    </div>
+                                                                    <div class="modal-footer">                                                            
+                                                                        <button type="button" class="btn btn-raised btn-primary" data-dismiss="modal">Batalkan</button>
+                                                                        <a class="btn btn-raised btn-danger ml-2" href="<?=base_url();?>Designer/hapusRevisi/<?=trimId('PS', $request->IDPesan);?>">Iya, Saya yakin</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    <?php endif;?>
                                                     <div>
                                                     <?php foreach($revisi as $img): ?>
                                                         <img src="<?=base_url()."uploads/revisi_design/".$img;?>" alt="revisi desain" class="img-thumbnail mr-2 mb-2">

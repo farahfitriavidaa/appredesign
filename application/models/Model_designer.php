@@ -118,4 +118,20 @@ class Model_designer extends CI_Model {
         $this->db->where('IDPortofolio', $id_portofolio);
         return $this->db->delete('tb_portofolio');
     }
+
+    public function deleteDesain($id_pesan, $id_designer)
+    {
+        $this->db->set('Hasil_design', null);
+        $this->db->where('IDPesan', $id_pesan);
+        $this->db->where('IDDesigner', $id_designer);
+        return $this->db->update('tb_pemesanan');
+    }
+
+    public function deleteRevisi($id_pesan, $id_designer)
+    {
+        $this->db->set('Revisi_design', null);
+        $this->db->where('IDPesan', $id_pesan);
+        $this->db->where('IDDesigner', $id_designer);
+        return $this->db->update('tb_pemesanan');
+    }
 }

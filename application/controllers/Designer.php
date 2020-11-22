@@ -105,7 +105,7 @@ class Designer extends CI_Controller {
 
 		if (is_null($status)) {
 			$_SESSION['alert'] = array(
-				'jenis'		=> 'danger',
+				'jenis'		=> 'alert-danger',
 				'isi'		=> 'Gagal mengunggah file'
 			);
 			$this->session->mark_as_flash('alert');
@@ -145,7 +145,7 @@ class Designer extends CI_Controller {
 				$isi_pesan	= $this->upload->display_errors('<span>', '</span>').' ('.$this->upload->data('file_name').')';
 
 				$_SESSION['alert'] = array(
-					'jenis'		=> 'danger',
+					'jenis'		=> 'alert-danger',
 					'isi'		=> $isi_pesan
 				);
 				$upload = false;
@@ -166,7 +166,7 @@ class Designer extends CI_Controller {
 				$this->Model_designer->updateStatus('3', $id_pesan_asli);
 
 				$_SESSION['alert'] = array(
-					'jenis'		=> 'primary',
+					'jenis'		=> 'alert-primary',
 					'isi'		=> 'Berhasil mengunggah hasil desain'
 				);
 			} else {
@@ -174,7 +174,7 @@ class Designer extends CI_Controller {
 				$this->Model_designer->uploadRevisi($file_terunggah, $id_pesan_asli);
 
 				$_SESSION['alert'] = array(
-					'jenis'		=> 'primary',
+					'jenis'		=> 'alert-primary',
 					'isi'		=> 'Berhasil mengunggah revisi'
 				);
 			}
@@ -184,6 +184,91 @@ class Designer extends CI_Controller {
 
 		$this->session->mark_as_flash('alert');
 		redirect('Designer/request/'.$id_pesan);
+	}
+
+	public function hapusDesain($id_pesan='0')
+	{
+		if ($id_pesan==='0') {
+			return http_response_code(400);
+		}
+
+		$id_pesan_asli	= 'PS'.str_pad($id_pesan, 4, '0', STR_PAD_LEFT);
+		$id_designer	= $this->session->id_designer; 
+
+		$status			= $this->Model_designer->getStatusRequest($id_pesan_asli, $id_designer);
+
+		if($status>3) {
+			$_SESSION['alert'] = array (
+				'jenis'	=> 'alert-danger',
+				'isi'	=> 'Hasil desain tidak bisa dihapus karena desain masih di-review atau sudah disetujui'
+			);
+
+			$this->session->mark_as_flash('alert');
+			redirect('Designer/request/'.$id_pesan);
+		}
+
+		$hapus			= $this->Model_designer->deleteDesain($id_pesan_asli, $id_designer);
+
+		if (!$hapus) {
+			$_SESSION['alert'] = 'Gagal menghapus hasil desain';
+
+			$this->session->mark_as_flash('alert');
+			redirect('Designer/lihatRequest');
+		}
+		else {
+			$_SESSION['alert'] = array (
+				'jenis'	=> 'alert-primary',
+				'isi'	=> 'Hasil desain berhasil dihapus'
+			);
+			
+			$this->Model_designer->updateStatus('2', $id_pesan_asli);
+
+			
+			$this->session->mark_as_flash('alert');
+			redirect('Designer/request/'.$id_pesan);
+		}
+	}
+
+	public function hapusRevisi($id_pesan='0')
+	{
+		if ($id_pesan==='0') {
+			return http_response_code(400);
+		}
+
+		$id_pesan_asli	= 'PS'.str_pad($id_pesan, 4, '0', STR_PAD_LEFT);
+		$id_designer	= $this->session->id_designer; 
+
+		$status			= $this->Model_designer->getStatusRequest($id_pesan_asli, $id_designer);
+
+		if($status>5) {
+			$_SESSION['alert'] = array (
+				'jenis'	=> 'alert-danger',
+				'isi'	=> 'Revisi tidak bisa dihapus karena desain sudah disetujui'
+			);
+
+			$this->session->mark_as_flash('alert');
+			redirect('Designer/request/'.$id_pesan);
+		}
+
+		$hapus			= $this->Model_designer->deleteRevisi($id_pesan_asli, $id_designer);
+
+		if (!$hapus) {
+			$_SESSION['alert'] = 'Gagal menghapus revisi';
+
+			$this->session->mark_as_flash('alert');
+			redirect('Designer/lihatRequest');
+		}
+		else {
+			$_SESSION['alert'] = array (
+				'jenis'	=> 'alert-primary',
+				'isi'	=> 'Revisi berhasil dihapus'
+			);
+
+			$this->session->mark_as_flash('alert');
+			redirect('Designer/request/'.$id_pesan);
+		}
+
+		
 	}
 
 	public function lihatProfil()
@@ -671,6 +756,11 @@ class Designer extends CI_Controller {
 	{
 		session_destroy();
 		redirect('Welcome/login');
+	}
+
+	public function muntah()
+	{
+		var_dump($_SESSION);
 	}
 
 	private function cekBuktiPortofolio(String $bukti)
