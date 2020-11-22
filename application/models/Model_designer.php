@@ -41,11 +41,11 @@ class Model_designer extends CI_Model {
 	{
 		return $this->db->query("SELECT IDPesan FROM tb_pemesanan WHERE IDDesigner='$id_designer'")->result_array();
     }
-    
+
     public function getAllRequest($id_designer)
     {
-        return $this->db->query("SELECT IDPesan, IDDataUMKM, IDDesigner, Status, Tgl_akhir, Keterangan_design, Nama_produk 
-            FROM tb_pemesanan 
+        return $this->db->query("SELECT IDPesan, IDDataUMKM, IDDesigner, Status, Tgl_akhir, Keterangan_design, Nama_produk
+            FROM tb_pemesanan
             JOIN tb_umkm_data USING (IDDataUMKM)
             WHERE IDDesigner='$id_designer' AND Status>1
             ORDER BY Tgl_order DESC")->result();
@@ -54,6 +54,12 @@ class Model_designer extends CI_Model {
     public function getRequest($id_pesan, $id_designer)
     {
         return $this->db->query("SELECT * FROM tb_pemesanan JOIN tb_umkm_data USING(IDDataUMKM) WHERE IDPesan='$id_pesan' AND IDDesigner='$id_designer' AND Status>1")->row();
+    }
+
+    public function getStatusRequest($id_pesan, $id_designer)
+    {
+        $query = $this->db->query("SELECT Status FROM tb_pemesanan WHERE IDPesan='$id_pesan' AND IDDesigner='$id_designer'")->row();
+        return $query->Status;
     }
 
     public function createPortofolio($data)
@@ -66,7 +72,7 @@ class Model_designer extends CI_Model {
 		$this->db->where('IDUser',$id_user);
 		$this->db->update('tb_user',$data);
     }
-    
+
     public function updateDesigner($id_designer, $data)
 	{
 		$this->db->where('IDDesigner',$id_designer);
@@ -84,7 +90,28 @@ class Model_designer extends CI_Model {
 		$this->db->set('Password', $password);
 		$this->db->where('IDUser',$id_user);
 		$this->db->update('tb_user');
-	}
+    }
+
+    public function uploadDesain($data, $id_pesan)
+    {
+        $this->db->set('Hasil_design', $data);
+        $this->db->where('IDPesan', $id_pesan);
+        $this->db->update('tb_pemesanan');
+    }
+
+    public function uploadRevisi($data, $id_pesan)
+    {
+        $this->db->set('Revisi_design', $data);
+        $this->db->where('IDPesan', $id_pesan);
+        $this->db->update('tb_pemesanan');
+    }
+
+    public function updateStatus($status, $id_pesan)
+    {
+        $this->db->set('Status', $status);
+        $this->db->where('IDPesan', $id_pesan);
+        $this->db->update('tb_pemesanan');
+    }
 
     public function deletePortofolio($id_portofolio)
     {

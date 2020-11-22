@@ -23,7 +23,7 @@ class Designer extends CI_Controller {
 			$id_designer = $this->Model_designer->getIdDesigner( $this->session->id_user );
 			$this->session->id_designer = $id_designer->IDDesigner;
 		}
-		/** 
+		/**
 		 * Data yg mau ditampilin di dashboard:
 		 * - jumlah request yang didapat
 		 * - jumlah request yang terselesaikan
@@ -87,6 +87,103 @@ class Designer extends CI_Controller {
 		// print_r($data);
 		$this->load->helper('my_helper');
 		$this->load->view('designer/request', $data);
+	}
+
+	public function uploadDesain()
+	{
+		if ($this->input->method()!=="post") {
+			return http_response_code(400);
+		}
+
+		$this->load->helper('my_helper');
+		$id_designer	= trimId('DG',$this->session->id_designer);
+
+		$id_pesan		= $this->input->post('np');
+		$id_pesan_asli	= 'PS'.str_pad($id_pesan, 4, '0', STR_PAD_LEFT);
+
+		$status			= $this->Model_designer->getStatusRequest($id_pesan_asli, $this->session->id_designer);
+
+		if (is_null($status)) {
+			$_SESSION['alert'] = array(
+				'jenis'		=> 'danger',
+				'isi'		=> 'Gagal mengunggah file'
+			);
+			$this->session->mark_as_flash('alert');
+
+			redirect('Designer/request/'.$id_pesan);
+		}
+
+		$files			= $_FILES['hasil-design'];
+		$jumlah_file	= count($files['name']);
+		$upload			= true;
+		$file_terunggah	= '';
+
+		$this->load->library('upload');
+		for ($i=0; $i < $jumlah_file; $i++) {
+			$config['allowed_types']	= 'jpg|png';
+			$config['max_size']			= 32000;
+			$config['overwrite']		= TRUE;
+
+			if ($status<=3) {
+				$config['upload_path']		= './uploads/hasil_design/';
+				$config['file_name']	  	= 'H_'.($id_pesan+16).($id_pesan*$id_designer).($id_designer+4).$i;
+			}
+			else {
+				$config['upload_path']		= './uploads/revisi_design/';
+				$config['file_name']	  	= 'R_'.($id_pesan+16).($id_pesan*$id_designer).($id_designer+4).$i;
+			}
+
+			$this->upload->initialize($config);
+
+			$_FILES['file']['name']		= $files['name'][$i];
+			$_FILES['file']['type']		= $files['type'][$i];
+			$_FILES['file']['tmp_name']	= $files['tmp_name'][$i];
+			$_FILES['file']['error']	= $files['error'][$i];
+			$_FILES['file']['size']		= $files['size'][$i];
+
+			if ( ! $this->upload->do_upload('file')) {
+				$isi_pesan	= $this->upload->display_errors('<span>', '</span>').' ('.$this->upload->data('file_name').')';
+
+				$_SESSION['alert'] = array(
+					'jenis'		=> 'danger',
+					'isi'		=> $isi_pesan
+				);
+				$upload = false;
+				break;
+			}
+			else {
+				$komah=$i==$jumlah_file-1?'':',';
+				$file_terunggah .= $this->upload->data('file_name').$komah;
+			}
+		}
+
+		var_dump($file_terunggah);
+
+		if ($upload) {
+			if ($status<=3) {
+
+				$this->Model_designer->uploadDesain($file_terunggah, $id_pesan_asli);
+				$this->Model_designer->updateStatus('3', $id_pesan_asli);
+
+				$_SESSION['alert'] = array(
+					'jenis'		=> 'primary',
+					'isi'		=> 'Berhasil mengunggah hasil desain'
+				);
+			} else {
+
+				$this->Model_designer->uploadRevisi($file_terunggah, $id_pesan_asli);
+
+				$_SESSION['alert'] = array(
+					'jenis'		=> 'primary',
+					'isi'		=> 'Berhasil mengunggah revisi'
+				);
+			}
+		}
+		// var_dump($data);
+		// var_dump($status);
+
+		$this->session->mark_as_flash('alert');
+		redirect('Designer/request/'.$id_pesan);
 	}
 
 	public function lihatProfil()
@@ -289,7 +386,7 @@ class Designer extends CI_Controller {
 		}
 
 		$this->load->model('Model_created');
-		
+
 		$data	= array(
 			'IDPortofolio'		=> $this->Model_created->idPortofolio(),
 			'IDDesigner'		=> $this->session->id_designer,
@@ -314,11 +411,11 @@ class Designer extends CI_Controller {
 		if ($id_portofolio=='0') {
 			return http_response_code('400');
 		}
-		
+
 		$id_prt_asli		= 'PRT'.str_pad($id_portofolio, 4, '0', STR_PAD_LEFT);
-		
+
 		$data_portofolio	= $this->Model_designer->getPortofolio($id_prt_asli);
-		
+
 		$bukti				= $this->cekBuktiPortofolio($data_portofolio->Bukti_portofolio);
 
 		$data				= array(

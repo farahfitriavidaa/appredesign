@@ -43,6 +43,22 @@
 
                         <div class="container-fluid">
 
+                            <?php
+                                if( ! is_null($this->session->flashdata('alert'))):
+                                    $alert = $this->session->flashdata('alert');
+                            ?>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="alert alert-<?=$alert['jenis']?> alert-dismissible fade show mb-0 mt-3" role="alert">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            <?=$alert['isi']?>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+
                             <div class="row align-items-stretch mt-4">
                                 <div class="col-lg-6 mb-4">
                                     <div class="card" style="height:100%;">
@@ -61,7 +77,9 @@
                                             </p>
                                             <strong class="d-block">Status</strong>
                                             <p>
-                                            <?php switch($request->Status){
+                                            <?php
+                                            $status_rq = $request->Status;
+                                            switch($status_rq){
                                                 case 1:
                                                     $status = "Request baru";
                                                     $badge  = "light";
@@ -156,43 +174,46 @@
                                 <div class="col-lg-6 mb-4">
                                     <div class="card" style="height:100%;">
                                         <div class="card-body">
-                                            
-                                            <form action="<?=base_url();?>Designer/uploadDesign" method="POST" enctype="multipart/form-data" autocomplete="off">
+                                            <?php if($status_rq<5): ?>
+
+                                            <form action="<?=base_url();?>Designer/uploadDesain" method="POST" enctype="multipart/form-data" autocomplete="off">
+                                                <input type="hidden" name="np" value="<?=trimID('PS', $request->IDPesan)?>">
                                                 <div class="form-group">
-                                                    <strong class="mb-0">Unggah hasil desain</strong>
-                                                    <p class="text-muted">Dengan mengunggah hasil desain maka akan mengubah status request menjadi "Selesai didesain".</p>
+                                                    <strong class="mb-0">Unggah <?=$status_rq<=3?'hasil desain':'revisi'?></strong>
+                                                    <p class="text-muted"><?php
+                                                        if($status_rq<=3)
+                                                            echo 'Dengan mengunggah hasil desain maka akan mengubah status request menjadi "Selesai didesain".'
+                                                    ?></p>
                                                 </div>
                                                 
                                                 <div class="form-group">
-                                                    <input type="file" name="bukti-portofolio" id="input-file-now" class="dropify" multiple/>
+                                                    <input type="file" name="hasil-design[]" id="input-file-now" class="dropify" multiple="multiple" required/>
                                                     <small class="text-muted">format .jpg atau .png</small>
                                                 </div>
 
                                                 <div class="form-group mt-4">
-                                                    <button type="submit" class="btn btn-primary btn-raised float-right">Submit</button>
-                                                    <a href="<?=base_url();?>Designer/lihatPortofolio" class="btn btn-secondary border-0 float-right">Batal</a>
+                                                    <button type="submit" class="btn btn-primary btn-raised float-right">Unggah</button>
                                                 </div>
 
                                                 <div class="clearfix"></div>
                                             </form>
+                                            <?php endif; ?>
 
                                             <strong class="d-block">Hasil Desain</strong>
-                                            <!-- TO DO: ganti direktori dan gambar hasil desain asli -->
-                                            <?php if(empty($request->Foto_produk)): ?>
+                                            <?php if(empty($request->Hasil_design)): ?>
                                             <p><i class="text-muted">Belum ada hasil desain</i></p>
                                             <?php else: ?>
                                             <div class="mb-4" style="height: 160px;">
-                                                <img src="<?=base_url()."uploads/foto_kemasan_lama/".$request->Foto_produk;?>" alt="hasil desain" class="img-thumbnail" style="height:inherit">
+                                                <img src="<?=base_url()."uploads/hasil_design/".$request->Hasil_design;?>" alt="hasil desain" class="img-thumbnail" style="height:inherit">
                                             </div>
                                             <?php endif; ?>
 
                                             <strong class="d-block">Revisi Desain</strong>
-                                            <!-- TO DO: ganti direktori dan gambar revisi desain asli -->
-                                            <?php if(empty($request->Foto_produk)): ?>
+                                            <?php if(empty($request->Revisi_design)): ?>
                                             <p><i class="text-muted">Tidak ada revisi desain</i></p>
                                             <?php else: ?>
                                             <div style="height: 160px;">
-                                                <img src="<?=base_url()."uploads/foto_kemasan_lama/".$request->Foto_produk;?>" alt="revisi desain" class="img-thumbnail" style="height:inherit">
+                                                <img src="<?=base_url()."uploads/revisi_design/".$request->Revisi_design;?>" alt="revisi desain" class="img-thumbnail" style="height:inherit">
                                             </div>
                                             <?php endif; ?>
                                         </div>
