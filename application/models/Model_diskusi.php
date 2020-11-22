@@ -79,12 +79,12 @@ class Model_diskusi extends CI_Model {
 
 	public function getJumlahDispro($id_pesan, $status)
 	{
-		$this->db->select("count(diskum1.IDDispro) AS jumlah");
-		$this->db->from("tb_diskusiproduksi AS diskum1");
+		$this->db->select("count(dispro1.IDDispro) AS jumlah");
+		$this->db->from("tb_diskusiproduksi AS dispro1");
 		$this->db->join("tb_pemesanan AS pemesanan", "IDPesan");
-		$this->db->join("(SELECT IDPesan, MAX(Tanggal_waktu) AS Tanggal_terupdate FROM tb_diskusiproduksi GROUP BY IDPesan) AS diskum2",
-			"diskum1.IDPesan = diskum2.IDPesan AND diskum1.Tanggal_waktu = diskum2.Tanggal_terupdate");
-		$this->db->where_in("diskum1.IDPesan", $id_pesan);
+		$this->db->join("(SELECT IDPesan, MAX(Tanggal_waktu) AS Tanggal_terupdate FROM tb_diskusiproduksi GROUP BY IDPesan) AS dispro2",
+			"dispro1.IDPesan = dispro2.IDPesan AND dispro1.Tanggal_waktu = dispro2.Tanggal_terupdate");
+		$this->db->where_in("dispro1.IDPesan", $id_pesan);
 		$this->db->where_in("pemesanan.Status", $status);
 		$result	= $this->db->get();
 

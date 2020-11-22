@@ -143,7 +143,7 @@
                                                                     $badge  = "danger";
                                                                     break;
                                                                 default:
-                                                                    $status = "Pending";
+                                                                    $status = "Unknown";
                                                                     $badge  = "light";
                                                                     break;
                                                             }?>

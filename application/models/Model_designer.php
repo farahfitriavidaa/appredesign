@@ -47,7 +47,7 @@ class Model_designer extends CI_Model {
         return $this->db->query("SELECT IDPesan, IDDataUMKM, IDDesigner, Status, Tgl_akhir, Keterangan_design, Nama_produk 
             FROM tb_pemesanan 
             JOIN tb_umkm_data USING (IDDataUMKM)
-            WHERE IDDesigner='$id_designer' AND Status>=1
+            WHERE IDDesigner='$id_designer' AND Status>1
             ORDER BY Tgl_order DESC")->result();
     }
 

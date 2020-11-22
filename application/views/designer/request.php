@@ -150,18 +150,6 @@
                                             </div>
                                             <?php endif; ?>
                                         </div>
-
-                                        <?php if($request->Status < 5): ?>
-                                        <div class="card-footer">
-                                            <?php
-                                                $path   = $request->IDPesan;
-                                                $path   = trimId('PS', $path);
-                                            ?>
-                                            <a class="btn btn-raised btn-secondary float-right" href="<?=base_url();?>Umkm/editRequest/<?=$path;?>">
-                                                Edit Data Produk
-                                            </a>
-                                        </div>
-                                        <?php endif; ?>
                                     </div>
                                 </div> <!-- end col -->
 
