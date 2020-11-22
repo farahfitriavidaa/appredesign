@@ -79,6 +79,8 @@
                                                     $badge  = "info";
                                                     break;
                                                 case 5:
+                                                case 6:
+                                                case 7:
                                                     $status = "Desain disetujui";
                                                     $badge  = "success";
                                                     break;

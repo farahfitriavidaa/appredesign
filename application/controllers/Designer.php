@@ -399,10 +399,10 @@ class Designer extends CI_Controller {
 			$status = ['1', '2', '3' ,'4'];
 		}
 		elseif ($filter==='semua') {
-			$status = ['1', '2', '3' ,'4', '5'];
+			$status = ['1', '2', '3' ,'4', '5','6', '7'];
 		}
 		elseif ($filter==='telah-selesai') {
-			$status = ['5'];
+			$status = ['5','6', '7'];
 		}
 		else {
 			redirect('Designer/lihatDiskusi');

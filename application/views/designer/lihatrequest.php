@@ -116,17 +116,13 @@
                                                             ?></td>
                                                             <td>
                                                             <?php switch($request->Status){
-                                                                case 0:
-                                                                    $status = "Pending";
-                                                                    $badge  = "light";
-                                                                    break;
                                                                 case 1:
-                                                                    $status = "Telah didiskusikan";
+                                                                    $status = "Request baru";
                                                                     $badge  = "light";
                                                                     break;
                                                                 case 2:
-                                                                    $status = "Mulai dikerjakan desainer";
-                                                                    $badge  = "light";
+                                                                    $status = "Mulai dikerjakan";
+                                                                    $badge  = "warning";
                                                                     break;
                                                                 case 3:
                                                                     $status = "Selesai didesain";
@@ -137,15 +133,9 @@
                                                                     $badge  = "info";
                                                                     break;
                                                                 case 5:
-                                                                    $status = "Desain disetujui";
-                                                                    $badge  = "info";
-                                                                    break;
                                                                 case 6:
-                                                                    $status = "Belum dibayar";
-                                                                    $badge  = "warning";
-                                                                    break;
                                                                 case 7:
-                                                                    $status = "Lunas";
+                                                                    $status = "Desain disetujui";
                                                                     $badge  = "success";
                                                                     break;
                                                                 case 8:

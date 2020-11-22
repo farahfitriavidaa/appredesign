@@ -143,6 +143,8 @@
                                                     $badge  = "info";
                                                     break;
                                                 case 5:
+                                                case 6:
+                                                case 7:
                                                     $status = "Desain disetujui";
                                                     $badge  = "success";
                                                     break;
@@ -156,13 +158,6 @@
                                                     break;
                                             }?>
                                                 <span class="badge badge-<?=$badge?>" style="font-size:unset"><?=$status?></span>
-                                            </p>
-                                            <strong class="d-block">Harga</strong>
-                                            <p>
-                                            <?php
-                                                $harga = $pemesanan->Harga;
-                                                echo $harga==NULL?'<i class="text-muted">Belum ditentukan</i>':$harga;
-                                            ?>
                                             </p>
                                             <strong class="d-block">Tanggal Mulai Desain</strong>
                                             <p>
@@ -217,10 +212,14 @@
                                             <?php endif; ?>
                                         </div>
                                         
+                                        <?php
+                                            $id_pesan   = $pemesanan->IDPesan;
+                                            $id_pesan   = trimId('PS', $id_pesan);
+                                        ?>
                                         <?php if($pemesanan->Status<=4): ?>
                                         <div class="card-footer">
-                                            <a class="btn btn-raised btn-secondary float-right" href="#">
-                                                Edit Keterangan
+                                            <a class="btn btn-raised btn-secondary float-right" href="<?=base_url();?>Designer/request/<?=$id_pesan?>">
+                                                Unggah hasil design
                                             </a>
                                         </div>
                                         <?php endif; ?>
@@ -282,10 +281,6 @@
                                             <form action="<?=base_url();?>Designer/tambahKomentar" method="post" enctype="multipart/form-data" class="mb-0" autocomplete="off">
                                                 <div style="display: flex; flex-flow: row nowrap; padding: 8px 16px;">
                                                     <div class="form-group" style="display:inline; padding:0; margin: 0; flex: auto">
-                                                        <?php
-                                                            $id_pesan   = $pemesanan->IDPesan;
-                                                            $id_pesan   = trimId('PS', $id_pesan);
-                                                        ?>
                                                         <input type="hidden" name="np" value="<?=$id_pesan?>">
                                                         <input type="text" name="komentar" placeholder="Masukan pesan..." class="form-control" style="display: unset;">
                                                     </div>
