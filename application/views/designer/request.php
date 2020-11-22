@@ -200,21 +200,33 @@
                                             <?php endif; ?>
 
                                             <strong class="d-block">Hasil Desain</strong>
-                                            <?php if(empty($request->Hasil_design)): ?>
-                                            <p><i class="text-muted">Belum ada hasil desain</i></p>
-                                            <?php else: ?>
-                                            <div class="mb-4" style="height: 160px;">
-                                                <img src="<?=base_url()."uploads/hasil_design/".$request->Hasil_design;?>" alt="hasil desain" class="img-thumbnail" style="height:inherit">
-                                            </div>
+                                            <?php 
+                                                $hasil_design = $request->Hasil_design;
+                                                if(empty($hasil_design)): ?>
+                                                    <p><i class="text-muted">Belum ada hasil desain</i></p>
+                                            <?php 
+                                                else:
+                                                    $hasil_design = explode(',', $hasil_design); ?>
+                                                    <div class="mb-4">
+                                                    <?php foreach($hasil_design as $img):?>
+                                                        <img src="<?=base_url()."uploads/hasil_design/".$img?>" alt="hasil desain" class="img-thumbnail mr-2 mb-2">
+                                                    <?php endforeach;?>
+                                                    </div>
                                             <?php endif; ?>
 
                                             <strong class="d-block">Revisi Desain</strong>
-                                            <?php if(empty($request->Revisi_design)): ?>
-                                            <p><i class="text-muted">Tidak ada revisi desain</i></p>
-                                            <?php else: ?>
-                                            <div style="height: 160px;">
-                                                <img src="<?=base_url()."uploads/revisi_design/".$request->Revisi_design;?>" alt="revisi desain" class="img-thumbnail" style="height:inherit">
-                                            </div>
+                                            <?php 
+                                                $revisi = $request->Revisi_design;
+                                                if(empty($revisi)): ?>
+                                                    <p><i class="text-muted">Tidak ada revisi desain</i></p>
+                                            <?php
+                                                else: 
+                                                    $revisi = explode(',', $revisi)?>
+                                                    <div>
+                                                    <?php foreach($revisi as $img): ?>
+                                                        <img src="<?=base_url()."uploads/revisi_design/".$img;?>" alt="revisi desain" class="img-thumbnail mr-2 mb-2">
+                                                    <?php endforeach; ?>
+                                                    </div>
                                             <?php endif; ?>
                                         </div>
                                     </div>
