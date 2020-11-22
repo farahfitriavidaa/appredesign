@@ -85,6 +85,27 @@ class Model_umkm extends CI_Model {
 	{
 		return $this->db->query("SELECT Password FROM tb_user WHERE IDUser='$id_user'")->row();
 	}
+
+	public function getKomenTerakhir($id_umkm)
+    {
+        return $this->db->query("SELECT diskum.*, pemesanan.Status, dataumkm.Nama_produk
+            FROM tb_diskusiumkm AS diskum
+            JOIN tb_pemesanan AS pemesanan USING(IDPesan)
+            JOIN tb_umkm_data AS dataumkm USING(IDDataUMKM)
+            WHERE diskum.IDUmkm='$id_umkm' 
+            ORDER BY Tanggal_waktu DESC 
+            LIMIT 3")->result();
+    }
+
+    public function getRequestTerbaru($id_umkm)
+    {
+        return $this->db->query("SELECT pemesanan.IDPesan, pemesanan.Status, dataumkm.Nama_produk 
+            FROM tb_pemesanan AS pemesanan
+            JOIN tb_umkm_data AS dataumkm USING(IDDataUMKM)
+            WHERE dataumkm.IDUMKM='$id_umkm'
+            ORDER BY Tgl_order DESC
+            LIMIT 3")->result();
+    }
 	
 	public function createUmkmData($data){
 		$this->db->insert('tb_umkm_data', $data);

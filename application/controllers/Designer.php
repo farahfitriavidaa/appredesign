@@ -37,7 +37,7 @@ class Designer extends CI_Controller {
 			'diskusi_terakhir'	=> $komen_terakhir,
 			'request_terbaru'	=> $request_terbaru
 		);
-		
+
 		$this->load->helper('my_helper');
 		$this->load->view('designer/dashboard', $data);
 	}
