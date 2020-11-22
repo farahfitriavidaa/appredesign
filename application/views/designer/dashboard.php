@@ -129,7 +129,7 @@
                                                 <a href="<?=base_url();?>Designer/lihatRequest" class="btn btn-primary">Lihat Request dan Beri Komentar</a>
                                             <?php else: 
                                                 foreach($diskusi_terakhir as $diskusi): ?>
-                                                <a href="<?=base_url();?>Designer/diskusi/<?=trimId('PS',$diskusi->IDPesan);?>" target="_blank" class="list-diskusi mb-2">
+                                                <a href="<?=base_url();?>Designer/diskusi/<?=trimId('PS',$diskusi->IDPesan);?>" class="list-diskusi mb-2">
                                                     <div class="card" style="box-shadow:unset;border:1px solid #e5e5e5;">
                                                         <div class="card-body">
                                                             <strong><?=$diskusi->Nama_produk?></strong>
@@ -194,7 +194,7 @@
                                                 <a class="btn btn-raised btn-primary" href="<?=base_url();?>Designer/lihatPortofolio">Lihat portofolio saya</a>
                                             <?php else: 
                                                 foreach($request_terbaru as $request): ?>
-                                                <a href="<?=base_url();?>Designer/diskusi/<?=trimId('PS',$request->IDPesan);?>" target="_blank" class="list-diskusi mb-2">
+                                                <a href="<?=base_url();?>Designer/diskusi/<?=trimId('PS',$request->IDPesan);?>" class="list-diskusi mb-2">
                                                     <div class="card" style="box-shadow:unset;border:1px solid #e5e5e5;">
                                                         <div class="card-body">
                                                             <strong>
