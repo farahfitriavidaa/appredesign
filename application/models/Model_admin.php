@@ -191,6 +191,13 @@ class Model_admin extends CI_Model {
     return $o;
   }
 
+  public function updateStatus($status, $id_pesan)
+    {
+      $this->db->set('Status', $status);
+      $this->db->where('IDPesan', $id_pesan);
+      $this->db->update('tb_pemesanan');
+    }
+
   public function delete_dataumkm($id)
   {
     $this->db->where('IDDataUMKM',$id);

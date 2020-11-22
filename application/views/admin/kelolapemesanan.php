@@ -410,7 +410,7 @@
                        </tr>
                        <tr>
                          <td>Hasil Design <br>
-                          <p style="font-size:11px">File harus berupa rar/jpg/pdf</p> </td>
+                          <p style="font-size:11px">File harus berupa rar/jpg/png</p> </td>
                          <td>:</td>
                          <td><input type="file" class="form-control" name="hasil_design"></td>
                        </tr>

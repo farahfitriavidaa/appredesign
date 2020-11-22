@@ -663,32 +663,40 @@ class Admin extends CI_Controller {
 
 	public function editPemesanan()
 	{
-					$config['upload_path'] = "./uploads/hasil_design";
-					$config['allowed_types'] = "rar|jpg|pdf";
-					$config['max_size'] = 2000;
-					$config['encrypt_name'] = TRUE;
+					$config['upload_path']		= "./uploads/hasil_design";
+					// Sorry, aku batasi dulu untuk upload file hanya boleh gambar jpg/png aja
+					// kalau pdf belum ada handling buat milah mana gambar mana file
+					$config['allowed_types']	= "jpg|png|rar";
+					$config['max_size']			= 2000;
+					$config['encrypt_name']		= TRUE;
 
 					$this->load->library('upload',$config);
 					$id 	= $this->input->post('idpesan');
 
 					if ($this->upload->do_upload('hasil_design')) {
-					$foto = $this->upload->data();
-					$data = array(
-						'IDDesigner' 				=> $this->input->post('iddesigner'),
-						'Tgl_mulai'  				=> $this->input->post('tgl_mulai'),
-						'Tgl_akhir'	 				=> $this->input->post('tgl_akhir'),
-						'Keterangan_design'	=> $this->input->post('keterangan'),
-						'Hasil_design'			=> $foto['file_name'],
-						'Status'					  => $this->input->post('status')
-					);
+
+						$status = $this->input->post('status');
+						if ($status<3) {
+							$status = '3';
+						}
+
+						$foto = $this->upload->data();
+						$data = array(
+							'IDDesigner'		=> $this->input->post('iddesigner'),
+							'Tgl_mulai'			=> $this->input->post('tgl_mulai'),
+							'Tgl_akhir'			=> $this->input->post('tgl_akhir'),
+							'Keterangan_design'	=> $this->input->post('keterangan'),
+							'Hasil_design'		=> $foto['file_name'],
+							'Status'			=> $status
+						);
 					}else{
 						$data = array(
-							'IDDesigner' 				=> $this->input->post('iddesigner'),
-							'Tgl_mulai'  				=> $this->input->post('tgl_mulai'),
-							'Tgl_akhir'	 				=> $this->input->post('tgl_akhir'),
+							'IDDesigner'		=> $this->input->post('iddesigner'),
+							'Tgl_mulai'			=> $this->input->post('tgl_mulai'),
+							'Tgl_akhir'			=> $this->input->post('tgl_akhir'),
 							'Keterangan_design'	=> $this->input->post('keterangan'),
-							'Hasil_design'			=> 'Belum ada',
-							'Status'					  => $this->input->post('status')
+							'Hasil_design'		=> 'Belum ada',
+							'Status'			=> $this->input->post('status')
 						);
 					}
 					$cek = $this->Model_admin->update_pemesanan($id,$data);
