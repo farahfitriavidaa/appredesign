@@ -250,7 +250,7 @@
                                         <div class="mb-4">
                                             <strong>Diskusi dengan UMKM</strong>
                                         </div>
-                                        <div class="px-2" style="overflow-y: auto; max-height: 1920px">
+                                        <div class="px-2" id="thread" style="overflow-y: auto; max-height: 120vh">
                                         <?php foreach($daftar_komentar as $diskusi): ?>
                                             <div class="card mb-3">
                                                 <div class="card-header">
@@ -284,7 +284,6 @@
                                                 </div>
                                             </div>
                                         <?php endforeach; ?>
-
                                         </div>
 
                                         <!-- Bagian input komentar -->
@@ -312,8 +311,6 @@
                                                     <input type="submit" value="Kirim" class="btn btn-primary">
                                                 </div>
                                             </form>
-
-
                                         </div>
                                     </div>
 
@@ -363,6 +360,7 @@
             hapus.addEventListener('click', hapusFoto);
 
             function hapusFoto() {
+                let input = document.getElementById('foto');
                 input.value = '';
 
                 let preview = document.getElementById('foto-upload');

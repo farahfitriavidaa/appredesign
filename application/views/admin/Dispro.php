@@ -251,7 +251,7 @@
                                         <div class="mb-4">
                                             <strong>Diskusi dengan Desainer </strong>
                                         </div>
-                                        <div class="px-2" style="overflow-y: auto; max-height: 1920px">
+                                        <div class="px-2" style="overflow-y: auto; max-height: 120vh">
                                         <?php foreach($daftar_komentar as $diskusi): ?>
                                             <div class="card mb-3">
                                                 <div class="card-header">

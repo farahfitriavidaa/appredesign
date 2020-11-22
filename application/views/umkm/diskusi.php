@@ -258,7 +258,7 @@
                                         <div class="mb-4">
                                             <strong>Diskusi dengan Pengelola</strong>
                                         </div>
-                                        <div class="px-2" style="overflow-y: auto; max-height: 1920px">
+                                        <div class="px-2" style="overflow-y: auto; max-height: 120vh">
                                         <?php 
                                         if(empty($daftar_diskusi)):
                                             echo "Belum ada diskusi untuk request ini.";
