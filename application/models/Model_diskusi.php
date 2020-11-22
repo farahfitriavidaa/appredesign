@@ -6,11 +6,6 @@
  */
 
 class Model_diskusi extends CI_Model {
-
-	// public function getPemesanan($id_pesan)
-	// {
-    //     return $this->db->query("SELECT * FROM tb_pemesanan JOIN tb_umkm_data USING(IDDataUMKM) WHERE IDPesan='$id_pesan'")->row();
-	// }
 	
 	public function getPemesanan($id_pesan, $id_level, $level)
 	{
@@ -93,8 +88,6 @@ class Model_diskusi extends CI_Model {
 
 	public function getDiskum($id_pesan)
 	{
-		// return $this->db->query("SELECT * FROM tb_diskusiumkm WHERE IDPesan='$id_pesan'")->result();
-
 		$this->db->select("diskum.*, user.Nama_lengkap, user.Level, user.Foto, umkm.Nama_umkm");
 		$this->db->from("tb_diskusiumkm AS diskum");
 		$this->db->join("tb_umkm AS umkm", "IDUMKM", "left");
@@ -109,7 +102,6 @@ class Model_diskusi extends CI_Model {
 
 	public function getDispro($id_pesan)
 	{
-
 		$this->db->select("dispro.*, user.Nama_lengkap, user.Level, user.Foto, desainer.IDDesigner");
 		$this->db->from("tb_diskusiproduksi AS dispro");
 		$this->db->join("tb_desainer AS desainer", "IDDesigner", "left");

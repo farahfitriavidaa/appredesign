@@ -38,7 +38,7 @@ class Umkm extends CI_Controller {
 			'diskusi_terakhir'	=> $komen_terakhir,
 			'request_terbaru'	=> $request_terbaru
 		);
-		// var_dump($data);
+
 		$this->load->helper('my_helper');
 		$this->load->view('umkm/dashboard', $data);
 	}
@@ -78,9 +78,7 @@ class Umkm extends CI_Controller {
 				'produks'		=> $daftar_produk
 			);
 		}
-		// echo $id_umkm."<br>";
-		// print_r($id_data_umkm);
-		// print_r($data);
+
 		$this->load->view('umkm/lihatrequest', $data);
 	}
 
@@ -147,11 +145,6 @@ class Umkm extends CI_Controller {
 				);
 				$this->session->mark_as_flash('alert');
 				redirect('Umkm/lihatRequest');
-
-				// var_dump($alert);
-				// var_dump($data_umkm);
-				// var_dump($data_pemesanan);
-
 			}
 			else{
 				$_SESSION['alert'] = $alert;
@@ -189,7 +182,6 @@ class Umkm extends CI_Controller {
 				'desainer'		=> $data_desainer
 			);
 
-			// print_r($data);
 			$this->load->helper('my_helper');
 			$this->load->view('umkm/detilrequest', $data);
 		} else {
@@ -211,8 +203,6 @@ class Umkm extends CI_Controller {
 				'data_produk'	=> $data_produk
 			);
 
-			// print_r($data);
-			// echo "<br>".$data['detil_request']->IDPesan."<br>";
 			$this->load->helper('my_helper');
 			$this->load->view('umkm/editrequest', $data);
 		} else {
@@ -272,11 +262,6 @@ class Umkm extends CI_Controller {
 				);;
 				$this->session->mark_as_flash('alert');
 				redirect('Umkm/lihatRequest');
-
-				// var_dump($alert);
-				// var_dump($data_umkm);
-				// var_dump($data_pemesanan);
-
 			}
 			else{
 				$_SESSION['alert'] = $alert;
@@ -339,34 +324,6 @@ class Umkm extends CI_Controller {
 			'daftar_designer'	=> $daftar_designer
 		);
 
-		/*
-		$nama_produk		= $this->input->post('nama-produk');
-		$keterangan_produk	= $this->input->post('keterangan-produk');
-		$keterangan_desain	= $this->input->post('keterangan-desain');
-		$foto_produk		= '';
-		$logo_produk		= '';
-		$kemasan_produk		= '';
-		$temp_input			= array();
-
-		if( isset($_FILES['foto-produk']) )
-			$foto_produk	= $_FILES['foto-produk'];
-		if( isset($_FILES['logo-produk']) )
-			$logo_produk	= $_FILES['logo-produk'];
-		if( isset($_FILES['kemasan-produk']) )
-			$kemasan_produk	= $_FILES['kemasan-produk'];
-
-		$temp_input			= array(
-			'nama-produk'			=> $nama_produk,
-			'keterangan-produk'		=> $keterangan_produk,
-			'keterangan-design'		=> $keterangan_desain,
-			'foto-produk'			=> $foto_produk,
-			'logo-produk'			=> $logo_produk,
-			'kemasan-produk'		=> $kemasan_produk,
-		);
-		*/
-
-		// var_dump($data);
-
 		$this->load->helper('my_helper');
 		$this->load->view('umkm/lihatportofolio', $data);
 	}
@@ -383,7 +340,6 @@ class Umkm extends CI_Controller {
 			'umkm'	=> $detil_umkm
 		);
 
-		// print_r($data);
 		$this->load->view('umkm/lihatprofil', $data);
 	}
 
@@ -399,8 +355,6 @@ class Umkm extends CI_Controller {
 			'umkm'	=> $detil_umkm
 		);
 
-		// print_r($data);
-		// echo "<br>".$data['detil_request']->IDPesan."<br>";
 		$this->load->view('umkm/editprofil', $data);
 	}
 
@@ -554,7 +508,7 @@ class Umkm extends CI_Controller {
 		// jika ada daftar diskusi maka beri status has_diskum=true dan masukan ke $data
 		if( empty($daftar_diskusi) ) {
 			$data = array(
-				'has_diskum' 		=> false, 
+				'has_diskum' 		=> false,
 				'filter'			=> $filter,
 				'page'				=> $page,
 				'hal_selanjutnya'	=> $hal_selanjutnya,
@@ -571,7 +525,7 @@ class Umkm extends CI_Controller {
 				'hal_sebelumnya'	=> $hal_sebelumnya
 			);
 		}
-		// var_dump($data);
+
 		$this->load->view('umkm/lihatdiskusi', $data);
 	}
 

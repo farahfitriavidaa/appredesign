@@ -83,18 +83,18 @@ class Model_designer extends CI_Model {
             FROM tb_diskusiproduksi AS dispro
             JOIN tb_pemesanan AS pemesanan USING(IDPesan)
             JOIN tb_umkm_data AS dataumkm USING(IDDataUMKM)
-            WHERE dispro.IDDesigner='$id_designer' 
-            ORDER BY Tanggal_waktu DESC 
+            WHERE dispro.IDDesigner='$id_designer'
+            ORDER BY Tanggal_waktu DESC
             LIMIT 3")->result();
     }
 
     public function getRequestTerbaru($id_designer)
     {
-        return $this->db->query("SELECT pemesanan.IDPesan, pemesanan.Status, dataumkm.Nama_produk 
+        return $this->db->query("SELECT pemesanan.IDPesan, pemesanan.Status, dataumkm.Nama_produk
             FROM tb_pemesanan AS pemesanan
             JOIN tb_umkm_data AS dataumkm USING(IDDataUMKM)
             WHERE IDdesigner='$id_designer'
-            AND Status IN('1','2') 
+            AND Status IN('1','2')
             ORDER BY Tgl_order DESC
             LIMIT 3")->result();
     }

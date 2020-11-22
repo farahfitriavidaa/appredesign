@@ -181,8 +181,6 @@ class Designer extends CI_Controller {
 				);
 			}
 		}
-		// var_dump($data);
-		// var_dump($status);
 
 		$this->session->mark_as_flash('alert');
 		redirect('Designer/request/'.$id_pesan);
@@ -195,7 +193,7 @@ class Designer extends CI_Controller {
 		}
 
 		$id_pesan_asli	= 'PS'.str_pad($id_pesan, 4, '0', STR_PAD_LEFT);
-		$id_designer	= $this->session->id_designer; 
+		$id_designer	= $this->session->id_designer;
 
 		$status			= $this->Model_designer->getStatusRequest($id_pesan_asli, $id_designer);
 
@@ -222,10 +220,10 @@ class Designer extends CI_Controller {
 				'jenis'	=> 'alert-primary',
 				'isi'	=> 'Hasil desain berhasil dihapus'
 			);
-			
+
 			$this->Model_designer->updateStatus('2', $id_pesan_asli);
 
-			
+
 			$this->session->mark_as_flash('alert');
 			redirect('Designer/request/'.$id_pesan);
 		}
@@ -238,7 +236,7 @@ class Designer extends CI_Controller {
 		}
 
 		$id_pesan_asli	= 'PS'.str_pad($id_pesan, 4, '0', STR_PAD_LEFT);
-		$id_designer	= $this->session->id_designer; 
+		$id_designer	= $this->session->id_designer;
 
 		$status			= $this->Model_designer->getStatusRequest($id_pesan_asli, $id_designer);
 
@@ -270,7 +268,7 @@ class Designer extends CI_Controller {
 			redirect('Designer/request/'.$id_pesan);
 		}
 
-		
+
 	}
 
 	public function lihatProfil()
@@ -297,7 +295,6 @@ class Designer extends CI_Controller {
 			'designer'	=> $detil_designer
 		);
 
-		// print_r($data);
 		$this->load->view('designer/editprofil', $data);
 	}
 
@@ -420,7 +417,7 @@ class Designer extends CI_Controller {
 		$this->load->view('designer/lihatportofolio', $data);
 	}
 
-	// deprecated function and view it loaded
+	// unused function
 	public function portofolio($id_portofolio='0')
 	{
 		if ($id_portofolio=='0') {
@@ -482,7 +479,6 @@ class Designer extends CI_Controller {
 			'Bukti_portofolio'	=> $bukti,
 			'Detail_portofolio'	=> $detil
 		);
-		// var_dump($data);
 
 		$this->Model_designer->createPortofolio($data);
 

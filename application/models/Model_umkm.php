@@ -11,7 +11,7 @@ class Model_umkm extends CI_Model {
 	{
 		return $this->db->query("SELECT IDUser FROM tb_user WHERE username='$user'")->row();
 	}
-	
+
 	public function getIdUmkm($id_user)
 	{
 		return $this->db->query("SELECT IDUMKM FROM tb_umkm WHERE IDUser='$id_user'")->row();
@@ -92,21 +92,21 @@ class Model_umkm extends CI_Model {
             FROM tb_diskusiumkm AS diskum
             JOIN tb_pemesanan AS pemesanan USING(IDPesan)
             JOIN tb_umkm_data AS dataumkm USING(IDDataUMKM)
-            WHERE diskum.IDUmkm='$id_umkm' 
-            ORDER BY Tanggal_waktu DESC 
+            WHERE diskum.IDUmkm='$id_umkm'
+            ORDER BY Tanggal_waktu DESC
             LIMIT 3")->result();
     }
 
     public function getRequestTerbaru($id_umkm)
     {
-        return $this->db->query("SELECT pemesanan.IDPesan, pemesanan.Status, dataumkm.Nama_produk 
+        return $this->db->query("SELECT pemesanan.IDPesan, pemesanan.Status, dataumkm.Nama_produk
             FROM tb_pemesanan AS pemesanan
             JOIN tb_umkm_data AS dataumkm USING(IDDataUMKM)
             WHERE dataumkm.IDUMKM='$id_umkm'
             ORDER BY Tgl_order DESC
             LIMIT 3")->result();
     }
-	
+
 	public function createUmkmData($data){
 		$this->db->insert('tb_umkm_data', $data);
 	}
