@@ -339,6 +339,7 @@ class Designer extends CI_Controller {
 
 		$id_user	= $this->session->id_user;
 		$this->Model_designer->updateUser($id_user, $data_user);
+		$this->session->foto_profil = $_FILES['foto-profil']['name'];
 
 		$data_designer	= array(
 			'No_telp'	=> $no_telp,

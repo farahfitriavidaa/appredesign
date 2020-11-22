@@ -434,6 +434,7 @@ class Umkm extends CI_Controller {
 
 				$id_user	= $this->Model_umkm->getIdUser( $this->session->user );
 				$this->Model_umkm->updateUser($id_user->IDUser, $data_user);
+				$this->session->foto_profil = $_FILES['foto-profil']['name'];
 
 				$data_umkm	= array(
 					'Nama_umkm'	=> $nama_umkm,

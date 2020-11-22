@@ -7,7 +7,13 @@
             <li class="list-inline-item dropdown notification-list">
                 <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false"
                     aria-expanded="false">
-                    <img src="<?=base_url()?>uploads/foto_user/umkm.png" alt="foto profil umkm" class="rounded-circle img-thumbnail">
+                    <?php
+                        if ($this->session->has_userdata('foto_profil'))
+                            $foto_profil = $this->session->foto_profil;
+                        else
+                            $foto_profil = 'umkm.png';
+                    ?>
+                    <img src="<?=base_url()?>uploads/foto_user/<?=$foto_profil?>" alt="foto profil umkm" class="rounded-circle img-thumbnail">
                 </a>
                 <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                     <!-- item-->
