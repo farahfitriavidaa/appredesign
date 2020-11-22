@@ -200,23 +200,33 @@
                                             </p>
 
                                             <strong class="d-block">Hasil Desain</strong>
-                                            <!-- TO DO: ganti direktori dan gambar hasil desain asli -->
-                                            <?php if(empty($data_produk->Foto_produk)): ?>
-                                            <p><i class="text-muted">Belum ada hasil desain</i></p>
-                                            <?php else: ?>
-                                            <div class="mb-4" style="height: 160px;">
-                                                <img src="<?=base_url()."uploads/foto_kemasan_lama/".$data_produk->Foto_produk;?>" alt="hasil desain" class="img-thumbnail" style="height:inherit">
-                                            </div>
+                                            <?php 
+                                                $hasil_design = $detil_request->Hasil_design;
+                                                if(empty($hasil_design)): ?>
+                                                    <p><i class="text-muted">Belum ada hasil desain</i></p>
+                                            <?php 
+                                                else: 
+                                                $hasil_design = explode(',', $hasil_design) ?>
+                                                <div class="mb-4">
+                                                    <?php foreach($hasil_design as $img):?>
+                                                        <img src="<?=base_url()."uploads/hasil_design/".$img?>" alt="hasil desain" class="img-thumbnail mr-2 mb-2" style="max-height:240px;">
+                                                    <?php endforeach;?>
+                                                </div>
                                             <?php endif; ?>
 
                                             <strong class="d-block">Revisi Desain</strong>
-                                            <!-- TO DO: ganti direktori dan gambar revisi desain asli -->
-                                            <?php if(empty($data_produk->Foto_produk)): ?>
-                                            <p><i class="text-muted">Tidak ada revisi desain</i></p>
-                                            <?php else: ?>
-                                            <div style="height: 160px;">
-                                                <img src="<?=base_url()."uploads/foto_kemasan_lama/".$data_produk->Foto_produk;?>" alt="revisi desain" class="img-thumbnail" style="height:inherit">
-                                            </div>
+                                            <?php 
+                                                $revisi = $detil_request->Revisi_design;
+                                                if(empty($revisi)): ?>
+                                                    <p><i class="text-muted">Belum ada hasil desain</i></p>
+                                            <?php 
+                                                else: 
+                                                $revisi = explode(',', $revisi) ?>
+                                                <div class="mb-4">
+                                                    <?php foreach($revisi as $img):?>
+                                                        <img src="<?=base_url()."uploads/revisi_design/".$img?>" alt="revisi desain" class="img-thumbnail mr-2 mb-2" style="max-height:240px;">
+                                                    <?php endforeach;?>
+                                                </div>
                                             <?php endif; ?>
                                         </div>
 
