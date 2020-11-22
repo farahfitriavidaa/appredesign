@@ -56,12 +56,37 @@ class Designer extends CI_Controller {
 				'daftar_request'	=> $daftar_request,
 			);
 		}
-		// echo $id_umkm."<br>";
-		// print_r($id_data_umkm);
-		// print_r($data);
 
 		$this->load->helper('my_helper');
 		$this->load->view('designer/lihatrequest', $data);
+	}
+
+	public function request($id_pesan='0')
+	{
+		if ($id_pesan==='0') {
+			return http_response_code(400);
+		}
+
+		$id_pesan		= 'PS'.str_pad($id_pesan, 4, '0', STR_PAD_LEFT);
+		$detil_request	= $this->Model_designer->getRequest($id_pesan, $this->session->id_designer);
+
+		if(is_null($detil_request)){
+			$data = array(
+				'detil_request'	=> null
+			);
+
+			$_SESSION['alert'] = 'Data request tidak ditemukan';
+			$this->session->mark_as_flash('alert');
+			redirect('Designer/lihatRequest');
+		}
+
+		$data			= array(
+			'request'	=> $detil_request
+		);
+
+		// print_r($data);
+		$this->load->helper('my_helper');
+		$this->load->view('designer/request', $data);
 	}
 
 	public function lihatProfil()

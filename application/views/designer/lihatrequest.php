@@ -48,11 +48,11 @@
                             ?>
                                 <div class="row">
                                     <div class="col-12">
-                                        <div class="alert <?=$alert['jenis']?> alert-dismissible fade show mb-0 mt-3" role="alert">
+                                        <div class="alert alert-danger alert-dismissible fade show mb-0 mt-3" role="alert">
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
-                                            <?=$alert['isi']?>
+                                            <?=$alert?>
                                         </div>
                                     </div>
                                 </div>
@@ -160,11 +160,7 @@
                                                                 <span class="badge badge-<?=$badge?>" style="font-size:unset"><?=$status?></span>
                                                             </td>
                                                             <td>
-                                                                <?php
-                                                                    $path   = $request->IDPesan;
-                                                                    $path   = trimId('PS', $path);
-                                                                ?>
-                                                                <a class="btn btn-raised btn-primary" href="<?=base_url();?>Designer/detilRequest/<?=$path;?>">Lihat Detail</a>
+                                                                <a class="btn btn-raised btn-primary" href="<?=base_url();?>Designer/request/<?=trimId('PS', $request->IDPesan);?>">Lihat Detail</a>
                                                             </td>
                                                         </tr>
                                                     <?php endforeach; ?>

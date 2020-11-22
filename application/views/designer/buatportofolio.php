@@ -103,7 +103,7 @@
 
                                                 <div class="form-group">
                                                     <input type="file" name="bukti-portofolio" id="input-file-now" class="dropify"/>
-                                                    <small class="text-muted">format .jpg, .png, atau .pdf</small>
+                                                    <small class="text-muted">format .jpg atau .png</small>
                                                 </div>
 
                                                 <div class="form-group mt-4">
