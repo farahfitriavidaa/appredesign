@@ -588,14 +588,20 @@ class Designer extends CI_Controller {
 		else {
 			redirect('Designer/lihatDiskusi');
 		}
+		
+		$this->load->helper('my_helper');
 
 		// Ambil semua IDPesan berdasarkan IDPengelola di tb_pemesanan
 		$id_designer	= $this->session->id_designer;
 		$id_pesan		= $this->Model_designer->getAllIdPesan($id_designer);
 
-		// Buat array $id_pesan menjadi array numeric dengan bantuan function flattenArray() dari my_helper
-		$this->load->helper('my_helper');
-		$id_pesan		= flattenArray($id_pesan);
+		if (empty($id_pesan)) {
+			$id_pesan	= '';
+		}
+		else {
+			// Buat array $id_pesan menjadi array numeric dengan bantuan function flattenArray() dari my_helper
+			$id_pesan		= flattenArray($id_pesan);
+		}
 
 		$this->load->model('Model_diskusi');
 		$jumlah_dispro	= $this->Model_diskusi->getJumlahDispro($id_pesan, $status);

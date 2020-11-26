@@ -879,15 +879,21 @@ class Admin extends CI_Controller {
 		else {
 			redirect('Admin/lihatDiskum');
 		}
+		
+		$this->load->helper('my_helper');
 
 		// Ambil semua IDPesan berdasarkan IDPengelola di tb_pemesanan
 		$pengelola		= $this->Model_admin->getAkunPengelola($this->session->user);
 		$id_pengelola	= $pengelola->IDPengelola;
 		$id_pesan		= $this->Model_admin->getAllIdPesan($id_pengelola);
 
-		// Buat array $id_pesan menjadi array numeric dengan bantuan function flattenArray() dari my_helper
-		$this->load->helper('my_helper');
-		$id_pesan		= flattenArray($id_pesan);
+		if (empty($id_pesan)) {
+			$id_pesan	= '';
+		}
+		else {
+			// Buat array $id_pesan menjadi array numeric dengan bantuan function flattenArray() dari my_helper
+			$id_pesan		= flattenArray($id_pesan);
+		}
 
 		$this->load->model('Model_diskusi');
 		$jumlah_diskum	= $this->Model_diskusi->getJumlahDiskum($id_pesan, $status);
@@ -1208,15 +1214,21 @@ class Admin extends CI_Controller {
 		else {
 			redirect('Admin/lihatDispro');
 		}
+		
+		$this->load->helper('my_helper');
 
 		// Ambil semua IDPesan berdasarkan IDPengelola di tb_pemesanan
 		$pengelola		= $this->Model_admin->getAkunPengelola($this->session->user);
 		$id_pengelola	= $pengelola->IDPengelola;
 		$id_pesan		= $this->Model_admin->getAllIdPesan($id_pengelola);
 
-		// Buat array $id_pesan menjadi array numeric dengan bantuan function flattenArray() dari my_helper
-		$this->load->helper('my_helper');
-		$id_pesan		= flattenArray($id_pesan);
+		if (empty($id_pesan)) {
+			$id_pesan	= '';
+		}
+		else {
+			// Buat array $id_pesan menjadi array numeric dengan bantuan function flattenArray() dari my_helper
+			$id_pesan		= flattenArray($id_pesan);
+		}
 
 		$this->load->model('Model_diskusi');
 		$jumlah_dispro	= $this->Model_diskusi->getJumlahDispro($id_pesan, $status);

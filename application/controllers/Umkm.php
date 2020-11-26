@@ -57,11 +57,17 @@ class Umkm extends CI_Controller {
 
 	public function lihatRequest()
 	{
+		$this->load->helper('my_helper');
+		
 		$id_umkm		= $this->session->id_umkm;
 		$id_data_umkm	= $this->Model_umkm->getAllIdDataUMKM($id_umkm);
-
-		$this->load->helper('my_helper');
-		$id_data_umkm	= flattenArray($id_data_umkm);
+		
+		if (empty($id_data_umkm)) {
+			$id_data_umkm = '';
+		} else {
+			$id_data_umkm	= flattenArray($id_data_umkm);
+		}
+		
 
 		$daftar_request	= $this->Model_umkm->getDaftarRequest($id_data_umkm);
 		$daftar_produk	= $this->Model_umkm->getDaftarProduk($id_data_umkm);
@@ -478,13 +484,19 @@ class Umkm extends CI_Controller {
 			redirect('Umkm/lihatDiskusi');
 		}
 
+		$this->load->helper('my_helper');
+
 		// Ambil semua IDPesan berdasarkan IDUMKM
 		$id_umkm	= $this->session->id_umkm;
 		$id_pesan	= $this->Model_umkm->getAllIdPesan($id_umkm);
 
-		// Buat array $id_pesan menjadi lebih sederhana dengan bantuan function flattenArray() dari my_helper
-		$this->load->helper('my_helper');
-		$id_pesan	= flattenArray($id_pesan);
+		if (empty($id_pesan)) {
+			$id_pesan	= '';
+		}
+		else {
+			// Buat array $id_pesan menjadi array numeric dengan bantuan function flattenArray() dari my_helper
+			$id_pesan		= flattenArray($id_pesan);
+		}
 
 		$this->load->model('Model_diskusi');
 		$jumlah_diskusi	= $this->Model_diskusi->getJumlahDiskum($id_pesan, $status);

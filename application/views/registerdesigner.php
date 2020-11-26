@@ -36,7 +36,7 @@
 
                                         <div class="text-center pt-3">
                                             <a href="index.html">
-                                                <!-- <img src="<?=base_url()?>asset/admin/images/logo-dark.png" alt="logo" height="22" /> -->
+                                                <img src="<?=base_url()?>asset/admin/images/logo-dark.png" alt="logo" height="22" />
                                                 <h1>gDESK</h1>
                                             </a>
                                         </div>
