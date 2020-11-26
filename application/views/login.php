@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-        <title>Urora - Responsive Bootstrap 4 Admin Dashboard</title>
+        <title>Log in</title>
         <meta content="Admin Dashboard" name="description" />
         <meta content="Mannatthemes" name="author" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -41,17 +41,18 @@
                                         </a>
                                     </div>
                                     <div class="px-3 pb-3">
+                                        <?=$this->session->flashdata('alert');?>
                                         <form class="form-horizontal m-t-20 mb-0" action="<?=base_url()?>Create/cekUser" method="POST">
                                             <?php echo validation_errors('<div class="error">'.'</div>'); ?>
                                             <div class="form-group row">
                                                 <div class="col-12">
-                                                    <input class="form-control" type="text" name="username" placeholder="Username">
+                                                    <input class="form-control" type="text" name="username" placeholder="Username" required>
                                                 </div>
                                             </div>
 
                                             <div class="form-group row">
                                                 <div class="col-12">
-                                                    <input class="form-control" type="password" name="password" placeholder="Password">
+                                                    <input class="form-control" type="password" name="password" placeholder="Password" required>
                                                 </div>
                                             </div>
                                             <div class="form-group text-right row m-t-20">
@@ -60,13 +61,10 @@
                                                 </div>
                                             </div>
 
-                                          </form>
-                                            <div class="form-group m-t-10 mb-0 row">
-
-                                                <div class="col-sm-5 m-t-20">
-                                                    <a href="<?=base_url()?>Create" class="text-muted"><i class="mdi mdi-account-circle"></i> Ingin membuat akun ?</a>
-                                                </div>
-                                            </div>
+                                        </form>
+                                        <div style="text-align:center;">
+                                            <a href="<?=base_url()?>Create" class="text-muted"><i class="mdi mdi-account-circle"></i> Ingin membuat akun ?</a>
+                                        </div>
                                     </div>
 
                                 </div>

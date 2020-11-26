@@ -191,54 +191,62 @@ class Create extends CI_Controller {
 		$cek	= $this->Model_created->login($user, md5($pass));
 		$this->form_validation->set_rules('username','Username','required',
 		array(
-		  'required' => 'Username tidak boleh kosong',
+			'required' => 'Username tidak boleh kosong',
 		));
 		$this->form_validation->set_rules('password','Password','required',
 		array(
 			'required' => 'Password tidak boleh kosong',
 		));
+
 		if($this->form_validation->run() == FALSE){
 			$this->login();
-		}else{
-		if( $cek->Level == 'Pengelola' ){
-			$this->session->user = $user;
-			$data = array(
+		}
+		else{
+			if( $cek->Level == 'Pengelola' ){
+				$this->session->user = $user;
+				$data = array(
+					'akun'			=> $cek,
+					'umkm'			=> $this->Model_admin->jumlahUMKM(),
+					'designer'		=> $this->Model_admin->jumlahDesigner(),
+					'order'			=> $this->Model_admin->jumlahOrder(),
+					'pesanan'		=> $this->Model_admin->jumlahOrderan(),
+					'pemesanan'		=> $this->Model_admin->dataPemesananPending(),
+					'ongoing'		=> $this->Model_admin->dataOrderOnGoing(),
+					'selesai'		=> $this->Model_admin->dataOrderSelesai(),
+					'transaksi'		=> $this->Model_admin->dataOrderTransaksi(),
+					'dataumkm'		=> $this->Model_admin->dataUMKMNew()
+				);
+				$this->load->view('admin/dashboard',$data);
+			}
+			else if( $cek->Level == 'UMKM' ){
+				$this->session->user = $user;
+				$this->session->level = 'umkm';
+				redirect('Umkm');
+			}
+			else if( $cek->Level == 'CDC' ){
+				$this->session->user = $user;
+				$data = array(
 				'akun' => $cek,
-				'umkm'				=> $this->Model_admin->jumlahUMKM(),
-				'designer'		=> $this->Model_admin->jumlahDesigner(),
-				'order'				=> $this->Model_admin->jumlahOrder(),
-				'pesanan'			=> $this->Model_admin->jumlahOrderan(),
-				'pemesanan'		=> $this->Model_admin->dataPemesananPending(),
-				'ongoing'			=> $this->Model_admin->dataOrderOnGoing(),
-				'selesai'			=> $this->Model_admin->dataOrderSelesai(),
-				'transaksi'		=> $this->Model_admin->dataOrderTransaksi(),
-				'dataumkm'		=> $this->Model_admin->dataUMKMNew()
-			);
-			$this->load->view('admin/dashboard',$data);
-		}
-		else if( $cek->Level == 'UMKM' ){
-			$this->session->user = $user;
-			$this->session->level = 'umkm';
-			redirect('/Umkm');
-		}
-		else if( $cek->Level == 'CDC' ){
-		$this->session->user = $user;
-		$data = array(
-  		'akun' => $cek,
-        'jumlahumkm'      => $this->Model_cdc->getJumlahUMKM(),
-        'jumlahreq'       => $this->Model_cdc->getJumlahReq(),
-        'jumlahongoing'   => $this->Model_cdc->getJumlahOnGoing(),
-        'jumlahselesai'   => $this->Model_cdc->getJumlahSelesai(),
-        'pemesanan'       => $this->Model_cdc->dataPemesanan(),
-        'umkm'            => $this->Model_cdc->dataUMKM()
-  		);
-  		$this->load->view('cdc/Dashboard',$data);
-		}
-		else if( $cek->Level == 'Designer' ){
-			$this->session->user = $user;
-			$this->session->level = 'designer';
-			redirect('/Designer');
-		}
+				'jumlahumkm'      => $this->Model_cdc->getJumlahUMKM(),
+				'jumlahreq'       => $this->Model_cdc->getJumlahReq(),
+				'jumlahongoing'   => $this->Model_cdc->getJumlahOnGoing(),
+				'jumlahselesai'   => $this->Model_cdc->getJumlahSelesai(),
+				'pemesanan'       => $this->Model_cdc->dataPemesanan(),
+				'umkm'            => $this->Model_cdc->dataUMKM()
+				);
+				$this->load->view('cdc/Dashboard',$data);
+			}
+			else if( $cek->Level == 'Designer' ){
+				$this->session->user = $user;
+				$this->session->level = 'designer';
+				redirect('Designer');
+			}
+			else {
+				$_SESSION['alert'] = '
+					<div class="text-danger" style="text-align:center;">Username atau Password kurang tepat</div>';
+				$this->session->mark_as_flash('alert');
+				redirect('Create/login');
+			}
 		}
 	}
 
