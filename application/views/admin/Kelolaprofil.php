@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <?php $this->load->view('admin/layout/Head'); ?>
+    <?php $this->load->view('admin/layout/head'); ?>
 
     <body class="fixed-left">
 
@@ -18,7 +18,7 @@
                     </div>
                 </div>
 
-              <?php $this->load->view('admin/layout/Sidebar') ?>
+              <?php $this->load->view('admin/layout/sidebar') ?>
 
             </div>
 
@@ -28,7 +28,7 @@
                 <div class="content">
 
 
-                    <?php $this->load->view('admin/layout/Navbar') ?>
+                    <?php $this->load->view('admin/layout/navbar') ?>
 
                     <div class="page-content-wrapper dashborad-v">
 
@@ -118,4 +118,4 @@
         <!-- END wrapper -->
 
 
-        <?php $this->load->view('admin/layout/Footer') ?>
+        <?php $this->load->view('admin/layout/footer') ?>

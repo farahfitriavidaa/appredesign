@@ -36,7 +36,7 @@ class Admin extends CI_Controller {
 		$data = array(
 			'akun' => $cek,
 		);
-		$this->load->view('admin/Kelolaprofil',$data);
+		$this->load->view('admin/kelolaprofil',$data);
 	}
 
 	public function editProfil($id)
@@ -581,7 +581,7 @@ class Admin extends CI_Controller {
 				'designer'	 => $this->Model_admin->getDesigner(),
 				'dataumkm'   => $this->Model_admin->getDataaUMKM()
 			);
-			$this->load->view('admin/Kelolapemesanan',$data);
+			$this->load->view('admin/kelolapemesanan',$data);
 	}
 
 	public function createPortofolio($id)
@@ -1001,7 +1001,7 @@ class Admin extends CI_Controller {
 			$this->load->helper('my_helper');
 
 			// Load view
-			$this->load->view('admin/Diskum', $data);
+			$this->load->view('admin/diskum', $data);
 
 		} else {
 			http_response_code('400');
@@ -1127,7 +1127,7 @@ class Admin extends CI_Controller {
 			$this->load->helper('my_helper');
 
 			// Load view
-			$this->load->view('admin/Dispro', $data);
+			$this->load->view('admin/dispro', $data);
 
 		} else {
 			http_response_code('400');

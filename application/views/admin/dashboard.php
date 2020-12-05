@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <?php $this->load->view('admin/layout/Head'); ?>
+    <?php $this->load->view('admin/layout/head'); ?>
 
     <body class="fixed-left">
 
@@ -21,7 +21,7 @@
                     </div>
                 </div>
 
-              <?php $this->load->view('admin/layout/Sidebar') ?>
+              <?php $this->load->view('admin/layout/sidebar') ?>
                 <!-- end sidebarinner -->
             </div>
             <!-- Left Sidebar End -->
@@ -33,7 +33,7 @@
                 <div class="content">
 
                     <!-- Top Bar Start -->
-                    <?php $this->load->view('admin/layout/Navbar') ?>
+                    <?php $this->load->view('admin/layout/navbar') ?>
                     <!-- Top Bar End -->
 
                     <div class="page-content-wrapper dashborad-v">
@@ -187,7 +187,6 @@
                                                                 <?php }else{ ?>
                                                                   <button type="button" class="badge badge-boxed  badge-dark" name="button">Selesai</button>
                                                                 <?php } ?>
-                                                              </span>
                                                           </td>
                                                       </tr>
                                                     <?php endforeach; ?>
@@ -246,7 +245,6 @@
                                                                 <?php }else{ ?>
                                                                   <button type="button" class="badge badge-boxed  badge-dark" name="button">Selesai</button>
                                                                 <?php } ?>
-                                                              </span>
                                                           </td>
                                                       </tr>
                                                     <?php endforeach; ?>
@@ -309,7 +307,6 @@
                                                                 <?php }else{ ?>
                                                                   <button type="button" class="badge badge-boxed  badge-dark" name="button">Selesai</button>
                                                                 <?php } ?>
-                                                              </span>
                                                           </td>
                                                       </tr>
                                                     <?php endforeach; ?>
@@ -358,7 +355,6 @@
                                                                 <?php }else if($p->Status == '7'){ ?>
                                                                   <button type="button" class="badge badge-boxed  badge-primary" name="button">Lunas</button>
                                                                 <?php } ?>
-                                                              </span>
                                                           </td>
                                                       </tr>
                                                     <?php endforeach; ?>
@@ -391,7 +387,7 @@
                                                     <td>
                                                       <?php echo $a->IDUMKM ?> </td>
                                                     <td>
-                                                      <?php echo $a->Nama_umkm ?></a>
+                                                      <?php echo $a->Nama_umkm ?>
                                                     </td>
                                                     <td>
                                                       <?php echo $a->Regional ?>
@@ -430,4 +426,4 @@
         <!-- END wrapper -->
 
 
-        <?php $this->load->view('admin/layout/Footer') ?>
+        <?php $this->load->view('admin/layout/footer') ?>

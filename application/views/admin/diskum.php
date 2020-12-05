@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" style="scroll-behavior:smooth">
 
-    <?php $this->load->view('admin/layout/Head'); ?>
+    <?php $this->load->view('admin/layout/head'); ?>
 
     <body class="fixed-left">
 
@@ -21,7 +21,7 @@
                     </div>
                 </div>
 
-                <?php $this->load->view('admin/layout/Sidebar') ?>
+                <?php $this->load->view('admin/layout/sidebar') ?>
                 <!-- end sidebarinner -->
             </div>
             <!-- Left Sidebar End -->
@@ -33,7 +33,7 @@
                 <div class="content">
 
                     <!-- Top Bar Start -->
-                    <?php $this->load->view('admin/layout/Navbar') ?>
+                    <?php $this->load->view('admin/layout/navbar') ?>
                     <!-- Top Bar End -->
 
                     <div class="page-content-wrapper ">
@@ -376,4 +376,4 @@
             }
         </script>
 
-        <?php $this->load->view('admin/layout/Footer') ?>
+        <?php $this->load->view('admin/layout/footer') ?>
