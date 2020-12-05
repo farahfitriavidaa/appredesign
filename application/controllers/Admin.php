@@ -937,7 +937,7 @@ class Admin extends CI_Controller {
 			);
 		}
 
-		$this->load->view('admin/Lihatdiskum', $data);
+		$this->load->view('admin/lihatdiskum', $data);
 	}
 
 	/**
@@ -1272,7 +1272,7 @@ class Admin extends CI_Controller {
 			);
 		}
 
-		$this->load->view('admin/Lihatdispro', $data);
+		$this->load->view('admin/lihatdispro', $data);
 	}
 
 }
