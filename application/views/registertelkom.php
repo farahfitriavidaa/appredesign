@@ -21,14 +21,20 @@
     <body class="fixed-left">
 
         <!-- Begin page -->
-        <div class="accountbg"></div>
+        <div class="accountbg" style="
+            background:url('<?=base_url()?>asset/admin/images/background.jpeg');
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background-position: center center;
+            background-size: cover;"></div>
         <div class="wrapper-page">
             <div class="display-table">
                 <div class="display-table-cell">
                     <diV class="container">
                         <div class="row">
                             <div class="col-md-6">
-                                <img src="<?=base_url()?>asset/admin/images/extra.png" alt="" class="img-fluid">
+                                <img src="<?=base_url()?>asset/admin/images/icon.png" alt="" class="img-fluid">
                             </div>
                             <div class="col-md-6">
                                 <div class="card">
@@ -36,8 +42,7 @@
 
                                         <div class="text-center pt-3">
                                             <a href="index.html">
-                                                <!-- <img src="<?=base_url()?>asset/admin/images/logo-dark.png" alt="logo" height="22" /> -->
-                                                <h1>gDESK</h1>
+                                                <img src="<?=base_url()?>asset/logo.png" alt="logo" style="width:100%;max-width:200px"/>
                                             </a>
                                         </div>
 

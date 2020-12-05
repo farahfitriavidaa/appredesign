@@ -36,9 +36,7 @@
                                     <div class="card-body">
 
                                         <div class="text-center pt-3">
-                                            <a href="index.html">
-                                                <img src="<?=base_url()?>asset/logo.png" alt="logo" width="200px"/>
-                                            </a>
+                                            <img src="<?=base_url()?>asset/logo.png" alt="logo" style="width:100%;max-width:200px"/>
                                         </div>
 
                                         <div class="p-3">
