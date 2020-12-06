@@ -81,7 +81,7 @@
                                 <div class="col-md-12 col-xl-12">
                                     <div class="card m-b-30">
                                         <div class="card-body">
-                                            <form action="<?=base_url();?>Umkm/tambahRequest" method="POST" class="mb-0" enctype="multipart/form-data" autocomplete="off">
+                                            <form action="<?=base_url();?>umkm/request/tambahRequest" method="POST" class="mb-0" enctype="multipart/form-data" autocomplete="off">
                                             <div class="form-group">
                                                     <label for="nama-produk" class="bmd-label-floating">Nama Produk</label>
                                                     <input type="text" name="nama-produk" class="form-control" id="nama-produk" required>
@@ -132,7 +132,7 @@
                                                             <label class="form-check-label text-dark" for="<?='desainer-'.$no?>">
                                                                 <?=$desainer->Nama_lengkap?>
                                                             </label>
-                                                            <a href="<?=base_url();?>Umkm/lihatPortofolio/<?=$path?>" target="_blank" class="ml-2 text-muted" noopener noreferer>(Lihat Portofolio)</a>
+                                                            <a href="<?=base_url();?>umkm/request/lihatPortofolio/<?=$path?>" target="_blank" class="ml-2 text-muted" noopener noreferer>(Lihat Portofolio)</a>
                                                         </div>
                                                     <?php
                                                         $no++;
@@ -142,7 +142,7 @@
                                                 </div>
 
                                                 <div class="form-group bmd-form-group">
-                                                    <a href="<?=base_url();?>Umkm/lihatRequest" class="btn btn-secondary border-0">Batal</a>
+                                                    <a href="<?=base_url();?>umkm/request" class="btn btn-secondary border-0">Batal</a>
                                                     <button type="submit" class="btn btn-primary btn-raised">Kirim</button>
                                                 </div>
                                             </form>

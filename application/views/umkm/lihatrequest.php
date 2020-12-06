@@ -71,7 +71,7 @@
                                 <div class="col-12">
                                     <?php if(!$has_request): ?>
                                         <p>Tidak ada daftar request, Anda belum membuat request.</p>
-                                        <a class="btn btn-raised btn-primary" href="<?=base_url();?>Umkm/buatRequest">
+                                        <a class="btn btn-raised btn-primary" href="<?=base_url();?>umkm/request/buatRequest">
                                         <i class="mdi mdi-plus"></i>
                                             Buat Request Baru
                                         </a>
@@ -84,7 +84,7 @@
                                                         <p class="text-muted font-14">Lihat daftar request yang telah dibuat</p>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <a class="btn btn-raised btn-primary float-right" href="<?=base_url();?>Umkm/buatRequest">
+                                                        <a class="btn btn-raised btn-primary float-right" href="<?=base_url();?>umkm/request/buatRequest">
                                                         <i class="mdi mdi-plus"></i>
                                                             Buat Request Baru
                                                         </a>
@@ -164,9 +164,9 @@
                                                                 $path   = $requests[$i]->IDPesan;
                                                                 $path   = trimId('PS', $path);
                                                             ?>
-                                                            <a class="btn btn-raised btn-primary" href="<?=base_url();?>Umkm/detilRequest/<?=$path;?>">Lihat Detil</a>
+                                                            <a class="btn btn-raised btn-primary" href="<?=base_url();?>umkm/request/detilRequest/<?=$path;?>">Lihat Detil</a>
                                                             <?php if($requests[$i]->Status < 5): ?>
-                                                                <a class="btn btn-raised btn-secondary" href="<?=base_url();?>Umkm/editRequest/<?=$path;?>">Edit</a>
+                                                                <a class="btn btn-raised btn-secondary" href="<?=base_url();?>umkm/request/editRequest/<?=$path;?>">Edit</a>
                                                             <?php endif; ?>
                                                             <?php if($requests[$i]->Status == 0): ?>
                                                                 <button class="btn btn-raised btn-danger" data-toggle="modal" data-target="#konfirmasi-hapus-<?=$path?>">Hapus</button>
@@ -179,7 +179,7 @@
                                                                             </div>
                                                                             <div class="modal-footer">                                                            
                                                                                 <button type="button" class="btn btn-raised btn-primary" data-dismiss="modal">Tidak</button>
-                                                                                <a class="btn btn-raised btn-danger ml-2" href="<?=base_url();?>Umkm/hapusRequest/<?=$path;?>">Iya, Saya yakin</a>
+                                                                                <a class="btn btn-raised btn-danger ml-2" href="<?=base_url();?>umkm/request/hapusRequest/<?=$path;?>">Iya, Saya yakin</a>
                                                                             </div>
                                                                         </div>
                                                                     </div>

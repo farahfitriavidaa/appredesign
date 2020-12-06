@@ -7,7 +7,7 @@
 
             <?php foreach($daftar_designer as $designer): ?>
             <li>
-                <a href="<?=base_url()?>Umkm/lihatPortofolio/<?=trimId('DG', $designer->IDDesigner)?>" class="waves-effect">
+                <a href="<?=base_url()?>umkm/request/lihatPortofolio/<?=trimId('DG', $designer->IDDesigner)?>" class="waves-effect">
                     <i class="mdi mdi-brush"></i>
                     <span><?php
                         $tambahan = strlen($designer->Nama_lengkap)>=47?'...':'';

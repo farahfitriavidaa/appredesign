@@ -81,7 +81,7 @@
                                 <div class="col-md-12 col-xl-12">
                                     <div class="card m-b-30">
                                         <div class="card-body">
-                                            <form action="<?=base_url();?>Umkm/updateRequest" method="POST" enctype="multipart/form-data" autocomplete="off">
+                                            <form action="<?=base_url();?>umkm/request/updateRequest" method="POST" enctype="multipart/form-data" autocomplete="off">
                                                 <input type="hidden" name="np" value="<?php echo trimId('PS', $detil_request->IDPesan)?>">
                                                 <div class="form-group">
                                                     <input type="text" name="nama-produk" class="form-control" placeholder="Nama Produk" value="<?=$data_produk->Nama_produk?>" required>
@@ -113,7 +113,7 @@
                                                 </div>
 
                                                 <div class="form-group bmd-form-group">
-                                                    <a href="<?=base_url();?>Umkm/lihatRequest" class="btn btn-secondary border-0">Batal</a>
+                                                    <a href="<?=base_url();?>umkm/request" class="btn btn-secondary border-0">Batal</a>
                                                     <button type="submit" class="btn btn-primary btn-raised">Simpan Perubahan</button>
                                                 </div>
                                             </form>

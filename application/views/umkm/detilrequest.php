@@ -93,7 +93,7 @@
                                                 $path   = $detil_request->IDPesan;
                                                 $path   = trimId('PS', $path);
                                             ?>
-                                            <a class="btn btn-raised btn-secondary float-right" href="<?=base_url();?>Umkm/editRequest/<?=$path;?>">
+                                            <a class="btn btn-raised btn-secondary float-right" href="<?=base_url();?>umkm/request/editRequest/<?=$path;?>">
                                                 Edit Data Produk
                                             </a>
                                         </div>
@@ -232,7 +232,7 @@
 
                                         <?php if($detil_request->Status < 5): ?>
                                         <div class="card-footer">
-                                            <a class="btn btn-raised btn-secondary float-right" href="<?=base_url();?>Umkm/editRequest/<?=$path;?>">
+                                            <a class="btn btn-raised btn-secondary float-right" href="<?=base_url();?>umkm/request/editRequest/<?=$path;?>">
                                                 Edit Keterangan Desain
                                             </a>
                                         </div>
