@@ -221,7 +221,7 @@ class Create extends CI_Controller {
 			else if( $cek->Level == 'UMKM' ){
 				$this->session->user = $user;
 				$this->session->level = 'umkm';
-				redirect('Umkm');
+				redirect('umkm');
 			}
 			else if( $cek->Level == 'CDC' ){
 				$this->session->user = $user;
