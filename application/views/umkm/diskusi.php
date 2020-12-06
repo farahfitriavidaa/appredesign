@@ -115,7 +115,7 @@
                                         ?>
                                         <?php if($pemesanan->Status < 5): ?>
                                         <div class="card-footer">
-                                            <a class="btn btn-raised btn-secondary float-right" href="<?=base_url();?>Umkm/editRequest/<?=$id_pesan;?>">
+                                            <a class="btn btn-raised btn-secondary float-right" href="<?=base_url();?>umkm/request/editRequest/<?=$id_pesan;?>">
                                                 Edit Produk
                                             </a>
                                         </div>
@@ -251,7 +251,7 @@
 
                                         <?php if($pemesanan->Status < 5): ?>
                                             <div class="card-footer">
-                                                <a class="btn btn-raised btn-secondary float-right" href="<?=base_url();?>Umkm/editRequest/<?=$id_pesan;?>">
+                                                <a class="btn btn-raised btn-secondary float-right" href="<?=base_url();?>umkm/request/editRequest/<?=$id_pesan;?>">
                                                     Edit Keterangan
                                                 </a>
                                             </div>
@@ -318,7 +318,7 @@
                                                 <img src="" alt="foto yang di upload" class="img-thumbnail" id="foto-upload" style="max-height: 320px">
                                             </div>
 
-                                            <form action="<?=base_url();?>Umkm/tambahKomentar" method="post" enctype="multipart/form-data" class="mb-0" autocomplete="off">
+                                            <form action="<?=base_url();?>umkm/diskusi/tambahKomentar" method="post" enctype="multipart/form-data" class="mb-0" autocomplete="off">
                                                 <div style="display: flex; flex-flow: row nowrap; padding: 8px 16px;">
                                                     <div class="form-group" style="display:inline; padding:0; margin: 0; flex: auto">
                                                         <input type="hidden" name="np" value="<?=$id_pesan?>">

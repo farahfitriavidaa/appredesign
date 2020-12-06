@@ -44,7 +44,7 @@
                         <div class="container-fluid">
 
                             <?php $id_pesan = trimId('PS', $detil_request->IDPesan);?>
-                            <a href="<?=base_url();?>Umkm/diskusi/<?=$id_pesan?>" class="btn btn-raised btn-secondary mt-4">
+                            <a href="<?=base_url();?>umkm/diskusi/<?=$id_pesan?>" class="btn btn-raised btn-secondary mt-4">
                             <i class="mdi mdi-comment"></i>
                                 Diskusi dengan Pengelola
                             </a>

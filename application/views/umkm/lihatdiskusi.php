@@ -54,17 +54,17 @@
                             <!-- end page title end breadcrumb -->
                             <div class="row mb-3" style="justify-content: flex-end;">
                                 <div>
-                                    <a class="btn btn-secondary btn-sm <?=$filter==="semua"?"btn-outline-secondary":"border-0"?>" href="<?=base_url();?>Umkm/lihatDiskusi/semua">
+                                    <a class="btn btn-secondary btn-sm <?=$filter==="semua"?"btn-outline-secondary":"border-0"?>" href="<?=base_url();?>umkm/diskusi/lihatDiskusi/semua">
                                         Semua diskusi
                                     </a>
                                 </div>
                                 <div>
-                                    <a class="btn btn-secondary btn-sm <?=$filter==="belum-selesai"?"btn-outline-secondary":"border-0"?>" href="<?=base_url();?>Umkm/lihatDiskusi/">
+                                    <a class="btn btn-secondary btn-sm <?=$filter==="belum-selesai"?"btn-outline-secondary":"border-0"?>" href="<?=base_url();?>umkm/diskusi/lihatDiskusi/">
                                         Belum selesai
                                     </a>
                                 </div>
                                 <div>
-                                    <a class="btn btn-secondary btn-sm <?=$filter==="telah-selesai"?"btn-outline-secondary":"border-0"?>" href="<?=base_url();?>Umkm/lihatDiskusi/telah-selesai">
+                                    <a class="btn btn-secondary btn-sm <?=$filter==="telah-selesai"?"btn-outline-secondary":"border-0"?>" href="<?=base_url();?>umkm/diskusi/lihatDiskusi/telah-selesai">
                                         Telah selesai
                                     </a>
                                 </div>
@@ -74,7 +74,7 @@
                                 <p class="mt-4">Belum ada diskusi untuk kategori ini.</p>
                                 <?php if($filter==="belum-selesai"): ?>
                                     <p>Anda akan melihat daftar diskusi di sini jika Anda memberi komentar atau mendapat respon dari Pengelola mengenai <i>redesign</i> produk Anda.</p>
-                                    <a class="btn btn-raised btn-primary" href="<?=base_url();?>Umkm/lihatRequest">
+                                    <a class="btn btn-raised btn-primary" href="<?=base_url();?>umkm/request">
                                         Lihat Request dan Beri Komentar
                                     </a>
                                 <?php endif; ?>
@@ -83,7 +83,7 @@
 
                             <div class="mb-4">
                             <?php foreach($daftar_diskusi as $diskusi): ?>
-                                <a href="<?=base_url();?>Umkm/diskusi/<?=trimId('PS', $diskusi->IDPesan)?>" class="list-diskusi mb-2">
+                                <a href="<?=base_url();?>umkm/diskusi/<?=trimId('PS', $diskusi->IDPesan)?>" class="list-diskusi mb-2">
                                     <div class="card">
                                         <div class="card-body">
                                             <strong><?=$diskusi->Nama_produk?></strong>
@@ -106,14 +106,14 @@
 
                             <div class="mt-4">
                                 <?php if ($hal_selanjutnya): ?>
-                                    <a class="float-right btn btn-raised btn-info" href="<?=base_url();?>Umkm/lihatDiskusi/<?=$filter."/".(int)++$page?>">
+                                    <a class="float-right btn btn-raised btn-info" href="<?=base_url();?>umkm/diskusi/lihatDiskusi/<?=$filter."/".(int)++$page?>">
                                         Daftar selanjutnya
                                         <i class="mdi mdi-arrow-right"></i>
                                     </a>
                                 <?php endif; ?>
 
                                 <?php if ($hal_sebelumnya): ?>
-                                    <a class="float-left btn btn-raised btn-info" href="<?=base_url();?>Umkm/lihatDiskusi/<?=$filter."/".(int)--$page?>">
+                                    <a class="float-left btn btn-raised btn-info" href="<?=base_url();?>umkm/diskusi/lihatDiskusi/<?=$filter."/".(int)--$page?>">
                                         <i class="mdi mdi-arrow-left"></i>
                                         Daftar sebelumnya
                                     </a>
