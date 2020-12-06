@@ -763,11 +763,6 @@ class Designer extends CI_Controller {
 		redirect('Welcome/login');
 	}
 
-	public function muntah()
-	{
-		var_dump($_SESSION);
-	}
-
 	private function cekBuktiPortofolio(String $bukti)
 	{
 		if (strchr($bukti, '/'))
