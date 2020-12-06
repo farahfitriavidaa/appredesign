@@ -17,7 +17,7 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                     <!-- item-->
-                    <a class="dropdown-item" href="<?=base_url();?>umkm/lihatProfil">
+                    <a class="dropdown-item" href="<?=base_url();?>umkm/profil">
                         <i class="mdi mdi-account-circle m-r-5 text-muted"></i> Profil</a>
                     <a class="dropdown-item" href="<?=base_url();?>umkm/logout">
                         <i class="mdi mdi-logout m-r-5 text-muted"></i> Logout</a>

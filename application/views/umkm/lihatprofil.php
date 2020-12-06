@@ -88,7 +88,7 @@
                                             <p><?=$user->Email?></p>
                                             
                                             <strong class="d-block">Password</strong>
-                                            <p><a href="<?=base_url();?>Umkm/editPwd">(Ubah password)</a></p>
+                                            <p><a href="<?=base_url();?>umkm/profil/editPwd">(Ubah password)</a></p>
 
                                             <strong class="d-block">Kontak UMKM</strong>
                                             <p><?=$umkm->No_telp?></p>
@@ -96,7 +96,7 @@
                                             <strong class="d-block">Alamat UMKM</strong>
                                             <p><?=$umkm->Alamat?></p>
 
-                                            <a class="btn btn-raised btn-secondary float-right" href="<?=base_url();?>Umkm/editProfil">
+                                            <a class="btn btn-raised btn-secondary float-right" href="<?=base_url();?>umkm/profil/editProfil">
                                                 Edit Profil
                                             </a>
                                         </div>
