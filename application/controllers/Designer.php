@@ -320,7 +320,7 @@ class Designer extends CI_Controller {
 				$data_user	+= array(
 					'Foto' => $_FILES['foto-profil']['name']
 				);
-				
+
 				$this->session->foto_profil = $_FILES['foto-profil']['name'];
 			}
 			else {
@@ -498,8 +498,19 @@ class Designer extends CI_Controller {
 		}
 
 		$id_prt_asli		= 'PRT'.str_pad($id_portofolio, 4, '0', STR_PAD_LEFT);
+		$id_designer		= $this->session->id_designer;
 
-		$data_portofolio	= $this->Model_designer->getPortofolio($id_prt_asli);
+		$data_portofolio	= $this->Model_designer->getPortofolio($id_designer, $id_prt_asli);
+
+		if (is_null($data_portofolio)) {
+			$_SESSION['alert'] = array(
+				'jenis' => 'alert-danger',
+				'isi'	=> 'Portofolio tidak diketahui.'
+			);
+			$this->session->mark_as_flash('alert');
+
+			redirect('Designer/lihatPortofolio');
+		}
 
 		$bukti				= $this->cekBuktiPortofolio($data_portofolio->Bukti_portofolio);
 
@@ -516,6 +527,21 @@ class Designer extends CI_Controller {
 	{
 		if ($this->input->method()!=='post') {
 			redirect ('Designer');
+		}
+
+		$id_portofolio		= 'PRT'.str_pad($this->input->post('np'), 4, '0', STR_PAD_LEFT);
+		$id_designer		= $this->session->id_designer;
+
+		$data_portofolio	= $this->Model_designer->getPortofolio($id_designer, $id_portofolio);
+
+		if (is_null($data_portofolio)) {
+			$_SESSION['alert'] = array(
+				'jenis' => 'alert-danger',
+				'isi'	=> 'Portofolio tidak diketahui.'
+			);
+			$this->session->mark_as_flash('alert');
+
+			redirect('Designer/lihatPortofolio');
 		}
 
 		$judul	= $this->input->post('judul-portofolio');
@@ -538,7 +564,6 @@ class Designer extends CI_Controller {
 			$bukti	= $this->input->post('link-portofolio');
 		}
 
-		$id_portofolio	= 'PRT'.str_pad($this->input->post('np'), 4, '0', STR_PAD_LEFT);
 		$data			= array(
 			'Judul'			 	=> $judul,
 			'Bukti_portofolio'	=> $bukti,
@@ -563,6 +588,19 @@ class Designer extends CI_Controller {
 		}
 
 		$id_prt_asli	= 'PRT'.str_pad($id_portofolio, 4, '0', STR_PAD_LEFT);
+		$id_designer		= $this->session->id_designer;
+
+		$data_portofolio	= $this->Model_designer->getPortofolio($id_designer, $id_prt_asli);
+
+		if (is_null($data_portofolio)) {
+			$_SESSION['alert'] = array(
+				'jenis' => 'alert-danger',
+				'isi'	=> 'Portofolio tidak diketahui.'
+			);
+			$this->session->mark_as_flash('alert');
+
+			redirect('Designer/lihatPortofolio');
+		}
 
 		$this->Model_designer->deletePortofolio($id_prt_asli);
 
@@ -589,7 +627,7 @@ class Designer extends CI_Controller {
 		else {
 			redirect('Designer/lihatDiskusi');
 		}
-		
+
 		$this->load->helper('my_helper');
 
 		// Ambil semua IDPesan berdasarkan IDPengelola di tb_pemesanan

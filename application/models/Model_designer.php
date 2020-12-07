@@ -32,9 +32,9 @@ class Model_designer extends CI_Model {
         return $this->db->query("SELECT * FROM tb_portofolio WHERE IDDesigner='$id_designer'")->result();
     }
 
-    public function getPortofolio($id_portofolio)
+    public function getPortofolio($id_designer, $id_portofolio)
     {
-        return $this->db->query("SELECT * FROM tb_portofolio WHERE IDPortofolio='$id_portofolio'")->row();
+        return $this->db->query("SELECT * FROM tb_portofolio WHERE IDPortofolio='$id_portofolio' AND IDDesigner='$id_designer'")->row();
     }
 
     public function getAllIdPesan($id_designer)
