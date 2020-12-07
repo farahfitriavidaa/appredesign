@@ -126,7 +126,7 @@
                                             
                                             <?php if(empty($diskusi_terakhir)): ?>
                                                 <p>Belum ada diskusi. Anda akan melihat daftar diskusi terkahir di sini jika ada request yang Anda atau Pengelola komentari.</p>
-                                                <a href="<?=base_url();?>designer/request" class="btn btn-primary">Lihat Request dan Beri Komentar</a>
+                                                <a href="<?=base_url();?>designer/request/lihatRequest" class="btn btn-primary">Lihat Request dan Beri Komentar</a>
                                             <?php else: 
                                                 foreach($diskusi_terakhir as $diskusi): ?>
                                                 <a href="<?=base_url();?>designer/diskusi/<?=trimId('PS',$diskusi->IDPesan);?>" class="list-diskusi mb-2">

@@ -72,7 +72,7 @@
                                     <?php if(!$has_request): ?>
                                         <p>Belum ada request.</p>
                                         <p>Mungkin Anda ingin membuat portofolio dulu jika Anda belum membuatnya?</p>
-                                        <a class="btn btn-raised btn-primary" href="<?=base_url();?>Designer/lihatPortofolio">
+                                        <a class="btn btn-raised btn-primary" href="<?=base_url();?>designer/portofolio">
                                             Lihat portofolio saya
                                         </a>
                                     <?php else: ?>
@@ -150,7 +150,7 @@
                                                                 <span class="badge badge-<?=$badge?>" style="font-size:unset"><?=$status?></span>
                                                             </td>
                                                             <td>
-                                                                <a class="btn btn-raised btn-primary" href="<?=base_url();?>Designer/request/<?=trimId('PS', $request->IDPesan);?>">Lihat Detail</a>
+                                                                <a class="btn btn-raised btn-primary" href="<?=base_url();?>designer/request/<?=trimId('PS', $request->IDPesan);?>">Lihat Detail</a>
                                                             </td>
                                                         </tr>
                                                     <?php endforeach; ?>

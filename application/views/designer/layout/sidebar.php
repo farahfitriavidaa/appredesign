@@ -11,7 +11,7 @@
             </li>
 
             <li>
-                <a href="<?=base_url()?>designer/request" class="waves-effect">
+                <a href="<?=base_url()?>designer/request/lihatRequest" class="waves-effect">
                     <i class="mdi mdi-format-list-bulleted"></i>
                     <span> Lihat Request </span>
                 </a>

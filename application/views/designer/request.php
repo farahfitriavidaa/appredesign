@@ -60,7 +60,7 @@
                             <?php endif; ?>
 
                             <?php $id_pesan = trimId('PS', $request->IDPesan);?>
-                            <a href="<?=base_url();?>Designer/diskusi/<?=$id_pesan?>" class="btn btn-raised btn-secondary mt-4">
+                            <a href="<?=base_url();?>designer/diskusi/<?=$id_pesan?>" class="btn btn-raised btn-secondary mt-4">
                             <i class="mdi mdi-comment"></i>
                                 Diskusi dengan Pengelola
                             </a>
@@ -182,7 +182,7 @@
                                         <div class="card-body">
                                             <?php if($status_rq<5): ?>
 
-                                            <form action="<?=base_url();?>Designer/uploadDesain" method="POST" enctype="multipart/form-data" autocomplete="off">
+                                            <form action="<?=base_url();?>designer/request/uploadDesain" method="POST" enctype="multipart/form-data" autocomplete="off">
                                                 <input type="hidden" name="np" value="<?=$id_pesan?>">
                                                 <div class="form-group">
                                                     <strong class="mb-0">Unggah <?=$status_rq<=3?'hasil desain':'revisi'?></strong>
@@ -225,7 +225,7 @@
                                                                     </div>
                                                                     <div class="modal-footer">                                                            
                                                                         <button type="button" class="btn btn-raised btn-primary" data-dismiss="modal">Batalkan</button>
-                                                                        <a class="btn btn-raised btn-danger ml-2" href="<?=base_url();?>Designer/hapusDesain/<?=$id_pesan?>">Iya, Saya yakin</a>
+                                                                        <a class="btn btn-raised btn-danger ml-2" href="<?=base_url();?>designer/request/hapusDesain/<?=$id_pesan?>">Iya, Saya yakin</a>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -258,7 +258,7 @@
                                                                     </div>
                                                                     <div class="modal-footer">                                                            
                                                                         <button type="button" class="btn btn-raised btn-primary" data-dismiss="modal">Batalkan</button>
-                                                                        <a class="btn btn-raised btn-danger ml-2" href="<?=base_url();?>Designer/hapusRevisi/<?=$id_pesan;?>">Iya, Saya yakin</a>
+                                                                        <a class="btn btn-raised btn-danger ml-2" href="<?=base_url();?>designer/request/hapusRevisi/<?=$id_pesan;?>">Iya, Saya yakin</a>
                                                                     </div>
                                                                 </div>
                                                             </div>
