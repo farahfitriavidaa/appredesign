@@ -69,7 +69,7 @@
                             <div class="row">
                                 <?php foreach($daftar_portofolio as $portofolio): ?>
                                 <div class="col-lg-6 col-md-12 mb-4">
-                                    <div class="card" style="min-height:285px;">
+                                    <div class="card" style="min-height:365px;">
                                         <div class="card-body">
                                             <h4 class="d-block h5 mt-0 mb-4"><?=$portofolio->Judul?></h4>
 
@@ -80,8 +80,8 @@
                                                     $bukti = cekPortofolio($portofolio->Bukti_portofolio);
                                                     if ($bukti==='image'):
                                                 ?>
-                                                    <div style="height:160px;">
-                                                        <img src="<?=base_url()."uploads/bukti_portofolio/".$portofolio->Bukti_portofolio;?>" alt="bukti portofolio" class="img-thumbnail" style="height:inherit">
+                                                    <div>
+                                                        <img src="<?=base_url()."uploads/bukti_portofolio/".$portofolio->Bukti_portofolio;?>" alt="bukti portofolio" class="img-thumbnail" style="max-height:240px;">
                                                     </div>
                                                 <?php elseif($bukti==='link'): ?>
                                                     <a href="<?=$portofolio->Bukti_portofolio?>" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
