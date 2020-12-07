@@ -81,7 +81,7 @@
                                 <div class="col-md-12 col-xl-12">
                                     <div class="card m-b-30">
                                         <div class="card-body">
-                                            <form action="<?=base_url();?>Designer/tambahPortofolio" method="POST" class="mb-0" enctype="multipart/form-data" autocomplete="off">
+                                            <form action="<?=base_url();?>designer/portofolio/tambahPortofolio" method="POST" class="mb-0" enctype="multipart/form-data" autocomplete="off">
                                                 <div class="form-group">
                                                     <label for="judul" class="bmd-label-floating">Judul Protofolio</label>
                                                     <input type="text" name="judul-portofolio" class="form-control" id="judul" required>
@@ -108,7 +108,7 @@
 
                                                 <div class="form-group mt-4">
                                                     <button type="submit" class="btn btn-primary btn-raised float-right">Submit</button>
-                                                    <a href="<?=base_url();?>Designer/lihatPortofolio" class="btn btn-secondary border-0 float-right">Batal</a>
+                                                    <a href="<?=base_url();?>designer/portofolio" class="btn btn-secondary border-0 float-right">Batal</a>
                                                 </div>
                                             </form>
                                         </div>
