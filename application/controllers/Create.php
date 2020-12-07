@@ -239,7 +239,7 @@ class Create extends CI_Controller {
 			else if( $cek->Level == 'Designer' ){
 				$this->session->user = $user;
 				$this->session->level = 'designer';
-				redirect('Designer');
+				redirect('designer');
 			}
 			else {
 				$_SESSION['alert'] = '

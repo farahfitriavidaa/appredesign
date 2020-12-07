@@ -56,3 +56,6 @@ $route['translate_uri_dashes'] = FALSE;
 $route['umkm'] = 'umkm/dasbor';
 $route['umkm/logout'] = 'umkm/dasbor/logout';
 $route['umkm/diskusi/(:num)'] = 'umkm/diskusi/index/$1';
+
+$route['designer'] = 'designer/dasbor';
+$route['designer/logout'] = 'designer/dasbor/logout';
