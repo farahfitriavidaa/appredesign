@@ -58,16 +58,16 @@ class Umkm extends CI_Controller {
 	public function lihatRequest()
 	{
 		$this->load->helper('my_helper');
-		
+
 		$id_umkm		= $this->session->id_umkm;
 		$id_data_umkm	= $this->Model_umkm->getAllIdDataUMKM($id_umkm);
-		
+
 		if (empty($id_data_umkm)) {
 			$id_data_umkm = '';
 		} else {
 			$id_data_umkm	= flattenArray($id_data_umkm);
 		}
-		
+
 
 		$daftar_request	= $this->Model_umkm->getDaftarRequest($id_data_umkm);
 		$daftar_produk	= $this->Model_umkm->getDaftarProduk($id_data_umkm);
@@ -166,7 +166,19 @@ class Umkm extends CI_Controller {
 	{
 		if ($id_pesan!=='0') {
 			$id_pesan		= 'PS'.str_pad($id_pesan, 4, '0', STR_PAD_LEFT);
-			$detil_request	= $this->Model_umkm->getRequest($id_pesan);
+			$id_umkm		= $this->session->id_umkm;
+
+			$detil_request	= $this->Model_umkm->getRequest($id_umkm, $id_pesan);
+
+			if(is_null($detil_request)) {
+				$_SESSION['alert'] = array(
+					'jenis' => 'alert-danger',
+					'isi'	=> 'Request tidak diketahui.'
+				);
+				$this->session->mark_as_flash('alert');
+
+				redirect('Umkm/lihatRequest');
+			}
 
 			$id_data_umkm	= $detil_request->IDDataUMKM;
 			$data_produk	= $this->Model_umkm->getUmkmData($id_data_umkm);
@@ -199,19 +211,33 @@ class Umkm extends CI_Controller {
 	{
 		if ($id_pesan!=='0') {
 			$id_pesan		= 'PS'.str_pad($id_pesan, 4, '0', STR_PAD_LEFT);
-			$detil_request	= $this->Model_umkm->getRequest($id_pesan);
+			$id_umkm		= $this->session->id_umkm;
 
-			$id_data_umkm	= $detil_request->IDDataUMKM;
-			$data_produk	= $this->Model_umkm->getUmkmData($id_data_umkm);
+			$detil_request	= $this->Model_umkm->getRequest($id_umkm, $id_pesan);
 
-			$data			= array(
-				'detil_request'	=> $detil_request,
-				'data_produk'	=> $data_produk
-			);
+			if(is_null($detil_request)) {
+				$_SESSION['alert'] = array(
+					'jenis' => 'alert-danger',
+					'isi'	=> 'Request tidak diketahui.'
+				);
+				$this->session->mark_as_flash('alert');
 
-			$this->load->helper('my_helper');
-			$this->load->view('umkm/editrequest', $data);
-		} else {
+				redirect('Umkm/lihatRequest');
+			}
+			else {
+				$id_data_umkm	= $detil_request->IDDataUMKM;
+				$data_produk	= $this->Model_umkm->getUmkmData($id_data_umkm);
+
+				$data			= array(
+					'detil_request'	=> $detil_request,
+					'data_produk'	=> $data_produk
+				);
+
+				$this->load->helper('my_helper');
+				$this->load->view('umkm/editrequest', $data);
+			}
+		}
+		else {
 			http_response_code('400');
 		}
 	}
@@ -219,6 +245,21 @@ class Umkm extends CI_Controller {
 	public function updateRequest()
 	{
 		if($this->input->method() == 'post') {
+			$id_pesan			= 'PS'.str_pad($this->input->post('np'), 4, '0', STR_PAD_LEFT);
+			$id_umkm			= $this->session->id_umkm;
+
+			$cekUmkmdanRequest	= $this->Model_umkm->cekUmkmdanRequest($id_umkm, $id_pesan);
+
+			if(is_null($cekUmkmdanRequest)) {
+				$_SESSION['alert'] = array(
+					'jenis' => 'alert-danger',
+					'isi'	=> 'Gagal mengedit request. Request tidak diketahui.'
+				);
+				$this->session->mark_as_flash('alert');
+
+				redirect('Umkm/lihatRequest');
+			} // else {
+
 			$nama_produk		= $this->input->post('nama-produk');
 			$keterangan_produk	= $this->input->post('keterangan-produk');
 			$keterangan_desain	= $this->input->post('keterangan-desain');
@@ -246,7 +287,6 @@ class Umkm extends CI_Controller {
 			}
 			if( $alert[0]==='sukses' && $alert[1]==='sukses' && $alert[2]==='sukses'){
 
-				$id_pesan			= 'PS'.str_pad($this->input->post('np'), 4, '0', STR_PAD_LEFT);
 				$id_data_umkm		= $this->Model_umkm->getIdDataUmkmFromIdPesan($id_pesan);
 
 				$data_umkm		+= array(
@@ -265,7 +305,7 @@ class Umkm extends CI_Controller {
 				$_SESSION['alert'] = array (
 					'jenis'	=> 'alert-primary',
 					'isi'	=> 'Request berhasil diubah.'
-				);;
+				);
 				$this->session->mark_as_flash('alert');
 				redirect('Umkm/lihatRequest');
 			}
@@ -274,6 +314,7 @@ class Umkm extends CI_Controller {
 				$this->session->mark_as_flash('alert');
 				redirect('Umkm/editRequest/'.$this->input->post('np'));
 			}
+			// } // end of else;
 		}
 		else
 			redirect('Umkm');
@@ -283,29 +324,44 @@ class Umkm extends CI_Controller {
 	{
 		if ($id_pesan!=='0') {
 			$id_pesan		= 'PS'.str_pad($id_pesan, 4, '0', STR_PAD_LEFT);
-			$detil_request	= $this->Model_umkm->getRequest($id_pesan);
+			$id_umkm		= $this->session->id_umkm;
 
-			if($detil_request->Status == 0){
-				$id_data_umkm	= $this->Model_umkm->getIdDataUmkmFromIdPesan($id_pesan);
+			$detil_request	= $this->Model_umkm->getRequest($id_umkm, $id_pesan);
 
-				$this->Model_umkm->deleteRequest($id_pesan);
-				$this->Model_umkm->deleteUmkmData($id_data_umkm->IDDataUMKM);
-
-				$_SESSION['alert'] = array (
-					'jenis'	=> 'alert-primary',
-					'isi'	=> 'Request berhasil dihapus'
+			if(is_null($detil_request)) {
+				$_SESSION['alert'] = array(
+					'jenis' => 'alert-danger',
+					'isi'	=> 'Request tidak diketahui.'
 				);
 				$this->session->mark_as_flash('alert');
+
 				redirect('Umkm/lihatRequest');
 			}
-			else{
-				$_SESSION['alert'] = array (
-					'jenis'	=> 'alert-danger',
-					'isi'	=> 'Request tidak bisa dihapus. Diskusikan dengan Pengelola untuk membatalkan request.'
-				);
-				$this->session->mark_as_flash('alert');
-				redirect('Umkm/lihatRequest');
+			else {
+
+				if($detil_request->Status == 0){
+					$id_data_umkm	= $this->Model_umkm->getIdDataUmkmFromIdPesan($id_pesan);
+
+					$this->Model_umkm->deleteRequest($id_pesan);
+					$this->Model_umkm->deleteUmkmData($id_data_umkm->IDDataUMKM);
+
+					$_SESSION['alert'] = array (
+						'jenis'	=> 'alert-primary',
+						'isi'	=> 'Request berhasil dihapus'
+					);
+					$this->session->mark_as_flash('alert');
+					redirect('Umkm/lihatRequest');
+				}
+				else{
+					$_SESSION['alert'] = array (
+						'jenis'	=> 'alert-danger',
+						'isi'	=> 'Request tidak bisa dihapus. Diskusikan dengan Pengelola untuk membatalkan request.'
+					);
+					$this->session->mark_as_flash('alert');
+					redirect('Umkm/lihatRequest');
+				}
 			}
+
 		} else {
 			http_response_code('400');
 		}
@@ -385,7 +441,7 @@ class Umkm extends CI_Controller {
 					$data_user		+= array(
 						'Foto' => $_FILES['foto-profil']['name']
 					);
-						
+
 					$this->session->foto_profil = $_FILES['foto-profil']['name'];
 				}
 			}

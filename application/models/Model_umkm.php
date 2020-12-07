@@ -51,9 +51,13 @@ class Model_umkm extends CI_Model {
 		return $result->result();
 	}
 
-	public function getRequest($id_pesan)
+	public function getRequest($id_umkm, $id_pesan)
 	{
-		return $this->db->query("SELECT * FROM tb_pemesanan WHERE IDPesan='$id_pesan'")->row();
+		return $this->db->query("SELECT pemesanan.*, dataumkm.IDDataUMKM, dataumkm.IDUMKM
+			FROM tb_pemesanan AS pemesanan
+			JOIN tb_umkm_data AS dataumkm USING(IDDataUMKM)
+			WHERE IDPesan='$id_pesan' 
+			AND IDUMKM='$id_umkm'")->row();
 	}
 
 	public function getUmkmData($id_data_umkm)
@@ -105,7 +109,16 @@ class Model_umkm extends CI_Model {
             WHERE dataumkm.IDUMKM='$id_umkm'
             ORDER BY Tgl_order DESC
             LIMIT 3")->result();
-    }
+	}
+	
+	public function cekUmkmdanRequest($id_umkm, $id_pesan)
+	{
+		return $this->db->query("SELECT pemesanan.IDPesan, dataumkm.IDDataUMKM, dataumkm.IDUMKM
+			FROM tb_pemesanan AS pemesanan
+			JOIN tb_umkm_data AS dataumkm USING(IDDataUMKM)
+			WHERE IDPesan='$id_pesan' 
+			AND IDUMKM='$id_umkm'")->row();
+	}
 
 	public function createUmkmData($data){
 		$this->db->insert('tb_umkm_data', $data);
