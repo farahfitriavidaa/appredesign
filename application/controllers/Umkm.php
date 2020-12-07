@@ -376,15 +376,20 @@ class Umkm extends CI_Controller {
 			$alamat			= $this->input->post('alamat');
 
 			$data_user			= array();
-			$alert				= ['sukses'];
+			$alert				= [''];
 			if( $_FILES['foto-profil']['error'] != 4 ){
 				$this->load->helper('my_helper');
-				$alert[0]		= uploadFoto('foto-profil', 'foto_user');
-				$data_user		+= array(
-					'Foto' => $_FILES['foto-profil']['name']
-				);
+				$alert			= uploadFoto('foto-profil', 'foto_user');
+
+				if ($alert==='sukses') {
+					$data_user		+= array(
+						'Foto' => $_FILES['foto-profil']['name']
+					);
+						
+					$this->session->foto_profil = $_FILES['foto-profil']['name'];
+				}
 			}
-			if( $alert[0]==='sukses'){
+			if( $alert==='sukses' || $alert===''){
 
 				$data_user		+= array(
 					'Nama_lengkap'	=> $nama_lengkap,
@@ -394,7 +399,6 @@ class Umkm extends CI_Controller {
 
 				$id_user	= $this->Model_umkm->getIdUser( $this->session->user );
 				$this->Model_umkm->updateUser($id_user->IDUser, $data_user);
-				$this->session->foto_profil = $_FILES['foto-profil']['name'];
 
 				$data_umkm	= array(
 					'Nama_umkm'	=> $nama_umkm,

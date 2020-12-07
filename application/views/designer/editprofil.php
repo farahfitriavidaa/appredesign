@@ -44,7 +44,6 @@
                         <div class="container-fluid">
                             <?php
                                 if( ! is_null($this->session->flashdata('alert'))):
-                                    $alert = $this->session->flashdata('alert');
                             ?>
                                 <div class="row">
                                     <div class="col-12">
@@ -53,15 +52,7 @@
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                             <p>Maaf, tidak bisa mengunggah foto atau gambar.</p>
-                                            <p>
-                                            <?php
-                                                foreach($alert as $a):
-                                                    if(!empty($a) && $a!=='sukses'):
-                                            ?>
-                                                        <?=$a?>
-                                                    <?php  endif; ?>
-                                                <?php endforeach; ?>
-                                            </p>
+                                            <p><?php echo $this->session->flashdata('alert');?></p>
                                         </div>
                                     </div>
                                 </div>
