@@ -54,9 +54,16 @@
                                             <?=$this->session->flashdata('alert');?>
                                         </div>
                                     </div>
+                                    <div class="col-12 mt-4">
+                                        <a href="<?=base_url();?>Umkm/lihatDiskusi" class="btn btn-raised btn-primary">
+                                            <i class="mdi mdi-arrow-left"></i>
+                                            Kembali
+                                        </a>
+                                    </div>
                                 </div>
                             <?php endif; ?>
 
+                            <?php if( ! is_null($pemesanan)): ?>
                             <button class="btn btn-raised btn-secondary mt-4" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="detilProduk detilRequest">
                             <i class="mdi mdi-format-align-left"></i>
                                 Deskripsi Request
@@ -212,12 +219,12 @@
                                             </p>
 
                                             <strong class="d-block">Hasil Desain</strong>
-                                            <?php 
+                                            <?php
                                                 $hasil_design = $pemesanan->Hasil_design;
                                                 if(empty($hasil_design)): ?>
                                                     <p><i class="text-muted">Belum ada hasil desain</i></p>
-                                            <?php 
-                                                else: 
+                                            <?php
+                                                else:
                                                 $hasil_design = explode(',', $hasil_design) ?>
                                                 <div class="mb-4">
                                                     <?php foreach($hasil_design as $img):?>
@@ -227,12 +234,12 @@
                                             <?php endif; ?>
 
                                             <strong class="d-block">Revisi Desain</strong>
-                                            <?php 
+                                            <?php
                                                 $revisi = $pemesanan->Revisi_design;
                                                 if(empty($revisi)): ?>
                                                     <p><i class="text-muted">Belum ada hasil desain</i></p>
-                                            <?php 
-                                                else: 
+                                            <?php
+                                                else:
                                                 $revisi = explode(',', $revisi) ?>
                                                 <div class="mb-4">
                                                     <?php foreach($revisi as $img):?>
@@ -259,7 +266,7 @@
                                             <strong>Diskusi dengan Pengelola</strong>
                                         </div>
                                         <div class="px-2" style="overflow-y: auto; max-height: 120vh">
-                                        <?php 
+                                        <?php
                                         if(empty($daftar_diskusi)):
                                             echo "Belum ada diskusi untuk request ini.";
                                         else:
@@ -295,9 +302,9 @@
                                                     <span class="text-13 text-muted float-right"><?=cetakWaktu($diskusi->Tanggal_waktu);?></span>
                                                 </div>
                                             </div>
-                                        <?php 
+                                        <?php
                                             endforeach;
-                                        endif; 
+                                        endif;
                                         ?>
 
                                         </div>
@@ -331,6 +338,8 @@
                                 </div>
 
                             </div> <!-- end row -->
+
+                            <?php endif; ?>
 
                         </div><!-- container -->
 
