@@ -82,12 +82,14 @@
                                     <div class="card m-b-30">
                                         <div class="card-body">
                                             <form action="<?=base_url();?>Umkm/tambahRequest" method="POST" class="mb-0" enctype="multipart/form-data" autocomplete="off">
-                                                <div class="form-group">
-                                                    <input type="text" name="nama-produk" class="form-control" placeholder="Nama Produk" required>
+                                            <div class="form-group">
+                                                    <label for="nama-produk" class="bmd-label-floating">Nama Produk</label>
+                                                    <input type="text" name="nama-produk" class="form-control" id="nama-produk" required>
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <textarea name="keterangan-produk" class="form-control" placeholder="Keterangan singkat mengenai produk Anda" required></textarea>
+                                                    <label for="keterangan-produk" class="bmd-label-floating">Keterangan singkat mengenai produk Anda</label>
+                                                    <textarea name="keterangan-produk" class="form-control" id="keterangan-produk" required></textarea>
                                                 </div>
 
                                                 <div class="form-group bmd-form-group">
@@ -102,13 +104,14 @@
                                                 </div>
 
                                                 <div class="form-group bmd-form-group">
-                                                    <label for="kemasan">Kemasan Produk</label>
+                                                    <label for="kemasan">Kemasan Produk (diperlukan)</label>
                                                     <input type="file" name="kemasan-produk" class="form-control-file" id="kemasan" required>
                                                     <small class="text-muted">Tambahkan gambar kemasan yang sekarang dimiliki</small>
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <textarea name="keterangan-desain" class="form-control" placeholder="Keterangan mengenai desain yang diinginkan" required></textarea>
+                                                    <label for="keterangan-desain" class="bmd-label-floating">Keterangan mengenai desain yang diinginkan</label>
+                                                    <textarea name="keterangan-desain" class="form-control" id="keterangan-produk" required></textarea>
                                                 </div>
 
                                                 <div class="form-group bmd-form-group">
