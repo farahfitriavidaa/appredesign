@@ -55,7 +55,7 @@
                                         </div>
                                     </div>
                                     <div class="col-12 mt-4">
-                                        <a href="<?=base_url();?>Umkm/lihatDiskusi" class="btn btn-raised btn-primary">
+                                        <a href="<?=base_url();?>umkm/diskusi/lihatDiskusi" class="btn btn-raised btn-primary">
                                             <i class="mdi mdi-arrow-left"></i>
                                             Kembali
                                         </a>

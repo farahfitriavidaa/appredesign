@@ -137,7 +137,19 @@ class Request extends CI_Controller {
 	{
 		if ($id_pesan!=='0') {
 			$id_pesan		= 'PS'.str_pad($id_pesan, 4, '0', STR_PAD_LEFT);
-			$detil_request	= $this->Model_umkm->getRequest($id_pesan);
+			$id_umkm		= $this->session->id_umkm;
+
+			$detil_request	= $this->Model_umkm->getRequest($id_umkm, $id_pesan);
+
+			if(is_null($detil_request)) {
+				$_SESSION['alert'] = array(
+					'jenis' => 'alert-danger',
+					'isi'	=> 'Request tidak diketahui.'
+				);
+				$this->session->mark_as_flash('alert');
+
+				redirect('umkm/request');
+			}// else {
 
 			$id_data_umkm	= $detil_request->IDDataUMKM;
 			$data_produk	= $this->Model_umkm->getUmkmData($id_data_umkm);
@@ -161,6 +173,7 @@ class Request extends CI_Controller {
 
 			$this->load->helper('my_helper');
 			$this->load->view('umkm/detilrequest', $data);
+			//} // end of else
 		} else {
 			http_response_code('400');
 		}
@@ -170,7 +183,19 @@ class Request extends CI_Controller {
 	{
 		if ($id_pesan!=='0') {
 			$id_pesan		= 'PS'.str_pad($id_pesan, 4, '0', STR_PAD_LEFT);
-			$detil_request	= $this->Model_umkm->getRequest($id_pesan);
+			$id_umkm		= $this->session->id_umkm;
+
+			$detil_request	= $this->Model_umkm->getRequest($id_umkm, $id_pesan);
+
+			if(is_null($detil_request)) {
+				$_SESSION['alert'] = array(
+					'jenis' => 'alert-danger',
+					'isi'	=> 'Request tidak diketahui.'
+				);
+				$this->session->mark_as_flash('alert');
+
+				redirect('umkm/request');
+			}// else {
 
 			$id_data_umkm	= $detil_request->IDDataUMKM;
 			$data_produk	= $this->Model_umkm->getUmkmData($id_data_umkm);
@@ -182,6 +207,7 @@ class Request extends CI_Controller {
 
 			$this->load->helper('my_helper');
 			$this->load->view('umkm/editrequest', $data);
+			//} // end of else
 		} else {
 			http_response_code('400');
 		}
@@ -190,6 +216,21 @@ class Request extends CI_Controller {
 	public function updateRequest()
 	{
 		if($this->input->method() == 'post') {
+			$id_pesan			= 'PS'.str_pad($this->input->post('np'), 4, '0', STR_PAD_LEFT);
+			$id_umkm			= $this->session->id_umkm;
+
+			$cekUmkmdanRequest	= $this->Model_umkm->cekUmkmdanRequest($id_umkm, $id_pesan);
+
+			if(is_null($cekUmkmdanRequest)) {
+				$_SESSION['alert'] = array(
+					'jenis' => 'alert-danger',
+					'isi'	=> 'Gagal mengedit request. Request tidak diketahui.'
+				);
+				$this->session->mark_as_flash('alert');
+
+				redirect('Umkm/lihatRequest');
+			} // else {
+
 			$nama_produk		= $this->input->post('nama-produk');
 			$keterangan_produk	= $this->input->post('keterangan-produk');
 			$keterangan_desain	= $this->input->post('keterangan-desain');
@@ -217,7 +258,6 @@ class Request extends CI_Controller {
 			}
 			if( $alert[0]==='sukses' && $alert[1]==='sukses' && $alert[2]==='sukses'){
 
-				$id_pesan			= 'PS'.str_pad($this->input->post('np'), 4, '0', STR_PAD_LEFT);
 				$id_data_umkm		= $this->Model_umkm->getIdDataUmkmFromIdPesan($id_pesan);
 
 				$data_umkm		+= array(
@@ -245,6 +285,7 @@ class Request extends CI_Controller {
 				$this->session->mark_as_flash('alert');
 				redirect('umkm/request/editRequest/'.$this->input->post('np'));
 			}
+			//} // end of else
 		}
 		else
 			redirect('umkm');
@@ -254,7 +295,19 @@ class Request extends CI_Controller {
 	{
 		if ($id_pesan!=='0') {
 			$id_pesan		= 'PS'.str_pad($id_pesan, 4, '0', STR_PAD_LEFT);
-			$detil_request	= $this->Model_umkm->getRequest($id_pesan);
+			$id_umkm		= $this->session->id_umkm;
+
+			$detil_request	= $this->Model_umkm->getRequest($id_umkm, $id_pesan);
+
+			if(is_null($detil_request)) {
+				$_SESSION['alert'] = array(
+					'jenis' => 'alert-danger',
+					'isi'	=> 'Request tidak diketahui.'
+				);
+				$this->session->mark_as_flash('alert');
+
+				redirect('umkm/request');
+			}// else {
 
 			if($detil_request->Status == 0){
 				$id_data_umkm	= $this->Model_umkm->getIdDataUmkmFromIdPesan($id_pesan);
@@ -277,6 +330,7 @@ class Request extends CI_Controller {
 				$this->session->mark_as_flash('alert');
 				redirect('umkm/request');
 			}
+			//} // end of else
 		} else {
 			http_response_code('400');
 		}

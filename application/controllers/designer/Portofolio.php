@@ -87,8 +87,19 @@ class Portofolio extends CI_Controller {
 		}
 
 		$id_prt_asli		= 'PRT'.str_pad($id_portofolio, 4, '0', STR_PAD_LEFT);
+		$id_designer		= $this->session->id_designer;
 
-		$data_portofolio	= $this->Model_designer->getPortofolio($id_prt_asli);
+		$data_portofolio	= $this->Model_designer->getPortofolio($id_designer, $id_prt_asli);
+
+		if (is_null($data_portofolio)) {
+			$_SESSION['alert'] = array(
+				'jenis' => 'alert-danger',
+				'isi'	=> 'Portofolio tidak diketahui.'
+			);
+			$this->session->mark_as_flash('alert');
+
+			redirect('designer/portofolio');
+		}
 
         $this->load->helper('my_helper');
 		$bukti				= cekPortofolio($data_portofolio->Bukti_portofolio);
@@ -106,6 +117,21 @@ class Portofolio extends CI_Controller {
 	{
 		if ($this->input->method()!=='post') {
 			redirect('designer');
+		}
+
+		$id_portofolio		= 'PRT'.str_pad($this->input->post('np'), 4, '0', STR_PAD_LEFT);
+		$id_designer		= $this->session->id_designer;
+
+		$data_portofolio	= $this->Model_designer->getPortofolio($id_designer, $id_portofolio);
+
+		if (is_null($data_portofolio)) {
+			$_SESSION['alert'] = array(
+				'jenis' => 'alert-danger',
+				'isi'	=> 'Portofolio tidak diketahui.'
+			);
+			$this->session->mark_as_flash('alert');
+
+			redirect('designer/portofolio');
 		}
 
 		$judul	= $this->input->post('judul-portofolio');
@@ -128,14 +154,12 @@ class Portofolio extends CI_Controller {
 			$bukti	= $this->input->post('link-portofolio');
 		}
 
-		$id_portofolio	= 'PRT'.str_pad($this->input->post('np'), 4, '0', STR_PAD_LEFT);
 		$data			= array(
 			'Judul'			 	=> $judul,
 			'Bukti_portofolio'	=> $bukti,
 			'Detail_portofolio'	=> $detil
 		);
 
-        // TODO: cek yang di-update portofolio sendiri
 		$this->Model_designer->updatePortofolio($id_portofolio, $data);
 
 		$_SESSION['alert'] = array (
@@ -154,8 +178,20 @@ class Portofolio extends CI_Controller {
 		}
 
 		$id_prt_asli	= 'PRT'.str_pad($id_portofolio, 4, '0', STR_PAD_LEFT);
+		$id_designer		= $this->session->id_designer;
 
-        // TODO: cek kalau yang dihapus portofolio sendiri
+		$data_portofolio	= $this->Model_designer->getPortofolio($id_designer, $id_prt_asli);
+
+		if (is_null($data_portofolio)) {
+			$_SESSION['alert'] = array(
+				'jenis' => 'alert-danger',
+				'isi'	=> 'Portofolio tidak diketahui.'
+			);
+			$this->session->mark_as_flash('alert');
+
+			redirect('designer/portofolio');
+		}
+
 		$this->Model_designer->deletePortofolio($id_prt_asli);
 
 		$_SESSION['alert'] = array (
