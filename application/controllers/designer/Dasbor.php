@@ -14,6 +14,7 @@ class Dasbor extends CI_Controller {
 		$this->load->model('Model_designer');
 	}
 
+	// re-mapped: base_url()/designer
 	public function index()
 	{
 		if ( ! $this->session->has_userdata('id_user')) {
@@ -42,6 +43,7 @@ class Dasbor extends CI_Controller {
 		$this->load->view('designer/dashboard', $data);
     }
 
+	// re-mapped: base_url()/designer/logout
     public function logout()
 	{
 		session_destroy();

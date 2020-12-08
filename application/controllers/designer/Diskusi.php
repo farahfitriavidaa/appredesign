@@ -14,6 +14,7 @@ class Diskusi extends CI_Controller {
 		$this->load->model('Model_designer');
     }
 
+	// re-mapped: base_url()/designer/diskusi/(:num)
     public function index($id_pesan='0')
 	{
 		if ($id_pesan==='0') {

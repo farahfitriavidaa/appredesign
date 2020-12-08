@@ -14,6 +14,7 @@ class Dasbor extends CI_Controller {
 		$this->load->model('Model_umkm');
 	}
 
+	// re-mapped: base_url()/umkm
 	public function index()
 	{
 		if ( ! $this->session->has_userdata('id_user')) {
@@ -43,6 +44,7 @@ class Dasbor extends CI_Controller {
 		$this->load->view('umkm/dashboard', $data);
 	}
 	
+	// re-mapped: base_url()/umkm/logout
 	public function logout()
 	{
 		session_destroy();
