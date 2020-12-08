@@ -8,7 +8,7 @@ class Designer extends CI_Controller {
 
 		if( !$this->session->has_userdata('user') || $this->session->level!=='designer' ){
 			session_destroy();
-			redirect('Welcome/login');
+			redirect('Create/login');
 		}
 
 		$this->load->model('Model_designer');
@@ -799,7 +799,7 @@ class Designer extends CI_Controller {
 	public function logout()
 	{
 		session_destroy();
-		redirect('Welcome/login');
+		redirect('Create/login');
 	}
 
 	private function cekBuktiPortofolio(String $bukti)

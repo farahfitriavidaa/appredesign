@@ -8,7 +8,7 @@ class Diskusi extends CI_Controller {
 
 		if( !$this->session->has_userdata('user') || $this->session->level!=='umkm' ){
 			session_destroy();
-			redirect('Welcome/login');
+			redirect('Create/login');
 		}
 
 		$this->load->model('Model_umkm');
