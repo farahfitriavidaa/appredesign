@@ -65,7 +65,7 @@ class Model_designer extends CI_Model {
     public function getSumRequest($id_designer)
     {
         $q1 = $this->db->query("SELECT COUNT(IDPesan) AS total FROM tb_pemesanan WHERE IDDesigner='$id_designer' AND Status>1")->row();
-        $q2 = $this->db->query("SELECT COUNT(IDPesan) AS selesai FROM tb_pemesanan WHERE IDDesigner='$id_designer' AND Status>4")->row();
+        $q2 = $this->db->query("SELECT COUNT(IDPesan) AS selesai FROM tb_pemesanan WHERE IDDesigner='$id_designer' AND Status IN ('3', '4')")->row();
         $q3 = $this->db->query("SELECT COUNT(IDPesan) AS belum FROM tb_pemesanan WHERE IDDesigner='$id_designer' AND Status IN('1', '2')")->row();
 
         $data = array(
