@@ -12,7 +12,7 @@
 
             <li>
                 <a href="<?=base_url()?>designer/request/lihatRequest" class="waves-effect">
-                    <i class="mdi mdi-format-list-bulleted"></i>
+                    <i class="mdi mdi-file-multiple"></i>
                     <span> Lihat Request </span>
                 </a>
             </li>
