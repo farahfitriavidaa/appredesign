@@ -39,7 +39,7 @@ class Dasbor extends CI_Controller {
 			'request_terbaru'	=> $request_terbaru
 		);
 
-		$this->load->helper('my_helper');
+		$this->load->helper(array('my_helper', 'status_helper'));
 		$this->load->view('designer/dashboard', $data);
     }
 

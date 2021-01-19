@@ -83,41 +83,7 @@
                                             </p>
                                             <strong class="d-block">Status</strong>
                                             <p>
-                                            <?php
-                                            $status_rq = $request->Status;
-                                            switch($status_rq){
-                                                case 1:
-                                                    $status = "Request baru";
-                                                    $badge  = "light";
-                                                    break;
-                                                case 2:
-                                                    $status = "Mulai dikerjakan";
-                                                    $badge  = "warning";
-                                                    break;
-                                                case 3:
-                                                    $status = "Selesai didesain";
-                                                    $badge  = "info";
-                                                    break;
-                                                case 4:
-                                                    $status = "Review hasil";
-                                                    $badge  = "info";
-                                                    break;
-                                                case 5:
-                                                case 6:
-                                                case 7:
-                                                    $status = "Desain disetujui";
-                                                    $badge  = "success";
-                                                    break;
-                                                case 8:
-                                                    $status = "Cancel";
-                                                    $badge  = "danger";
-                                                    break;
-                                                default:
-                                                    $status = "Unknown";
-                                                    $badge  = "light";
-                                                    break;
-                                            }?>
-                                                <span class="badge badge-<?=$badge?>" style="font-size:unset"><?=$status?></span>
+                                                <?php cetakStatus($request->Status, false); ?>    
                                             </p>
                                             <strong class="d-block">Tanggal Mulai Desain</strong>
                                             <p>

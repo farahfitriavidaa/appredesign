@@ -64,10 +64,10 @@ class Diskusi extends CI_Controller {
 
 		}
 
-		$this->load->helper('my_helper');
+		$this->load->helper(array('my_helper', 'status_helper'));
 		$this->load->view('designer/diskusi', $data);
     }
-    
+
     public function lihatDiskusi($filter='belum-selesai', $page=1)
 	{
 		if ($filter==='belum-selesai') {
@@ -82,7 +82,7 @@ class Diskusi extends CI_Controller {
 		else {
 			redirect('designer/diskusi/lihatDiskusi');
 		}
-		
+
 		$this->load->helper('my_helper');
 
 		// Ambil semua IDPesan berdasarkan IDPengelola di tb_pemesanan
@@ -137,9 +137,10 @@ class Diskusi extends CI_Controller {
 			);
 		}
 
+		$this->load->helper('status_helper');
 		$this->load->view('designer/lihatdiskusi', $data);
     }
-    
+
     public function tambahKomentar()
 	{
 		if($this->input->method() == 'post') {

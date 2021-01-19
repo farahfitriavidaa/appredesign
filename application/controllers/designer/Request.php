@@ -13,7 +13,7 @@ class Request extends CI_Controller {
 
 		$this->load->model('Model_designer');
     }
-	
+
 	// re-mapped: base_url()/designer/request/(:num)
 	public function index($id_pesan='0')
 	{
@@ -39,7 +39,7 @@ class Request extends CI_Controller {
 		);
 
 		// print_r($data);
-		$this->load->helper('my_helper');
+		$this->load->helper(array('my_helper', 'status_helper'));
 		$this->load->view('designer/request', $data);
 	}
 
@@ -60,7 +60,7 @@ class Request extends CI_Controller {
 			);
 		}
 
-		$this->load->helper('my_helper');
+		$this->load->helper(array('my_helper', 'status_helper'));
 		$this->load->view('designer/lihatrequest', $data);
 	}
 

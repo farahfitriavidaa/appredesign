@@ -90,39 +90,7 @@
                                             </p>
                                             <div class="mt-2">
                                                 <span class="text-muted"><?=cetakWaktu($diskusi->Tanggal_waktu)?></span>
-                                                <?php switch($diskusi->Status){
-                                                case 1:
-                                                    $status = "Request baru";
-                                                    $badge  = "light";
-                                                    break;
-                                                case 2:
-                                                    $status = "Mulai dikerjakan";
-                                                    $badge  = "warning";
-                                                    break;
-                                                case 3:
-                                                    $status = "Selesai didesain";
-                                                    $badge  = "info";
-                                                    break;
-                                                case 4:
-                                                    $status = "Review hasil";
-                                                    $badge  = "info";
-                                                    break;
-                                                case 5:
-                                                case 6:
-                                                case 7:
-                                                    $status = "Desain disetujui";
-                                                    $badge  = "success";
-                                                    break;
-                                                case 8:
-                                                    $status = "Cancel";
-                                                    $badge  = "danger";
-                                                    break;
-                                                default:
-                                                    $status = "Unknown";
-                                                    $badge  = "light";
-                                                    break;
-                                            }?>
-                                                <span class="float-right badge badge-<?=$badge?>" style="font-size:unset"><?=$status?></span>
+                                                <?php cetakStatus($diskusi->Status); ?>
                                             </div>
                                         </div>
                                     </div>
