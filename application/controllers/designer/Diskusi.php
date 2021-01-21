@@ -156,7 +156,7 @@ class Diskusi extends CI_Controller {
 			// Jika tidak ada foto yang di-upload maka lewati bagian if() ini
 			$this->load->helper('my_helper');
 			if( $_FILES['foto-komentar']['error'] !== 4 ){
-				$alert	= uploadFoto('foto-komentar', 'foto_diskum');
+				$alert	= uploadFoto('foto-komentar', 'foto_dispro');
 				$data	+= array(
 					'Foto_dispro' => $_FILES['foto-komentar']['name']
 				);
