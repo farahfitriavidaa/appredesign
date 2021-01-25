@@ -55,20 +55,26 @@ class Profil extends CI_Controller {
 		$data_user		= array();
 
 		if( $_FILES['foto-profil']['error'] != 4 ){
-			$this->load->helper('my_helper');
-			$alert[0]	= uploadFoto('foto-profil', 'foto_user');
 
-			if( $alert[0]==='sukses') {
-				$data_user	+= array(
-					'Foto' => $_FILES['foto-profil']['name']
-                );
+			$this->load->library('upload');
 
-		        $this->session->foto_profil = $_FILES['foto-profil']['name'];
-			}
-			else {
-				$_SESSION['alert'] = $alert;
+			$config['upload_path']		= './uploads/foto_user/';
+			$config['allowed_types']	= 'png|jpg|jpeg';
+			$config['max_size']			= '65000';
+
+			$this->upload->initialize($config);
+
+			if ( ! $this->upload->do_upload('foto-profil') ) {
+				$_SESSION['alert'] = $this->upload->display_errors();
 				$this->session->mark_as_flash('alert');
 				redirect('designer/profil/editProfil');
+			}
+			else {
+				$data_user	+= array(
+					'Foto' => $this->upload->data('file_name')
+				);
+
+				$this->session->foto_profil = $this->upload->data('file_name');
 			}
 		}
 

@@ -132,8 +132,6 @@ class Request extends CI_Controller {
 			}
 		}
 
-		var_dump($file_terunggah);
-
 		if ($upload) {
 			if ($status<=3) {
 

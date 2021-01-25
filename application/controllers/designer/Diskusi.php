@@ -144,6 +144,8 @@ class Diskusi extends CI_Controller {
     public function tambahKomentar()
 	{
 		if($this->input->method() == 'post') {
+			
+			$this->load->helper('my_helper');
 
 			// Kembalikan IDPesan sesuai format, 1 -> PS0001
 			$id_pesan		= $this->input->post('np');
@@ -152,19 +154,30 @@ class Diskusi extends CI_Controller {
 			$data			= array();
 			$alert			= '';
 
-			// Proses upload foto dengan bantuan function uploadFoto() dari my_helper
 			// Jika tidak ada foto yang di-upload maka lewati bagian if() ini
-			$this->load->helper('my_helper');
 			if( $_FILES['foto-komentar']['error'] !== 4 ){
-				$alert	= uploadFoto('foto-komentar', 'foto_dispro');
-				$data	+= array(
-					'Foto_dispro' => $_FILES['foto-komentar']['name']
-				);
+
+				$this->load->library('upload');
+
+				$config['upload_path']		= './uploads/foto_dispro/';
+				$config['allowed_types']	= 'png|jpg|jpeg';
+				$config['max_size']			= '65000';
+
+				$this->upload->initialize($config);
+
+				if ( ! $this->upload->do_upload('foto-komentar') ) {
+					$alert = $this->upload->display_errors();
+				}
+				else {
+					$data	+= array(
+						'Foto_dispro' => $this->upload->data('file_name')
+					);
+				}
 			}
 
 			// Cek apakah upload foto berhasil
 			// Jika berhasil tambahkan ke database, jika tidak berhasil lempar peringatan ke halaman diskusi
-			if($alert==='sukses' || $alert===''){
+			if( empty($alert) ){
 				$this->load->model('Model_created');
 				$id_dispro		= $this->Model_created->idDispro();
 
@@ -190,6 +203,7 @@ class Diskusi extends CI_Controller {
 
 			}
 			else{
+				// TODO: perbaiki pesan error upload file, pesan tidak muncul di halaman diskusi
 				$_SESSION['alert'] = $alert;
 				$this->session->mark_as_flash('alert');
 				redirect('designer/diskusi/'.$id_pesan);

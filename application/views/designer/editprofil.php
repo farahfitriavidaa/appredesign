@@ -43,7 +43,7 @@
 
                         <div class="container-fluid">
                             <?php
-                                if( ! is_null($this->session->flashdata('alert'))):
+                                if( ! is_null($this->session->flashdata('alert')) ):
                             ?>
                                 <div class="row">
                                     <div class="col-12">
@@ -51,7 +51,7 @@
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
-                                            <p>Maaf, tidak bisa mengunggah foto atau gambar.</p>
+                                            <p>Failed to upload image</p>
                                             <p><?php echo $this->session->flashdata('alert');?></p>
                                         </div>
                                     </div>

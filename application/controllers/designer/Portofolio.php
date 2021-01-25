@@ -45,21 +45,28 @@ class Portofolio extends CI_Controller {
 		$bukti	= '';
 
 		if ( isset($_FILES['bukti-portofolio']) && $_FILES['bukti-portofolio']['error'] != 4 ) {
-			$this->load->helper('my_helper');
-			$alert[0]	= uploadFoto('bukti-portofolio', 'bukti_portofolio');
 
-			if ($alert[0]==='sukses')
-				$bukti	= $_FILES['bukti-portofolio']['name'];
-			else {
-				$_SESSION['alert'] = $alert;
+			$this->load->library('upload');
+
+			$config['upload_path']		= './uploads/bukti_portofolio/';
+			$config['allowed_types']	= 'png|jpg|jpeg';
+			$config['max_size']			= '65000';
+
+			$this->upload->initialize($config);
+
+			if ( ! $this->upload->do_upload('bukti-portofolio') ) {
+				$_SESSION['alert'] = $this->upload->display_errors();
 				$this->session->mark_as_flash('alert');
 				redirect('designer/portofolio/buatPortofolio');
+			}
+			else {
+				$bukti	= $this->upload->data('file_name');
 			}
 		}
 		else {
 			$bukti	= $this->input->post('link-portofolio');
 		}
-
+		
 		$this->load->model('Model_created');
 
 		$data	= array(
@@ -119,7 +126,8 @@ class Portofolio extends CI_Controller {
 			redirect('designer');
 		}
 
-		$id_portofolio		= 'PRT'.str_pad($this->input->post('np'), 4, '0', STR_PAD_LEFT);
+		$id_prt_asli		= $this->input->post('np');
+		$id_portofolio		= 'PRT'.str_pad($id_prt_asli, 4, '0', STR_PAD_LEFT);
 		$id_designer		= $this->session->id_designer;
 
 		$data_portofolio	= $this->Model_designer->getPortofolio($id_designer, $id_portofolio);
@@ -136,29 +144,42 @@ class Portofolio extends CI_Controller {
 
 		$judul	= $this->input->post('judul-portofolio');
 		$detil	= $this->input->post('detil-portofolio');
+		$link	= $this->input->post('link-portofolio');
 		$bukti	= '';
 
 		if ( isset($_FILES['bukti-portofolio']) && $_FILES['bukti-portofolio']['error'] != 4 ) {
-			$this->load->helper('my_helper');
-			$alert[0]	= uploadFoto('bukti-portofolio', 'bukti_portofolio');
+			
+			$this->load->library('upload');
 
-			if ($alert[0]==='sukses')
-				$bukti	= $_FILES['bukti-portofolio']['name'];
-			else {
-				$_SESSION['alert'] = $alert;
+			$config['upload_path']		= './uploads/bukti_portofolio/';
+			$config['allowed_types']	= 'png|jpg|jpeg';
+			$config['max_size']			= '65000';
+
+			$this->upload->initialize($config);
+
+			if ( ! $this->upload->do_upload('bukti-portofolio') ) {
+				$_SESSION['alert'] = $this->upload->display_errors();
 				$this->session->mark_as_flash('alert');
-				redirect('designer/portofolio/buatPortofolio');
+				redirect('designer/portofolio/editPortofolio/'.$id_prt_asli);
+			}
+			else {
+				$bukti	= $this->upload->data('file_name');
 			}
 		}
-		else {
-			$bukti	= $this->input->post('link-portofolio');
+		elseif ( ! empty($link) ) {
+			$bukti	= $link;
 		}
-
-		$data			= array(
+		
+		$data	= array(
 			'Judul'			 	=> $judul,
-			'Bukti_portofolio'	=> $bukti,
 			'Detail_portofolio'	=> $detil
 		);
+
+		if ( $bukti !== '' ) {
+			$data	+= array(
+				'Bukti_portofolio'	=> $bukti
+			);
+		}
 
 		$this->Model_designer->updatePortofolio($id_portofolio, $data);
 

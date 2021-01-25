@@ -52,16 +52,8 @@
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
-                                            Maaf, edit portofolio gagal
-                                            <ul>
-                                            <?php
-                                                foreach($alert as $a):
-                                                    if(!empty($a) && $a!=='sukses'):
-                                            ?>
-                                                        <li><?=$a?>
-                                                    <?php  endif; ?>
-                                                <?php endforeach; ?>
-                                            </ul>
+                                            <p>Failed to upload image.</p>
+                                            <?=$alert;?>
                                         </div>
                                     </div>
                                 </div>
@@ -93,7 +85,7 @@
                                                 </div>
 
                                                 <div style="margin:48px 0 -16px">
-                                                    <span class="text-muted">Bukti Portofolio (link atau file)</span>
+                                                    <span class="text-muted">Bukti Portofolio (link <strong>atau</strong> file)</span>
                                                 </div>
 
                                                 <div class="form-group">
@@ -102,12 +94,12 @@
                                                 </div>
 
                                                 <?php if ($bukti==='link') :?>
-                                                    <span class="btn btn-secondary mt-3" id="change">Ganti portofolio dengan file</span>
+                                                    <span class="btn btn-secondary mt-3" id="change" role="button">Ganti portofolio dengan file</span>
                                                 <?php endif;?>
 
                                                 <div class="form-group">
                                                     <input type="file" name="bukti-portofolio" id="input-file-now" class="dropify"/>
-                                                    <small class="text-muted">format .jpg, .png, atau .pdf</small>
+                                                    <small class="text-muted">format .png atau .jpg</small>
                                                 </div>
 
                                                 <?php if ($bukti==='image'): ?>
