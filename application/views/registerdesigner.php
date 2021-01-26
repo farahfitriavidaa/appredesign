@@ -49,7 +49,7 @@
                                               <input type="hidden" name="iduser" value="<?=$id?>">
                                                 <div class="form-group row">
                                                     <div class="col-12">
-                                                      <textarea name="keterangan" class="form-control" placeholder="Keterangan" rows="8" cols="80"></textarea>
+                                                      <textarea name="keterangan" class="form-control" placeholder="Keterangan atau Bio tentang Anda" rows="8" cols="80"></textarea>
                                                     </div>
                                                 </div>
 
