@@ -55,8 +55,12 @@ class Portofolio extends CI_Controller {
 			$this->upload->initialize($config);
 
 			if ( ! $this->upload->do_upload('bukti-portofolio') ) {
-				$_SESSION['alert'] = $this->upload->display_errors();
+				$isi_pesan	= $this->upload->display_errors().
+					'<span>Allowed filetype: png or jpg.</span>';
+
+				$_SESSION['alert'] = $isi_pesan;
 				$this->session->mark_as_flash('alert');
+
 				redirect('designer/portofolio/buatPortofolio');
 			}
 			else {
@@ -158,8 +162,12 @@ class Portofolio extends CI_Controller {
 			$this->upload->initialize($config);
 
 			if ( ! $this->upload->do_upload('bukti-portofolio') ) {
-				$_SESSION['alert'] = $this->upload->display_errors();
+				$isi_pesan	= $this->upload->display_errors().
+					'<span>Allowed filetype: png or jpg.</span>';
+
+				$_SESSION['alert'] = $isi_pesan;
 				$this->session->mark_as_flash('alert');
+				
 				redirect('designer/portofolio/editPortofolio/'.$id_prt_asli);
 			}
 			else {

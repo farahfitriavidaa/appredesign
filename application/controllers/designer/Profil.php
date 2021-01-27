@@ -65,8 +65,12 @@ class Profil extends CI_Controller {
 			$this->upload->initialize($config);
 
 			if ( ! $this->upload->do_upload('foto-profil') ) {
-				$_SESSION['alert'] = $this->upload->display_errors();
+				$isi_pesan	= $this->upload->display_errors().
+					'<span>Allowed filetype: png or jpg.</span>';
+
+				$_SESSION['alert'] = $isi_pesan;
 				$this->session->mark_as_flash('alert');
+				
 				redirect('designer/profil/editProfil');
 			}
 			else {
