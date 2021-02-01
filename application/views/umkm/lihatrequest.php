@@ -115,49 +115,7 @@
                                                                 echo substr($requests[$i]->Keterangan_design, '0', '47').$tambahan;
                                                             ?></td>
                                                             <td>
-                                                            <?php switch($requests[$i]->Status){
-                                                                case 0:
-                                                                    $status = "Pending";
-                                                                    $badge  = "light";
-                                                                    break;
-                                                                case 1:
-                                                                    $status = "Telah didiskusikan";
-                                                                    $badge  = "light";
-                                                                    break;
-                                                                case 2:
-                                                                    $status = "Mulai dikerjakan desainer";
-                                                                    $badge  = "light";
-                                                                    break;
-                                                                case 3:
-                                                                    $status = "Selesai didesain";
-                                                                    $badge  = "info";
-                                                                    break;
-                                                                case 4:
-                                                                    $status = "Review hasil";
-                                                                    $badge  = "info";
-                                                                    break;
-                                                                case 5:
-                                                                    $status = "Desain disetujui";
-                                                                    $badge  = "info";
-                                                                    break;
-                                                                case 6:
-                                                                    $status = "Belum dibayar";
-                                                                    $badge  = "warning";
-                                                                    break;
-                                                                case 7:
-                                                                    $status = "Lunas";
-                                                                    $badge  = "success";
-                                                                    break;
-                                                                case 8:
-                                                                    $status = "Cancel";
-                                                                    $badge  = "danger";
-                                                                    break;
-                                                                default:
-                                                                    $status = "Pending";
-                                                                    $badge  = "light";
-                                                                    break;
-                                                            }?>
-                                                                <span class="badge badge-<?=$badge?>" style="font-size:unset"><?=$status?></span>
+                                                            <?php cetakStatusLengkap($requests[$i]->Status) ?>
                                                             </td>
                                                             <td>
                                                             <?php

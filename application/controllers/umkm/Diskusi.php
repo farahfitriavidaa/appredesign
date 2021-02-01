@@ -64,8 +64,8 @@ class Diskusi extends CI_Controller {
 				);
 			}
             // var_dump($data);
-			// Load helper untuk memotong IDPesan, PS0015 -> 15.
-			$this->load->helper('my_helper');
+			// Load helper untuk memotong IDPesan (PS0015 -> 15) dan untuk cetak badge status
+			$this->load->helper( array('my_helper' ,'status_helper') );
 			$this->load->view('umkm/diskusi', $data);
 
 		} else {
@@ -88,7 +88,7 @@ class Diskusi extends CI_Controller {
 			redirect('umkm/diskusi/lihatDiskusi');
 		}
 
-		$this->load->helper('my_helper');
+		$this->load->helper( array('my_helper', 'status_helper') );
 
 		// Ambil semua IDPesan berdasarkan IDUMKM
 		$id_umkm	= $this->session->id_umkm;

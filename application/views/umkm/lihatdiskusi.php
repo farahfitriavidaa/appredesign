@@ -95,6 +95,7 @@
                                             </p>
                                             <div class="mt-2">
                                                 <span class="text-muted"><?=cetakWaktu($diskusi->Tanggal_waktu)?></span>
+                                                <?php cetakStatusLengkap($diskusi->Status) ?>
                                             </div>
                                         </div>
                                     </div>

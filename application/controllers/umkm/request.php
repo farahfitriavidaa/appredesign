@@ -44,6 +44,7 @@ class Request extends CI_Controller {
 			);
 		}
 
+		$this->load->helper('status_helper');
 		$this->load->view('umkm/lihatrequest', $data);
 	}
 
@@ -171,7 +172,7 @@ class Request extends CI_Controller {
 				'desainer'		=> $data_desainer
 			);
 
-			$this->load->helper('my_helper');
+			$this->load->helper( array('my_helper', 'status_helper') );
 			$this->load->view('umkm/detilrequest', $data);
 			//} // end of else
 		} else {
