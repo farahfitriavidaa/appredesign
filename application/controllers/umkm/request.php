@@ -237,25 +237,138 @@ class Request extends CI_Controller {
 
 			$data_umkm			= array();
 			$alert				= ['sukses','sukses','sukses'];
+
 			$this->load->helper('my_helper');
+			$this->load->library('upload');
+
 			if( $_FILES['foto-produk']['error'] != 4 ){
-				$alert[0]		= uploadFoto('foto-produk', 'foto_produk');
-				$data_umkm		+= array(
-					'Foto_produk' => $_FILES['foto-produk']['name']
-				);
+				// $alert[0]		= uploadFoto('foto-produk', 'foto_produk');
+				// $data_umkm		+= array(
+				// 	'Foto_produk' => $_FILES['foto-produk']['name']
+				// );
+
+
+				$config['upload_path']		= './uploads/foto_produk/';
+				$config['allowed_types']	= 'png|jpg|jpeg';
+				$config['max_size']			= '65000';
+
+				$this->upload->initialize($config);
+
+				if ( ! $this->upload->do_upload('foto-produk') ) {
+					$alert[0]	= $this->upload->display_errors().
+						'('.$this->upload->data['filename'].')';
+				}
+				else {
+					$data_user	+= array(
+						'Foto_produk' => $this->upload->data('file_name')
+					);
+				}
 			}
 			if( $_FILES['logo-produk']['error'] != 4 ){
-				$alert[1]		= uploadFoto('logo-produk', 'logo_produk');
-				$data_umkm		+= array(
-					'Logo_produk' => $_FILES['logo-produk']['name']
-				);
+				// $alert[1]		= uploadFoto('logo-produk', 'logo_produk');
+				// $data_umkm		+= array(
+				// 	'Logo_produk' => $_FILES['logo-produk']['name']
+				// );
+
+				$config['upload_path']		= './uploads/logo_produk/';
+				$config['allowed_types']	= 'png|jpg|jpeg';
+				$config['max_size']			= '65000';
+
+				$this->upload->initialize($config);
+
+				if ( ! $this->upload->do_upload('logo-produk') ) {
+					$alert[0]	= $this->upload->display_errors().
+						'('.$this->upload->data['filename'].')';
+				}
+				else {
+					$data_user	+= array(
+						'Logo_produk' => $this->upload->data('file_name')
+					);
+				}
 			}
 			if( $_FILES['kemasan-produk']['error'] != 4 ){
-				$alert[2]		= uploadFoto('kemasan-produk', 'fto_kemasan_lama');
-				$data_umkm		+= array(
-					'Kemasan_produk' => $_FILES['kemasan-produk']['name']
-				);
+				// $alert[2]		= uploadFoto('kemasan-produk', 'fto_kemasan_lama');
+				// $data_umkm		+= array(
+				// 	'Kemasan_produk' => $_FILES['kemasan-produk']['name']
+				// );
+
+				$config['upload_path']		= './uploads/kemasan_produk/';
+				$config['allowed_types']	= 'png|jpg|jpeg';
+				$config['max_size']			= '65000';
+
+				$this->upload->initialize($config);
+
+				if ( ! $this->upload->do_upload('kemasan-produk') ) {
+					$alert[0]	= $this->upload->display_errors().
+						'('.$this->upload->data['filename'].')';
+				}
+				else {
+					$data_user	+= array(
+						'Kemasan_produk' => $this->upload->data('file_name')
+					);
+				}
 			}
+
+			/** {
+			$files			= array('foto-produk', );
+			$jumlah_file	= count($files['name']);
+			$upload			= true;
+			$file_terunggah	= '';
+
+			$this->load->library('upload');
+			for ($i = 0; $i < $jumlah_file; $i++) {
+				$config['allowed_types']	= 'jpg|png';
+				$config['max_size']			= '65000';
+				$config['upload_path']		= './uploads/hasil_design/';
+
+				$this->upload->initialize($config);
+
+				$_FILES['file']['name']		= $files['name'][$i];
+				$_FILES['file']['type']		= $files['type'][$i];
+				$_FILES['file']['tmp_name']	= $files['tmp_name'][$i];
+				$_FILES['file']['error']	= $files['error'][$i];
+				$_FILES['file']['size']		= $files['size'][$i];
+
+				if ( ! $this->upload->do_upload('file')) {
+					$alert	= $this->upload->display_errors().
+						'('.$this->upload->data['filename'].')';
+
+					$_SESSION['alert'] = array(
+						'jenis'		=> 'alert-danger',
+						'isi'		=> $isi_pesan
+					);
+					$upload = false;
+					break;
+				}
+				else {
+					$komah=$i==$jumlah_file-1?'':',';
+					$file_terunggah .= $this->upload->data('file_name').$komah;
+				}
+			}
+
+			if ($upload) {
+				if ($status<=3) {
+
+					$this->Model_designer->uploadDesain($file_terunggah, $id_pesan_asli);
+					$this->Model_designer->updateStatus('3', $id_pesan_asli);
+
+					$_SESSION['alert'] = array(
+						'jenis'		=> 'alert-primary',
+						'isi'		=> 'Berhasil mengunggah hasil desain'
+					);
+				} else {
+
+					$this->Model_designer->uploadRevisi($file_terunggah, $id_pesan_asli);
+
+					$_SESSION['alert'] = array(
+						'jenis'		=> 'alert-primary',
+						'isi'		=> 'Berhasil mengunggah revisi'
+					);
+				}
+			}
+			} */
+
+
 			if( $alert[0]==='sukses' && $alert[1]==='sukses' && $alert[2]==='sukses'){
 
 				$id_data_umkm		= $this->Model_umkm->getIdDataUmkmFromIdPesan($id_pesan);
@@ -276,7 +389,7 @@ class Request extends CI_Controller {
 				$_SESSION['alert'] = array (
 					'jenis'	=> 'alert-primary',
 					'isi'	=> 'Request berhasil diubah.'
-				);;
+				);
 				$this->session->mark_as_flash('alert');
 				redirect('umkm/request');
 			}

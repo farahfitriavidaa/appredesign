@@ -55,49 +55,57 @@ class Profil extends CI_Controller {
 			$no_telp		= $this->input->post('no-telp');
 			$alamat			= $this->input->post('alamat');
 
-			$data_user			= array();
-			$alert				= [''];
-			if( $_FILES['foto-profil']['error'] != 4 ){
-				$this->load->helper('my_helper');
-				$alert			= uploadFoto('foto-profil', 'foto_user');
+			$data_user		= array();
 
-				if ($alert==='sukses') {
-					$data_user		+= array(
-						'Foto' => $_FILES['foto-profil']['name']
+			if( $_FILES['foto-profil']['error'] != 4 ){
+
+				$this->load->library('upload');
+
+				$config['upload_path']		= './uploads/foto_user/';
+				$config['allowed_types']	= 'png|jpg|jpeg';
+				$config['max_size']			= '65000';
+
+				$this->upload->initialize($config);
+
+				if ( ! $this->upload->do_upload('foto-profil') ) {
+					$isi_pesan	= $this->upload->display_errors().
+						'<span>Allowed filetype: png or jpg.</span>';
+
+					$_SESSION['alert'] = $isi_pesan;
+					$this->session->mark_as_flash('alert');
+					
+					redirect('umkm/profil/editProfil');
+				}
+				else {
+					$data_user	+= array(
+						'Foto' => $this->upload->data('file_name')
 					);
 
-					$this->session->foto_profil = $_FILES['foto-profil']['name'];
+					$this->session->foto_profil = $this->upload->data('file_name');
 				}
 			}
-			if( $alert==='sukses' || $alert===''){
 
-				$data_user		+= array(
-					'Nama_lengkap'	=> $nama_lengkap,
-					'Username'		=> $username,
-					'Email'			=> $email
-				);
+			$data_user		+= array(
+				'Nama_lengkap'	=> $nama_lengkap,
+				'Username'		=> $username,
+				'Email'			=> $email
+			);
 
-				$id_user	= $this->Model_umkm->getIdUser( $this->session->user );
-				$this->Model_umkm->updateUser($id_user->IDUser, $data_user);
+			$id_user	= $this->Model_umkm->getIdUser( $this->session->user );
+			$this->Model_umkm->updateUser($id_user->IDUser, $data_user);
 
-				$data_umkm	= array(
-					'Nama_umkm'	=> $nama_umkm,
-					'No_telp'	=> $no_telp,
-					'Alamat'	=> $alamat
-				);
+			$data_umkm	= array(
+				'Nama_umkm'	=> $nama_umkm,
+				'No_telp'	=> $no_telp,
+				'Alamat'	=> $alamat
+			);
 
-				$id_umkm	= $this->session->id_umkm;
-				$this->Model_umkm->updateUmkm($id_umkm, $data_umkm);
+			$id_umkm	= $this->session->id_umkm;
+			$this->Model_umkm->updateUmkm($id_umkm, $data_umkm);
 
-				$_SESSION['alert'] = 'Profil berhasil diubah.';
-				$this->session->mark_as_flash('alert');
-				redirect('umkm/profil');
-			}
-			else{
-				$_SESSION['alert'] = $alert;
-				$this->session->mark_as_flash('alert');
-				redirect('umkm/profil/editProfil');
-			}
+			$_SESSION['alert'] = 'Profil berhasil diubah.';
+			$this->session->mark_as_flash('alert');
+			redirect('umkm/profil');
 		}
 		else
 			redirect('umkm');

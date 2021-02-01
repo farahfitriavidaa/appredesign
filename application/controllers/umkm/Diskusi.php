@@ -149,6 +149,9 @@ class Diskusi extends CI_Controller {
 	{
 		// Cek kalo user ke alamat ini dengan method post (tidak mengetik secara langsung alamat "../Umkm/tambahKomentar")
 		if($this->input->method() == 'post') {
+			
+			$this->load->helper('my_helper');
+
 			// Kembalikan IDPesan sesuai format, 1 -> PS0001
 			$id_terpotong	= $this->input->post('np');
 			$id_pesan		= 'PS'.str_pad($id_terpotong, 4, '0', STR_PAD_LEFT);
@@ -158,17 +161,37 @@ class Diskusi extends CI_Controller {
 
 			// Proses upload foto dengan bantuan function uploadFoto() dari my_helper
 			// Jika tidak ada foto yang di-upload maka lewati bagian if() ini
-			$this->load->helper('my_helper');
+			// if( $_FILES['foto-komentar']['error'] !== 4 ){
+			// 	$alert	= uploadFoto('foto-komentar', 'foto_diskum');
+			// 	$data	+= array(
+			// 		'Foto_diskum' => $_FILES['foto-komentar']['name']
+			// 	);
+			// }
+
+			// Jika tidak ada foto yang di-upload maka lewati bagian if() ini
 			if( $_FILES['foto-komentar']['error'] !== 4 ){
-				$alert	= uploadFoto('foto-komentar', 'foto_diskum');
-				$data	+= array(
-					'Foto_diskum' => $_FILES['foto-komentar']['name']
-				);
+
+				$this->load->library('upload');
+
+				$config['upload_path']		= './uploads/foto_diskum/';
+				$config['allowed_types']	= 'png|jpg|jpeg';
+				$config['max_size']			= '65000';
+
+				$this->upload->initialize($config);
+
+				if ( ! $this->upload->do_upload('foto-komentar') ) {
+					$alert = $this->upload->display_errors();
+				}
+				else {
+					$data	+= array(
+						'Foto_diskum' => $this->upload->data('file_name')
+					);
+				}
 			}
 
 			// Cek apakah upload foto berhasil
 			// Jika berhasil tambahkan ke database, jika tidak berhasil lempar peringatan ke halaman diskusi
-			if($alert==='sukses' || $alert===''){
+			if( empty($alert) ){
 				$this->load->model('Model_created');
 				$id_diskum		= $this->Model_created->idDiskum();
 
