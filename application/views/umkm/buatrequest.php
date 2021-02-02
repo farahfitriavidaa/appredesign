@@ -92,15 +92,36 @@
                                                     <textarea name="keterangan-produk" class="form-control" id="keterangan-produk" required></textarea>
                                                 </div>
 
+                                                <div class="position-relative" id="preview-wrapper-foto" style="display: none; height: 0;">
+                                                    <img src="" alt="foto yang akan di upload" class="img-thumbnail" id="preview-foto" style="max-height: 120px">
+                                                    <button type="button" class="btn btn-secondary position-absolute ml-2" id="hapus-foto" aria-label="Close" style="background-color: #fff">
+                                                        Hapus Foto
+                                                    </button>
+                                                </div>
+
                                                 <div class="form-group bmd-form-group">
                                                     <label for="foto">Foto Produk</label>
                                                     <input type="file" name="foto-produk" class="form-control-file" id="foto">
+                                                </div>
+
+                                                <div class="position-relative" id="preview-wrapper-logo" style="display: none; height: 0;">
+                                                    <img src="" alt="foto yang akan di upload" class="img-thumbnail" id="preview-logo" style="max-height: 120px">
+                                                    <button type="button" class="btn btn-secondary position-absolute ml-2" id="hapus-logo" aria-label="Close" style="background-color: #fff">
+                                                        Hapus Logo
+                                                    </button>
                                                 </div>
 
                                                 <div class="form-group bmd-form-group">
                                                     <label for="logo">Logo Produk</label>
                                                     <input type="file" name="logo-produk" class="form-control-file" id="logo">
                                                     <small class="text-muted">Tambahkan logo produk jika ada</small>
+                                                </div>
+
+                                                <div class="position-relative" id="preview-wrapper-kemasan" style="display: none; height: 0;">
+                                                    <img src="" alt="foto yang akan di upload" class="img-thumbnail" id="preview-kemasan" style="max-height: 120px">
+                                                    <button type="button" class="btn btn-secondary position-absolute ml-2" id="hapus-kemasan" aria-label="Close" style="background-color: #fff">
+                                                        Hapus Kemasan
+                                                    </button>
                                                 </div>
 
                                                 <div class="form-group bmd-form-group">
@@ -167,5 +188,60 @@
 
         </div>
         <!-- END wrapper -->
+        <script>
+            var file = [
+                {
+                    "input": "foto",
+                    "wrapper": "preview-wrapper-foto",
+                    "preview": "preview-foto",
+                },
+                {
+                    "input": "logo",
+                    "wrapper": "preview-wrapper-logo",
+                    "preview": "preview-logo"
+                },
+                {
+                    "input": "kemasan",
+                    "wrapper": "preview-wrapper-kemasan",
+                    "preview": "preview-kemasan"
+                }
+            ];
+
+            document.getElementById('foto').addEventListener('change', previewFoto.bind(event, 0));
+            document.getElementById('logo').addEventListener('change', previewFoto.bind(event, 1));
+            document.getElementById('kemasan').addEventListener('change', previewFoto.bind(event, 2));
+
+            function previewFoto(idx) {
+                console.log(idx);
+                console.log(file[idx]);
+                console.log(file[idx].wrapper);
+                let wrapper = document.getElementById(file[idx].wrapper);
+                wrapper.style.height= 'auto';
+                wrapper.style.display= 'block';
+                wrapper.classList.add('pt-3');
+
+                let preview = document.getElementById(file[idx].preview);
+                preview.src = URL.createObjectURL(event.target.files[0]);
+                preview.onload = function(){
+                    URL.revokeObjectURL(preview.src);
+                }
+            }
+
+            document.getElementById('hapus-foto').addEventListener('click', hapusImg.bind(null, 0));
+            document.getElementById('hapus-logo').addEventListener('click', hapusImg.bind(null, 1));
+            document.getElementById('hapus-kemasan').addEventListener('click', hapusImg.bind(null, 2));
+
+            function hapusImg(idx) {
+                document.getElementById( file[idx].input ).value = '';
+
+                let preview = document.getElementById(file[idx].preview);
+                preview.src = '';
+
+                let wrapper = document.getElementById(file[idx].wrapper);
+                wrapper.style.height= '0';
+                wrapper.style.display= 'none';
+                wrapper.classList.remove('pt-3');
+            }
+        </script>
 
         <?php $this->load->view('umkm/layout/footer') ?>
