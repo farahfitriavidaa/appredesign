@@ -260,7 +260,7 @@ class Request extends CI_Controller {
 						'('.$this->upload->data['filename'].')';
 				}
 				else {
-					$data_user	+= array(
+					$data_umkm	+= array(
 						'Foto_produk' => $this->upload->data('file_name')
 					);
 				}
@@ -282,7 +282,7 @@ class Request extends CI_Controller {
 						'('.$this->upload->data['filename'].')';
 				}
 				else {
-					$data_user	+= array(
+					$data_umkm	+= array(
 						'Logo_produk' => $this->upload->data('file_name')
 					);
 				}
@@ -304,7 +304,7 @@ class Request extends CI_Controller {
 						'('.$this->upload->data['filename'].')';
 				}
 				else {
-					$data_user	+= array(
+					$data_umkm	+= array(
 						'Kemasan_produk' => $this->upload->data('file_name')
 					);
 				}
