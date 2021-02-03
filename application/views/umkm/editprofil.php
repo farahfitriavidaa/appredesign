@@ -52,16 +52,7 @@
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
-                                            Maaf, tidak bisa mengunggah foto atau gambar.
-                                            <ul>
-                                            <?php
-                                                foreach($alert as $a):
-                                                    if(!empty($a) && $a!=='sukses'):
-                                            ?>
-                                                        <li><?=$a?>
-                                                    <?php  endif; ?>
-                                                <?php endforeach; ?>
-                                            </ul>
+                                            <?=$alert;?>
                                         </div>
                                     </div>
                                 </div>

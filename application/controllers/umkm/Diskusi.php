@@ -159,15 +159,7 @@ class Diskusi extends CI_Controller {
 			$data			= array();
 			$alert			= '';
 
-			// Proses upload foto dengan bantuan function uploadFoto() dari my_helper
-			// Jika tidak ada foto yang di-upload maka lewati bagian if() ini
-			// if( $_FILES['foto-komentar']['error'] !== 4 ){
-			// 	$alert	= uploadFoto('foto-komentar', 'foto_diskum');
-			// 	$data	+= array(
-			// 		'Foto_diskum' => $_FILES['foto-komentar']['name']
-			// 	);
-			// }
-
+			// Proses upload foto dengan library upload
 			// Jika tidak ada foto yang di-upload maka lewati bagian if() ini
 			if( $_FILES['foto-komentar']['error'] !== 4 ){
 

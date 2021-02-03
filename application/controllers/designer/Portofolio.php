@@ -55,8 +55,7 @@ class Portofolio extends CI_Controller {
 			$this->upload->initialize($config);
 
 			if ( ! $this->upload->do_upload('bukti-portofolio') ) {
-				$isi_pesan	= $this->upload->display_errors().
-					'<span>Allowed filetype: png or jpg.</span>';
+				$isi_pesan	= $this->upload->display_errors();
 
 				$_SESSION['alert'] = $isi_pesan;
 				$this->session->mark_as_flash('alert');
@@ -162,8 +161,7 @@ class Portofolio extends CI_Controller {
 			$this->upload->initialize($config);
 
 			if ( ! $this->upload->do_upload('bukti-portofolio') ) {
-				$isi_pesan	= $this->upload->display_errors().
-					'<span>Allowed filetype: png or jpg.</span>';
+				$isi_pesan	= $this->upload->display_errors();
 
 				$_SESSION['alert'] = $isi_pesan;
 				$this->session->mark_as_flash('alert');

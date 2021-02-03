@@ -117,8 +117,7 @@ class Request extends CI_Controller {
 			$_FILES['file']['size']		= $files['size'][$i];
 
 			if ( ! $this->upload->do_upload('file')) {
-				$isi_pesan	= $this->upload->display_errors().
-					'<span>Allowed filetype: png or jpg.</span>';
+				$isi_pesan	= $this->upload->display_errors();
 
 				$_SESSION['alert'] = array(
 					'jenis'		=> 'alert-danger',
