@@ -67,6 +67,7 @@ class Request extends CI_Controller {
 			$keterangan_produk	= $this->input->post('keterangan-produk');
 			$keterangan_desain	= $this->input->post('keterangan-desain');
 
+			$data_umkm			= array();
 			$alert				= ['sukses','sukses','sukses'];
 
 			$this->load->helper('my_helper');
@@ -82,8 +83,13 @@ class Request extends CI_Controller {
 				$this->upload->initialize($config);
 
 				if ( ! $this->upload->do_upload('foto-produk') ) {
-					$alert[0]	= $this->upload->display_errors().
-						'('.$this->upload->data['filename'].')';
+					$alert[0]	= $this->upload->display_errors('<span>', '</span>').
+						' ('.$this->upload->data('file_name').')';
+				}
+				else {
+					$data_umkm	+= array(
+						'Foto_produk' => $this->upload->data('file_name')
+					);
 				}
 			}
 
@@ -97,8 +103,13 @@ class Request extends CI_Controller {
 				$this->upload->initialize($config);
 
 				if ( ! $this->upload->do_upload('logo-produk') ) {
-					$alert[0]	= $this->upload->display_errors().
-						'('.$this->upload->data['filename'].')';
+					$alert[1]	= $this->upload->display_errors('<span>', '</span>').
+						' ('.$this->upload->data('file_name').')';
+				}
+				else {
+					$data_umkm	+= array(
+						'Logo_produk' => $this->upload->data('file_name')
+					);
 				}
 			}
 
@@ -112,8 +123,13 @@ class Request extends CI_Controller {
 				$this->upload->initialize($config);
 
 				if ( ! $this->upload->do_upload('kemasan-produk') ) {
-					$alert[0]	= $this->upload->display_errors().
-						'('.$this->upload->data['filename'].')';
+					$alert[2]	= $this->upload->display_errors('<span>', '</span>').
+						' ('.$this->upload->data('file_name').')';
+				}
+				else {
+					$data_umkm	+= array(
+						'Kemasan_produk' => $this->upload->data('file_name')
+					);
 				}
 			}
 
@@ -123,18 +139,15 @@ class Request extends CI_Controller {
 
 				$id_data_umkm		= $this->Model_created->idDataUMKM();
 				$id_umkm			= $this->session->id_umkm;
-				$foto_produk		= $_FILES['foto-produk']['name'];
-				$logo_produk		= $_FILES['logo-produk']['name'];
-				$kemasan_produk		= $_FILES['kemasan-produk']['name'];
+				// $foto_produk		= $_FILES['foto-produk']['name'];
+				// $logo_produk		= $_FILES['logo-produk']['name'];
+				// $kemasan_produk		= $_FILES['kemasan-produk']['name'];
 
-				$data_umkm		= array(
+				$data_umkm		+= array(
 					'IDDataUMKM'		=> $id_data_umkm,
 					'IDUMKM'			=> $id_umkm,
 					'Nama_produk'		=> $nama_produk,
-					'Foto_produk'		=> $foto_produk,
-					'Keterangan'		=> $keterangan_produk,
-					'Logo_produk'		=> $logo_produk,
-					'Kemasan_produk'	=> $kemasan_produk
+					'Keterangan'		=> $keterangan_produk
 				);
 
 				$this->Model_umkm->createUmkmData($data_umkm);
@@ -295,8 +308,8 @@ class Request extends CI_Controller {
 				$this->upload->initialize($config);
 
 				if ( ! $this->upload->do_upload('foto-produk') ) {
-					$alert[0]	= $this->upload->display_errors().
-						'('.$this->upload->data['filename'].')';
+					$alert[0]	= $this->upload->display_errors('<span>', '</span>').
+						' ('.$this->upload->data('file_name').')';
 				}
 				else {
 					$data_umkm	+= array(
@@ -317,8 +330,8 @@ class Request extends CI_Controller {
 				$this->upload->initialize($config);
 
 				if ( ! $this->upload->do_upload('logo-produk') ) {
-					$alert[0]	= $this->upload->display_errors().
-						'('.$this->upload->data['filename'].')';
+					$alert[1]	= $this->upload->display_errors('<span>', '</span>').
+						' ('.$this->upload->data('file_name').')';
 				}
 				else {
 					$data_umkm	+= array(
@@ -339,8 +352,8 @@ class Request extends CI_Controller {
 				$this->upload->initialize($config);
 
 				if ( ! $this->upload->do_upload('kemasan-produk') ) {
-					$alert[0]	= $this->upload->display_errors().
-						'('.$this->upload->data['filename'].')';
+					$alert[2]	= $this->upload->display_errors('<span>', '</span>').
+						' ('.$this->upload->data('file_name').')';
 				}
 				else {
 					$data_umkm	+= array(
@@ -370,8 +383,8 @@ class Request extends CI_Controller {
 				$_FILES['file']['size']		= $files['size'][$i];
 
 				if ( ! $this->upload->do_upload('file')) {
-					$alert	= $this->upload->display_errors().
-						'('.$this->upload->data['filename'].')';
+					$alert	= $this->upload->display_errors('<span>', '</span>').
+						'('.$this->upload->data('file_name').')';
 
 					$_SESSION['alert'] = array(
 						'jenis'		=> 'alert-danger',
