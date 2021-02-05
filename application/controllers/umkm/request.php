@@ -68,15 +68,54 @@ class Request extends CI_Controller {
 			$keterangan_desain	= $this->input->post('keterangan-desain');
 
 			$alert				= ['sukses','sukses','sukses'];
+
 			$this->load->helper('my_helper');
-			if( $_FILES['foto-produk']['error'] != 4 )
-				$alert[0]		= uploadFoto('foto-produk', 'foto_produk');
+			$this->load->library('upload');
 
-			if( $_FILES['logo-produk']['error'] != 4 )
-				$alert[1]		= uploadFoto('logo-produk', 'logo_produk');
+			if( $_FILES['foto-produk']['error'] != 4 ) {
+				// $alert[0]		= uploadFoto('foto-produk', 'foto_produk');
 
-			if( $_FILES['kemasan-produk']['error'] != 4 )
-				$alert[2]		= uploadFoto('kemasan-produk', 'foto_kemasan_lama');
+				$config['upload_path']		= './uploads/foto_produk/';
+				$config['allowed_types']	= 'png|jpg|jpeg';
+				$config['max_size']			= '65000';
+
+				$this->upload->initialize($config);
+
+				if ( ! $this->upload->do_upload('foto-produk') ) {
+					$alert[0]	= $this->upload->display_errors().
+						'('.$this->upload->data['filename'].')';
+				}
+			}
+
+			if( $_FILES['logo-produk']['error'] != 4 ) {
+				// $alert[1]		= uploadFoto('logo-produk', 'logo_produk');
+
+				$config['upload_path']		= './uploads/logo_produk/';
+				$config['allowed_types']	= 'png|jpg|jpeg';
+				$config['max_size']			= '65000';
+
+				$this->upload->initialize($config);
+
+				if ( ! $this->upload->do_upload('logo-produk') ) {
+					$alert[0]	= $this->upload->display_errors().
+						'('.$this->upload->data['filename'].')';
+				}
+			}
+
+			if( $_FILES['kemasan-produk']['error'] != 4 ) {
+				// $alert[2]		= uploadFoto('kemasan-produk', 'foto_kemasan_lama');
+
+				$config['upload_path']		= './uploads/foto_kemasan_lama/';
+				$config['allowed_types']	= 'png|jpg|jpeg';
+				$config['max_size']			= '65000';
+
+				$this->upload->initialize($config);
+
+				if ( ! $this->upload->do_upload('kemasan-produk') ) {
+					$alert[0]	= $this->upload->display_errors().
+						'('.$this->upload->data['filename'].')';
+				}
+			}
 
 			if( $alert[0]==='sukses' && $alert[1]==='sukses' && $alert[2]==='sukses'){
 
@@ -288,12 +327,12 @@ class Request extends CI_Controller {
 				}
 			}
 			if( $_FILES['kemasan-produk']['error'] != 4 ){
-				// $alert[2]		= uploadFoto('kemasan-produk', 'fto_kemasan_lama');
+				// $alert[2]		= uploadFoto('kemasan-produk', 'foto_kemasan_lama');
 				// $data_umkm		+= array(
 				// 	'Kemasan_produk' => $_FILES['kemasan-produk']['name']
 				// );
 
-				$config['upload_path']		= './uploads/kemasan_produk/';
+				$config['upload_path']		= './uploads/foto_kemasan_lama/';
 				$config['allowed_types']	= 'png|jpg|jpeg';
 				$config['max_size']			= '65000';
 
