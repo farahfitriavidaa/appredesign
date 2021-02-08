@@ -83,15 +83,18 @@
                                             <form action="<?=base_url();?>umkm/request/updateRequest" method="POST" enctype="multipart/form-data" autocomplete="off">
                                                 <input type="hidden" name="np" value="<?php echo trimId('PS', $detil_request->IDPesan)?>">
                                                 <div class="form-group">
-                                                    <input type="text" name="nama-produk" class="form-control" placeholder="Nama Produk" value="<?=$data_produk->Nama_produk?>" required>
+                                                    <label for="nama-produk" class="bmd-label-floating">Nama Produk</label>
+                                                    <input type="text" name="nama-produk" class="form-control" value="<?=$data_produk->Nama_produk?>" required>
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <textarea name="keterangan-produk" class="form-control" rows="3" placeholder="Keterangan singkat mengenai produk Anda" required><?=$data_produk->Keterangan?></textarea>
+                                                    <label for="keterangan-produk" class="bmd-label-floating">Keterangan singkat mengenai produk Anda</label>
+                                                    <textarea name="keterangan-produk" class="form-control" rows="3" required><?=$data_produk->Keterangan?></textarea>
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <textarea name="keterangan-desain" class="form-control" rows="3" placeholder="Keterangan mengenai desain yang diinginkan" required><?=$detil_request->Keterangan_design?></textarea>
+                                                    <label for="keterangan-desain" class="bmd-label-floating">Keterangan mengenai desain yang diinginkan</label>
+                                                    <textarea name="keterangan-desain" class="form-control" rows="3" required><?=$detil_request->Keterangan_design?></textarea>
                                                 </div>
 
                                                 <div class="form-group bmd-form-group">
