@@ -148,7 +148,7 @@
                                                 </div>
 
                                                 <div class="form-group bmd-form-group">
-                                                    <a href="<?=base_url();?>umkm/request" class="btn btn-secondary border-0">Batal</a>
+                                                    <a href="<?=base_url();?>umkm/request" class="btn btn-secondary border-0 mr-2">Batal</a>
                                                     <button type="submit" class="btn btn-primary btn-raised">Simpan Perubahan</button>
                                                 </div>
                                             </form>
