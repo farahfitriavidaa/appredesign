@@ -93,7 +93,7 @@
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label for="tentang">Tentang Saya</label>
+                                                    <label for="tentang">Tentang Saya/Bio</label>
                                                     <textarea name="keterangan" class="form-control" id="tentang" placeholder="Ceritakan tentang diri Anda sebagai designer" required><?=$designer->Keterangan?></textarea>
                                                 </div>
 

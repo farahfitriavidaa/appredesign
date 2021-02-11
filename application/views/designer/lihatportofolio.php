@@ -77,7 +77,8 @@
                                             echo $designer->Keterangan;
                                         else:
                                     ?>
-                                        <span class="text-muted">Belum ada bio/keterangan</span>
+                                        <span class="text-muted">Belum ada bio/keterangan.</span>
+                                        <a href="<?=base_url();?>designer/profil/editProfil" class="text-primary" title="Tinggalkan halaman ini dan edit bio/keterangan">(Edit)</a>
                                     <?php endif; ?>
                                     </p>
                                 </div>
