@@ -89,7 +89,7 @@
                             </a>
 
                             <?php if(empty($daftar_portofolio)): ?>
-                                <i>Belum ada portofolio</i>
+                                <p><i>Belum ada portofolio</i></p>
                             <?php else: ?>
                             <div class="row">
                                 <?php foreach($daftar_portofolio as $portofolio): ?>
