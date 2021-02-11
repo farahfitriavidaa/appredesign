@@ -124,7 +124,7 @@
                                         <div class="card-body">
                                             <h5 class="header-title mt-0 pb-3">Diskusi Terakhir</h5>
 
-                                            <?php if(empty($diskusi_terakhir)): ?>
+                                            <?php if ( empty($diskusi_terakhir) ): ?>
                                                 <p>Belum ada diskusi. Anda akan melihat daftar diskusi terkahir di sini jika ada request yang Anda atau Pengelola komentari.</p>
                                                 <a href="<?=base_url();?>designer/request/lihatRequest" class="btn btn-primary">Lihat Request dan Beri Komentar</a>
                                             <?php else:
@@ -157,9 +157,11 @@
                                         <div class="card-body">
                                             <h5 class="header-title mt-0 pb-3">Request Terbaru</h5>
 
-                                            <?php if(empty($request_terbaru)): ?>
-                                                <p>Belum ada request masuk. Mungkin Anda ingin membuat portofolio dulu jika Anda belum membuatnya?</p>
+                                            <?php if ( $ringkasan['total'] == '0' ): ?>
+                                                <p>Belum ada request baru yang masuk. Mungkin Anda ingin membuat portofolio dulu jika Anda belum membuatnya?</p>
                                                 <a class="btn btn-raised btn-primary" href="<?=base_url();?>designer/portofolio">Lihat portofolio saya</a>
+                                            <?php elseif ( empty($request_terbaru) ): ?>
+                                                <p>Belum ada request baru yang masuk.</p>
                                             <?php else:
                                                 foreach($request_terbaru as $request): ?>
                                                 <a href="<?=base_url();?>designer/diskusi/<?=trimId('PS',$request->IDPesan);?>" class="list-diskusi mb-2">
