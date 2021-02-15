@@ -118,10 +118,11 @@
 
                                                 <div class="form-group bmd-form-group">
                                                     <label for="kemasan">Kemasan Produk (diperlukan)</label>
-                                                    <input type="file" name="kemasan-produk" class="form-control-file" id="kemasan" required>
+                                                    <input type="file" name="kemasan-produk[]" class="form-control-file" id="kemasan" multiple="multiple" required>
                                                     <small class="text-muted">Tambahkan gambar kemasan yang sekarang dimiliki</small>
                                                 </div>
 
+                                                <!-- TODO: buat preview agar bisa menampilkan gambar lebi dari satu -->
                                                 <div class="position-relative" id="preview-wrapper-kemasan" style="display: none; height: 0;">
                                                     <img src="" alt="foto yang akan di upload" class="img-thumbnail" id="preview-kemasan" style="max-height: 120px">
                                                     <button type="button" class="btn btn-secondary position-absolute ml-2" id="hapus-kemasan" aria-label="Close" style="background-color: #fff">

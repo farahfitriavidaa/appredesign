@@ -64,7 +64,7 @@
                                             <p><i class="text-muted">Tidak ada foto produk</i></p>
                                             <?php else: ?>
                                             <div class="mb-4" style="height: 160px;">
-                                                <img src="<?=base_url()."uploads/foto_produk/".$data_produk->Foto_produk;?>" alt="foto produk" class="img-thumbnail" style="height:inherit">
+                                                <img src="<?=base_url()."uploads/foto_produk/".$data_produk->Foto_produk;?>" alt="foto produk" class="img-thumbnail" style="max-height: 160px">
                                             </div>
                                             <?php endif; ?>
 
@@ -73,16 +73,20 @@
                                             <p><i class="text-muted">Tidak ada logo produk</i></p>
                                             <?php else: ?>
                                             <div class="mb-4" style="height: 160px;">
-                                                <img src="<?=base_url()."uploads/logo_produk/".$data_produk->Logo_produk;?>" alt="logo produk" class="img-thumbnail" style="height:inherit">
+                                                <img src="<?=base_url()."uploads/logo_produk/".$data_produk->Logo_produk;?>" alt="logo produk" class="img-thumbnail" style="max-height: 160px">
                                             </div>
                                             <?php endif; ?>
 
                                             <strong class="d-block">Kemasan Produk</strong>
                                             <?php if(empty($data_produk->Kemasan_produk)): ?>
                                             <p><i class="text-muted">Tidak ada foto kemasan produk</i></p>
-                                            <?php else: ?>
-                                            <div class="mb-4" style="height: 160px;">
-                                                <img src="<?=base_url()."uploads/foto_kemasan_lama/".$data_produk->Kemasan_produk;?>" alt="kemasan produk" class="img-thumbnail" style="height:inherit">
+                                            <?php else: 
+                                                    $kemasan_produk = explode(',', $data_produk->Kemasan_produk);
+                                            ?>
+                                            <div class="mb-4">
+                                                <?php foreach($kemasan_produk as $img):?>
+                                                    <img src="<?=base_url()."uploads/foto_kemasan_lama/".$img;?>" alt="kemasan produk" class="img-thumbnail mr-1" style="max-height: 160px;">
+                                                <?php endforeach; ?>
                                             </div>
                                             <?php endif; ?>
                                         </div>
