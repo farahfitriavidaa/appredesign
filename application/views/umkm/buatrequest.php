@@ -269,11 +269,10 @@
             function hapusImgs(idx) {
                 document.getElementById( file[idx].input ).value = '';
 
-                let imgs = document.getElementsByClassName('kemasan');
-                console.log(imgs);
+                let preview = document.getElementById(file[idx].preview);
 
-                for (let i = 0; i < imgs.length; i++) {
-                    imgs[i].parentNode.removeChild(imgs[i]);
+                while (preview.firstChild) {
+                    preview.removeChild(preview.lastChild);
                 }
 
                 let wrapper = document.getElementById(file[idx].wrapper);
