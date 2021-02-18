@@ -365,19 +365,41 @@ class Request extends CI_Controller {
 				}
 			}
 			if( $_FILES['kemasan-produk']['error'] != 4 ){
-				$config['upload_path']		= './uploads/foto_kemasan_lama/';
-				$config['allowed_types']	= 'png|jpg|jpeg';
-				$config['max_size']			= '65000';
+				$files			= $_FILES['kemasan-produk'];
+				$jumlah_file	= count($files['name']);
+				$upload			= true;
+				$foto_kemasan_lama	= '';
 
-				$this->upload->initialize($config);
+				for ($i = 0; $i < $jumlah_file; ++$i) {
+					$config['upload_path']		= './uploads/foto_kemasan_lama/';
+					$config['allowed_types']	= 'png|jpg|jpeg';
+					$config['max_size']			= '65000';
+		
+					$this->upload->initialize($config);
+		
+					$_FILES['file']['name']		= $files['name'][$i];
+					$_FILES['file']['type']		= $files['type'][$i];
+					$_FILES['file']['tmp_name']	= $files['tmp_name'][$i];
+					$_FILES['file']['error']	= $files['error'][$i];
+					$_FILES['file']['size']		= $files['size'][$i];
+		
+					if ( ! $this->upload->do_upload('file')) {
 
-				if ( ! $this->upload->do_upload('kemasan-produk') ) {
-					$alert[2]	= $this->upload->display_errors('<span>', '</span>').
+						$alert[2]	= $this->upload->display_errors('<span>', '</span>').
 						' ('.$this->upload->data('file_name').')';
+
+						$upload = false;
+						break;
+					}
+					else {
+						$komah = $i == $jumlah_file-1 ? '' : ',';
+						$foto_kemasan_lama .= $this->upload->data('file_name').$komah;
+					}
 				}
-				else {
+
+				if ($upload) {
 					$data_umkm	+= array(
-						'Kemasan_produk' => $this->upload->data('file_name')
+						'Kemasan_produk' => $foto_kemasan_lama
 					);
 				}
 			}
