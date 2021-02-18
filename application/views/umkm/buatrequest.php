@@ -122,11 +122,10 @@
                                                     <small class="text-muted">Tambahkan gambar kemasan yang sekarang dimiliki</small>
                                                 </div>
 
-                                                <!-- TODO: buat preview agar bisa menampilkan gambar lebi dari satu -->
                                                 <div class="position-relative" id="preview-wrapper-kemasan" style="display: none; height: 0;">
-                                                    <img src="" alt="foto yang akan di upload" class="img-thumbnail" id="preview-kemasan" style="max-height: 120px">
+                                                    <div id="preview-kemasan" style="display: inline;"></div>
                                                     <button type="button" class="btn btn-secondary position-absolute ml-2" id="hapus-kemasan" aria-label="Close" style="background-color: #fff">
-                                                        Hapus Kemasan
+                                                        Hapus Semua Kemasan
                                                     </button>
                                                 </div>
 
@@ -209,12 +208,12 @@
 
             document.getElementById('foto').addEventListener('change', previewFoto.bind(event, 0));
             document.getElementById('logo').addEventListener('change', previewFoto.bind(event, 1));
-            document.getElementById('kemasan').addEventListener('change', previewFoto.bind(event, 2));
+            document.getElementById('kemasan').addEventListener('change', previewImgs.bind(event, 2));
 
             function previewFoto(idx) {
-                console.log(idx);
-                console.log(file[idx]);
-                console.log(file[idx].wrapper);
+                // console.log(idx);
+                // console.log(file[idx]);
+                // console.log(file[idx].wrapper);
                 let wrapper = document.getElementById(file[idx].wrapper);
                 wrapper.style.height= 'auto';
                 wrapper.style.display= 'block';
@@ -226,15 +225,56 @@
                 }
             }
 
+            function previewImgs(idx) {
+                let wrapper = document.getElementById(file[idx].wrapper);
+                wrapper.style.height= 'auto';
+                wrapper.style.display= 'block';
+                
+                let preview = document.getElementById(file[idx].preview);
+
+                const fileKemasan = event.target.files;
+
+                for (let i = 0; i < fileKemasan.length; i++) {
+                    let img = document.createElement('img');
+
+                    img.alt = 'gambar kemasan yang akan di-upload';
+                    img.classList.add('img-thumbnail', 'm-2', 'kemasan');
+                    img.style.maxHeight = '160px';
+                    img.src = URL.createObjectURL(fileKemasan[i]);
+                    img.onload = function(){
+                        URL.revokeObjectURL(img.src);
+                    }
+
+                    // console.log("file: "+fileKemasan[i]);
+
+                    preview.appendChild(img);
+                }
+            }
+
             document.getElementById('hapus-foto').addEventListener('click', hapusImg.bind(null, 0));
             document.getElementById('hapus-logo').addEventListener('click', hapusImg.bind(null, 1));
-            document.getElementById('hapus-kemasan').addEventListener('click', hapusImg.bind(null, 2));
+            document.getElementById('hapus-kemasan').addEventListener('click', hapusImgs.bind(null, 2));
 
             function hapusImg(idx) {
                 document.getElementById( file[idx].input ).value = '';
 
                 let preview = document.getElementById(file[idx].preview);
                 preview.src = '';
+
+                let wrapper = document.getElementById(file[idx].wrapper);
+                wrapper.style.height= '0';
+                wrapper.style.display= 'none';
+            }
+
+            function hapusImgs(idx) {
+                document.getElementById( file[idx].input ).value = '';
+
+                let imgs = document.getElementsByClassName('kemasan');
+                console.log(imgs);
+
+                for (let i = 0; i < imgs.length; i++) {
+                    imgs[i].parentNode.removeChild(imgs[i]);
+                }
 
                 let wrapper = document.getElementById(file[idx].wrapper);
                 wrapper.style.height= '0';
