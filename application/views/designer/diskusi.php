@@ -41,7 +41,7 @@
                         <div class="container-fluid">
 
                             <?php
-                                if( ! is_null($this->session->flashdata('alert'))):
+                                if( ! is_null( $_SESSION['alert'] ) ):
                             ?>
                                 <div class="row">
                                     <div class="col-12">
@@ -49,23 +49,29 @@
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
-                                            <?=$this->session->flashdata('alert');?>
+                                            <?=$_SESSION['alert']?>
                                         </div>
                                     </div>
+
+                                    <?php
+                                        if( $_SESSION['btn_back'] ):
+                                            unset($_SESSION['alert']);
+                                            unset($_SESSION['btn_back']);
+                                    ?>
                                     <div class="col-12 mt-4">
                                         <a href="<?=base_url();?>designer/diskusi/lihatDiskusi" class="btn btn-raised btn-primary">
                                             <i class="mdi mdi-arrow-left"></i>
                                             Kembali
                                         </a>
                                     </div>
+                                    <?php endif; ?>
                                 </div>
                             <?php endif; ?>
 
                             <?php if( ! is_null($pemesanan)): ?>
                             <button class="btn btn-raised btn-secondary mt-4" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="detilProduk detilRequest">
                             <i class="mdi mdi-format-align-left"></i>
-                                Deskripsi Request 
-                            <?php echo $this->session->flashdata('alert');?>
+                                Deskripsi Request
                             </button>
 
                             <div class="row align-items-stretch mt-4">
@@ -100,7 +106,7 @@
                                             <strong class="d-block">Kemasan Produk</strong>
                                             <?php if(empty($pemesanan->Kemasan_produk)): ?>
                                             <p><i class="text-muted">Tidak ada foto kemasan produk</i></p>
-                                            <?php else: 
+                                            <?php else:
                                                     $kemasan_produk = explode(',', $pemesanan->Kemasan_produk);
                                             ?>
                                             <div class="mb-4">

@@ -34,10 +34,9 @@ class Diskusi extends CI_Controller {
 			);
 
 			$_SESSION['alert'] = 'Diskusi tidak ditemukan';
-			$this->session->mark_as_flash('alert');
+			$_SESSION['btn_back'] = true;
 		}
 		else{
-			unset($_SESSION['alert']);
 
 			// Cek designer
 			// Jika designer ada, ambil nama designer. Jika tidak, beri keterangan 'Ditentukan Pengelola'
@@ -144,7 +143,7 @@ class Diskusi extends CI_Controller {
     public function tambahKomentar()
 	{
 		if($this->input->method() == 'post') {
-			
+
 			$this->load->helper('my_helper');
 
 			// Kembalikan IDPesan sesuai format, 1 -> PS0001
@@ -203,7 +202,6 @@ class Diskusi extends CI_Controller {
 
 			}
 			else{
-				// TODO: perbaiki pesan error upload file, pesan tidak muncul di halaman diskusi
 				$_SESSION['alert'] = $alert;
 				$this->session->mark_as_flash('alert');
 				redirect('designer/diskusi/'.$id_pesan);
