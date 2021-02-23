@@ -110,24 +110,6 @@ class Request extends CI_Controller {
 			}
 
 			if( $_FILES['kemasan-produk']['error'] != 4 ) {
-				/*
-				$config['upload_path']		= './uploads/foto_kemasan_lama/';
-				$config['allowed_types']	= 'png|jpg|jpeg';
-				$config['max_size']			= '65000';
-
-				$this->upload->initialize($config);
-
-				if ( ! $this->upload->do_upload('kemasan-produk') ) {
-					$alert[2]	= $this->upload->display_errors('<span>', '</span>').
-						' ('.$this->upload->data('file_name').')';
-				}
-				else {
-					$data_umkm	+= array(
-						'Kemasan_produk' => $this->upload->data('file_name')
-					);
-				}
-				*/
-
 				$files			= $_FILES['kemasan-produk'];
 				$jumlah_file	= count($files['name']);
 				$upload			= true;
@@ -206,11 +188,6 @@ class Request extends CI_Controller {
 				);
 				$this->session->mark_as_flash('alert');
 				redirect('umkm/request');
-
-
-				// var_dump($data_umkm);
-				// var_dump($data_pemesanan);
-				// print_r($alert);
 			}
 			else{
 				$_SESSION['alert'] = $alert;
