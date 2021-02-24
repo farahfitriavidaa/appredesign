@@ -55,7 +55,7 @@
                                         </div>
                                     </div>
                                     <div class="col-12 mt-4">
-                                        <a href="<?=base_url();?>Umkm/lihatDiskusi" class="btn btn-raised btn-primary">
+                                        <a href="<?=base_url();?>umkm/diskusi/lihatDiskusi" class="btn btn-raised btn-primary">
                                             <i class="mdi mdi-arrow-left"></i>
                                             Kembali
                                         </a>
@@ -97,13 +97,16 @@
                                                 <img src="<?=base_url()."uploads/logo_produk/".$pemesanan->Logo_produk;?>" alt="logo produk" class="img-thumbnail" style="height:inherit">
                                             </div>
                                             <?php endif; ?>
-
                                             <strong class="d-block">Kemasan Produk</strong>
                                             <?php if(empty($pemesanan->Kemasan_produk)): ?>
                                             <p><i class="text-muted">Tidak ada foto kemasan produk</i></p>
-                                            <?php else: ?>
-                                            <div class="mb-4" style="height: 160px;">
-                                                <img src="<?=base_url()."uploads/foto_kemasan_lama/".$pemesanan->Kemasan_produk;?>" alt="kemasan produk" class="img-thumbnail" style="height:inherit">
+                                            <?php else:
+                                                    $kemasan_produk = explode(',', $pemesanan->Kemasan_produk);
+                                            ?>
+                                            <div class="mb-4">
+                                                <?php foreach($kemasan_produk as $img):?>
+                                                    <img src="<?=base_url()."uploads/foto_kemasan_lama/".$img;?>" alt="kemasan produk" class="img-thumbnail mr-1" style="max-height: 160px;">
+                                                <?php endforeach; ?>
                                             </div>
                                             <?php endif; ?>
 
@@ -115,7 +118,7 @@
                                         ?>
                                         <?php if($pemesanan->Status < 5): ?>
                                         <div class="card-footer">
-                                            <a class="btn btn-raised btn-secondary float-right" href="<?=base_url();?>Umkm/editRequest/<?=$id_pesan;?>">
+                                            <a class="btn btn-raised btn-secondary float-right" href="<?=base_url();?>umkm/request/editRequest/<?=$id_pesan;?>">
                                                 Edit Produk
                                             </a>
                                         </div>
@@ -137,49 +140,7 @@
                                             </p>
                                             <strong class="d-block">Status</strong>
                                             <p>
-                                            <?php switch($pemesanan->Status){
-                                                case 0:
-                                                    $status = "Pending";
-                                                    $badge  = "light";
-                                                    break;
-                                                case 1:
-                                                    $status = "Telah didiskusikan";
-                                                    $badge  = "light";
-                                                    break;
-                                                case 2:
-                                                    $status = "Mulai dikerjakan desainer";
-                                                    $badge  = "light";
-                                                    break;
-                                                case 3:
-                                                    $status = "Selesai didesain";
-                                                    $badge  = "info";
-                                                    break;
-                                                case 4:
-                                                    $status = "Review hasil";
-                                                    $badge  = "info";
-                                                    break;
-                                                case 5:
-                                                    $status = "Desain disetujui";
-                                                    $badge  = "info";
-                                                    break;
-                                                case 6:
-                                                    $status = "Belum dibayar";
-                                                    $badge  = "warning";
-                                                    break;
-                                                case 7:
-                                                    $status = "Lunas";
-                                                    $badge  = "success";
-                                                    break;
-                                                case 8:
-                                                    $status = "Cancel";
-                                                    $badge  = "danger";
-                                                    break;
-                                                default:
-                                                    $status = "Pending";
-                                                    $badge  = "light";
-                                                    break;
-                                            }?>
-                                                <span class="badge badge-<?=$badge?>" style="font-size:unset"><?=$status?></span>
+                                            <?php cetakStatusLengkap($pemesanan->Status, false) ?>
                                             </p>
                                             <strong class="d-block">Harga</strong>
                                             <p>
@@ -251,7 +212,7 @@
 
                                         <?php if($pemesanan->Status < 5): ?>
                                             <div class="card-footer">
-                                                <a class="btn btn-raised btn-secondary float-right" href="<?=base_url();?>Umkm/editRequest/<?=$id_pesan;?>">
+                                                <a class="btn btn-raised btn-secondary float-right" href="<?=base_url();?>umkm/request/editRequest/<?=$id_pesan;?>">
                                                     Edit Keterangan
                                                 </a>
                                             </div>
@@ -318,7 +279,7 @@
                                                 <img src="" alt="foto yang di upload" class="img-thumbnail" id="foto-upload" style="max-height: 320px">
                                             </div>
 
-                                            <form action="<?=base_url();?>Umkm/tambahKomentar" method="post" enctype="multipart/form-data" class="mb-0" autocomplete="off">
+                                            <form action="<?=base_url();?>umkm/diskusi/tambahKomentar" method="post" enctype="multipart/form-data" class="mb-0" autocomplete="off">
                                                 <div style="display: flex; flex-flow: row nowrap; padding: 8px 16px;">
                                                     <div class="form-group" style="display:inline; padding:0; margin: 0; flex: auto">
                                                         <input type="hidden" name="np" value="<?=$id_pesan?>">

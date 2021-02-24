@@ -55,17 +55,17 @@
 
                             <div class="row mb-3" style="justify-content: flex-end;">
                                 <div>
-                                    <a class="btn btn-secondary btn-sm <?=$filter==="semua"?"btn-outline-secondary":"border-0"?>" href="<?=base_url();?>Designer/lihatDiskusi/semua">
+                                    <a class="btn btn-secondary btn-sm <?=$filter==="semua"?"btn-outline-secondary":"border-0"?>" href="<?=base_url();?>designer/diskusi/lihatDiskusi/semua">
                                         Semua diskusi
                                     </a>
                                 </div>
                                 <div>
-                                    <a class="btn btn-secondary btn-sm <?=$filter==="belum-selesai"?"btn-outline-secondary":"border-0"?>" href="<?=base_url();?>Designer/lihatDiskusi/">
+                                    <a class="btn btn-secondary btn-sm <?=$filter==="belum-selesai"?"btn-outline-secondary":"border-0"?>" href="<?=base_url();?>designer/diskusi/lihatDiskusi/">
                                         Belum selesai
                                     </a>
                                 </div>
                                 <div>
-                                    <a class="btn btn-secondary btn-sm <?=$filter==="telah-selesai"?"btn-outline-secondary":"border-0"?>" href="<?=base_url();?>Designer/lihatDiskusi/telah-selesai">
+                                    <a class="btn btn-secondary btn-sm <?=$filter==="telah-selesai"?"btn-outline-secondary":"border-0"?>" href="<?=base_url();?>designer/diskusi/lihatDiskusi/telah-selesai">
                                         Telah selesai
                                     </a>
                                 </div>
@@ -78,7 +78,7 @@
                             <?php else: ?>
                                 
                                 <?php foreach($daftar_diskusi as $diskusi): ?>
-                                <a href="<?=base_url();?>Designer/diskusi/<?=trimId('PS',$diskusi->IDPesan);?>" class="list-diskusi mb-2">
+                                <a href="<?=base_url();?>designer/diskusi/<?=trimId('PS',$diskusi->IDPesan);?>" class="list-diskusi mb-2">
                                     <div class="card">
                                         <div class="card-body">
                                             <strong><?=$diskusi->Nama_produk?></strong>
@@ -90,39 +90,7 @@
                                             </p>
                                             <div class="mt-2">
                                                 <span class="text-muted"><?=cetakWaktu($diskusi->Tanggal_waktu)?></span>
-                                                <?php switch($diskusi->Status){
-                                                case 1:
-                                                    $status = "Request baru";
-                                                    $badge  = "light";
-                                                    break;
-                                                case 2:
-                                                    $status = "Mulai dikerjakan";
-                                                    $badge  = "warning";
-                                                    break;
-                                                case 3:
-                                                    $status = "Selesai didesain";
-                                                    $badge  = "info";
-                                                    break;
-                                                case 4:
-                                                    $status = "Review hasil";
-                                                    $badge  = "info";
-                                                    break;
-                                                case 5:
-                                                case 6:
-                                                case 7:
-                                                    $status = "Desain disetujui";
-                                                    $badge  = "success";
-                                                    break;
-                                                case 8:
-                                                    $status = "Cancel";
-                                                    $badge  = "danger";
-                                                    break;
-                                                default:
-                                                    $status = "Unknown";
-                                                    $badge  = "light";
-                                                    break;
-                                            }?>
-                                                <span class="float-right badge badge-<?=$badge?>" style="font-size:unset"><?=$status?></span>
+                                                <?php cetakStatus($diskusi->Status); ?>
                                             </div>
                                         </div>
                                     </div>
@@ -133,14 +101,14 @@
 
                             <div class="mt-4">
                                 <?php if ($hal_selanjutnya): ?>
-                                    <a class="float-right btn btn-raised btn-info" href="<?=base_url();?>Designer/lihatDiskusi/<?=$filter."/".(int)++$page?>">
+                                    <a class="float-right btn btn-raised btn-info" href="<?=base_url();?>designer/diskusi/lihatDiskusi/<?=$filter."/".(int)++$page?>">
                                         Daftar selanjutnya
                                         <i class="mdi mdi-arrow-right"></i>
                                     </a>
                                 <?php endif; ?>
 
                                 <?php if ($hal_sebelumnya): ?>
-                                    <a class="float-left btn btn-raised btn-info" href="<?=base_url();?>Designer/lihatDiskusi/<?=$filter."/".(int)--$page?>">
+                                    <a class="float-left btn btn-raised btn-info" href="<?=base_url();?>designer/diskusi/lihatDiskusi/<?=$filter."/".(int)--$page?>">
                                         <i class="mdi mdi-arrow-left"></i>
                                         Daftar sebelumnya
                                     </a>

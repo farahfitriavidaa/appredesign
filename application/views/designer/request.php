@@ -60,7 +60,7 @@
                             <?php endif; ?>
 
                             <?php $id_pesan = trimId('PS', $request->IDPesan);?>
-                            <a href="<?=base_url();?>Designer/diskusi/<?=$id_pesan?>" class="btn btn-raised btn-secondary mt-4">
+                            <a href="<?=base_url();?>designer/diskusi/<?=$id_pesan?>" class="btn btn-raised btn-secondary mt-4">
                             <i class="mdi mdi-comment"></i>
                                 Diskusi dengan Pengelola
                             </a>
@@ -83,41 +83,7 @@
                                             </p>
                                             <strong class="d-block">Status</strong>
                                             <p>
-                                            <?php
-                                            $status_rq = $request->Status;
-                                            switch($status_rq){
-                                                case 1:
-                                                    $status = "Request baru";
-                                                    $badge  = "light";
-                                                    break;
-                                                case 2:
-                                                    $status = "Mulai dikerjakan";
-                                                    $badge  = "warning";
-                                                    break;
-                                                case 3:
-                                                    $status = "Selesai didesain";
-                                                    $badge  = "info";
-                                                    break;
-                                                case 4:
-                                                    $status = "Review hasil";
-                                                    $badge  = "info";
-                                                    break;
-                                                case 5:
-                                                case 6:
-                                                case 7:
-                                                    $status = "Desain disetujui";
-                                                    $badge  = "success";
-                                                    break;
-                                                case 8:
-                                                    $status = "Cancel";
-                                                    $badge  = "danger";
-                                                    break;
-                                                default:
-                                                    $status = "Unknown";
-                                                    $badge  = "light";
-                                                    break;
-                                            }?>
-                                                <span class="badge badge-<?=$badge?>" style="font-size:unset"><?=$status?></span>
+                                                <?php cetakStatus($request->Status, false); ?>    
                                             </p>
                                             <strong class="d-block">Tanggal Mulai Desain</strong>
                                             <p>
@@ -168,9 +134,13 @@
                                             <strong class="d-block">Kemasan Produk</strong>
                                             <?php if(empty($request->Kemasan_produk)): ?>
                                             <p><i class="text-muted">Tidak ada foto kemasan produk</i></p>
-                                            <?php else: ?>
-                                            <div class="mb-4" style="height: 160px;">
-                                                <img src="<?=base_url()."uploads/foto_kemasan_lama/".$request->Kemasan_produk;?>" alt="kemasan produk" class="img-thumbnail" style="height:inherit">
+                                            <?php else: 
+                                                    $kemasan_produk = explode(',', $request->Kemasan_produk);
+                                            ?>
+                                            <div class="mb-4">
+                                                <?php foreach($kemasan_produk as $img):?>
+                                                    <img src="<?=base_url()."uploads/foto_kemasan_lama/".$img;?>" alt="kemasan produk" class="img-thumbnail mr-1" style="max-height: 160px;">
+                                                <?php endforeach; ?>
                                             </div>
                                             <?php endif; ?>
                                         </div>
@@ -182,7 +152,7 @@
                                         <div class="card-body">
                                             <?php if($status_rq<5): ?>
 
-                                            <form action="<?=base_url();?>Designer/uploadDesain" method="POST" enctype="multipart/form-data" autocomplete="off">
+                                            <form action="<?=base_url();?>designer/request/uploadDesain" method="POST" enctype="multipart/form-data" autocomplete="off">
                                                 <input type="hidden" name="np" value="<?=$id_pesan?>">
                                                 <div class="form-group">
                                                     <strong class="mb-0">Unggah <?=$status_rq<=3?'hasil desain':'revisi'?></strong>
@@ -225,7 +195,7 @@
                                                                     </div>
                                                                     <div class="modal-footer">                                                            
                                                                         <button type="button" class="btn btn-raised btn-primary" data-dismiss="modal">Batalkan</button>
-                                                                        <a class="btn btn-raised btn-danger ml-2" href="<?=base_url();?>Designer/hapusDesain/<?=$id_pesan?>">Iya, Saya yakin</a>
+                                                                        <a class="btn btn-raised btn-danger ml-2" href="<?=base_url();?>designer/request/hapusDesain/<?=$id_pesan?>">Iya, Saya yakin</a>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -258,7 +228,7 @@
                                                                     </div>
                                                                     <div class="modal-footer">                                                            
                                                                         <button type="button" class="btn btn-raised btn-primary" data-dismiss="modal">Batalkan</button>
-                                                                        <a class="btn btn-raised btn-danger ml-2" href="<?=base_url();?>Designer/hapusRevisi/<?=$id_pesan;?>">Iya, Saya yakin</a>
+                                                                        <a class="btn btn-raised btn-danger ml-2" href="<?=base_url();?>designer/request/hapusRevisi/<?=$id_pesan;?>">Iya, Saya yakin</a>
                                                                     </div>
                                                                 </div>
                                                             </div>

@@ -43,7 +43,7 @@
 
                         <div class="container-fluid">
                             <?php
-                                if( ! is_null($this->session->flashdata('alert'))):
+                                if( ! is_null($this->session->flashdata('alert')) ):
                             ?>
                                 <div class="row">
                                     <div class="col-12">
@@ -51,7 +51,6 @@
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
-                                            <p>Maaf, tidak bisa mengunggah foto atau gambar.</p>
                                             <p><?php echo $this->session->flashdata('alert');?></p>
                                         </div>
                                     </div>
@@ -72,7 +71,7 @@
                                 <div class="col-md-12 col-xl-12">
                                     <div class="card m-b-30">
                                         <div class="card-body">
-                                            <form action="<?=base_url();?>Designer/updateProfil" method="POST" enctype="multipart/form-data" autocomplete="off">
+                                            <form action="<?=base_url();?>designer/profil/updateProfil" method="POST" enctype="multipart/form-data" autocomplete="off">
                                                 <div class="form-group">
                                                     <label for="nama-lengkap">Nama Anda</label>
                                                     <input type="text" name="nama-lengkap" class="form-control" id="nama-lengkap" placeholder="Nama Anda" value="<?=$designer->Nama_lengkap?>">
@@ -94,7 +93,7 @@
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label for="tentang">Tentang Saya</label>
+                                                    <label for="tentang">Tentang Saya/Bio</label>
                                                     <textarea name="keterangan" class="form-control" id="tentang" placeholder="Ceritakan tentang diri Anda sebagai designer" required><?=$designer->Keterangan?></textarea>
                                                 </div>
 
@@ -105,7 +104,7 @@
 
                                                 <div class="form-group bmd-form-group">
                                                     <button type="submit" class="btn btn-primary btn-raised float-right">Simpan Perubahan</button>
-                                                    <a href="<?=base_url();?>Designer/lihatProfil" class="btn btn-secondary border-0 mr-2 float-right">Batal</a>
+                                                    <a href="<?=base_url();?>designer/profil" class="btn btn-secondary border-0 mr-2 float-right">Batal</a>
                                                 </div>
                                             </form>
                                         </div>

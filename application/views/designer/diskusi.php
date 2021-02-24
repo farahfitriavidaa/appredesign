@@ -41,7 +41,7 @@
                         <div class="container-fluid">
 
                             <?php
-                                if( ! is_null($this->session->flashdata('alert'))):
+                                if( ! is_null( $_SESSION['alert'] ) ):
                             ?>
                                 <div class="row">
                                     <div class="col-12">
@@ -49,15 +49,22 @@
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
-                                            <?=$this->session->flashdata('alert');?>
+                                            <?=$_SESSION['alert']?>
                                         </div>
                                     </div>
+
+                                    <?php
+                                        if( $_SESSION['btn_back'] ):
+                                            unset($_SESSION['alert']);
+                                            unset($_SESSION['btn_back']);
+                                    ?>
                                     <div class="col-12 mt-4">
-                                        <a href="<?=base_url();?>Designer/lihatDiskusi" class="btn btn-raised btn-primary">
+                                        <a href="<?=base_url();?>designer/diskusi/lihatDiskusi" class="btn btn-raised btn-primary">
                                             <i class="mdi mdi-arrow-left"></i>
                                             Kembali
                                         </a>
                                     </div>
+                                    <?php endif; ?>
                                 </div>
                             <?php endif; ?>
 
@@ -99,21 +106,18 @@
                                             <strong class="d-block">Kemasan Produk</strong>
                                             <?php if(empty($pemesanan->Kemasan_produk)): ?>
                                             <p><i class="text-muted">Tidak ada foto kemasan produk</i></p>
-                                            <?php else: ?>
-                                            <div class="mb-4" style="height: 160px;">
-                                                <img src="<?=base_url()."uploads/foto_kemasan_lama/".$pemesanan->Kemasan_produk;?>" alt="kemasan produk" class="img-thumbnail" style="height:inherit">
+                                            <?php else:
+                                                    $kemasan_produk = explode(',', $pemesanan->Kemasan_produk);
+                                            ?>
+                                            <div class="mb-4">
+                                                <?php foreach($kemasan_produk as $img):?>
+                                                    <img src="<?=base_url()."uploads/foto_kemasan_lama/".$img;?>" alt="kemasan produk" class="img-thumbnail mr-1" style="max-height: 160px;">
+                                                <?php endforeach; ?>
                                             </div>
                                             <?php endif; ?>
 
                                         </div>
 
-                                        <?php if($pemesanan->Status < 5): ?>
-                                        <div class="card-footer">
-                                            <a class="btn btn-raised btn-secondary float-right" href="#">
-                                                Edit Produk
-                                            </a>
-                                        </div>
-                                        <?php endif; ?>
                                     </div>
                                 </div>
 
@@ -123,47 +127,7 @@
                                         <div class="card-body">
                                             <strong class="d-block">Tanggal Request</strong>
                                             <p>
-                                            <?php
-                                                $tgl_order  = $pemesanan->Tgl_order;
-                                                $tgl_order  = strtotime($tgl_order);
-                                                echo date('d-M-Y', $tgl_order);
-                                            ?>
-                                            </p>
-                                            <strong class="d-block">Status</strong>
-                                            <p>
-                                            <?php switch($pemesanan->Status){
-                                                case 1:
-                                                    $status = "Request baru";
-                                                    $badge  = "light";
-                                                    break;
-                                                case 2:
-                                                    $status = "Mulai dikerjakan";
-                                                    $badge  = "warning";
-                                                    break;
-                                                case 3:
-                                                    $status = "Selesai didesain";
-                                                    $badge  = "info";
-                                                    break;
-                                                case 4:
-                                                    $status = "Review hasil";
-                                                    $badge  = "info";
-                                                    break;
-                                                case 5:
-                                                case 6:
-                                                case 7:
-                                                    $status = "Desain disetujui";
-                                                    $badge  = "success";
-                                                    break;
-                                                case 8:
-                                                    $status = "Cancel";
-                                                    $badge  = "danger";
-                                                    break;
-                                                default:
-                                                    $status = "Unknown";
-                                                    $badge  = "light";
-                                                    break;
-                                            }?>
-                                                <span class="badge badge-<?=$badge?>" style="font-size:unset"><?=$status?></span>
+                                                <?php cetakStatus($pemesanan->Status, false); ?>
                                             </p>
                                             <strong class="d-block">Tanggal Mulai Desain</strong>
                                             <p>
@@ -232,7 +196,7 @@
                                         ?>
                                         <?php if($pemesanan->Status<=4): ?>
                                         <div class="card-footer">
-                                            <a class="btn btn-raised btn-secondary float-right" href="<?=base_url();?>Designer/request/<?=$id_pesan?>">
+                                            <a class="btn btn-raised btn-secondary float-right" href="<?=base_url();?>designer/request/<?=$id_pesan?>">
                                                 Unggah hasil design
                                             </a>
                                         </div>
@@ -292,7 +256,7 @@
                                                 <img src="" alt="foto yang di upload" class="img-thumbnail" id="foto-upload" style="max-height: 320px">
                                             </div>
 
-                                            <form action="<?=base_url();?>Designer/tambahKomentar" method="post" enctype="multipart/form-data" class="mb-0" autocomplete="off">
+                                            <form action="<?=base_url();?>designer/diskusi/tambahKomentar" method="post" enctype="multipart/form-data" class="mb-0" autocomplete="off">
                                                 <div style="display: flex; flex-flow: row nowrap; padding: 8px 16px;">
                                                     <div class="form-group" style="display:inline; padding:0; margin: 0; flex: auto">
                                                         <input type="hidden" name="np" value="<?=$id_pesan?>">

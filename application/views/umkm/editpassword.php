@@ -42,35 +42,12 @@
                     <div class="page-content-wrapper ">
 
                         <div class="container-fluid">
-                            <?php
-                                if( ! is_null($this->session->flashdata('alert'))):
-                                    $alert = $this->session->flashdata('alert');
-                            ?>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="alert alert-danger alert-dismissible fade show  mb-0 mt-3" role="alert">
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                            Maaf, tidak bisa mengunggah foto atau gambar.
-                                            <ul>
-                                            <?php
-                                                foreach($alert as $a):
-                                                    if(!empty($a) && $a!=='sukses'):
-                                            ?>
-                                                        <li><?=$a?>
-                                                    <?php  endif; ?>
-                                                <?php endforeach; ?>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php endif; ?>
+
                             <!-- end alert -->
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="page-title-box">
-                                        <h4 class="page-title">Edit Profil</h4>
+                                        <h4 class="page-title">Edit Password</h4>
                                     </div>
                                 </div>
                                 <div class="clearfix"></div>
@@ -81,7 +58,7 @@
                                 <div class="col-md-12 col-xl-12">
                                     <div class="card m-b-30">
                                         <div class="card-body">
-                                            <form action="<?=base_url();?>Umkm/editPwd" method="POST" enctype="multipart/form-data" autocomplete="off">
+                                            <form action="<?=base_url();?>umkm/profil/editPwd" method="POST" enctype="multipart/form-data" autocomplete="off">
                                                 <div class="row mx-1">
                                                     <div class="col-lg-4">
                                                         <div class="form-group">
@@ -95,7 +72,7 @@
                                                         <div class="form-group">
                                                             <label for="password-baru" class="text-dark bmd-label-floating">Password Baru</label>
                                                             <input type="password" name="password-baru" class="form-control" id="password-baru" required>
-                                                            <!-- <small class="text-danger">Password batu tidak boleh kosong</small> -->
+                                                            <!-- <small class="text-danger">Password baru tidak boleh kosong</small> -->
                                                             <?=form_error('password-baru', '<small class="d-block text-danger">', '</small>'); ?>
                                                         </div>
 
@@ -109,8 +86,8 @@
                                                 </div>
 
                                                 <div class="form-group bmd-form-group mt-4">
-                                                    <button type="submit" class="btn btn-primary btn-raised float-right">Simpan Perubahan</button>
-                                                    <a href="<?=base_url();?>Umkm/lihatProfil" class="btn btn-secondary border-0 mr-2 float-right">Batal</a>
+                                                    <a href="<?=base_url();?>umkm/profil" class="btn btn-secondary border-0 mr-2">Batal</a>
+                                                    <button type="submit" class="btn btn-primary btn-raised">Simpan Perubahan</button>
                                                 </div>
                                             </form>
                                         </div>

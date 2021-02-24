@@ -44,7 +44,7 @@
                         <div class="container-fluid">
 
                             <?php $id_pesan = trimId('PS', $detil_request->IDPesan);?>
-                            <a href="<?=base_url();?>Umkm/diskusi/<?=$id_pesan?>" class="btn btn-raised btn-secondary mt-4">
+                            <a href="<?=base_url();?>umkm/diskusi/<?=$id_pesan?>" class="btn btn-raised btn-secondary mt-4">
                             <i class="mdi mdi-comment"></i>
                                 Diskusi dengan Pengelola
                             </a>
@@ -64,7 +64,7 @@
                                             <p><i class="text-muted">Tidak ada foto produk</i></p>
                                             <?php else: ?>
                                             <div class="mb-4" style="height: 160px;">
-                                                <img src="<?=base_url()."uploads/foto_produk/".$data_produk->Foto_produk;?>" alt="foto produk" class="img-thumbnail" style="height:inherit">
+                                                <img src="<?=base_url()."uploads/foto_produk/".$data_produk->Foto_produk;?>" alt="foto produk" class="img-thumbnail" style="max-height: 160px">
                                             </div>
                                             <?php endif; ?>
 
@@ -73,16 +73,20 @@
                                             <p><i class="text-muted">Tidak ada logo produk</i></p>
                                             <?php else: ?>
                                             <div class="mb-4" style="height: 160px;">
-                                                <img src="<?=base_url()."uploads/logo_produk/".$data_produk->Logo_produk;?>" alt="logo produk" class="img-thumbnail" style="height:inherit">
+                                                <img src="<?=base_url()."uploads/logo_produk/".$data_produk->Logo_produk;?>" alt="logo produk" class="img-thumbnail" style="max-height: 160px">
                                             </div>
                                             <?php endif; ?>
 
                                             <strong class="d-block">Kemasan Produk</strong>
                                             <?php if(empty($data_produk->Kemasan_produk)): ?>
                                             <p><i class="text-muted">Tidak ada foto kemasan produk</i></p>
-                                            <?php else: ?>
-                                            <div class="mb-4" style="height: 160px;">
-                                                <img src="<?=base_url()."uploads/foto_kemasan_lama/".$data_produk->Kemasan_produk;?>" alt="kemasan produk" class="img-thumbnail" style="height:inherit">
+                                            <?php else: 
+                                                    $kemasan_produk = explode(',', $data_produk->Kemasan_produk);
+                                            ?>
+                                            <div class="mb-4">
+                                                <?php foreach($kemasan_produk as $img):?>
+                                                    <img src="<?=base_url()."uploads/foto_kemasan_lama/".$img;?>" alt="kemasan produk" class="img-thumbnail mr-1" style="max-height: 160px;">
+                                                <?php endforeach; ?>
                                             </div>
                                             <?php endif; ?>
                                         </div>
@@ -93,7 +97,7 @@
                                                 $path   = $detil_request->IDPesan;
                                                 $path   = trimId('PS', $path);
                                             ?>
-                                            <a class="btn btn-raised btn-secondary float-right" href="<?=base_url();?>Umkm/editRequest/<?=$path;?>">
+                                            <a class="btn btn-raised btn-secondary float-right" href="<?=base_url();?>umkm/request/editRequest/<?=$path;?>">
                                                 Edit Data Produk
                                             </a>
                                         </div>
@@ -118,49 +122,7 @@
                                             </p>
                                             <strong class="d-block">Status</strong>
                                             <p>
-                                            <?php switch($detil_request->Status){
-                                                case 0:
-                                                    $status = "Pending";
-                                                    $badge  = "light";
-                                                    break;
-                                                case 1:
-                                                    $status = "Telah didiskusikan";
-                                                    $badge  = "light";
-                                                    break;
-                                                case 2:
-                                                    $status = "Mulai dikerjakan desainer";
-                                                    $badge  = "light";
-                                                    break;
-                                                case 3:
-                                                    $status = "Selesai didesain";
-                                                    $badge  = "info";
-                                                    break;
-                                                case 4:
-                                                    $status = "Review hasil";
-                                                    $badge  = "info";
-                                                    break;
-                                                case 5:
-                                                    $status = "Desain disetujui";
-                                                    $badge  = "info";
-                                                    break;
-                                                case 6:
-                                                    $status = "Belum dibayar";
-                                                    $badge  = "warning";
-                                                    break;
-                                                case 7:
-                                                    $status = "Lunas";
-                                                    $badge  = "success";
-                                                    break;
-                                                case 8:
-                                                    $status = "Cancel";
-                                                    $badge  = "danger";
-                                                    break;
-                                                default:
-                                                    $status = "Pending";
-                                                    $badge  = "light";
-                                                    break;
-                                            }?>
-                                                <span class="badge badge-<?=$badge?>" style="font-size:unset"><?=$status?></span>
+                                            <?php cetakStatusLengkap($detil_request->Status, false) ?>
                                             </p>
                                             <strong class="d-block">Harga</strong>
                                             <p>
@@ -232,7 +194,7 @@
 
                                         <?php if($detil_request->Status < 5): ?>
                                         <div class="card-footer">
-                                            <a class="btn btn-raised btn-secondary float-right" href="<?=base_url();?>Umkm/editRequest/<?=$path;?>">
+                                            <a class="btn btn-raised btn-secondary float-right" href="<?=base_url();?>umkm/request/editRequest/<?=$path;?>">
                                                 Edit Keterangan Desain
                                             </a>
                                         </div>

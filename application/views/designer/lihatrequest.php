@@ -72,7 +72,7 @@
                                     <?php if(!$has_request): ?>
                                         <p>Belum ada request.</p>
                                         <p>Mungkin Anda ingin membuat portofolio dulu jika Anda belum membuatnya?</p>
-                                        <a class="btn btn-raised btn-primary" href="<?=base_url();?>Designer/lihatPortofolio">
+                                        <a class="btn btn-raised btn-primary" href="<?=base_url();?>designer/portofolio">
                                             Lihat portofolio saya
                                         </a>
                                     <?php else: ?>
@@ -115,42 +115,10 @@
                                                                     echo "Belum ditentukan"
                                                             ?></td>
                                                             <td>
-                                                            <?php switch($request->Status){
-                                                                case 1:
-                                                                    $status = "Request baru";
-                                                                    $badge  = "light";
-                                                                    break;
-                                                                case 2:
-                                                                    $status = "Mulai dikerjakan";
-                                                                    $badge  = "warning";
-                                                                    break;
-                                                                case 3:
-                                                                    $status = "Selesai didesain";
-                                                                    $badge  = "info";
-                                                                    break;
-                                                                case 4:
-                                                                    $status = "Review hasil";
-                                                                    $badge  = "info";
-                                                                    break;
-                                                                case 5:
-                                                                case 6:
-                                                                case 7:
-                                                                    $status = "Desain disetujui";
-                                                                    $badge  = "success";
-                                                                    break;
-                                                                case 8:
-                                                                    $status = "Cancel";
-                                                                    $badge  = "danger";
-                                                                    break;
-                                                                default:
-                                                                    $status = "Unknown";
-                                                                    $badge  = "light";
-                                                                    break;
-                                                            }?>
-                                                                <span class="badge badge-<?=$badge?>" style="font-size:unset"><?=$status?></span>
+                                                                <?php cetakStatus($request->Status, false); ?>
                                                             </td>
                                                             <td>
-                                                                <a class="btn btn-raised btn-primary" href="<?=base_url();?>Designer/request/<?=trimId('PS', $request->IDPesan);?>">Lihat Detail</a>
+                                                                <a class="btn btn-raised btn-primary" href="<?=base_url();?>designer/request/<?=trimId('PS', $request->IDPesan);?>">Lihat Detail</a>
                                                             </td>
                                                         </tr>
                                                     <?php endforeach; ?>

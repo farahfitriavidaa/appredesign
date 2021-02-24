@@ -68,10 +68,10 @@
                                             
                                             <?php if(empty($diskusi_terakhir)): ?>
                                                 <p>Belum ada diskusi. Anda akan melihat daftar diskusi terkahir di sini jika ada request yang Anda atau Pengelola komentari.</p>
-                                                <a href="<?=base_url();?>Umkm/lihatRequest" class="btn btn-primary">Lihat Request dan Beri Komentar</a>
+                                                <a href="<?=base_url();?>umkm/request" class="btn btn-primary">Lihat Request dan Beri Komentar</a>
                                             <?php else: 
                                                 foreach($diskusi_terakhir as $diskusi): ?>
-                                                <a href="<?=base_url();?>Umkm/diskusi/<?=trimId('PS',$diskusi->IDPesan);?>" class="list-diskusi mb-2">
+                                                <a href="<?=base_url();?>umkm/diskusi/<?=trimId('PS',$diskusi->IDPesan);?>" class="list-diskusi mb-2">
                                                     <div class="card" style="box-shadow:unset;border:1px solid #e5e5e5;">
                                                         <div class="card-body">
                                                             <strong><?=$diskusi->Nama_produk?></strong>
@@ -83,49 +83,7 @@
                                                             </p>
                                                             <div class="mt-2">
                                                                 <span class="text-muted"><?=cetakWaktu($diskusi->Tanggal_waktu)?></span>
-                                                                <?php switch($diskusi->Status){
-                                                                case 0:
-                                                                    $status = "Pending";
-                                                                    $badge  = "light";
-                                                                    break;
-                                                                case 1:
-                                                                    $status = "Telah didiskusikan";
-                                                                    $badge  = "light";
-                                                                    break;
-                                                                case 2:
-                                                                    $status = "Mulai dikerjakan desainer";
-                                                                    $badge  = "light";
-                                                                    break;
-                                                                case 3:
-                                                                    $status = "Selesai didesain";
-                                                                    $badge  = "info";
-                                                                    break;
-                                                                case 4:
-                                                                    $status = "Review hasil";
-                                                                    $badge  = "info";
-                                                                    break;
-                                                                case 5:
-                                                                    $status = "Desain disetujui";
-                                                                    $badge  = "info";
-                                                                    break;
-                                                                case 6:
-                                                                    $status = "Belum dibayar";
-                                                                    $badge  = "warning";
-                                                                    break;
-                                                                case 7:
-                                                                    $status = "Lunas";
-                                                                    $badge  = "success";
-                                                                    break;
-                                                                case 8:
-                                                                    $status = "Cancel";
-                                                                    $badge  = "danger";
-                                                                    break;
-                                                                default:
-                                                                    $status = "Pending";
-                                                                    $badge  = "light";
-                                                                    break;
-                                                                }?>
-                                                                <span class="float-right badge badge-<?=$badge?>" style="font-size:unset"><?=$status?></span>
+                                                                <?php cetakStatusLengkap($diskusi->Status) ?>                                                                
                                                             </div>
                                                         </div>
                                                     </div>
@@ -142,11 +100,12 @@
                                             <h5 class="header-title mt-0 pb-3">Request Terbaru</h5>
 
                                             <?php if(empty($request_terbaru)): ?>
-                                                <p>Belum ada request masuk. Mungkin Anda ingin membuat portofolio dulu jika Anda belum membuatnya?</p>
-                                                <a class="btn btn-raised btn-primary" href="<?=base_url();?>Umkm/lihatPortofolio">Lihat portofolio saya</a>
+                                                <p>Belum ada request yang telah Anda dibuat.</p>
+                                                <p>Request adalah pesanan Anda untuk melakukan <i title="desain ulang">redesign</i> kemasan.</p>
+                                                <a class="btn btn-raised btn-primary" href="<?=base_url();?>umkm/request/buatRequest">Buat Request Baru</a>
                                             <?php else: 
                                                 foreach($request_terbaru as $request): ?>
-                                                <a href="<?=base_url();?>Umkm/diskusi/<?=trimId('PS',$request->IDPesan);?>" class="list-diskusi mb-2">
+                                                <a href="<?=base_url();?>umkm/diskusi/<?=trimId('PS',$request->IDPesan);?>" class="list-diskusi mb-2">
                                                     <div class="card" style="box-shadow:unset;border:1px solid #e5e5e5;">
                                                         <div class="card-body">
                                                             <strong>
@@ -156,49 +115,7 @@
                                                                 ?>
                                                             </strong>
                                                             <div class="mt-2">
-                                                                <?php switch($request->Status){
-                                                                case 0:
-                                                                    $status = "Pending";
-                                                                    $badge  = "light";
-                                                                    break;
-                                                                case 1:
-                                                                    $status = "Telah didiskusikan";
-                                                                    $badge  = "light";
-                                                                    break;
-                                                                case 2:
-                                                                    $status = "Mulai dikerjakan desainer";
-                                                                    $badge  = "light";
-                                                                    break;
-                                                                case 3:
-                                                                    $status = "Selesai didesain";
-                                                                    $badge  = "info";
-                                                                    break;
-                                                                case 4:
-                                                                    $status = "Review hasil";
-                                                                    $badge  = "info";
-                                                                    break;
-                                                                case 5:
-                                                                    $status = "Desain disetujui";
-                                                                    $badge  = "info";
-                                                                    break;
-                                                                case 6:
-                                                                    $status = "Belum dibayar";
-                                                                    $badge  = "warning";
-                                                                    break;
-                                                                case 7:
-                                                                    $status = "Lunas";
-                                                                    $badge  = "success";
-                                                                    break;
-                                                                case 8:
-                                                                    $status = "Cancel";
-                                                                    $badge  = "danger";
-                                                                    break;
-                                                                default:
-                                                                    $status = "Pending";
-                                                                    $badge  = "light";
-                                                                    break;
-                                                                }?>
-                                                                <span class="float-right badge badge-<?=$badge?>" style="font-size:unset"><?=$status?></span>
+                                                                <?php cetakStatusLengkap($request->Status) ?>
                                                             </div>
                                                         </div>
                                                     </div>

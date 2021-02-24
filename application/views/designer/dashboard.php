@@ -66,7 +66,7 @@
                                                 <div class="col-8 ml-auto align-self-center text-center">
                                                     <div class="m-l-10 text-white float-right">
                                                         <h5 class="mt-0 round-inner"><?=$ringkasan['total']?></h5>
-                                                        <p class="mb-0 ">Total Request</p>
+                                                        <p class="mb-0 ">Total Request yang didapatkan</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -87,7 +87,7 @@
                                                 <div class="col-8 ml-auto align-self-center text-center">
                                                     <div class="m-l-10 text-white float-right">
                                                         <h5 class="mt-0 round-inner"><?=$ringkasan['selesai']?></h5>
-                                                        <p class="mb-0">Req. diselesaikan</p>
+                                                        <p class="mb-0">Request diselesaikan</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -102,13 +102,13 @@
                                             <div class="d-flex row">
                                                 <div class="col-3 align-self-center">
                                                     <div class="round">
-                                                        <i class="mdi mdi-file-hidden"></i>
+                                                        <i class="mdi mdi-file-outline"></i>
                                                     </div>
                                                 </div>
                                                 <div class="col-8 ml-auto align-self-center text-center">
                                                     <div class="m-l-10 text-white float-right">
                                                         <h5 class="mt-0 round-inner"><?=$ringkasan['belum']?></h5>
-                                                        <p class="mb-0">Req. dikerjakan</p>
+                                                        <p class="mb-0">Request <br>belum selesai</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -123,13 +123,13 @@
                                     <div class="card m-b-30">
                                         <div class="card-body">
                                             <h5 class="header-title mt-0 pb-3">Diskusi Terakhir</h5>
-                                            
-                                            <?php if(empty($diskusi_terakhir)): ?>
+
+                                            <?php if ( empty($diskusi_terakhir) ): ?>
                                                 <p>Belum ada diskusi. Anda akan melihat daftar diskusi terkahir di sini jika ada request yang Anda atau Pengelola komentari.</p>
-                                                <a href="<?=base_url();?>Designer/lihatRequest" class="btn btn-primary">Lihat Request dan Beri Komentar</a>
-                                            <?php else: 
+                                                <a href="<?=base_url();?>designer/request/lihatRequest" class="btn btn-primary">Lihat Request dan Beri Komentar</a>
+                                            <?php else:
                                                 foreach($diskusi_terakhir as $diskusi): ?>
-                                                <a href="<?=base_url();?>Designer/diskusi/<?=trimId('PS',$diskusi->IDPesan);?>" class="list-diskusi mb-2">
+                                                <a href="<?=base_url();?>designer/diskusi/<?=trimId('PS',$diskusi->IDPesan);?>" class="list-diskusi mb-2">
                                                     <div class="card" style="box-shadow:unset;border:1px solid #e5e5e5;">
                                                         <div class="card-body">
                                                             <strong><?=$diskusi->Nama_produk?></strong>
@@ -141,39 +141,7 @@
                                                             </p>
                                                             <div class="mt-2">
                                                                 <span class="text-muted"><?=cetakWaktu($diskusi->Tanggal_waktu)?></span>
-                                                                <?php switch($diskusi->Status){
-                                                                case 1:
-                                                                    $status = "Request baru";
-                                                                    $badge  = "light";
-                                                                    break;
-                                                                case 2:
-                                                                    $status = "Mulai dikerjakan";
-                                                                    $badge  = "warning";
-                                                                    break;
-                                                                case 3:
-                                                                    $status = "Selesai didesain";
-                                                                    $badge  = "info";
-                                                                    break;
-                                                                case 4:
-                                                                    $status = "Review hasil";
-                                                                    $badge  = "info";
-                                                                    break;
-                                                                case 5:
-                                                                case 6:
-                                                                case 7:
-                                                                    $status = "Desain disetujui";
-                                                                    $badge  = "success";
-                                                                    break;
-                                                                case 8:
-                                                                    $status = "Cancel";
-                                                                    $badge  = "danger";
-                                                                    break;
-                                                                default:
-                                                                    $status = "Unknown";
-                                                                    $badge  = "light";
-                                                                    break;
-                                                            }?>
-                                                                <span class="float-right badge badge-<?=$badge?>" style="font-size:unset"><?=$status?></span>
+                                                                <?php cetakStatus($diskusi->Status); ?>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -189,12 +157,14 @@
                                         <div class="card-body">
                                             <h5 class="header-title mt-0 pb-3">Request Terbaru</h5>
 
-                                            <?php if(empty($request_terbaru)): ?>
-                                                <p>Belum ada request masuk. Mungkin Anda ingin membuat portofolio dulu jika Anda belum membuatnya?</p>
-                                                <a class="btn btn-raised btn-primary" href="<?=base_url();?>Designer/lihatPortofolio">Lihat portofolio saya</a>
-                                            <?php else: 
+                                            <?php if ( $ringkasan['total'] == '0' ): ?>
+                                                <p>Belum ada request baru yang masuk. Mungkin Anda ingin membuat portofolio dulu jika Anda belum membuatnya?</p>
+                                                <a class="btn btn-raised btn-primary" href="<?=base_url();?>designer/portofolio">Lihat portofolio saya</a>
+                                            <?php elseif ( empty($request_terbaru) ): ?>
+                                                <p>Belum ada request baru yang masuk.</p>
+                                            <?php else:
                                                 foreach($request_terbaru as $request): ?>
-                                                <a href="<?=base_url();?>Designer/diskusi/<?=trimId('PS',$request->IDPesan);?>" class="list-diskusi mb-2">
+                                                <a href="<?=base_url();?>designer/diskusi/<?=trimId('PS',$request->IDPesan);?>" class="list-diskusi mb-2">
                                                     <div class="card" style="box-shadow:unset;border:1px solid #e5e5e5;">
                                                         <div class="card-body">
                                                             <strong>
@@ -204,39 +174,7 @@
                                                                 ?>
                                                             </strong>
                                                             <div class="mt-2">
-                                                                <?php switch($request->Status){
-                                                                case 1:
-                                                                    $status = "Request baru";
-                                                                    $badge  = "light";
-                                                                    break;
-                                                                case 2:
-                                                                    $status = "Mulai dikerjakan";
-                                                                    $badge  = "warning";
-                                                                    break;
-                                                                case 3:
-                                                                    $status = "Selesai didesain";
-                                                                    $badge  = "info";
-                                                                    break;
-                                                                case 4:
-                                                                    $status = "Review hasil";
-                                                                    $badge  = "info";
-                                                                    break;
-                                                                case 5:
-                                                                case 6:
-                                                                case 7:
-                                                                    $status = "Desain disetujui";
-                                                                    $badge  = "success";
-                                                                    break;
-                                                                case 8:
-                                                                    $status = "Cancel";
-                                                                    $badge  = "danger";
-                                                                    break;
-                                                                default:
-                                                                    $status = "Unknown";
-                                                                    $badge  = "light";
-                                                                    break;
-                                                            }?>
-                                                                <span class="float-right badge badge-<?=$badge?>" style="font-size:unset"><?=$status?></span>
+                                                                <?php cetakStatus($request->Status); ?>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -245,7 +183,7 @@
                                             endif; ?>
                                         </div>
                                     </div>
-                                </div> 
+                                </div>
                             </div>
 
                         </div>

@@ -52,3 +52,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'Landingpage';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+$route['umkm'] = 'umkm/dasbor';
+$route['umkm/logout'] = 'umkm/dasbor/logout';
+$route['umkm/diskusi/(:num)'] = 'umkm/diskusi/index/$1';
+
+$route['designer'] = 'designer/dasbor';
+$route['designer/logout'] = 'designer/dasbor/logout';
+$route['designer/request/(:num)'] = 'designer/request/index/$1';
+$route['designer/diskusi/(:num)'] = 'designer/diskusi/index/$1';

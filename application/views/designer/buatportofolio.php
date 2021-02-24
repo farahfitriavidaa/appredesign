@@ -52,16 +52,7 @@
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
-                                            Maaf, pembuatan portofolio gagal
-                                            <ul>
-                                            <?php
-                                                foreach($alert as $a):
-                                                    if(!empty($a) && $a!=='sukses'):
-                                            ?>
-                                                        <li><?=$a?>
-                                                    <?php  endif; ?>
-                                                <?php endforeach; ?>
-                                            </ul>
+                                            <?=$alert;?>
                                         </div>
                                     </div>
                                 </div>
@@ -81,7 +72,7 @@
                                 <div class="col-md-12 col-xl-12">
                                     <div class="card m-b-30">
                                         <div class="card-body">
-                                            <form action="<?=base_url();?>Designer/tambahPortofolio" method="POST" class="mb-0" enctype="multipart/form-data" autocomplete="off">
+                                            <form action="<?=base_url();?>designer/portofolio/tambahPortofolio" method="POST" class="mb-0" enctype="multipart/form-data" autocomplete="off">
                                                 <div class="form-group">
                                                     <label for="judul" class="bmd-label-floating">Judul Protofolio</label>
                                                     <input type="text" name="judul-portofolio" class="form-control" id="judul" required>
@@ -93,7 +84,7 @@
                                                 </div>
 
                                                 <div style="margin:48px 0 -16px">
-                                                    <span class="text-muted">Bukti Portofolio (link atau file)</span>
+                                                    <span class="text-muted">Bukti Portofolio (link <strong>atau</strong> file)</span>
                                                 </div>
 
                                                 <div class="form-group">
@@ -103,12 +94,12 @@
 
                                                 <div class="form-group">
                                                     <input type="file" name="bukti-portofolio" id="input-file-now" class="dropify"/>
-                                                    <small class="text-muted">format .jpg atau .png</small>
+                                                    <small class="text-muted">format .png atau .jpg</small>
                                                 </div>
 
                                                 <div class="form-group mt-4">
                                                     <button type="submit" class="btn btn-primary btn-raised float-right">Submit</button>
-                                                    <a href="<?=base_url();?>Designer/lihatPortofolio" class="btn btn-secondary border-0 float-right">Batal</a>
+                                                    <a href="<?=base_url();?>designer/portofolio" class="btn btn-secondary border-0 float-right">Batal</a>
                                                 </div>
                                             </form>
                                         </div>

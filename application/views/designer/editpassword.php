@@ -81,7 +81,7 @@
                                 <div class="col-md-12 col-xl-12">
                                     <div class="card m-b-30">
                                         <div class="card-body">
-                                            <form action="<?=base_url();?>Designer/editPwd" method="POST" enctype="multipart/form-data" autocomplete="off">
+                                            <form action="<?=base_url();?>designer/profil/editPwd" method="POST" enctype="multipart/form-data" autocomplete="off">
                                                 <div class="row mx-1">
                                                     <div class="col-lg-4">
                                                         <div class="form-group">

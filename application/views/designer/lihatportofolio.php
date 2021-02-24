@@ -73,22 +73,24 @@
                                     <span class="d-block h4 mb-3"><?=$designer->Nama_lengkap?></span>
 
                                     <p><?php
-                                        if( ! is_null($designer->Keterangan) )
+                                        if( ! is_null($designer->Keterangan) ):
                                             echo $designer->Keterangan;
-                                        else
+                                        else:
                                     ?>
-                                        <span class="text-muted">Belum ada bio/keterangan</span>
+                                        <span class="text-muted">Belum ada bio/keterangan.</span>
+                                        <a href="<?=base_url();?>designer/profil/editProfil" class="text-primary" title="Tinggalkan halaman ini dan edit bio/keterangan">(Edit)</a>
+                                    <?php endif; ?>
                                     </p>
                                 </div>
                             </div>
 
-                            <a class="btn btn-raised btn-primary mb-4" href="<?=base_url();?>Designer/buatPortofolio">
+                            <a class="btn btn-raised btn-primary mb-4" href="<?=base_url();?>designer/portofolio/buatPortofolio">
                                 <i class="mdi mdi-plus"></i>
                                 Tambah Portofolio
                             </a>
 
                             <?php if(empty($daftar_portofolio)): ?>
-                                <i>Belum ada portofolio</i>
+                                <p><i>Belum ada portofolio</i></p>
                             <?php else: ?>
                             <div class="row">
                                 <?php foreach($daftar_portofolio as $portofolio): ?>
@@ -121,7 +123,7 @@
                                             <button class="btn btn-danger border-0 float-right ml-2" data-toggle="modal" data-target="#konfirmasi-hapus-<?=$path?>" style="font-size:1.25rem">
                                                 <i class="mdi mdi-delete"></i>
                                             </button>
-                                            <a href="<?=base_url();?>Designer/editPortofolio/<?=$path?>" class="btn btn-secondary border-0 float-right" style="font-size:1.25rem">
+                                            <a href="<?=base_url();?>designer/portofolio/editPortofolio/<?=$path?>" class="btn btn-secondary border-0 float-right" style="font-size:1.25rem">
                                                 <i class="mdi mdi-pencil"></i>
                                             </a>
                                         </div>
@@ -134,7 +136,7 @@
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-raised btn-secondary" data-dismiss="modal">Tidak</button>
-                                                        <a class="btn btn-raised btn-danger ml-2" href="<?=base_url();?>Designer/hapusPortofolio/<?=$path;?>">Iya</a>
+                                                        <a class="btn btn-raised btn-danger ml-2" href="<?=base_url();?>designer/portofolio/hapusPortofolio/<?=$path;?>">Iya</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -144,57 +146,6 @@
                                 <?php endforeach; ?>
                             </div>
                             <?php endif; ?>
-
-<!--
-                            <div class="row">
-                                <?php foreach($daftar_portofolio as $portofolio): ?>
-                                    <div class="col-lg-4 col-md-6">
-                                        <div class="card mb-4">
-                                            <?php if( ! strchr($portofolio->Bukti_portofolio, '/') ): ?>
-                                                <img class="card-img-top img-fluid crop-center" src="<?=base_url();?>Uploads/bukti_portofolio/<?=$portofolio->Bukti_portofolio?>" alt="Gambar portofolio" style="max-height:240px;">
-                                            <?php endif; ?>
-                                            <?php
-                                                $path = trimId('PRT', $portofolio->IDPortofolio);
-                                            ?>
-                                            <a href="<?=base_url();?>Designer/portofolio/<?=$path?>" class="hoverable">
-                                                <div class="card-body">
-                                                    <span class="d-block h5 card-title"><?=$portofolio->Judul?></span>
-                                                    <p class="card-text text-muted">
-                                                    <?php
-                                                        $tambahan = strlen($portofolio->Detail_portofolio)>=47?'...':'';
-                                                        echo substr($portofolio->Detail_portofolio, '0', '47').$tambahan;
-                                                    ?>
-                                                    </p>
-                                                </div>
-                                            </a>
-                                            <div class="card-footer px-2">
-                                                <button type="button" class="btn btn-secondary border-0 float-right py-0 px-2 mb-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size:1.5rem;">
-                                                    <i class="mdi mdi-dots-vertical"></i>
-                                                </button>
-                                                <div class="dropdown-menu">
-                                                    <a class="dropdown-item hoverable" href="<?=base_url();?>Designer/editPortofolio/<?=$path?>">Edit</a>
-                                                    <div class="dropdown-divider"></div>
-                                                    <button class="dropdown-item hoverable" data-toggle="modal" data-target="#konfirmasi-hapus-<?=$path?>">Hapus</button>
-                                                </div>
-
-                                                <div class="modal fade" id="konfirmasi-hapus-<?=$path?>" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmModal" aria-hidden="true">
-                                                    <div class="modal-dialog" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-body">
-                                                                <p>Hapus data portofolio ini?</p>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-raised btn-secondary" data-dismiss="modal">Tidak</button>
-                                                                <a class="btn btn-raised btn-danger ml-2" href="<?=base_url();?>Designer/hapusPortofolio/<?=$path;?>">Iya</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                <?php endforeach; ?> -->
-                            </div> <!-- end of row --->
 
                         </div><!-- container -->
 

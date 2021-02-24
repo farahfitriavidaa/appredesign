@@ -52,16 +52,7 @@
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
-                                            Maaf, tidak bisa mengunggah foto atau gambar.
-                                            <ul>
-                                            <?php
-                                                foreach($alert as $a):
-                                                    if(!empty($a) && $a!=='sukses'):
-                                            ?>
-                                                        <li><?=$a?>
-                                                    <?php  endif; ?>
-                                                <?php endforeach; ?>
-                                            </ul>
+                                            <?=$alert;?>
                                         </div>
                                     </div>
                                 </div>
@@ -81,7 +72,7 @@
                                 <div class="col-md-12 col-xl-12">
                                     <div class="card m-b-30">
                                         <div class="card-body">
-                                            <form action="<?=base_url();?>Umkm/updateProfil" method="POST" enctype="multipart/form-data" autocomplete="off">
+                                            <form action="<?=base_url();?>umkm/profil/updateProfil" method="POST" enctype="multipart/form-data" autocomplete="off">
                                                 <div class="form-group">
                                                     <label for="nama-lengkap">Nama Anda</label>
                                                     <input type="text" name="nama-lengkap" class="form-control" id="nama-lengkap" placeholder="Nama Anda" value="<?=$user->Nama_lengkap?>">
@@ -119,7 +110,7 @@
 
                                                 <div class="form-group bmd-form-group">
                                                     <button type="submit" class="btn btn-primary btn-raised float-right">Simpan Perubahan</button>
-                                                    <a href="<?=base_url();?>Umkm/lihatProfil" class="btn btn-secondary border-0 mr-2 float-right">Batal</a>
+                                                    <a href="<?=base_url();?>umkm/profil" class="btn btn-secondary border-0 mr-2 float-right">Batal</a>
                                                 </div>
                                             </form>
                                         </div>

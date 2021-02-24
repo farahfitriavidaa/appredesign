@@ -87,7 +87,7 @@
                                             <p><?=$designer->Email?></p>
                                             
                                             <strong class="d-block">Password</strong>
-                                            <p><a href="<?=base_url();?>designer/editPwd">(Ubah password)</a></p>
+                                            <p><a href="<?=base_url();?>designer/profil/editPwd">(Ubah password)</a></p>
 
                                             <strong class="d-block">No. Telepon</strong>
                                             <p><?=$designer->No_telp?></p>
@@ -95,8 +95,7 @@
                                             <strong class="d-block">Tentang Saya</strong>
                                             <p><?=$designer->Keterangan?></p>
 
-                                            <!-- TO DO: buat edit profil designer -->
-                                            <a class="btn btn-raised btn-secondary float-right mt-4" href="<?=base_url();?>Designer/editProfil">
+                                            <a class="btn btn-raised btn-secondary float-right mt-4" href="<?=base_url();?>designer/profil/editProfil">
                                                 Edit Profil
                                             </a>
                                         </div>
