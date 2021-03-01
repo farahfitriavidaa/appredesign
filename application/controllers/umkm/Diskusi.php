@@ -13,7 +13,11 @@ class Diskusi extends CI_Controller {
 		$this->load->model('Model_umkm');
     }
 
-	// re-mapped: base_url()/umkm/diskusi/(:num)
+	/**
+	 * Menampilkan thread diskusi suatu request
+	 * 
+	 * re-mapped: base_url()/umkm/diskusi/(:num)
+	 */
     public function index($id_pesan='0')
 	{
 		// Cek IDPesan dan pastikan user tidak input alamat ".../Umkm/diskusi" tanpa IDPesan

@@ -13,7 +13,11 @@ class Diskusi extends CI_Controller {
 		$this->load->model('Model_designer');
     }
 
-	// re-mapped: base_url()/designer/diskusi/(:num)
+	/**
+	 * Menampilkan thread diskusi suatu request
+	 * 
+	 * re-mapped: base_url()/designer/diskusi/(:num)
+	 */
     public function index($id_pesan='0')
 	{
 		if ($id_pesan==='0') {
@@ -58,8 +62,6 @@ class Diskusi extends CI_Controller {
 				'designer'			=> $data_designer,
 				'daftar_komentar'	=> $daftar_komentar
 			);
-			// var_dump($detil_pemesanan);
-
 		}
 
 		$this->load->helper(array('my_helper', 'status_helper'));

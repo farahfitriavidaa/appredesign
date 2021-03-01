@@ -13,7 +13,14 @@ class Dasbor extends CI_Controller {
 		$this->load->model('Model_umkm');
 	}
 
-	// re-mapped: base_url()/umkm
+	/**
+	 * Menampilkan halaman dashboard
+	 * 
+	 * Halaman dashboard adalah halaman pertama yang ditampilkan
+	 * setelah umkm berhasil log in.
+	 * 
+	 * re-mapped: base_url()/umkm	 
+	 */
 	public function index()
 	{
 		if ( ! $this->session->has_userdata('id_user')) {

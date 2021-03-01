@@ -13,7 +13,11 @@ class Request extends CI_Controller {
 		$this->load->model('Model_designer');
     }
 
-	// re-mapped: base_url()/designer/request/(:num)
+	/**
+	 * Menampilkan detel request/pemesanan
+	 * 
+	 * re-mapped: base_url()/designer/request/(:num)  
+	 */
 	public function index($id_pesan='0')
 	{
 		if ($id_pesan==='0') {

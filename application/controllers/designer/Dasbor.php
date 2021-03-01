@@ -13,7 +13,14 @@ class Dasbor extends CI_Controller {
 		$this->load->model('Model_designer');
 	}
 
-	// re-mapped: base_url()/designer
+	/**
+	 * Menampilkan halaman dashboard
+	 * 
+	 * Halaman dashboard adalah halaman pertama yang ditampilkan
+	 * setelah designer berhasil log in.
+	 * 
+	 * re-mapped: base_url()/designer	 
+	 */
 	public function index()
 	{
 		if ( ! $this->session->has_userdata('id_user')) {
