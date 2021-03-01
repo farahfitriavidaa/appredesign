@@ -14,7 +14,7 @@
                       <img src="<?=base_url()?>uploads/foto_user/<?=$akun->Foto?>" alt="user" class="rounded-circle img-thumbnail">
                 </a>
                 <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
-                    <a class="dropdown-item" href="<?=base_url()?>Admin/kelolaProfil">
+                    <a class="dropdown-item" href="<?=base_url()?>admin/Akun/kelolaProfil">
                         <i class="mdi mdi-account-circle m-r-5 text-muted"></i> Profile</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="<?=base_url()?>Create/logout">

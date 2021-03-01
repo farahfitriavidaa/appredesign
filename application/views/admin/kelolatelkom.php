@@ -92,12 +92,12 @@
                                                   <td><?php echo $a->Status ?></td>
                                                   <td>
                                                     <?php if ($a->Status == 'Aktif'){ ?>
-                                                      <a class="btn btn-raised btn-secondary" href="<?=base_url()?>Admin/statusTdkAktif/<?=$a->IDUser?>">
+                                                      <a class="btn btn-raised btn-secondary" href="<?=base_url()?>admin/Pengguna/statusTdkAktif/<?=$a->IDUser?>">
                                                         <i class="mdi mdi-account-minus mr-2 text-white-400"></i>
                                                           Tidak Aktif
                                                       </a>
                                                     <?php }else if($a->Status == 'Tidak Aktif'){ ?>
-                                                        <a class="btn btn-raised btn-warning" href="<?=base_url()?>Admin/statusAktif/<?=$a->IDUser?>">
+                                                        <a class="btn btn-raised btn-warning" href="<?=base_url()?>admin/Pengguna/statusAktif/<?=$a->IDUser?>">
                                                         <i class="mdi mdi-account-check mr-2 text-white-400"></i>
                                                           Aktif
                                                       </a>
@@ -154,7 +154,7 @@
            </div>
            <div class="modal-footer justify-content-between">
              <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Tidak</button>
-             <a href="<?= site_url()?>Admin/hapusCDC/<?= $key->IDUser ?>" class="btn btn-danger">Iya</a>
+             <a href="<?= site_url()?>admin/Pengguna/hapusCDC/<?= $key->IDUser ?>" class="btn btn-danger">Iya</a>
            </div>
          </div>
          <!-- /.modal-content -->
@@ -175,7 +175,7 @@
              </button>
            </div>
            <div class="modal-body">
-             <form class="" action="<?=base_url()?>Admin/editTelkom/<?=$key->IDUser?>" method="POST">
+             <form class="" action="<?=base_url()?>admin/Pengguna/editTelkom/<?=$key->IDUser?>" method="POST">
                <input type="hidden" name="IDUser" value="<?=$key->IDUser?>">
                <table width="100%">
                  <tr>
@@ -246,7 +246,7 @@
                </div>
                <div class="modal-body">
                  <?php echo validation_errors('<div class="error">'.'</div>'); ?>
-                 <form class="" action="<?=base_url()?>Admin/tambahTelkom" method="POST">
+                 <form class="" action="<?=base_url()?>admin/Pengguna/tambahTelkom" method="POST">
                    <table width="100%">
                      <tr>
                        <td>Username</td>

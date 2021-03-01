@@ -93,10 +93,10 @@
                                                       <i class="mdi mdi-grease-pencil mr-2 text-white-400"></i>
                                                         Edit
                                                     </a>
-                                                    <a class="btn btn-raised btn-danger" href="" data-toggle="modal" data-target="#hapus<?=$a->IDDataUMKM?>">
+                                                    <!-- <a class="btn btn-raised btn-danger" href="" data-toggle="modal" data-target="#hapus<?=$a->IDDataUMKM?>">
                                                       <i class="mdi mdi-delete mr-2 text-white-400"></i>
                                                         Hapus
-                                                    </a>
+                                                    </a> -->
                                                   </td>
                                               </tr>
                                             <?php endforeach; ?>
@@ -116,7 +116,7 @@
                                   </div>
                               </div>
                           </div>
-                          <a class="btn btn-raised btn-danger" href="<?=base_url()?>Admin/kelolaUMKM">
+                          <a class="btn btn-raised btn-danger" href="<?=base_url()?>admin/Pengguna/kelolaUMKM">
                             <i class="mdi mdi-arrow-left-bold-circle mr-2 text-white-400"></i>
                               Kembali
                           </a>
@@ -149,8 +149,9 @@
              </button>
               </div>
            <div class="modal-body">
-             <form style="margin-left:8px" action="<?=base_url()?>Admin/UpdateFoto" method="post" enctype="multipart/form-data">
+             <form style="margin-left:8px" action="<?=base_url()?>admin/Pengguna/UpdateFoto" method="post" enctype="multipart/form-data">
                <input type="hidden" name="iddataumkm" value="<?=$key->IDDataUMKM?>">
+                <input type="hidden" name="idumkm" value="<?=$key->IDUMKM?>">
              <?php if (!$key->Foto_produk) { ?>
                <p style="color:red">Belum upload foto produk</p>
              <?php }else if($key->Foto_produk){?>
@@ -206,8 +207,9 @@
              </button>
               </div>
            <div class="modal-body">
-             <form style="margin-left:8px" action="<?=base_url()?>Admin/UpdateLogo" method="post" enctype="multipart/form-data">
+             <form style="margin-left:8px" action="<?=base_url()?>admin/Pengguna/UpdateLogo" method="post" enctype="multipart/form-data">
                <input type="hidden" name="iddataumkm" value="<?=$key->IDDataUMKM?>">
+                <input type="hidden" name="idumkm" value="<?=$key->IDUMKM?>">
              <?php if (!$key->Logo_produk) { ?>
                <p style="color:red">Belum upload logo produk</p>
              <?php }else if($key->Logo_produk){ ?>
@@ -271,8 +273,9 @@
              </button>
               </div>
            <div class="modal-body">
-             <form style="margin-left:8px" action="<?=base_url()?>Admin/UpdateKemasan" method="post" enctype="multipart/form-data">
+             <form style="margin-left:8px" action="<?=base_url()?>admin/Pengguna/UpdateKemasan" method="post" enctype="multipart/form-data">
                <input type="hidden" name="iddataumkm" value="<?=$key->IDDataUMKM?>">
+               <input type="hidden" name="idumkm" value="<?=$key->IDUMKM?>">
              <?php if (!$key->Kemasan_produk) { ?>
                <p style="color:red">Belum upload kemasan produk</p>
              <?php }else if($key->Kemasan_produk){ ?>
@@ -330,7 +333,7 @@
            </div>
            <div class="modal-footer justify-content-between">
              <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Tidak</button>
-             <a href="<?= site_url()?>Admin/hapusDataUMKM/<?= $key->IDDataUMKM ?>" class="btn btn-danger">Iya</a>
+             <a href="<?= site_url()?>admin/Pengguna/hapusDataUMKM/<?= $key->IDDataUMKM ?>" class="btn btn-danger">Iya</a>
            </div>
           </div>
          <!-- /.modal-content -->
@@ -340,62 +343,6 @@
         <!-- /.modal -->
         <?php } ?>
 
-            <div class="modal fade" id="tambahumkm" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="ExampleModalLabel">
-                <div class="modal-dialog" role="document">
-                   <div class="modal-content">
-                     <div class="modal-header">
-                       <h4 class="modal-title" id="ExampleModalLabel">Tambah Data UMKM</h4>
-                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                         <span aria-hidden="true">&times;</span>
-                       </button>
-                     </div>
-                     <div class="modal-body">
-                     <form class="" action="<?=base_url()?>Admin/tambahDataUMKMM" method="POST" enctype="multipart/form-data">
-                         <table width="100%">
-                           <tr>
-                             <td>Nama UMKM</td>
-                             <td>:</td>
-                             <td>
-                               <select class="form-control" name="idumkm">
-                                 <option value="">-- Pilih UMKM -- </option>
-                                 <?php foreach ($umkm as $u): ?>
-                                   <option value="<?=$u->IDUMKM?>"><?=$u->Nama_umkm?></option>
-                                     <?php endforeach; ?>
-                                </select>
-                             </td>
-                            </tr>
-                            <tr>
-                              <td>Nama Produk</td>
-                              <td>:</td>
-                              <td><input type="text" name="nama_produk" class="form-control"></td>
-                            </tr>
-                            <tr>
-                              <td>Foto Produk</td>
-                              <td>:</td>
-                              <td>*Pilih salah satu*</td>
-                            </tr>
-                            <tr>
-                              <td><input type="text" name="foto_produk" placeholder="link foto" class="form-control"></td>
-                              <td>Atau</td>
-                              <td> <input type="file" name="foto_produk" class="form-control"> </td>
-                            </tr>
-                            <tr>
-                              <td>Keterangan</td>
-                              <td>:</td>
-                              <td><textarea name="keterangan" class="form-control" rows="8" cols="80"></textarea> </td>
-                            </tr>
-                          </table>
-                       </div>
-                           <div class="modal-footer justify-content-between">
-                                 <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Tidak</button>
-                                 <input type="submit" class="btn btn-danger" value="Iya">
-                               </div>
-                             </form>
-                         </div>
-                         <!-- /.modal-content -->
-                      </div>
-                            <!-- /.modal-dialog -->
-              </div>
 
               <?php foreach ($umkm as $key) { ?>
               <div class="modal fade" id="edit<?=$key->IDDataUMKM?>" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="ExampleModalLabel">
@@ -408,8 +355,9 @@
                    </button>
                  </div>
                  <div class="modal-body">
-                   <form class="" action="<?=base_url()?>Admin/editDataUMKM/<?=$key->IDDataUMKM?>" method="POST" enctype="multipart/form-data">
+                   <form class="" action="<?=base_url()?>admin/Pengguna/editDataUMKM/<?=$key->IDDataUMKM?>" method="POST" enctype="multipart/form-data">
                      <input type="hidden" name="iddataumkm" value="<?=$key->IDDataUMKM?>">
+                     <input type="hidden" name="idumkm" value="<?=$key->IDUMKM?>">
                      <table width="100%">
                        <tr>
                          <td>Nama UMKM</td>

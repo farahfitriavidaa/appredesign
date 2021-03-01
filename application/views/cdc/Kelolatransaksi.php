@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <?php $this->load->view('cdc/layout/Head'); ?>
+    <?php $this->load->view('cdc/layout/head'); ?>
 
     <body class="fixed-left">
 
@@ -21,7 +21,7 @@
                     </div>
                 </div>
 
-              <?php $this->load->view('cdc/layout/Sidebar') ?>
+              <?php $this->load->view('cdc/layout/sidebar') ?>
                 <!-- end sidebarinner -->
             </div>
             <!-- Left Sidebar End -->
@@ -33,7 +33,7 @@
                 <div class="content">
 
                     <!-- Top Bar Start -->
-                    <?php $this->load->view('cdc/layout/Navbar') ?>
+                    <?php $this->load->view('cdc/layout/navbar') ?>
                     <!-- Top Bar End -->
 
                     <div class="page-content-wrapper dashborad-v">
@@ -242,7 +242,7 @@
              Apakah Anda yang bahwa status order pemesanan <?=$key->IDPesan?> sudah lunas?
            </div>
            <div class="modal-footer justify-content-between">
-              <a href="<?= site_url()?>CDC/statusLunas/<?= $key->IDPesan ?>" class="btn btn-danger">Iya</a>
+              <a href="<?= site_url()?>cdc/Report/statusLunas/<?= $key->IDPesan ?>" class="btn btn-danger">Iya</a>
              <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Tutup</button>
            </div>
           </div>
@@ -254,4 +254,4 @@
         <?php } ?>
 
 
-        <?php $this->load->view('cdc/layout/Footer') ?>
+        <?php $this->load->view('cdc/layout/footer') ?>

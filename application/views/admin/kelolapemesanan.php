@@ -62,7 +62,7 @@
                                           <p class="text-muted font-14">
                                             Berikut ini adalah data pemesanan re-design UMKM gDESK
                                           </p>
-                                          <a class="btn btn-raised btn-primary" href="<?=base_url()?>Admin/kelolaDataUMKM">
+                                          <a class="btn btn-raised btn-primary" href="<?=base_url()?>admin/Order/kelolaDataUMKM">
                                           <i class="mdi mdi-folder mr-2 text-white-400"></i>
                                             Data UMKM
                                           </a>
@@ -100,12 +100,12 @@
                                                   <td><?php echo $a->IDPesan ?></td>
                                                   <td><?php echo $a->Nama_umkm ?></td>
                                                   <td>
-                                                    <a class="btn btn-raised btn-info" href="<?=base_url()?>Admin/kelolaDataUMKMIo/<?=$a->IDUMKM?>">
+                                                    <a class="btn btn-raised btn-info" href="<?=base_url()?>admin/Order/kelolaDataUMKMIo/<?=$a->IDUMKM?>">
                                                       <i class="mdi mdi-information mr-2 text-white-400"></i>
                                                         Data UMKM
                                                     </a>
                                                   </td>
-                                                  <td> <a href="<?=base_url()?>Admin/diskum/<?=$a->IDPesan?>">Diskusi</a> </td>
+                                                  <td> <a href="<?=base_url()?>admin/Order/diskum/<?=$a->IDPesan?>">Diskusi</a> </td>
                                                   <td>
                                                     <?php
                                                     if (!$a->Tgl_mulai) {?>
@@ -232,7 +232,7 @@
            </div>
            <div class="modal-footer justify-content-between">
              <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Tidak</button>
-             <a href="<?= site_url()?>Admin/hapusPemesanan/<?= $key->IDPesan ?>" class="btn btn-danger">Iya</a>
+             <a href="<?= site_url()?>admin/Order/hapusPemesanan/<?= $key->IDPesan ?>" class="btn btn-danger">Iya</a>
            </div>
           </div>
          <!-- /.modal-content -->
@@ -252,7 +252,7 @@
                </button>
                </div>
                <div class="modal-body">
-                 <form class="" action="<?=base_url()?>Admin/tambahPemesanan" method="POST">
+                 <form class="" action="<?=base_url()?>admin/Order/tambahPemesanan" method="POST">
                    <table width="100%">
                      <tr>
                        <td>Nama UMKM</td>
@@ -288,7 +288,6 @@
                        <td>:</td>
                        <td><textarea class="form-control" name="keterangan" rows="8" cols="80"></textarea> </td>
                      </tr>
-                     <input type="datetime" name="tgl" value="">
                    </table>
                </div>
                <div class="modal-footer justify-content-between">
@@ -312,7 +311,7 @@
                        </button>
                      </div>
                      <div class="modal-body">
-                     <form class="" action="<?=base_url()?>Admin/tambahDataUMKM" method="POST" enctype="multipart/form-data">
+                     <form class="" action="<?=base_url()?>admin/Order/tambahDataUMKM" method="POST" enctype="multipart/form-data">
                          <table width="100%">
                            <tr>
                              <td>Nama UMKM</td>
@@ -365,7 +364,7 @@
                    </button>
                  </div>
                  <div class="modal-body">
-                   <form class="" action="<?=base_url()?>Admin/editPemesanan/<?=$key->IDPesan?>" method="POST" enctype="multipart/form-data">
+                   <form class="" action="<?=base_url()?>admin/Order/editPemesanan/<?=$key->IDPesan?>" method="POST" enctype="multipart/form-data">
                      <input type="hidden" name="idpesan" value="<?=$key->IDPesan?>">
                      <table width="100%">
                        <tr>

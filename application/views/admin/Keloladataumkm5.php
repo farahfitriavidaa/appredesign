@@ -73,7 +73,6 @@
                                                   <th>Logo Produk</th>
                                                   <th>Kemasan Produk</th>
                                                   <th>Keterangan</th>
-                                                  <th>Aksi</th>
                                               </tr>
                                               </thead>
                                               <tbody>
@@ -88,20 +87,9 @@
                                                   <td><a class="btn btn-info" data-toggle="modal" data-target="#logo<?=$a->IDDataUMKM?>">Logo Produk</a></td>
                                                   <td><a class="btn btn-info" data-toggle="modal" data-target="#kemasan<?=$a->IDDataUMKM?>">Kemasan Produk</a></td>
                                                   <td><?php echo $a->Keterangan ?></td>
-                                                  <td>
-                                                      <a class="btn btn-raised btn-primary" href="" data-toggle="modal" data-target="#edit<?=$a->IDDataUMKM?>">
-                                                      <i class="mdi mdi-grease-pencil mr-2 text-white-400"></i>
-                                                        Edit
-                                                    </a>
-                                                    <a class="btn btn-raised btn-danger" href="" data-toggle="modal" data-target="#hapus<?=$a->IDDataUMKM?>">
-                                                      <i class="mdi mdi-delete mr-2 text-white-400"></i>
-                                                        Hapus
-                                                    </a>
-                                                  </td>
                                               </tr>
                                             <?php endforeach; ?>
                                             <tr>
-                                              <td></td>
                                               <td></td>
                                               <td></td>
                                               <td></td>
@@ -156,26 +144,6 @@
                 Unduh</a>
                 <br><br>
             <?php } ?>
-              <table style="margin-left:50px">
-                <tr>
-                  <td>Upload or Edit Foto Produk</td>
-                </tr>
-                <tr>
-                  <td>
-                    <input type="file" name="foto_produk" class="btn btn-success">
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <br><br>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <input type="submit" name="submit" value="Submit" class="badge-danger form-control">
-                  </td>
-                </tr>
-              </table>
           </form>
            </div>
            <div class="modal-footer justify-content-between">
@@ -208,36 +176,6 @@
              <?php }else if($key->Logo_produk){ ?>
               <img src="<?=base_url()?>uploads/logo_produk/<?=$key->Logo_produk?>" width="450px" alt="Design"><br><br>
             <?php } ?>
-              <table style="margin-left:50px">
-                <tr>
-                  <td>Upload or Edit Logo Produk</td>
-                </tr>
-                <tr>
-                  <td>
-                    <input type="file" name="logo_produk" class="btn btn-success">
-                  </td>
-                </tr>
-                <!-- <tr>
-                  <td>
-                    <p>Atau</p>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <input type="text" name="logo_produk" class="form-control" placeholder="Link logo">
-                  </td>
-                </tr> -->
-                <tr>
-                  <td>
-                    <br><br>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <input type="submit" name="submit" value="Submit" class="badge-danger form-control">
-                  </td>
-                </tr>
-              </table>
           </form>
            </div>
            <div class="modal-footer justify-content-between">
@@ -269,26 +207,6 @@
              <?php }else if($key->Kemasan_produk){ ?>
               <img src="<?=base_url()?>uploads/foto_kemasan_lama/<?=$key->Kemasan_produk?>" width="450px" alt="Design"><br><br>
             <?php } ?>
-              <table style="margin-left:50px">
-                <tr>
-                  <td>Upload or Edit Kemasan Produk</td>
-                </tr>
-                <tr>
-                  <td>
-                    <input type="file" name="kemasan_produk" class="btn btn-success">
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <br><br>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <input type="submit" name="submit" value="Submit" class="badge-danger form-control">
-                  </td>
-                </tr>
-              </table>
           </form>
            </div>
            <div class="modal-footer justify-content-between">

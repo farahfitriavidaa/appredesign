@@ -86,7 +86,7 @@
                                                   <td><?php echo $a->IDPesan ?></td>
                                                   <td><?php echo $a->IDDesigner ?></td>
                                                   <td><?php echo $a->Nama_umkm ?></td>
-                                                  <td> <a class="btn btn-raised btn-info" href="<?=base_url()?>Admin/kelolaDataUMKMIp/<?=$a->IDUMKM?>">
+                                                  <td> <a class="btn btn-raised btn-info" href="<?=base_url()?>admin/Order/kelolaDataUMKMIp/<?=$a->IDUMKM?>">
                                                     <i class="mdi mdi-information mr-2 text-white-400"></i>
                                                       Data UMKM
                                                   </a> </td>

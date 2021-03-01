@@ -5,7 +5,7 @@
             <li class="menu-title">Main Menu</li>
 
             <li>
-                <a href="<?=base_url()?>Admin" class="waves-effect">
+                <a href="<?=base_url()?>admin/Dashboard" class="waves-effect">
                     <i class="mdi mdi-view-dashboard"></i>
                     <span> Dashboard
                     </span>
@@ -13,7 +13,7 @@
             </li>
 
             <li>
-                <a href="<?=base_url()?>Admin/kelolaAkun" class="waves-effect">
+                <a href="<?=base_url()?>admin/Akun/kelolaAkun" class="waves-effect">
                     <i class="mdi mdi-calendar-clock"></i>
                     <span> Kelola Akun </span>
                 </a>
@@ -29,13 +29,13 @@
                 </a>
                 <ul class="list-unstyled">
                     <li>
-                        <a href="<?=base_url()?>Admin/kelolaTelkom">CDC Telkom</a>
+                        <a href="<?=base_url()?>admin/Pengguna/kelolaTelkom">CDC Telkom</a>
                     </li>
                     <li>
-                        <a href="<?=base_url()?>Admin/kelolaDesigner">Designer</a>
+                        <a href="<?=base_url()?>admin/Pengguna/kelolaDesigner">Designer</a>
                     </li>
                     <li>
-                        <a href="<?=base_url()?>Admin/kelolaUMKM">UMKM</a>
+                        <a href="<?=base_url()?>admin/Pengguna/kelolaUMKM">UMKM</a>
                     </li>
                 </ul>
             </li>
@@ -49,16 +49,16 @@
                 </a>
                 <ul class="list-unstyled">
                     <li>
-                        <a href="<?=base_url()?>Admin/kelolaPemesanan">Pengguna</a>
+                        <a href="<?=base_url()?>admin/Order/kelolaPemesanan">Pengguna</a>
                     </li>
                     <li>
-                        <a href="<?=base_url()?>Admin/kelolaOrderDesigner">Designer</a>
+                        <a href="<?=base_url()?>admin/Order/kelolaOrderDesigner">Designer</a>
                     </li>
                     <li>
-                        <a href="<?=base_url()?>Admin/lihatDiskum">Diskusi UMKM</a>
+                        <a href="<?=base_url()?>admin/Diskusi/lihatDiskum">Diskusi UMKM</a>
                     </li>
                     <li>
-                        <a href="<?=base_url()?>Admin/lihatDispro">Diskusi Produk</a>
+                        <a href="<?=base_url()?>admin/Diskusi/lihatDispro">Diskusi Produk</a>
                     </li>
                 </ul>
             </li>
@@ -70,16 +70,16 @@
                 </a>
                 <ul class="list-unstyled">
                   <li>
-                    <a href="<?=base_url()?>Admin/kelolaOrderPermintaan"> Report Permintaan Design </a>
+                    <a href="<?=base_url()?>admin/Report/kelolaOrderPermintaan"> Report Permintaan Design </a>
                   </li>
                   <li>
-                      <a href="<?=base_url()?>Admin/kelolaOrderOnGoing"> Report Design On Going</a>
+                      <a href="<?=base_url()?>admin/Report/kelolaOrderOnGoing"> Report Design On Going</a>
                   </li>
                   <li>
-                      <a href="<?=base_url()?>Admin/kelolaOrderSelesai"> Report Design Selesai</a>
+                      <a href="<?=base_url()?>admin/Report/kelolaOrderSelesai"> Report Design Selesai</a>
                   </li>
                   <li>
-                      <a href="<?=base_url()?>Admin/kelolaTransaksi"> Report Transaksi Design</a>
+                      <a href="<?=base_url()?>admin/Report/kelolaTransaksi"> Report Transaksi Design</a>
                   </li>
                 </ul>
             </li>

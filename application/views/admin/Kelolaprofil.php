@@ -57,7 +57,7 @@
                                                     <br><br>
                                                     <div class="general-label">
                                                         <?php echo validation_errors('<div class="error">'.'</div>'); ?>
-                                                        <form class="mb-0" action="<?=base_url()?>Admin/editProfil/<?=$akun->IDUser?>" method="POST" enctype="multipart/form-data">
+                                                        <form class="mb-0" action="<?=base_url()?>admin/Akun/editProfil/<?=$akun->IDUser?>" method="POST" enctype="multipart/form-data">
                                                           <div class="form-group">
                                                               <img src="<?=base_url()?>uploads/foto_user/<?=$akun->Foto?>" width="100px">
                                                               <label for="exampleInputEmail1" class="bmd-label-floating ">Foto Profil</label>

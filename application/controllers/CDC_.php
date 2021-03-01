@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class CDC extends CI_Controller {
+class CDC_ extends CI_Controller {
 
     public function __construct()
     {
@@ -22,7 +22,7 @@ class CDC extends CI_Controller {
         'pemesanan'       => $this->Model_cdc->dataPemesanan(),
         'umkm'            => $this->Model_cdc->dataUMKM()
   		);
-  		$this->load->view('cdc/Dashboard',$data);
+  		$this->load->view('cdc/dashboard',$data);
   	}
 
     public function kelolaProfil()
@@ -31,7 +31,7 @@ class CDC extends CI_Controller {
       $data = array(
         'akun' => $cek,
       );
-      $this->load->view('cdc/Kelolaprofil',$data);
+      $this->load->view('cdc/kelolaprofil',$data);
     }
 
     public function editProfil($id)
@@ -139,7 +139,7 @@ class CDC extends CI_Controller {
       'akun' => $cek,
       'verifikasi' => $this->Model_cdc->getDataVerifikasi()
     );
-    $this->load->view('cdc/Kelolaverifikasi',$data);
+    $this->load->view('cdc/kelolaverifikasi',$data);
   }
 
   public function statusAktif($id)
@@ -167,7 +167,7 @@ class CDC extends CI_Controller {
       'akun' => $cek,
       'umkm' => $this->Model_cdc->getDataUMKM()
     );
-    $this->load->view('cdc/Kelolaumkm',$data);
+    $this->load->view('cdc/kelolaumkm',$data);
   }
 
   public function kelolaOrderOnGoing()
@@ -177,7 +177,7 @@ class CDC extends CI_Controller {
       'akun' => $cek,
       'orderpemesanan' => $this->Model_cdc->getOrderOnGoing()
     );
-    $this->load->view('cdc/Kelolaongoing',$data);
+    $this->load->view('cdc/kelolaongoing',$data);
   }
 
   public function kelolaOrderSelesai()
@@ -187,7 +187,7 @@ class CDC extends CI_Controller {
       'akun' => $cek,
       'orderpemesanan' => $this->Model_cdc->getOrderSelesai()
     );
-    $this->load->view('cdc/Kelolaselesai',$data);
+    $this->load->view('cdc/kelolaselesai',$data);
   }
 
   public function kelolaOrderTransaksi()
@@ -197,7 +197,7 @@ class CDC extends CI_Controller {
       'akun' => $cek,
       'orderpemesanan' => $this->Model_cdc->getOrderTransaksi()
     );
-    $this->load->view('cdc/Kelolatransaksi',$data);
+    $this->load->view('cdc/kelolatransaksi',$data);
   }
 
   public function statusLunas($id)

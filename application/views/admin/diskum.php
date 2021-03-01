@@ -52,7 +52,7 @@
                                         </div>
                                     </div>
                                     <div class="col-12 mt-4">
-                                        <a href="<?=base_url();?>Admin/lihatDiskum" class="btn btn-raised btn-primary">
+                                        <a href="<?=base_url();?>admin/Diskusi/lihatDiskum" class="btn btn-raised btn-primary">
                                             <i class="mdi mdi-arrow-left"></i>
                                             Kembali
                                         </a>
@@ -211,21 +211,6 @@
                                             <?php endif; ?>
                                             </p>
 
-                                            <strong class="d-block">Hasil Desain</strong>
-                                            <?php
-                                                $hasil_design = $pemesanan->Hasil_design;
-                                                if(empty($hasil_design)): ?>
-                                                    <p><i class="text-muted">Belum ada hasil desain</i></p>
-                                            <?php
-                                                else:
-                                                $hasil_design = explode(',', $hasil_design) ?>
-                                                <div class="mb-4">
-                                                    <?php foreach($hasil_design as $img):?>
-                                                        <img src="<?=base_url()."uploads/hasil_design/".$img?>" alt="hasil desain" class="img-thumbnail mr-2 mb-2" style="max-height:240px;">
-                                                    <?php endforeach;?>
-                                                </div>
-                                            <?php endif; ?>
-
                                             <strong class="d-block">Revisi Desain</strong>
                                             <?php
                                                 $revisi = $pemesanan->Revisi_design;
@@ -242,11 +227,11 @@
                                             <?php endif; ?>
                                         </div>
 
-                                        <div class="card-footer">
+                                        <!-- <div class="card-footer">
                                             <a class="btn btn-raised btn-secondary float-right" href="#">
                                                 Edit Keterangan
                                             </a>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
 
@@ -301,7 +286,7 @@
                                                 <img src="" alt="foto yang di upload" class="img-thumbnail" id="foto-upload" style="max-height: 320px">
                                             </div>
 
-                                            <form action="<?=base_url();?>Admin/tambahKomentar" method="post" enctype="multipart/form-data" class="mb-0" autocomplete="off">
+                                            <form action="<?=base_url();?>admin/Diskusi/tambahKomentar" method="post" enctype="multipart/form-data" class="mb-0" autocomplete="off">
                                                 <div style="display: flex; flex-flow: row nowrap; padding: 8px 16px;">
                                                     <div class="form-group" style="display:inline; padding:0; margin: 0; flex: auto">
                                                         <?php

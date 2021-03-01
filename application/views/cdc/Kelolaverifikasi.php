@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <?php $this->load->view('cdc/layout/Head'); ?>
+    <?php $this->load->view('cdc/layout/head'); ?>
 
     <body class="fixed-left">
 
@@ -21,7 +21,7 @@
                     </div>
                 </div>
 
-              <?php $this->load->view('cdc/layout/Sidebar') ?>
+              <?php $this->load->view('cdc/layout/sidebar') ?>
                 <!-- end sidebarinner -->
             </div>
             <!-- Left Sidebar End -->
@@ -33,7 +33,7 @@
                 <div class="content">
 
                     <!-- Top Bar Start -->
-                    <?php $this->load->view('cdc/layout/Navbar') ?>
+                    <?php $this->load->view('cdc/layout/navbar') ?>
                     <!-- Top Bar End -->
 
                     <div class="page-content-wrapper dashborad-v">
@@ -146,7 +146,7 @@
                </div>
                <div class="modal-footer justify-content-between">
                  <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Tidak</button>
-                 <a href="<?= site_url()?>CDC/statusAktif/<?= $key->IDUser ?>" class="btn btn-danger">Iya</a>
+                 <a href="<?= site_url()?>cdc/Umkm/statusAktif/<?= $key->IDUser ?>" class="btn btn-danger">Iya</a>
                </div>
              </div>
              <!-- /.modal-content -->
@@ -171,7 +171,7 @@
                  </div>
                  <div class="modal-footer justify-content-between">
                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Tidak</button>
-                   <a href="<?= site_url()?>CDC/statusTdkAktif/<?= $key->IDUser ?>" class="btn btn-danger">Iya</a>
+                   <a href="<?= site_url()?>cdc/Umkm/statusTdkAktif/<?= $key->IDUser ?>" class="btn btn-danger">Iya</a>
                  </div>
                </div>
                <!-- /.modal-content -->
@@ -182,4 +182,4 @@
               <?php } ?>
 
 
-        <?php $this->load->view('cdc/layout/Footer') ?>
+        <?php $this->load->view('cdc/layout/footer') ?>

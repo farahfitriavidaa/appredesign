@@ -109,7 +109,6 @@
                                                   <th>ID Designer</th>
                                                   <th>Nama UMKM</th>
                                                   <th>Data UMKM</th>
-                                                  <th>Diskusi</th>
                                                   <th>Status</th>
                                               </tr>
                                               </thead>
@@ -123,11 +122,10 @@
                                                   <td><?php echo $a->IDPengelola ?></td>
                                                   <td><?php echo $a->IDDesigner ?></td>
                                                   <td><?php echo $a->Nama_umkm ?></td>
-                                                  <td> <a class="btn btn-raised btn-info" href="<?=base_url()?>Admin/kelolaDataUMKMIc/<?=$a->IDUMKM?>">
+                                                  <td> <a class="btn btn-raised btn-info" href="<?=base_url()?>admin/Report/kelolaDataUMKMIc/<?=$a->IDUMKM?>">
                                                     <i class="mdi mdi-information mr-2 text-white-400"></i>
                                                       Data UMKM
                                                   </a> </td>
-                                                  <td> <a href="#">Diskusi</a> </td>
                                                   <td>
                                                     <?php if ($a->Status == '0'){ ?>
                                                       <button type="button" class="badge badge-pill badge-secondary" name="button">Pending</button>

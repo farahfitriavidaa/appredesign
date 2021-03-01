@@ -144,7 +144,7 @@
            </div>
            <div class="modal-footer justify-content-between">
              <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Tidak</button>
-             <a href="<?= site_url()?>Admin/hapusPengelola/<?= $key->IDUser ?>" class="btn btn-danger">Iya</a>
+             <a href="<?= site_url()?>admin/Akun/hapusPengelola/<?= $key->IDUser ?>" class="btn btn-danger">Iya</a>
            </div>
          </div>
          <!-- /.modal-content -->
@@ -165,7 +165,7 @@
              </button>
            </div>
            <div class="modal-body">
-             <form class="" action="<?=base_url()?>Admin/editPengelola/<?=$key->IDUser?>" method="POST">
+             <form class="" action="<?=base_url()?>admin/Akun/editPengelola/<?=$key->IDUser?>" method="POST">
                <input type="hidden" name="IDUser" value="<?=$key->IDUser?>">
                <table width="100%">
                  <tr>
@@ -230,7 +230,7 @@
                    </div>
                    <div class="modal-body">
                         <?php echo validation_errors('<div class="error">'.'</div>'); ?>
-                     <form class="" action="<?=base_url()?>Admin/tambahPengelola" method="POST">
+                     <form class="" action="<?=base_url()?>admin/Akun/tambahPengelola" method="POST">
                        <table width="100%">
                          <tr>
                            <td>Username</td>

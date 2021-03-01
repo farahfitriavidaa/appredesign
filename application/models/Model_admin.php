@@ -27,6 +27,11 @@ class Model_admin extends CI_Model {
     return $this->db->query("SELECT COUNT(IDPesan) as hasil FROM tb_pemesanan WHERE Status='5'")->row();
   }
 
+  public function cekUMKMId($id)
+  {
+    return $this->db->query("SELECT * FROM tb_umkm_data WHERE IDDataUMKM = '$id'")->row();
+  }
+
   public function dataPemesananPending()
   {
     return $this->db->query("SELECT * FROM tb_pemesanan JOIN tb_umkm_data USING(IDDataUMKM) JOIN tb_umkm USING(IDUMKM) WHERE Status='0' ORDER BY IDPesan DESC limit 5")->result();

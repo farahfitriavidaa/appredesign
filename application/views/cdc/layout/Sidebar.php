@@ -5,7 +5,7 @@
             <li class="menu-title">Main Menu</li>
 
             <li>
-                <a href="<?=base_url()?>CDC" class="waves-effect">
+                <a href="<?=base_url()?>cdc/Dashboard" class="waves-effect">
                     <i class="mdi mdi-view-dashboard"></i>
                     <span> Dashboard
                     </span>
@@ -13,7 +13,7 @@
             </li>
 
             <li>
-                <a href="<?=base_url()?>CDC/kelolaProfil" class="waves-effect">
+                <a href="<?=base_url()?>cdc/Profil" class="waves-effect">
                     <i class="mdi mdi-account"></i>
                     <span> Kelola Profil </span>
                 </a>
@@ -28,10 +28,10 @@
                 </a>
                 <ul class="list-unstyled">
                     <li>
-                        <a href="<?=base_url()?>CDC/kelolaVerifikasi"><i class="mdi mdi-check-all"> Verifikasi UMKM</i></a>
+                        <a href="<?=base_url()?>cdc/Umkm/kelolaVerifikasi"><i class="mdi mdi-check-all"> Verifikasi UMKM</i></a>
                     </li>
                     <li>
-                        <a href="<?=base_url()?>CDC/dataUMKM"><i class="mdi mdi-database"> Data UMKM</i></a>
+                        <a href="<?=base_url()?>cdc/Umkm/dataUMKM"><i class="mdi mdi-database"> Data UMKM</i></a>
                     </li>
                 </ul>
             </li>
@@ -45,13 +45,13 @@
                 </a>
                 <ul class="list-unstyled">
                     <li>
-                        <a href="<?=base_url()?>CDC/kelolaOrderOnGoing"><i class="mdi mdi-check-circle"> Report Design On Going</i></a>
+                        <a href="<?=base_url()?>cdc/Report/kelolaOrderOnGoing"><i class="mdi mdi-check-circle"> Report Design On Going</i></a>
                     </li>
                     <li>
-                        <a href="<?=base_url()?>CDC/kelolaOrderSelesai"><i class="mdi mdi-check-circle"> Report Design Selesai</i></a>
+                        <a href="<?=base_url()?>cdc/Report/kelolaOrderSelesai"><i class="mdi mdi-check-circle"> Report Design Selesai</i></a>
                     </li>
                     <li>
-                        <a href="<?=base_url()?>CDC/kelolaOrderTransaksi"><i class="mdi mdi-check-circle"> Report Transaksi Design</i></a>
+                        <a href="<?=base_url()?>cdc/Report/kelolaOrderTransaksi"><i class="mdi mdi-check-circle"> Report Transaksi Design</i></a>
                     </li>
                 </ul>
             </li>

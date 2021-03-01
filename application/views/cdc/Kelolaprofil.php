@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <?php $this->load->view('cdc/layout/Head'); ?>
+    <?php $this->load->view('cdc/layout/head'); ?>
 
     <body class="fixed-left">
 
@@ -18,7 +18,7 @@
                     </div>
                 </div>
 
-              <?php $this->load->view('cdc/layout/Sidebar') ?>
+              <?php $this->load->view('cdc/layout/sidebar') ?>
 
             </div>
 
@@ -28,7 +28,7 @@
                 <div class="content">
 
 
-                    <?php $this->load->view('cdc/layout/Navbar') ?>
+                    <?php $this->load->view('cdc/layout/navbar') ?>
 
                     <div class="page-content-wrapper dashborad-v">
 
@@ -57,7 +57,7 @@
                                                     <br><br>
                                                     <div class="general-label">
                                                         <?php echo validation_errors('<div class="error">'.'</div>'); ?>
-                                                        <form class="mb-0" action="<?=base_url()?>CDC/editProfil/<?=$akun->IDUser?>" method="POST" enctype="multipart/form-data">
+                                                        <form class="mb-0" action="<?=base_url()?>CDC/Profil/editProfil/<?=$akun->IDUser?>" method="POST" enctype="multipart/form-data">
                                                           <div class="form-group">
                                                               <img src="<?=base_url()?>uploads/foto_user/<?=$akun->Foto?>" width="100px">
                                                               <label for="exampleInputEmail1" class="bmd-label-floating ">Foto Profil</label>
@@ -123,4 +123,4 @@
         <!-- END wrapper -->
 
 
-        <?php $this->load->view('cdc/layout/Footer') ?>
+        <?php $this->load->view('cdc/layout/footer') ?>

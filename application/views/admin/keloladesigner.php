@@ -90,7 +90,7 @@
                                                   <td><?php echo $a->Email ?></td>
                                                   <td><?php echo $a->Keterangan ?></td>
                                                   <td>
-                                                    <a class="btn btn-raised btn-warning" href="<?=base_url()?>Admin/createPortofolio/<?=$a->IDUser?>">
+                                                    <a class="btn btn-raised btn-warning" href="<?=base_url()?>admin/Pengguna/createPortofolio/<?=$a->IDUser?>">
                                                       <i class="mdi mdi-file-document-box mr-2 text-white-400"></i>
                                                         Portofolio
                                                     </a>
@@ -98,12 +98,12 @@
                                                   <td><?php echo $a->Status ?></td>
                                                   <td>
                                                     <?php if ($a->Status == 'Aktif'){ ?>
-                                                      <a class="btn btn-raised btn-secondary" href="<?=base_url()?>Admin/statussTdkAktif/<?=$a->IDUser?>">
+                                                      <a class="btn btn-raised btn-secondary" href="<?=base_url()?>admin/Pengguna/statussTdkAktif/<?=$a->IDUser?>">
                                                         <i class="mdi mdi-account-minus mr-2 text-white-400"></i>
                                                           Tidak Aktif
                                                       </a>
                                                     <?php }else if($a->Status == 'Tidak Aktif'){ ?>
-                                                        <a class="btn btn-raised btn-warning" href="<?=base_url()?>Admin/statussAktif/<?=$a->IDUser?>">
+                                                        <a class="btn btn-raised btn-warning" href="<?=base_url()?>admin/Pengguna/statussAktif/<?=$a->IDUser?>">
                                                         <i class="mdi mdi-account-check mr-2 text-white-400"></i>
                                                           Aktif
                                                       </a>
@@ -156,7 +156,7 @@
                </div>
                <div class="modal-body">
                  <?php echo validation_errors('<div class="error">'.'</div>'); ?>
-                 <form class="" action="<?=base_url()?>Admin/tambahDesigner" method="POST">
+                 <form class="" action="<?=base_url()?>admin/Pengguna/tambahDesigner" method="POST">
                    <table width="100%">
                      <tr>
                        <td>Username</td>
@@ -226,7 +226,7 @@
                </div>
                <div class="modal-footer justify-content-between">
                  <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Tidak</button>
-                 <a href="<?= site_url()?>Admin/hapusDesigner/<?= $key->IDUser ?>" class="btn btn-danger">Iya</a>
+                 <a href="<?= site_url()?>admin/Pengguna/hapusDesigner/<?= $key->IDUser ?>" class="btn btn-danger">Iya</a>
                </div>
              </div>
              <!-- /.modal-content -->
@@ -247,7 +247,7 @@
                  </button>
                </div>
                <div class="modal-body">
-                 <form class="" action="<?=base_url()?>Admin/editDesigner/<?=$key->IDUser?>" method="POST">
+                 <form class="" action="<?=base_url()?>admin/Pengguna/editDesigner/<?=$key->IDUser?>" method="POST">
                    <input type="hidden" name="IDUser" value="<?=$key->IDUser?>">
                    <table width="100%">
                      <tr>

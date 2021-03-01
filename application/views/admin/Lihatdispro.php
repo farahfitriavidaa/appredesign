@@ -55,17 +55,17 @@
 
                             <div class="row mb-3" style="justify-content: flex-end;">
                                 <div>
-                                    <a class="btn btn-secondary btn-sm <?=$filter==="semua"?"btn-outline-secondary":"border-0"?>" href="<?=base_url();?>Admin/lihatDispro/semua">
+                                    <a class="btn btn-secondary btn-sm <?=$filter==="semua"?"btn-outline-secondary":"border-0"?>" href="<?=base_url();?>admin/Diskusi/lihatDispro/semua">
                                         Semua diskusi
                                     </a>
                                 </div>
                                 <div>
-                                    <a class="btn btn-secondary btn-sm <?=$filter==="belum-selesai"?"btn-outline-secondary":"border-0"?>" href="<?=base_url();?>Admin/lihatDispro/">
+                                    <a class="btn btn-secondary btn-sm <?=$filter==="belum-selesai"?"btn-outline-secondary":"border-0"?>" href="<?=base_url();?>admin/Diskusi/lihatDispro/">
                                         Belum selesai
                                     </a>
                                 </div>
                                 <div>
-                                    <a class="btn btn-secondary btn-sm <?=$filter==="telah-selesai"?"btn-outline-secondary":"border-0"?>" href="<?=base_url();?>Admin/lihatDispro/telah-selesai">
+                                    <a class="btn btn-secondary btn-sm <?=$filter==="telah-selesai"?"btn-outline-secondary":"border-0"?>" href="<?=base_url();?>admin/Diskusi/lihatDispro/telah-selesai">
                                         Telah selesai
                                     </a>
                                 </div>
@@ -73,13 +73,13 @@
 
                             <?php if(!$has_diskum): ?>
                                 <p class="mt-4">Belum ada diskusi. Anda akan melihat daftar diskusi di sini jika Anda memberi komentar mengenai order <i>redesign</i> produk UMKM.</p>
-                                <a class="btn btn-raised btn-primary" href="<?=base_url();?>Admin/kelolaPemesanan">
+                                <a class="btn btn-raised btn-primary" href="<?=base_url();?>admin/Diskusi/kelolaPemesanan">
                                     Lihat Pemesanan dan Beri Komentar
                                 </a>
                             <?php else: ?>
 
                             <?php foreach($daftar_diskusi as $diskusi): ?>
-                                <a href="<?=base_url();?>Admin/dispro/<?=$diskusi->IDPesan?>" target="_blank" class="list-diskusi mb-2" noopener noreferer>
+                                <a href="<?=base_url();?>admin/Diskusi/dispro/<?=$diskusi->IDPesan?>" target="_blank" class="list-diskusi mb-2" noopener noreferer>
                                     <div class="card">
                                         <div class="card-body">
                                             <strong><?=$diskusi->Nama_produk?></strong>
@@ -144,14 +144,14 @@
 
                             <div class="mt-4">
                                 <?php if ($hal_selanjutnya): ?>
-                                    <a class="float-right btn btn-raised btn-info" href="<?=base_url();?>Admin/lihatDiskum/<?=$filter."/".(int)++$page?>">
+                                    <a class="float-right btn btn-raised btn-info" href="<?=base_url();?>admin/Diskusi/lihatDiskum/<?=$filter."/".(int)++$page?>">
                                         Daftar selanjutnya
                                         <i class="mdi mdi-arrow-right"></i>
                                     </a>
                                 <?php endif; ?>
 
                                 <?php if ($hal_sebelumnya): ?>
-                                    <a class="float-left btn btn-raised btn-info" href="<?=base_url();?>Admin/lihatDiskum/<?=$filter."/".(int)--$page?>">
+                                    <a class="float-left btn btn-raised btn-info" href="<?=base_url();?>admin/Diskusi/lihatDiskum/<?=$filter."/".(int)--$page?>">
                                         <i class="mdi mdi-arrow-left"></i>
                                         Daftar sebelumnya
                                     </a>

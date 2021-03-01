@@ -70,8 +70,6 @@
                                                   <th>ID Pengelola</th>
                                                   <th>ID Designer</th>
                                                   <th>Nama UMKM</th>
-                                                  <th>Data UMKM</th>
-                                                  <th>Diskusi</th>
                                                   <th>Tanggal Mulai</th>
                                                   <th>Tanggal Akhir</th>
                                                   <th>Hasil Design</th>
@@ -88,11 +86,6 @@
                                                   <td><?php echo $a->IDPengelola ?></td>
                                                   <td><?php echo $a->IDDesigner ?></td>
                                                   <td><?php echo $a->Nama_umkm ?></td>
-                                                  <td> <a class="btn btn-raised btn-info" href="<?=base_url()?>Admin/kelolaDataUMKMIc/<?=$a->IDUMKM?>">
-                                                    <i class="mdi mdi-information mr-2 text-white-400"></i>
-                                                      Data UMKM
-                                                  </a> </td>
-                                                  <td> <a href="#">Diskusi</a> </td>
                                                   <td><?php echo $a->Tgl_mulai ?></td>
                                                   <td><?php echo $a->Tgl_akhir ?></td>
                                                   <td><a class="btn btn-primary" data-toggle="modal" data-target="#hasil<?=$a->IDPesan?>">Hasil</a></td>
@@ -118,8 +111,6 @@
                                               </tr>
                                             <?php endforeach; ?>
                                             <tr>
-                                              <td></td>
-                                              <td></td>
                                               <td></td>
                                               <td></td>
                                               <td></td>

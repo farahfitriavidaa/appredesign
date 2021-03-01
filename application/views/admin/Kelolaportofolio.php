@@ -129,9 +129,8 @@
              <?php if (!$key->Bukti_portofolio) { ?>
                <p style="color:red">Portofolio Belum Tertera</p>
              <?php }else if($key->Bukti_portofolio){ ?>
-               <img src="<?=base_url()?>uploads/hasil_design/<?=$key->Bukti_portofolio?>" width="350px" alt="Portofolio"><br>
-               <p><?=$key->Bukti_portofolio?></p>
-               <a class="btn btn-success" href="<?=base_url()?>uploads/hasil_design/<?=$key->Bukti_portofolio?>" target="_blank" rel="nofollow">
+               <img src="<?=base_url()?>uploads/bukti_portofolio/<?=$key->Bukti_portofolio?>" width="350px" alt="Portofolio"><br>
+               <a class="btn btn-success" href="<?=base_url()?>uploads/bukti_portofolio/<?=$key->Bukti_portofolio?>" target="_blank" rel="nofollow">
                  <i class="mdi mdi-arrow-down-bold-circle"></i>
                  Unduh</a>
             <?php } ?>

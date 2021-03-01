@@ -116,7 +116,7 @@
                                   </div>
                               </div>
                           </div>
-                          <a class="btn btn-raised btn-danger" href="<?=base_url()?>Admin/kelolaOrderDesigner">
+                          <a class="btn btn-raised btn-danger" href="<?=base_url()?>admin/Order/kelolaOrderDesigner">
                             <i class="mdi mdi-arrow-left-bold-circle mr-2 text-white-400"></i>
                               Kembali
                           </a>
@@ -149,8 +149,9 @@
              </button>
               </div>
            <div class="modal-body">
-             <form style="margin-left:8px" action="<?=base_url()?>Admin/UpdateFoto" method="post" enctype="multipart/form-data">
+             <form style="margin-left:8px" action="<?=base_url()?>admin/Order/UpdateFotoo" method="post" enctype="multipart/form-data">
                <input type="hidden" name="iddataumkm" value="<?=$key->IDDataUMKM?>">
+                <input type="hidden" name="idumkm" value="<?=$key->IDUMKM?>">
              <?php if (!$key->Foto_produk) { ?>
                <p style="color:red">Belum upload foto produk</p>
              <?php }else if($key->Foto_produk){?>
@@ -205,8 +206,9 @@
              </button>
               </div>
            <div class="modal-body">
-             <form style="margin-left:8px" action="<?=base_url()?>Admin/UpdateLogo" method="post" enctype="multipart/form-data">
+             <form style="margin-left:8px" action="<?=base_url()?>admin/Order/UpdateLogoo" method="post" enctype="multipart/form-data">
                <input type="hidden" name="iddataumkm" value="<?=$key->IDDataUMKM?>">
+                <input type="hidden" name="idumkm" value="<?=$key->IDUMKM?>">
              <?php if (!$key->Logo_produk) { ?>
                <p style="color:red">Belum upload logo produk</p>
              <?php }else if($key->Logo_produk){ ?>
@@ -266,8 +268,9 @@
              </button>
               </div>
            <div class="modal-body">
-             <form style="margin-left:8px" action="<?=base_url()?>Admin/UpdateKemasan" method="post" enctype="multipart/form-data">
+             <form style="margin-left:8px" action="<?=base_url()?>admin/Order/UpdateKemasann" method="post" enctype="multipart/form-data">
                <input type="hidden" name="iddataumkm" value="<?=$key->IDDataUMKM?>">
+                <input type="hidden" name="idumkm" value="<?=$key->IDUMKM?>">
              <?php if (!$key->Kemasan_produk) { ?>
                <p style="color:red">Belum upload kemasan produk</p>
              <?php }else if($key->Kemasan_produk){ ?>
@@ -321,7 +324,7 @@
            </div>
            <div class="modal-footer justify-content-between">
              <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Tidak</button>
-             <a href="<?= site_url()?>Admin/hapusDataUMKM/<?= $key->IDDataUMKM ?>" class="btn btn-danger">Iya</a>
+             <a href="<?= site_url()?>admin/Order/hapusDataUMKMM/<?= $key->IDDataUMKM ?>" class="btn btn-danger">Iya</a>
            </div>
           </div>
          <!-- /.modal-content -->
@@ -341,7 +344,7 @@
                        </button>
                      </div>
                      <div class="modal-body">
-                     <form class="" action="<?=base_url()?>Admin/tambahDataUMKMM" method="POST" enctype="multipart/form-data">
+                     <form class="" action="<?=base_url()?>admin/Order/tambahDataUMKMM" method="POST" enctype="multipart/form-data">
                          <table width="100%">
                            <tr>
                              <td>Nama UMKM</td>
@@ -399,8 +402,9 @@
                    </button>
                  </div>
                  <div class="modal-body">
-                   <form class="" action="<?=base_url()?>Admin/editDataUMKM/<?=$key->IDDataUMKM?>" method="POST" enctype="multipart/form-data">
+                   <form class="" action="<?=base_url()?>admin/Order/editDataUMKMM/<?=$key->IDDataUMKM?>" method="POST" enctype="multipart/form-data">
                      <input type="hidden" name="iddataumkm" value="<?=$key->IDDataUMKM?>">
+                     <input type="hidden" name="idumkm" value="<?=$key->IDUMKM?>">
                      <table width="100%">
                        <tr>
                          <td>Nama UMKM</td>

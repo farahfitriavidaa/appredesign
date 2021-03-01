@@ -70,7 +70,6 @@
                                                   <th>ID Pengelola</th>
                                                   <th>ID Designer</th>
                                                   <th>Nama UMKM</th>
-                                                  <th>Data UMKM</th>
                                                   <th>Tanggal Mulai</th>
                                                   <th>Tanggal Akhir</th>
                                                   <th>Harga</th>
@@ -88,7 +87,6 @@
                                                   <td><?php echo $a->IDPengelola ?></td>
                                                   <td><?php echo $a->IDDesigner ?></td>
                                                   <td><?php echo $a->Nama_umkm ?></td>
-                                                  <td> <a href="#">Data UMKM</a> </td>
                                                   <td><?php echo $a->Tgl_mulai ?></td>
                                                   <td><?php echo $a->Tgl_akhir ?></td>
                                                   <td><?php echo $a->Harga ?></td>
