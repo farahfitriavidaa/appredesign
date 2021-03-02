@@ -5,7 +5,7 @@ class Request extends CI_Controller {
 	{
 		parent::__construct();
 
-		if( !$this->session->has_userdata('user') || $this->session->level!=='umkm' ){
+		if( ! $this->session->has_userdata('user') OR $this->session->level !== 'umkm' ){
 			session_destroy();
 			redirect('Create/login');
 		}
@@ -198,7 +198,7 @@ class Request extends CI_Controller {
 			redirect('umkm/request/buatRequest');
 	}
 
-	public function detilRequest($id_pesan='0')
+	public function detilRequest($id_pesan = '0')
 	{
 		if ($id_pesan!=='0') {
 			$id_pesan		= 'PS'.str_pad($id_pesan, 4, '0', STR_PAD_LEFT);
@@ -244,7 +244,7 @@ class Request extends CI_Controller {
 		}
 	}
 
-	public function editRequest( $id_pesan='0' )
+	public function editRequest($id_pesan = '0')
 	{
 		if ($id_pesan!=='0') {
 			$id_pesan		= 'PS'.str_pad($id_pesan, 4, '0', STR_PAD_LEFT);
@@ -416,7 +416,7 @@ class Request extends CI_Controller {
 			redirect('umkm');
 	}
 
-	public function hapusRequest($id_pesan='0')
+	public function hapusRequest($id_pesan = '0')
 	{
 		if ($id_pesan!=='0') {
 			$id_pesan		= 'PS'.str_pad($id_pesan, 4, '0', STR_PAD_LEFT);
@@ -461,7 +461,7 @@ class Request extends CI_Controller {
 		}
 	}
 
-	public function lihatPortofolio($id_designer='0')
+	public function lihatPortofolio($id_designer = '0')
 	{
 		if($id_designer==='0') {
 			redirect('umkm');

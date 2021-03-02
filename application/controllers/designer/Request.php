@@ -5,7 +5,7 @@ class Request extends CI_Controller {
 	{
 		parent::__construct();
 
-		if( !$this->session->has_userdata('user') || $this->session->level!=='designer' ){
+		if( ! $this->session->has_userdata('user') OR $this->session->level !== 'designer' ){
 			session_destroy();
 			redirect('Create/login');
 		}
@@ -18,9 +18,9 @@ class Request extends CI_Controller {
 	 * 
 	 * re-mapped: base_url()/designer/request/(:num)  
 	 */
-	public function index($id_pesan='0')
+	public function index($id_pesan = '0')
 	{
-		if ($id_pesan==='0') {
+		if ($id_pesan === '0') {
 			return http_response_code(400);
 		}
 
@@ -160,7 +160,7 @@ class Request extends CI_Controller {
 		redirect('designer/request/'.$id_pesan);
 	}
 
-	public function hapusDesain($id_pesan='0')
+	public function hapusDesain($id_pesan = '0')
 	{
 		if ($id_pesan==='0') {
 			return http_response_code(400);
@@ -203,7 +203,7 @@ class Request extends CI_Controller {
 		}
 	}
 
-	public function hapusRevisi($id_pesan='0')
+	public function hapusRevisi($id_pesan = '0')
 	{
 		if ($id_pesan==='0') {
 			return http_response_code(400);

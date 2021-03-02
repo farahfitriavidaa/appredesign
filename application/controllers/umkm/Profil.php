@@ -5,7 +5,7 @@ class Profil extends CI_Controller {
 	{
 		parent::__construct();
 
-		if( !$this->session->has_userdata('user') || $this->session->level!=='umkm' ){
+		if( ! $this->session->has_userdata('user') OR $this->session->level !== 'umkm' ){
 			session_destroy();
 			redirect('Create/login');
 		}

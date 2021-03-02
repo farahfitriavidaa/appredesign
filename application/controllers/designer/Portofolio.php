@@ -5,7 +5,7 @@ class Portofolio extends CI_Controller {
 	{
 		parent::__construct();
 
-		if( !$this->session->has_userdata('user') || $this->session->level!=='designer' ){
+		if( ! $this->session->has_userdata('user') OR $this->session->level !== 'designer' ){
 			session_destroy();
 			redirect('Create/login');
 		}
@@ -68,7 +68,7 @@ class Portofolio extends CI_Controller {
 		else {
 			$bukti	= $this->input->post('link-portofolio');
 		}
-		
+
 		$this->load->model('Model_created');
 
 		$data	= array(
@@ -89,7 +89,7 @@ class Portofolio extends CI_Controller {
 		redirect('designer/portofolio');
 	}
 
-	public function editPortofolio($id_portofolio='0')
+	public function editPortofolio($id_portofolio = '0')
 	{
 		if ($id_portofolio=='0') {
 			return http_response_code('400');
@@ -150,7 +150,7 @@ class Portofolio extends CI_Controller {
 		$bukti	= '';
 
 		if ( isset($_FILES['bukti-portofolio']) && $_FILES['bukti-portofolio']['error'] != 4 ) {
-			
+
 			$this->load->library('upload');
 
 			$config['upload_path']		= './uploads/bukti_portofolio/';
@@ -164,7 +164,7 @@ class Portofolio extends CI_Controller {
 
 				$_SESSION['alert'] = $isi_pesan;
 				$this->session->mark_as_flash('alert');
-				
+
 				redirect('designer/portofolio/editPortofolio/'.$id_prt_asli);
 			}
 			else {
@@ -174,7 +174,7 @@ class Portofolio extends CI_Controller {
 		elseif ( ! empty($link) ) {
 			$bukti	= $link;
 		}
-		
+
 		$data	= array(
 			'Judul'			 	=> $judul,
 			'Detail_portofolio'	=> $detil
@@ -197,7 +197,7 @@ class Portofolio extends CI_Controller {
 
 	}
 
-	public function hapusPortofolio($id_portofolio='0')
+	public function hapusPortofolio($id_portofolio = '0')
 	{
 		if($id_portofolio==='0'){
 			return http_response_code('400');

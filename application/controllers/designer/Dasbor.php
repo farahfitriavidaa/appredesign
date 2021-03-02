@@ -5,7 +5,7 @@ class Dasbor extends CI_Controller {
 	{
 		parent::__construct();
 
-		if( !$this->session->has_userdata('user') || $this->session->level!=='designer' ){
+		if( ! $this->session->has_userdata('user') OR $this->session->level !== 'designer' ){
 			session_destroy();
 			redirect('Create/login');
 		}
@@ -15,11 +15,11 @@ class Dasbor extends CI_Controller {
 
 	/**
 	 * Menampilkan halaman dashboard
-	 * 
+	 *
 	 * Halaman dashboard adalah halaman pertama yang ditampilkan
 	 * setelah designer berhasil log in.
-	 * 
-	 * re-mapped: base_url()/designer	 
+	 *
+	 * re-mapped: base_url()/designer
 	 */
 	public function index()
 	{

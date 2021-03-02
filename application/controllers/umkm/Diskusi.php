@@ -5,7 +5,7 @@ class Diskusi extends CI_Controller {
 	{
 		parent::__construct();
 
-		if( !$this->session->has_userdata('user') || $this->session->level!=='umkm' ){
+		if( ! $this->session->has_userdata('user') OR $this->session->level !== 'umkm'){
 			session_destroy();
 			redirect('Create/login');
 		}
@@ -37,7 +37,6 @@ class Diskusi extends CI_Controller {
 					'pemesanan'			=> null
 				);
 
-                // TODO: cari destinasi jika detil pesan tidak ada
 				$_SESSION['alert'] = 'Diskusi tidak ditemukan';
                 $this->session->mark_as_flash('alert');
 			}
@@ -66,7 +65,6 @@ class Diskusi extends CI_Controller {
 					'daftar_diskusi'	=> $daftar_diskusi
 				);
 			}
-            // var_dump($data);
 			// Load helper untuk memotong IDPesan (PS0015 -> 15) dan untuk cetak badge status
 			$this->load->helper( array('my_helper' ,'status_helper') );
 			$this->load->view('umkm/diskusi', $data);
