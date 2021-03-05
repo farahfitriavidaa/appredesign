@@ -36,6 +36,8 @@ class Diskusi extends CI_Controller {
 				'pemesanan'			=> null
 			);
 
+			// TIdak pakai flashdata agar bisa menampilkan flashdata dari tambahKomentar()
+			// bug (?)
 			$_SESSION['alert'] = 'Diskusi tidak ditemukan';
 			$_SESSION['btn_back'] = true;
 		}
