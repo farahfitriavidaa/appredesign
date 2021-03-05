@@ -41,7 +41,8 @@
                         <div class="container-fluid">
 
                             <?php
-                                if( ! is_null( $_SESSION['alert'] ) ):
+                                // if( ! is_null( $_SESSION['alert'] ) ):
+                                if( ! is_null( $this->session->flashdata('alert') ) ):
                             ?>
                                 <div class="row">
                                     <div class="col-12">
@@ -55,8 +56,6 @@
 
                                     <?php
                                         if( $_SESSION['btn_back'] ):
-                                            unset($_SESSION['alert']);
-                                            unset($_SESSION['btn_back']);
                                     ?>
                                     <div class="col-12 mt-4">
                                         <a href="<?=base_url();?>designer/diskusi/lihatDiskusi" class="btn btn-raised btn-primary">

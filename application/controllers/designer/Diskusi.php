@@ -40,6 +40,8 @@ class Diskusi extends CI_Controller {
 			// bug (?)
 			$_SESSION['alert'] = 'Diskusi tidak ditemukan';
 			$_SESSION['btn_back'] = true;
+
+			$this->session->mark_as_flash(array('alert', 'btn_back'));
 		}
 		else{
 
