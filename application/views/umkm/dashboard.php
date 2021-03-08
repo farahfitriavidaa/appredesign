@@ -56,7 +56,10 @@
                             <!-- end page title end breadcrumb -->
                             <div class="row mb-4">
                                 <div class="col-12">
-                                    <span class="h2">Selamat Datang</span>
+                                    <span class="h2">
+                                        Selamat Datang, 
+                                        <?=character_limiter($this->session->nama_umkm, 50);?>
+                                    </span>
                                 </div>
                             </div>
 
@@ -67,7 +70,7 @@
                                             <h5 class="header-title mt-0 pb-3">Diskusi Terakhir</h5>
                                             
                                             <?php if(empty($diskusi_terakhir)): ?>
-                                                <p>Belum ada diskusi. Anda akan melihat daftar diskusi terkahir di sini jika ada request yang Anda atau Pengelola komentari.</p>
+                                                <p>Belum ada diskusi. Anda akan melihat daftar diskusi terakhir di sini jika ada request yang Anda atau Pengelola komentari.</p>
                                                 <a href="<?=base_url();?>umkm/request" class="btn btn-primary">Lihat Request dan Beri Komentar</a>
                                             <?php else: 
                                                 foreach($diskusi_terakhir as $diskusi): ?>
@@ -100,7 +103,7 @@
                                             <h5 class="header-title mt-0 pb-3">Request Terbaru</h5>
 
                                             <?php if(empty($request_terbaru)): ?>
-                                                <p>Belum ada request yang telah Anda dibuat.</p>
+                                                <p>Belum ada request yang telah Anda buat.</p>
                                                 <p>Request adalah pesanan Anda untuk melakukan <i title="desain ulang">redesign</i> kemasan.</p>
                                                 <a class="btn btn-raised btn-primary" href="<?=base_url();?>umkm/request/buatRequest">Buat Request Baru</a>
                                             <?php else: 

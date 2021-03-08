@@ -46,7 +46,7 @@ class Dasbor extends CI_Controller {
 			'request_terbaru'	=> $request_terbaru
 		);
 
-		$this->load->helper( array('my_helper', 'status_helper') );
+		$this->load->helper( array('text', 'my_helper', 'status_helper') );
 		$this->load->view('umkm/dashboard', $data);
 	}
 	
