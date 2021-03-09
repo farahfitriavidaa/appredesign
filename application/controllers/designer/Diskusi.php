@@ -186,9 +186,9 @@ class Diskusi extends CI_Controller {
 				$id_dispro		= $this->Model_created->idDispro();
 
 				$komentar		= $this->input->post('komentar');
-				$tanggal_waktu	= date('Y-m-d h:i:s');
-				// $now			= new DateTime('now',new DateTimeZone('Asia/Jakarta'));
-				// $tanggal_waktu	= $now->format('Y-m-d H:i:s');
+
+				$now			= new DateTime('now', new DateTimeZone('Asia/Jakarta'));
+				$tanggal_waktu	= $now->format('Y-m-d H:i:s');
 
 				// IDUMKM dikosongkan karena pengirim komentar adalah Pengelola
 				$data 			+= array(

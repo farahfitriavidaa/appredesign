@@ -189,10 +189,9 @@ class Diskusi extends CI_Controller {
 				$id_diskum		= $this->Model_created->idDiskum();
 
 				$komentar		= $this->input->post('komentar');
-				$tanggal_waktu	= date('Y-m-d h:i:s');
-				// Alternatif cara ambil tanggal sekarang jika yg di atas tdk akurat
-				// $now				= new DateTime('now',new DateTimeZone('Asia/Jakarta'));
-				// $tanggal_waktu	= $now->format('Y-m-d H:i:s');
+
+				$now			= new DateTime('now', new DateTimeZone('Asia/Jakarta'));
+				$tanggal_waktu	= $now->format('Y-m-d H:i:s');
 
 				// IDPengelola dikosongkan karena pengirim komentar adalah UMKM
 				$data 			+= array(
