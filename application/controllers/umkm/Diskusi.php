@@ -11,14 +11,14 @@ class Diskusi extends CI_Controller {
 		}
 
 		$this->load->model('Model_umkm');
-    }
+	}
 
 	/**
 	 * Menampilkan thread diskusi suatu request
-	 * 
+	 *
 	 * re-mapped: base_url()/umkm/diskusi/(:num)
 	 */
-    public function index($id_pesan='0')
+	public function index($id_pesan='0')
 	{
 		// Cek IDPesan dan pastikan user tidak input alamat ".../Umkm/diskusi" tanpa IDPesan
 		if ($id_pesan!=='0') {
@@ -38,7 +38,7 @@ class Diskusi extends CI_Controller {
 				);
 
 				$_SESSION['alert'] = 'Diskusi tidak ditemukan';
-                $this->session->mark_as_flash('alert');
+				$this->session->mark_as_flash('alert');
 			}
 			else{
 				unset($_SESSION['alert']);
@@ -72,8 +72,8 @@ class Diskusi extends CI_Controller {
 		} else {
 			http_response_code('400');
 		}
-    }
-    
+	}
+
 	public function lihatDiskusi($filter='belum-selesai', $page=1)
 	{
 		if ($filter==='belum-selesai') {
@@ -144,13 +144,13 @@ class Diskusi extends CI_Controller {
 		}
 
 		$this->load->view('umkm/lihatdiskusi', $data);
-    }
-    
-    public function tambahKomentar()
+	}
+
+	public function tambahKomentar()
 	{
 		// Cek kalo user ke alamat ini dengan method post (tidak mengetik secara langsung alamat "../Umkm/tambahKomentar")
 		if($this->input->method() == 'post') {
-			
+
 			$this->load->helper('my_helper');
 
 			// Kembalikan IDPesan sesuai format, 1 -> PS0001

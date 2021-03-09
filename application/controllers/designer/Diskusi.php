@@ -11,14 +11,14 @@ class Diskusi extends CI_Controller {
 		}
 
 		$this->load->model('Model_designer');
-    }
+	}
 
 	/**
 	 * Menampilkan thread diskusi suatu request
 	 *
 	 * re-mapped: base_url()/designer/diskusi/(:num)
 	 */
-    public function index($id_pesan = '0')
+	public function index($id_pesan = '0')
 	{
 		if ($id_pesan==='0') {
 			return http_response_code('400');
@@ -70,9 +70,9 @@ class Diskusi extends CI_Controller {
 
 		$this->load->helper(array('my_helper', 'status_helper'));
 		$this->load->view('designer/diskusi', $data);
-    }
+	}
 
-    public function lihatDiskusi($filter = 'belum-selesai', $page = 1)
+	public function lihatDiskusi($filter = 'belum-selesai', $page = 1)
 	{
 		if ($filter==='belum-selesai') {
 			$status = ['1', '2', '3' ,'4'];
@@ -143,9 +143,9 @@ class Diskusi extends CI_Controller {
 
 		$this->load->helper('status_helper');
 		$this->load->view('designer/lihatdiskusi', $data);
-    }
+	}
 
-    public function tambahKomentar()
+	public function tambahKomentar()
 	{
 		if($this->input->method() == 'post') {
 
