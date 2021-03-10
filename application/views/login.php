@@ -40,8 +40,11 @@
                                     </div>
                                     <div class="px-3 pb-3">
                                         <?=$this->session->flashdata('alert');?>
-                                        <form class="form-horizontal m-t-20 mb-0" action="<?=base_url()?>Create/cekUser" method="POST">
-                                            <?php echo validation_errors('<div class="error">'.'</div>'); ?>
+
+                                        <?=form_open('Create/cekUser', ['class' => 'form-horizontal m-t-20 mb-0']);?>
+
+                                            <?=validation_errors('<div class="error">'.'</div>');?>
+
                                             <div class="form-group row">
                                                 <div class="col-12">
                                                     <input class="form-control" type="text" name="username" placeholder="Username" required>
@@ -59,7 +62,8 @@
                                                 </div>
                                             </div>
 
-                                        </form>
+                                        <?=form_close();?>
+
                                         <div style="text-align:center;">
                                             <a href="<?=base_url()?>Create" class="text-muted"><i class="mdi mdi-account-circle"></i> Ingin membuat akun ?</a>
                                         </div>

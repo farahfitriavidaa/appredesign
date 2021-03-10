@@ -43,8 +43,8 @@
 
                         <div class="container-fluid">
                             <?php
-                                if( ! is_null($this->session->flashdata('alert'))):
-                                    $alert = $this->session->flashdata('alert');
+                                $alert = $this->session->flashdata('alert');
+                                if( ! is_null($alert)):
                             ?>
                                 <div class="row">
                                     <div class="col-12">
@@ -72,7 +72,7 @@
                                 <div class="col-md-12 col-xl-12">
                                     <div class="card m-b-30">
                                         <div class="card-body">
-                                            <form action="<?=base_url();?>umkm/profil/updateProfil" method="POST" enctype="multipart/form-data" autocomplete="off">
+                                            <?=form_open_multipart('umkm/profil/updateProfil', ['autocomplete' => 'off']);?>
                                                 <div class="form-group">
                                                     <label for="nama-lengkap">Nama Anda</label>
                                                     <input type="text" name="nama-lengkap" class="form-control" id="nama-lengkap" placeholder="Nama Anda" value="<?=$user->Nama_lengkap?>">
@@ -112,7 +112,7 @@
                                                     <button type="submit" class="btn btn-primary btn-raised float-right">Simpan Perubahan</button>
                                                     <a href="<?=base_url();?>umkm/profil" class="btn btn-secondary border-0 mr-2 float-right">Batal</a>
                                                 </div>
-                                            </form>
+                                            <?=form_close();?>
                                         </div>
                                     </div>
                                 </div> <!-- end col -->

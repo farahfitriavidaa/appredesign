@@ -40,8 +40,10 @@
                                         </div>
 
                                         <div class="p-3">
-                                            <form class="form-horizontal mb-0" action="<?=base_url()?>Create/register" method="POST">
-                                                    <?php echo validation_errors('<div class="error">'.'</div>'); ?>
+                                            <?=form_open('Create/register', ['class' => 'form-horizontal m-t-20 mb-0']);?>
+
+                                                <?=validation_errors('<div class="error">'.'</div>'); ?>
+
                                                 <div class="form-group row">
                                                     <div class="col-12">
                                                         <input class="form-control" type="email" name="email" placeholder="Email">
@@ -95,7 +97,7 @@
                                                         <a href="<?=base_url()?>Create/login" class="text-muted">Sudah punya akun?</a>
                                                     </div>
                                                 </div>
-                                            </form>
+                                            <?=form_close();?>
                                         </div>
 
                                     </div>
