@@ -54,6 +54,6 @@ class Dasbor extends CI_Controller {
 	public function logout()
 	{
 		session_destroy();
-		redirect('Create/login');
+		redirect('Create/register');
 	}
 }

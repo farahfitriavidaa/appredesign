@@ -58,7 +58,8 @@
                                 <div class="col-md-12 col-xl-12">
                                     <div class="card m-b-30">
                                         <div class="card-body">
-                                            <form action="<?=base_url();?>umkm/profil/editPwd" method="POST" enctype="multipart/form-data" autocomplete="off">
+                                            <?=form_open('umkm/profil/editPwd', ['class' => 'form-horizontal m-t-20 mb-0', 'autocomplete' => 'off']);?>
+                                            
                                                 <div class="row mx-1">
                                                     <div class="col-lg-4">
                                                         <div class="form-group">
@@ -89,7 +90,7 @@
                                                     <a href="<?=base_url();?>umkm/profil" class="btn btn-secondary border-0 mr-2">Batal</a>
                                                     <button type="submit" class="btn btn-primary btn-raised">Simpan Perubahan</button>
                                                 </div>
-                                            </form>
+                                            <?=form_close();?>
                                         </div>
                                     </div>
                                 </div> <!-- end col -->
