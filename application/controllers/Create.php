@@ -26,130 +26,143 @@ class Create extends CI_Controller {
 		$level = $this->input->post('level');
 		$id    = $this->Model_created->idUser();
 		$idP   = $this->Model_created->idPengelola();
+
 		$this->form_validation->set_rules('username','Username','required|is_unique[tb_user.Username]',
-		array(
-		  'required' => 'Username tidak boleh kosong',
-		  'is_unique'=> 'Username sudah ada, coba lagi'
-		));
+			array(
+			'required' => 'Username tidak boleh kosong',
+			'is_unique'=> 'Username sudah ada, coba lagi'
+			));
+
 		$this->form_validation->set_rules('namalengkap','Nama Lengkap','required',
-		array(
-			'required' => 'Nama lengkap tidak boleh kosong',
-		));
+			array(
+				'required' => 'Nama lengkap tidak boleh kosong',
+			));
+
 		$this->form_validation->set_rules('password','Password','required|min_length[8]',
-		array(
-			'required'      => '%s tidak boleh kosong',
-			'min_length'    => 'Masukan password minimal 8 character',
-		));
+			array(
+				'required'      => '%s tidak boleh kosong',
+				'min_length'    => 'Masukan password minimal 8 character',
+			));
+
 		$this->form_validation->set_rules('telp','Nomor Telp','required|min_length[10]|numeric|greater_than[0]',
-		array(
-			'required'    => '%s tidak boleh kosong',
-			'min_length'  => '%s diisi minimal 10angka',
-			'numeric'     => '%s wajib menggunakan angka',
-			'greater_than'=> '%s tidak boleh minus'
-		));
+			array(
+				'required'    => '%s tidak boleh kosong',
+				'min_length'  => '%s diisi minimal 10angka',
+				'numeric'     => '%s wajib menggunakan angka',
+				'greater_than'=> '%s tidak boleh minus'
+			));
+
 		$this->form_validation->set_rules('email','Email','required|valid_email',
-		array(
-		'required'      => 'Email tidak boleh kosong',
-		'valid_email'   => 'Harus berformat email yang valid (contoh : email@gmail.com)'
-		));
+			array(
+			'required'      => 'Email tidak boleh kosong',
+			'valid_email'   => 'Harus berformat email yang valid (contoh : email@gmail.com)'
+			));
+
 		$this->form_validation->set_rules('level','Bagian','required',
-		array(
-		'required'      => 'Bagian harus diisi (Pengelola/UMKM/Designer/CDC Telkom)',
-		));
+			array(
+			'required'      => 'Bagian harus diisi (Pengelola/UMKM/Designer/CDC Telkom)',
+			));
+		
 		if($this->form_validation->run() == FALSE){
 			$this->index();
-		}else{
-		if($level == 'Pengelola'){
+		}
+		else{
+			if($level == 'Pengelola'){
 				$data = array(
-					'IDUser'			=> $id,
+					'IDUser'		=> $id,
 					'Username'		=> $this->input->post('username'),
 					'Password'		=> md5($this->input->post('password')),
-					'Nama_lengkap'=> $this->input->post('namalengkap'),
-					'Foto'				=> 'pengelola.png',
-					'Email'				=> $this->input->post('email'),
-					'Level'				=> 'Pengelola',
-					'Status'			=> 'Aktif'
+					'Nama_lengkap'	=> $this->input->post('namalengkap'),
+					'Foto'			=> 'pengelola.png',
+					'Email'			=> $this->input->post('email'),
+					'Level'			=> 'Pengelola',
+					'Status'		=> 'Aktif'
 				);
+
 				$dataa = array(
-					'IDUser'			=> $id,
+					'IDUser'		=> $id,
 					'IDPengelola'	=> $idP,
-					'No_telp'			=> $this->input->post('telp')
+					'No_telp'		=> $this->input->post('telp')
 				);
+
 				$cek 	= $this->Model_created->create_user($data);
 				$cekk	= $this->Model_created->create_pengelola($dataa);
+	
 				redirect('Create/login');
-		}else if($level == 'Designer'){
-				$idD = $this->Model_created->idDesigner();
+			}
+			else if($level == 'Designer'){
+					$idD = $this->Model_created->idDesigner();
+					$data = array(
+						'IDUser'			=> $id,
+						'Username'		=> $this->input->post('username'),
+						'Password'		=> md5($this->input->post('password')),
+						'Nama_lengkap'=> $this->input->post('namalengkap'),
+						'Foto'				=> 'designer.png',
+						'Email'				=> $this->input->post('email'),
+						'Level'				=> 'Designer',
+						'Status'			=> 'Aktif'
+					);
+					$dataa = array(
+						'IDUser'			=> $id,
+						'IDDesigner'	=> $idD,
+						'No_telp'			=> $this->input->post('telp')
+					);
+					$cek = $this->Model_created->create_user($data);
+					$cekk = $this->Model_created->create_design($dataa);
+					$d = array(
+						'id' => $id
+					);
+					$this->load->view('registerdesigner',$d);
+			}else if($level == 'UMKM'){
+				$idU = $this->Model_created->idUMKM();
 				$data = array(
 					'IDUser'			=> $id,
 					'Username'		=> $this->input->post('username'),
 					'Password'		=> md5($this->input->post('password')),
 					'Nama_lengkap'=> $this->input->post('namalengkap'),
-					'Foto'				=> 'designer.png',
+					'Foto'				=> 'umkm.png',
 					'Email'				=> $this->input->post('email'),
-					'Level'				=> 'Designer',
+					'Level'				=> 'UMKM',
 					'Status'			=> 'Aktif'
 				);
 				$dataa = array(
+					'IDUMKM'			=> $idU,
 					'IDUser'			=> $id,
-					'IDDesigner'	=> $idD,
 					'No_telp'			=> $this->input->post('telp')
 				);
 				$cek = $this->Model_created->create_user($data);
-				$cekk = $this->Model_created->create_design($dataa);
+				$cekk = $this->Model_created->create_umkm($dataa);
 				$d = array(
 					'id' => $id
 				);
-				$this->load->view('registerdesigner',$d);
-		}else if($level == 'UMKM'){
-			$idU = $this->Model_created->idUMKM();
-			$data = array(
-				'IDUser'			=> $id,
-				'Username'		=> $this->input->post('username'),
-				'Password'		=> md5($this->input->post('password')),
-				'Nama_lengkap'=> $this->input->post('namalengkap'),
-				'Foto'				=> 'umkm.png',
-				'Email'				=> $this->input->post('email'),
-				'Level'				=> 'UMKM',
-				'Status'			=> 'Aktif'
-			);
-			$dataa = array(
-				'IDUMKM'			=> $idU,
-				'IDUser'			=> $id,
-				'No_telp'			=> $this->input->post('telp')
-			);
-			$cek = $this->Model_created->create_user($data);
-			$cekk = $this->Model_created->create_umkm($dataa);
-			$d = array(
-				'id' => $id
-			);
-			$this->load->view('registerumkm',$d);
-		}else if($level == 'CDC Telkom'){
-			$idT = $this->Model_created->idTelkom();
-			$data = array(
-				'IDUser'			=> $id,
-				'Username'		=> $this->input->post('username'),
-				'Password'		=> md5($this->input->post('password')),
-				'Nama_lengkap'=> $this->input->post('namalengkap'),
-				'Foto'				=> 'cdc.png',
-				'Email'				=> $this->input->post('email'),
-				'Level'				=> 'CDC',
-				'Status'			=> 'Aktif'
-			);
-			$dataa = array(
-				'IDTelkom'			=> $idT,
-				'IDUser'			=> $id,
-				'No_telp'			=> $this->input->post('telp')
-			);
-			$cek = $this->Model_created->create_user($data);
-			$cekk = $this->Model_created->create_telkom($dataa);
-			$d = array(
-				'id' => $id
-			);
-			$this->load->view('registertelkom',$d);
-		}else{
-			echo "Mohon registrasi ulang";
-		}}
+				$this->load->view('registerumkm',$d);
+			}else if($level == 'CDC Telkom'){
+				$idT = $this->Model_created->idTelkom();
+				$data = array(
+					'IDUser'			=> $id,
+					'Username'		=> $this->input->post('username'),
+					'Password'		=> md5($this->input->post('password')),
+					'Nama_lengkap'=> $this->input->post('namalengkap'),
+					'Foto'				=> 'cdc.png',
+					'Email'				=> $this->input->post('email'),
+					'Level'				=> 'CDC',
+					'Status'			=> 'Aktif'
+				);
+				$dataa = array(
+					'IDTelkom'			=> $idT,
+					'IDUser'			=> $id,
+					'No_telp'			=> $this->input->post('telp')
+				);
+				$cek = $this->Model_created->create_user($data);
+				$cekk = $this->Model_created->create_telkom($dataa);
+				$d = array(
+					'id' => $id
+				);
+				$this->load->view('registertelkom',$d);
+			}else{
+				echo "Mohon registrasi ulang";
+			}
+		}
 	}
 
 	public function registerDesigner()
