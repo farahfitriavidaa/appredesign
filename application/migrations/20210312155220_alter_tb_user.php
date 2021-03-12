@@ -8,7 +8,7 @@ class Migration_alter_tb_user extends CI_Migration
         $this->dbforge->modify_column('tb_user', array(
             'Password' => array(
                 'type'          => 'VARCHAR',
-                'constraint'    => '60'
+                'constraint'    => '255'
             )
         ));
     }
