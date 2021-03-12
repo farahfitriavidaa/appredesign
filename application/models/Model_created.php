@@ -192,9 +192,14 @@ class Model_created extends CI_Model {
 		return $o;
 	}
 
-	public function login($username,$password)
+	// public function login($username, $password)
+	// {
+	// 	return $this->db->query("SELECT * FROM tb_user WHERE username='$username' AND password='$password'")->row();
+	// }
+
+	public function login($username)
 	{
-		return $this->db->query("SELECT * FROM tb_user WHERE username='$username' AND password='$password'")->row();
+		return $this->db->query("SELECT * FROM tb_user WHERE Username = '$username'")->row();
 	}
 
 }

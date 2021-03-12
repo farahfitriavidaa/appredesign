@@ -47,7 +47,7 @@ class Create extends CI_Controller {
 		$this->form_validation->set_rules('telp','Nomor Telp','required|min_length[10]|numeric|greater_than[0]',
 			array(
 				'required'    => '%s tidak boleh kosong',
-				'min_length'  => '%s diisi minimal 10angka',
+				'min_length'  => '%s diisi minimal 10 angka',
 				'numeric'     => '%s wajib menggunakan angka',
 				'greater_than'=> '%s tidak boleh minus'
 			));
@@ -71,7 +71,7 @@ class Create extends CI_Controller {
 				$data = array(
 					'IDUser'		=> $id,
 					'Username'		=> $this->input->post('username'),
-					'Password'		=> md5($this->input->post('password')),
+					'Password'		=> password_hash($this->input->post('password'), PASSWORD_DEFAULT),
 					'Nama_lengkap'	=> $this->input->post('namalengkap'),
 					'Foto'			=> 'pengelola.png',
 					'Email'			=> $this->input->post('email'),
@@ -91,75 +91,92 @@ class Create extends CI_Controller {
 				redirect('Create/login');
 			}
 			else if($level == 'Designer'){
-					$idD = $this->Model_created->idDesigner();
-					$data = array(
-						'IDUser'			=> $id,
-						'Username'		=> $this->input->post('username'),
-						'Password'		=> md5($this->input->post('password')),
-						'Nama_lengkap'=> $this->input->post('namalengkap'),
-						'Foto'				=> 'designer.png',
-						'Email'				=> $this->input->post('email'),
-						'Level'				=> 'Designer',
-						'Status'			=> 'Aktif'
-					);
-					$dataa = array(
-						'IDUser'			=> $id,
-						'IDDesigner'	=> $idD,
-						'No_telp'			=> $this->input->post('telp')
-					);
-					$cek = $this->Model_created->create_user($data);
-					$cekk = $this->Model_created->create_design($dataa);
-					$d = array(
-						'id' => $id
-					);
-					$this->load->view('registerdesigner',$d);
-			}else if($level == 'UMKM'){
-				$idU = $this->Model_created->idUMKM();
+				$idD = $this->Model_created->idDesigner();
 				$data = array(
-					'IDUser'			=> $id,
+					'IDUser'		=> $id,
 					'Username'		=> $this->input->post('username'),
-					'Password'		=> md5($this->input->post('password')),
-					'Nama_lengkap'=> $this->input->post('namalengkap'),
-					'Foto'				=> 'umkm.png',
-					'Email'				=> $this->input->post('email'),
-					'Level'				=> 'UMKM',
-					'Status'			=> 'Aktif'
+					'Password'		=> password_hash($this->input->post('password'), PASSWORD_DEFAULT),
+					'Nama_lengkap'	=> $this->input->post('namalengkap'),
+					'Foto'			=> 'designer.png',
+					'Email'			=> $this->input->post('email'),
+					'Level'			=> 'Designer',
+					'Status'		=> 'Aktif'
+				);
+
+				$dataa = array(
+					'IDUser'		=> $id,
+					'IDDesigner'	=> $idD,
+					'No_telp'		=> $this->input->post('telp')
+				);
+
+				$cek = $this->Model_created->create_user($data);
+				$cekk = $this->Model_created->create_design($dataa);
+
+				$d = array(
+					'id' => $id
+				);
+
+				$this->load->view('registerdesigner',$d);
+
+			}
+			else if($level == 'UMKM'){
+				$idU = $this->Model_created->idUMKM();
+
+				$data = array(
+					'IDUser'		=> $id,
+					'Username'		=> $this->input->post('username'),
+					'Password'		=> password_hash($this->input->post('password'), PASSWORD_DEFAULT),
+					'Nama_lengkap'	=> $this->input->post('namalengkap'),
+					'Foto'			=> 'umkm.png',
+					'Email'			=> $this->input->post('email'),
+					'Level'			=> 'UMKM',
+					'Status'		=> 'Aktif'
 				);
 				$dataa = array(
-					'IDUMKM'			=> $idU,
-					'IDUser'			=> $id,
-					'No_telp'			=> $this->input->post('telp')
+					'IDUMKM'		=> $idU,
+					'IDUser'		=> $id,
+					'No_telp'		=> $this->input->post('telp')
 				);
+
 				$cek = $this->Model_created->create_user($data);
 				$cekk = $this->Model_created->create_umkm($dataa);
+
 				$d = array(
 					'id' => $id
 				);
+
 				$this->load->view('registerumkm',$d);
-			}else if($level == 'CDC Telkom'){
+			}
+			else if($level == 'CDC Telkom'){
 				$idT = $this->Model_created->idTelkom();
+
 				$data = array(
-					'IDUser'			=> $id,
+					'IDUser'		=> $id,
 					'Username'		=> $this->input->post('username'),
-					'Password'		=> md5($this->input->post('password')),
-					'Nama_lengkap'=> $this->input->post('namalengkap'),
-					'Foto'				=> 'cdc.png',
-					'Email'				=> $this->input->post('email'),
-					'Level'				=> 'CDC',
-					'Status'			=> 'Aktif'
+					'Password'		=> password_hash($this->input->post('password'), PASSWORD_DEFAULT),
+					'Nama_lengkap'	=> $this->input->post('namalengkap'),
+					'Foto'			=> 'cdc.png',
+					'Email'			=> $this->input->post('email'),
+					'Level'			=> 'CDC',
+					'Status'		=> 'Aktif'
 				);
+
 				$dataa = array(
-					'IDTelkom'			=> $idT,
-					'IDUser'			=> $id,
-					'No_telp'			=> $this->input->post('telp')
+					'IDTelkom'		=> $idT,
+					'IDUser'		=> $id,
+					'No_telp'		=> $this->input->post('telp')
 				);
+
 				$cek = $this->Model_created->create_user($data);
 				$cekk = $this->Model_created->create_telkom($dataa);
+
 				$d = array(
 					'id' => $id
 				);
+
 				$this->load->view('registertelkom',$d);
-			}else{
+			}
+			else{
 				echo "Mohon registrasi ulang";
 			}
 		}
@@ -199,22 +216,28 @@ class Create extends CI_Controller {
 
 	public function cekUser()
 	{
-		$user	= $this->input->post('username');
-		$pass	= $this->input->post('password');
-		$cek	= $this->Model_created->login($user, md5($pass));
 		$this->form_validation->set_rules('username','Username','required',
-		array(
-			'required' => 'Username tidak boleh kosong',
-		));
+			array(
+				'required' => 'Username tidak boleh kosong',
+			));
+
 		$this->form_validation->set_rules('password','Password','required',
-		array(
-			'required' => 'Password tidak boleh kosong',
-		));
+			array(
+				'required' => 'Password tidak boleh kosong',
+			));
 
 		if($this->form_validation->run() == FALSE){
 			$this->login();
 		}
 		else{
+			$user	= $this->input->post('username');
+			$pass	= $this->input->post('password');
+			
+			$cek	= $this->Model_created->login($user);
+			
+			if ( ! password_verify($pass, $cek->Password))
+				$cek->Level = null;
+
 			if( $cek->Level == 'Pengelola' ){
 				$this->session->user = $user;
 				$data = array(
@@ -239,13 +262,13 @@ class Create extends CI_Controller {
 			else if( $cek->Level == 'CDC' ){
 				$this->session->user = $user;
 				$data = array(
-				'akun' => $cek,
-				'jumlahumkm'      => $this->Model_cdc->getJumlahUMKM(),
-				'jumlahreq'       => $this->Model_cdc->getJumlahReq(),
-				'jumlahongoing'   => $this->Model_cdc->getJumlahOnGoing(),
-				'jumlahselesai'   => $this->Model_cdc->getJumlahSelesai(),
-				'pemesanan'       => $this->Model_cdc->dataPemesanan(),
-				'umkm'            => $this->Model_cdc->dataUMKM()
+				'akun'			=> $cek,
+				'jumlahumkm'	=> $this->Model_cdc->getJumlahUMKM(),
+				'jumlahreq'		=> $this->Model_cdc->getJumlahReq(),
+				'jumlahongoing'	=> $this->Model_cdc->getJumlahOnGoing(),
+				'jumlahselesai'	=> $this->Model_cdc->getJumlahSelesai(),
+				'pemesanan'		=> $this->Model_cdc->dataPemesanan(),
+				'umkm'			=> $this->Model_cdc->dataUMKM()
 				);
 				$this->load->view('cdc/dashboard',$data);
 			}
