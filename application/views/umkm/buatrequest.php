@@ -122,11 +122,11 @@
                                                     <small class="text-muted">Tambahkan gambar kemasan yang sekarang dimiliki</small>
                                                 </div>
 
-                                                <div class="position-relative" id="preview-wrapper-kemasan" style="display: none; height: 0;">
-                                                    <div id="preview-kemasan" style="display: inline;"></div>
-                                                    <button type="button" class="btn btn-secondary position-absolute ml-2" id="hapus-kemasan" aria-label="Close" style="background-color: #fff">
+                                                <div id="preview-wrapper-kemasan" style="display: none; height: 0;">
+                                                    <button type="button" class="btn btn-secondary ml-2" id="hapus-kemasan" aria-label="Close" style="background-color: #fff">
                                                         Hapus Semua Kemasan
                                                     </button>
+                                                    <div id="preview-kemasan"></div>
                                                 </div>
 
                                                 <div class="form-group">

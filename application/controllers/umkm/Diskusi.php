@@ -148,6 +148,7 @@ class Diskusi extends CI_Controller {
 
 	public function tambahKomentar()
 	{
+		var_dump($_POST);
 		// Cek kalo user ke alamat ini dengan method post (tidak mengetik secara langsung alamat "../Umkm/tambahKomentar")
 		if($this->input->method() == 'post') {
 

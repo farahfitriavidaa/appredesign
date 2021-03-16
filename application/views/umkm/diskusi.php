@@ -279,18 +279,23 @@
                                                 <img src="" alt="foto yang di upload" class="img-thumbnail" id="foto-upload" style="max-height: 320px">
                                             </div>
 
-                                            <form action="<?=base_url();?>umkm/diskusi/tambahKomentar" method="post" enctype="multipart/form-data" class="mb-0" autocomplete="off">
+                                            <!-- <form action="<?=base_url();?>umkm/diskusi/tambahKomentar" method="post" enctype="multipart/form-data" class="mb-0" autocomplete="off"> -->
+                                            <?=form_open_multipart('umkm/diskusi/tambahKomentar', ['class' => 'mb-0', 'autocomplete' => 'off']);?>
                                                 <div style="display: flex; flex-flow: row nowrap; padding: 8px 16px;">
                                                     <div class="form-group" style="display:inline; padding:0; margin: 0; flex: auto">
                                                         <input type="hidden" name="np" value="<?=$id_pesan?>">
                                                         <input type="text" name="komentar" placeholder="Masukan pesan..." class="form-control" style="display: unset;">
                                                     </div>
-                                                    <label for="foto" class="btn btn-secondary mr-2 ml-2"><span id="label">Tambahkan Foto</span>
+                                                    <label for="foto" class="mx-3 mb-0" style="font-size: 1.4em; cursor: pointer">
+                                                        <i class="mdi mdi-camera"></i>
                                                         <input type="file" name="foto-komentar" id="foto" style="display:none">
                                                     </label>
-                                                    <input type="submit" value="Kirim" class="btn btn-primary">
+                                                    <label for="submit-button" class="btn btn-primary">
+                                                        <i class="mdi mdi-send"></i>
+                                                        <input type="submit" id="submit-button" value="Kirim" style="display: none;">
+                                                    </label>
                                                 </div>
-                                            </form>
+                                            <?=form_close();?>
 
 
                                         </div>

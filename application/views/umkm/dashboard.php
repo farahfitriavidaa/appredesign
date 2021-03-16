@@ -57,8 +57,7 @@
                             <div class="row mb-4">
                                 <div class="col-12">
                                     <span class="h2">
-                                        Selamat Datang, 
-                                        <?=character_limiter($this->session->nama_umkm, 50);?>
+                                        Selamat Datang
                                     </span>
                                 </div>
                             </div>
@@ -100,7 +99,7 @@
                                 <div class="col-md-12 col-xl-6">
                                     <div class="card m-b-30">
                                         <div class="card-body">
-                                            <h5 class="header-title mt-0 pb-3">Request Terbaru</h5>
+                                            <h5 class="header-title mt-0 pb-3">Request Saya</h5>
 
                                             <?php if(empty($request_terbaru)): ?>
                                                 <p>Belum ada request yang telah Anda buat.</p>
