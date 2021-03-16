@@ -80,7 +80,7 @@
                                 <div class="col-md-12 col-xl-12">
                                     <div class="card m-b-30">
                                         <div class="card-body">
-                                            <form action="<?=base_url();?>umkm/request/tambahRequest" method="POST" class="mb-0" enctype="multipart/form-data" autocomplete="off">
+                                            <?=form_open_multipart('umkm/request/tambahRequest', ['class' => 'mb-0', 'autocomplete' => 'off']);?>
                                                 <div class="form-group">
                                                     <label for="nama-produk" class="bmd-label-floating">Nama Produk</label>
                                                     <input type="text" name="nama-produk" class="form-control" id="nama-produk" required>
@@ -165,7 +165,7 @@
                                                     <a href="<?=base_url();?>umkm/request" class="btn btn-secondary border-0 mr-2">Batal</a>
                                                     <button type="submit" class="btn btn-primary btn-raised">Kirim Request</button>
                                                 </div>
-                                            </form>
+                                            <?=form_close();?>
                                         </div>
                                     </div>
                                 </div> <!-- end col -->
