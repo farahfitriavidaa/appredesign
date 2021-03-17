@@ -220,7 +220,8 @@
                </button>
                </div>
                <div class="modal-body">
-                 <form class="" action="<?=base_url()?>Admin/tambahPemesanan" method="POST">
+                 <?=form_open('Admin/tambahPemesanan');?>
+
                    <table width="100%">
                      <tr>
                        <td>Nama UMKM</td>
@@ -287,7 +288,8 @@
                        </button>
                      </div>
                      <div class="modal-body">
-                     <form class="" action="<?=base_url()?>Admin/tambahDataUMKM" method="POST" enctype="multipart/form-data">
+                     <?=form_open_multipart('Admin/tambahDataUMKM');?>
+
                          <table width="100%">
                            <tr>
                              <td>Nama UMKM</td>
@@ -345,7 +347,8 @@
                    </button>
                  </div>
                  <div class="modal-body">
-                   <form class="" action="<?=base_url()?>Admin/editPemesanan/<?=$key->IDPesan?>" method="POST" enctype="multipart/form-data">
+                   <?=form_open_multipart('Admin/editPemesanan/'.$key->IDPesan);?>
+
                      <input type="hidden" name="idpesan" value="<?=$key->IDPesan?>">
                      <table width="100%">
                        <tr>
@@ -448,7 +451,10 @@
                    </button>
                  </div>
                  <div class="modal-body">
-                   <form class="" action="" method="POST" enctype="multipart/form-data">
+                   <!-- Tidak ada action-nya? -->
+                   <!-- <form class="" action="" method="POST" enctype="multipart/form-data"> -->
+                   <?=form_open_multipart();?>
+
                      <input type="hidden" name="idpesan" value="<?=$key->IDPesan?>">
                      <table width="100%">
                        <tr>

@@ -175,7 +175,8 @@
              </button>
            </div>
            <div class="modal-body">
-             <form class="" action="<?=base_url()?>admin/Pengguna/editTelkom/<?=$key->IDUser?>" method="POST">
+             <?=form_open('admin/Pengguna/editTelkom/'.$key->IDUser);?>
+
                <input type="hidden" name="IDUser" value="<?=$key->IDUser?>">
                <table width="100%">
                  <tr>
@@ -245,8 +246,9 @@
                </button>
                </div>
                <div class="modal-body">
-                 <?php echo validation_errors('<div class="error">'.'</div>'); ?>
-                 <form class="" action="<?=base_url()?>admin/Pengguna/tambahTelkom" method="POST">
+                 <?=validation_errors('<div class="error">'.'</div>');?>
+                 <?=form_open_multipart('admin/Pengguna/tambahTelkom');?>
+
                    <table width="100%">
                      <tr>
                        <td>Username</td>

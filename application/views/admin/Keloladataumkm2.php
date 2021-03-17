@@ -149,7 +149,8 @@
              </button>
               </div>
            <div class="modal-body">
-             <form style="margin-left:8px" action="<?=base_url()?>admin/Pengguna/UpdateFoto" method="post" enctype="multipart/form-data">
+             <?=form_open_multipart('admin/Pengguna/UpdateFoto', ['style' => 'margin-left: 8px;']);?>
+
                <input type="hidden" name="iddataumkm" value="<?=$key->IDDataUMKM?>">
                 <input type="hidden" name="idumkm" value="<?=$key->IDUMKM?>">
              <?php if (!$key->Foto_produk) { ?>
@@ -207,7 +208,7 @@
              </button>
               </div>
            <div class="modal-body">
-             <form style="margin-left:8px" action="<?=base_url()?>admin/Pengguna/UpdateLogo" method="post" enctype="multipart/form-data">
+             <?=form_open_multipart('admin/Pengguna/UpdateLogo', ['style' => 'margin-left: 8px;']);?>
                <input type="hidden" name="iddataumkm" value="<?=$key->IDDataUMKM?>">
                 <input type="hidden" name="idumkm" value="<?=$key->IDUMKM?>">
              <?php if (!$key->Logo_produk) { ?>
@@ -273,7 +274,7 @@
              </button>
               </div>
            <div class="modal-body">
-             <form style="margin-left:8px" action="<?=base_url()?>admin/Pengguna/UpdateKemasan" method="post" enctype="multipart/form-data">
+             <?=form_open_multipart('admin/Pengguna/UpdateKemasan', ['style' => 'margin-left: 8px;']);?>
                <input type="hidden" name="iddataumkm" value="<?=$key->IDDataUMKM?>">
                <input type="hidden" name="idumkm" value="<?=$key->IDUMKM?>">
              <?php if (!$key->Kemasan_produk) { ?>
@@ -355,7 +356,7 @@
                    </button>
                  </div>
                  <div class="modal-body">
-                   <form class="" action="<?=base_url()?>admin/Pengguna/editDataUMKM/<?=$key->IDDataUMKM?>" method="POST" enctype="multipart/form-data">
+                   <?=form_open_multipart('admin/Pengguna/editDataUMKM/'.$key->IDDataUMKM);?>
                      <input type="hidden" name="iddataumkm" value="<?=$key->IDDataUMKM?>">
                      <input type="hidden" name="idumkm" value="<?=$key->IDUMKM?>">
                      <table width="100%">

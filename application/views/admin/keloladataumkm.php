@@ -136,17 +136,18 @@
              </button>
               </div>
            <div class="modal-body">
-             <form style="margin-left:8px" action="<?=base_url()?>admin/Order/UpdateFoto" method="post" enctype="multipart/form-data">
+             <?=form_open_multipart('admin/Order/UpdateFoto', ['style' => 'margin-left: 8px;']);?>
                <input type="hidden" name="iddataumkm" value="<?=$key->IDDataUMKM?>">
-             <?php if (!$key->Foto_produk) { ?>
+             <?php if (!$key->Foto_produk): ?>
                <p style="color:red">Belum upload foto produk</p>
-             <?php }else if($key->Foto_produk){?>
-              <img src="<?=base_url()?>uploads/foto_produk/<?=$key->Foto_produk?>" width="400px" alt="Design">
-              <a class="btn btn-success" style="margin-left:40%" href="<?=base_url()?>uploads/foto_produk/<?=$key->Foto_produk?>" target="_blank" rel="nofollow">
-                <i class="mdi mdi-arrow-down-bold-circle"></i>
-                Unduh</a>
-                <br><br>
-            <?php } ?>
+             <?php elseif($key->Foto_produk): ?>
+               <img src="<?=base_url()?>uploads/foto_produk/<?=$key->Foto_produk?>" width="400px" alt="Design">
+               <a class="btn btn-success" style="margin-left:40%" href="<?=base_url()?>uploads/foto_produk/<?=$key->Foto_produk?>" target="_blank" rel="nofollow">
+                 <i class="mdi mdi-arrow-down-bold-circle"></i>
+                 Unduh
+               </a>
+               <br><br>
+             <?php endif; ?>
               <table style="margin-left:50px">
                 <tr>
                   <td>Upload or Edit Foto Produk</td>
@@ -192,16 +193,16 @@
              </button>
               </div>
            <div class="modal-body">
-             <form style="margin-left:8px" action="<?=base_url()?>admin/Order/UpdateLogo" method="post" enctype="multipart/form-data">
+             <?=form_open_multipart('admin/Order/UpdateLogo', ['style' => 'margin-left: 8px;']);?>
                <input type="hidden" name="iddataumkm" value="<?=$key->IDDataUMKM?>">
-             <?php if (!$key->Logo_produk) { ?>
+             <?php if (!$key->Logo_produk): ?>
                <p style="color:red">Belum upload logo produk</p>
-             <?php }else if($key->Logo_produk){ ?>
+             <?php elseif($key->Logo_produk): ?>
               <img src="<?=base_url()?>uploads/logo_produk/<?=$key->Logo_produk?>" width="400px" alt="Design"><br><br>
               <a class="btn btn-success" style="margin-left:40%" href="<?=base_url()?>uploads/logo_produk/<?=$key->Logo_produk?>" target="_blank" rel="nofollow">
                 <i class="mdi mdi-arrow-down-bold-circle"></i>
                 Unduh</a>
-            <?php } ?>
+             <?php endif; ?>
               <table style="margin-left:50px">
                 <tr>
                   <td>Upload or Edit Logo Produk</td>
@@ -246,17 +247,17 @@
              </button>
               </div>
            <div class="modal-body">
-             <form style="margin-left:8px" action="<?=base_url()?>admin/Order/UpdateKemasan" method="post" enctype="multipart/form-data">
+             <?=form_open_multipart('admin/Order/UpdateKemasan', ['style' => 'margin-left: 8px;']);?>
                <input type="hidden" name="iddataumkm" value="<?=$key->IDDataUMKM?>">
-             <?php if (!$key->Kemasan_produk) { ?>
+             <?php if (!$key->Kemasan_produk): ?>
                <p style="color:red">Belum upload kemasan produk</p>
-             <?php }else if($key->Kemasan_produk){ ?>
+             <?php elseif($key->Kemasan_produk): ?>
               <img src="<?=base_url()?>uploads/foto_kemasan_lama/<?=$key->Kemasan_produk?>" width="400px" alt="Design">
               <br><br>
               <a class="btn btn-success" style="margin-left:40%" href="<?=base_url()?>uploads/foto_kemasan_lama/<?=$key->Kemasan_produk?>" target="_blank" rel="nofollow">
                 <i class="mdi mdi-arrow-down-bold-circle"></i>
                 Unduh</a>
-            <?php } ?>
+             <?php endif; ?>
               <table style="margin-left:50px">
                 <tr>
                   <td>Upload or Edit Kemasan Produk</td>
@@ -335,7 +336,7 @@
                        </button>
                      </div>
                      <div class="modal-body">
-                     <form class="" action="<?=base_url()?>admin/Order/tambahDataUMKMM" method="POST" enctype="multipart/form-data">
+                     <?=form_open_multipart('admin/Order/tambahDataUMKM');?>
                          <table width="100%">
                            <tr>
                              <td>Nama UMKM</td>
@@ -393,7 +394,7 @@
                    </button>
                  </div>
                  <div class="modal-body">
-                   <form class="" action="<?=base_url()?>admin/Order/editDataUMKM/<?=$key->IDDataUMKM?>" method="POST" enctype="multipart/form-data">
+                   <?=form_open_multipart('admin/Order/editDataUMKM/'.$key->IDDataUMKM);?>
                      <input type="hidden" name="iddataumkm" value="<?=$key->IDDataUMKM?>">
                      <table width="100%">
                        <tr>

@@ -80,8 +80,9 @@
                                 <div class="col-md-12 col-xl-12">
                                     <div class="card m-b-30">
                                         <div class="card-body">
-                                            <form action="<?=base_url();?>umkm/request/updateRequest" method="POST" enctype="multipart/form-data" autocomplete="off">
-                                                <input type="hidden" name="np" value="<?php echo trimId('PS', $detil_request->IDPesan)?>">
+                                            <?=form_open_multipart('umkm/request/updateRequest', ['autocomplete' => 'off']);?>
+
+                                                <input type="hidden" name="np" value="<?=trimId('PS', $detil_request->IDPesan)?>">
                                                 <div class="form-group">
                                                     <label for="nama-produk" class="bmd-label-floating">Nama Produk</label>
                                                     <input type="text" name="nama-produk" class="form-control" value="<?=$data_produk->Nama_produk?>" required>

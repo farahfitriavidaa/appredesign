@@ -149,7 +149,7 @@
              </button>
               </div>
            <div class="modal-body">
-             <form style="margin-left:8px" action="<?=base_url()?>admin/Order/UpdateFotoo" method="post" enctype="multipart/form-data">
+             <?=form_open_multipart('admin/Order/UpdateFotoo', ['style' => 'margin-left: 8px;']);?>
                <input type="hidden" name="iddataumkm" value="<?=$key->IDDataUMKM?>">
                 <input type="hidden" name="idumkm" value="<?=$key->IDUMKM?>">
              <?php if (!$key->Foto_produk) { ?>
@@ -206,7 +206,7 @@
              </button>
               </div>
            <div class="modal-body">
-             <form style="margin-left:8px" action="<?=base_url()?>admin/Order/UpdateLogoo" method="post" enctype="multipart/form-data">
+             <?=form_open_multipart('admin/Order/UpdateLogoo', ['style' => 'margin-left: 8px;']);?>
                <input type="hidden" name="iddataumkm" value="<?=$key->IDDataUMKM?>">
                 <input type="hidden" name="idumkm" value="<?=$key->IDUMKM?>">
              <?php if (!$key->Logo_produk) { ?>
@@ -268,7 +268,7 @@
              </button>
               </div>
            <div class="modal-body">
-             <form style="margin-left:8px" action="<?=base_url()?>admin/Order/UpdateKemasann" method="post" enctype="multipart/form-data">
+             <?=form_open_multipart('admin/Order/UpdateKemasann', ['style' => 'margin-left: 8px;']);?>
                <input type="hidden" name="iddataumkm" value="<?=$key->IDDataUMKM?>">
                 <input type="hidden" name="idumkm" value="<?=$key->IDUMKM?>">
              <?php if (!$key->Kemasan_produk) { ?>
@@ -344,7 +344,8 @@
                        </button>
                      </div>
                      <div class="modal-body">
-                     <form class="" action="<?=base_url()?>admin/Order/tambahDataUMKMM" method="POST" enctype="multipart/form-data">
+                     <?=form_open_multipart('admin/Order/tambahDataUMKMM');?>
+
                          <table width="100%">
                            <tr>
                              <td>Nama UMKM</td>
@@ -402,7 +403,8 @@
                    </button>
                  </div>
                  <div class="modal-body">
-                   <form class="" action="<?=base_url()?>admin/Order/editDataUMKMM/<?=$key->IDDataUMKM?>" method="POST" enctype="multipart/form-data">
+                   <?=form_open_multipart('admin/Order/editDataUMKMM/'.$key->IDDataUMKM);?>
+
                      <input type="hidden" name="iddataumkm" value="<?=$key->IDDataUMKM?>">
                      <input type="hidden" name="idumkm" value="<?=$key->IDUMKM?>">
                      <table width="100%">

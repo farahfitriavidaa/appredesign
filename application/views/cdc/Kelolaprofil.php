@@ -56,8 +56,9 @@
                                                     <h4 class="mt-0 header-title">Data Profil</h4>
                                                     <br><br>
                                                     <div class="general-label">
-                                                        <?php echo validation_errors('<div class="error">'.'</div>'); ?>
-                                                        <form class="mb-0" action="<?=base_url()?>CDC/Profil/editProfil/<?=$akun->IDUser?>" method="POST" enctype="multipart/form-data">
+                                                        <?=validation_errors('<div class="error">'.'</div>'); ?>
+                                                        <?=form_open_multipart('Admin/editPemesanan/'.$akun->IDUser, ['class' => 'mb-0']);?>
+
                                                           <div class="form-group">
                                                               <img src="<?=base_url()?>uploads/foto_user/<?=$akun->Foto?>" width="100px">
                                                               <label for="exampleInputEmail1" class="bmd-label-floating ">Foto Profil</label>

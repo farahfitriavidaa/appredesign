@@ -288,7 +288,7 @@
                                                 <img src="" alt="foto yang di upload" class="img-thumbnail" id="foto-upload" style="max-height: 320px">
                                             </div>
 
-                                            <form action="<?=base_url();?>admin/Diskusi/tambahKomen" method="post" enctype="multipart/form-data" class="mb-0" autocomplete="off">
+                                            <?=form_open_multipart('admin/Diskusi/tambahKomen', ['class' => 'mb-0', 'autocomplete' => 'off']);?>
                                                 <div style="display: flex; flex-flow: row nowrap; padding: 8px 16px;">
                                                     <div class="form-group" style="display:inline; padding:0; margin: 0; flex: auto">
                                                         <?php
@@ -303,9 +303,7 @@
                                                     </label>
                                                     <input type="submit" value="Kirim" class="btn btn-primary">
                                                 </div>
-                                            </form>
-
-
+                                            <?=form_close();?>
                                         </div>
                                     </div>
 

@@ -187,8 +187,9 @@
                </button>
                </div>
                <div class="modal-body">
-                  <?php echo validation_errors('<div class="error">'.'</div>'); ?>
-                 <form class="" action="<?=base_url()?>admin/Pengguna/tambahUMKM" method="POST">
+                  <?=validation_errors('<div class="error">'.'</div>');?>
+                 <?=form_open('admin/Pengguna/tambahDataUMKM');?>
+
                    <table width="100%">
                      <tr>
                        <td>Username</td>
@@ -290,7 +291,10 @@
                              </button>
                            </div>
                            <div class="modal-body">
-                             <form class="" action="">
+                             <!-- Tidak ada action-nya? -->
+                             <!-- <form class="" action=""> -->
+                             <?=form_open();?>
+
                                <table width="100%">
                                  <tr>
                                    <td>ID UMKM</td>
@@ -369,7 +373,8 @@
                              </button>
                            </div>
                            <div class="modal-body">
-                             <form class="" action="<?=base_url()?>admin/Pengguna/editUMKM/<?=$key->IDUser?>" method="POST">
+                             <?=form_open_multipart('admin/Order/editUMKM/'.$key->IDUser);?>
+
                                <input type="hidden" name="IDUser" value="<?=$key->IDUser?>">
                                <table width="100%">
                                  <tr>

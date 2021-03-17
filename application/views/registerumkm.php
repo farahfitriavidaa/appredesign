@@ -45,7 +45,7 @@
                                         </div>
 
                                         <div class="p-3">
-                                            <form class="form-horizontal mb-0" action="<?=base_url()?>Create/registerUMKM" method="POST">
+                                            <?=form_open('Create/registerUMKM', ['class' => 'form-horizontal mb-0']); ?>
                                                 <input type="hidden" name="iduser" value="<?=$id?>">
                                                 <div class="form-group row">
                                                     <div class="col-12">
@@ -76,7 +76,7 @@
                                                         <a href="pages-login.html" class="text-muted">Sudah punya akun?</a>
                                                     </div>
                                                 </div>
-                                            </form>
+                                            <?=form_close();?>
                                         </div>
 
                                     </div>

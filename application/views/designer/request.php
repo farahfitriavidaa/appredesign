@@ -152,14 +152,17 @@
                                         <div class="card-body">
                                             <?php if($status_rq<5): ?>
 
-                                            <form action="<?=base_url();?>designer/request/uploadDesain" method="POST" enctype="multipart/form-data" autocomplete="off">
+                                            <?=form_open_multipart('designer/request/uploadDesain', ['autocomplete' => 'off']);?>
+
                                                 <input type="hidden" name="np" value="<?=$id_pesan?>">
                                                 <div class="form-group">
-                                                    <strong class="mb-0">Unggah <?=$status_rq<=3?'hasil desain':'revisi'?></strong>
-                                                    <p class="text-muted"><?php
+                                                    <strong class="mb-0">Unggah <?=$status_rq <= 3 ? 'hasil desain' : 'revisi'?></strong>
+                                                    <p class="text-muted">
+                                                    <?php
                                                         if($status_rq <= 3)
                                                             echo 'Dengan mengunggah hasil desain maka akan mengubah status request menjadi "Selesai didesain".'
-                                                    ?></p>
+                                                    ?>
+                                                    </p>
                                                 </div>
                                                 
                                                 <div class="form-group">
