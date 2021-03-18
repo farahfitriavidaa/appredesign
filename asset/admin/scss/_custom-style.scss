@@ -1,0 +1,26 @@
+/* ==============
+  Custom Style
+===================*/
+
+.overflow-auto {
+    overflow: auto;
+}
+
+.crop-center {
+    object-fit: cover;
+    object-position: center;
+}
+
+.list-diskusi {
+    display: block;
+    color: $dark;
+    cursor: pointer;
+
+    &:hover {
+        color: $primary;
+
+        .card {
+            background-color: rgba(63, 81, 181, 0.1);
+        }
+    }
+}

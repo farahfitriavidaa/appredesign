@@ -131,7 +131,8 @@ table.focus-on {
     }
     input[type="checkbox"]:checked + label {
       &::before {
-        background-color: $primary;
+        // background-color: $primary;
+        background-color: #cbd1f3;
         border-color: $primary;
       }
       &::after {
