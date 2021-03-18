@@ -10,6 +10,8 @@ class Admin extends CI_Controller {
 		$this->load->model('Model_admin');
 		$this->load->model('Model_diskusi');
 		$this->load->library('form_validation');
+
+		http_response_code(500);
 	}
 
 	// public function index()

@@ -12,6 +12,9 @@ class Designer extends CI_Controller {
 		}
 
 		$this->load->model('Model_designer');
+
+		http_response_code(500);
+
 	}
 
 	public function index()

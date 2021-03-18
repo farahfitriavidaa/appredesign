@@ -8,6 +8,9 @@ class CDC_ extends CI_Controller {
       parent::__construct();
       $this->load->model('Model_cdc');
       $this->load->library('form_validation');
+
+  		http_response_code(500);
+
     }
 
     public function index()

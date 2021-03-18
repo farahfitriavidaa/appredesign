@@ -12,6 +12,9 @@ class Umkm extends CI_Controller {
 		}
 
 		$this->load->model('Model_umkm');
+
+		http_response_code(500);
+
 	}
 
 	public function index()
