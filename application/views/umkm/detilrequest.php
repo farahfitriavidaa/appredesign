@@ -54,10 +54,10 @@
                                     <div class="card" style="height:100%;">
                                         <div class="card-body">
                                             <strong class="d-block">Nama Produk</strong>
-                                            <p><?=$data_produk->Nama_produk?></p>
+                                            <p><?= $data_produk->Nama_produk; ?></p>
 
                                             <strong class="d-block">Keterangan</strong>
-                                            <p><?=$data_produk->Keterangan?></p>
+                                            <p><?= $data_produk->Keterangan; ?></p>
 
                                             <strong class="d-block">Foto Produk</strong>
                                             <?php if(empty($data_produk->Foto_produk)): ?>
@@ -122,7 +122,7 @@
                                             </p>
                                             <strong class="d-block">Status</strong>
                                             <p>
-                                            <?php cetakStatusLengkap($detil_request->Status, false) ?>
+                                            <?= cetakStatus($detil_request->Status, $level, false); ?>
                                             </p>
                                             <strong class="d-block">Harga</strong>
                                             <p>

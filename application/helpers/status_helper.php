@@ -1,12 +1,12 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php
+
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Helper untuk mencetak badge status
- * 
- * Halaman-halaman yang memanggil function cetakStatus() (Designer):
+ * Halaman-halaman yang memanggil function cetakStatus():
  * - dashboard 2x
  * - lihatrequest 
- * - request
+ * - detilrequest
  * - lihat diskusi
  * - diskusi
  * 
@@ -16,120 +16,78 @@ if ( ! function_exists('cetakStatus')) {
 	/**
 	 * Function untuk mencetak badge status request
 	 * 
-	 * @param String id status dari request
-	 * @param boolean badge status mau float ke kanan atau tidak?
+	 * @param    String    $idStatus   id status dari request
+	 * @param    String    $level      level
+	 * @param    Boolean   $float      status mau float ke kanan atau tidak?
 	 * 
 	 */
-	function cetakStatus(int $idStatus, bool $float=true)
-	{
+	function cetakStatus(String $idStatus, String $level, bool $float = true)
+	{	
+		$status = array(
+			'admin'    => array('Pending', 'Permintaan Design Fix', 'On Going', 'Design Fix', 'Review Hasil', 'Pemesanan Fix', 'Belum Dibayar', 'Lunas', 'Cancel'),
+			'umkm'     => array('Pending', 'Telah didikusikan', 'Mulai dikerjakan dessainer', 'Selesai didesain', 'Review Hasil', 'Desain disetujui', 'Belum Dibayar', 'Lunas', 'Cancel'),
+			'designer' => array('Unknown', 'Request baru', 'Mulai dikerjakan', 'Selesai didesain', 'Review Hasil', 'Desin disetuji', 'Cancel')
+		);
+
 		switch($idStatus){
+			case 0:
+				$status_ = $status[$level][$idStatus];
+				$badge   = 'light';
+				break;
 			case 1:
-				$status = 'Request baru';
-				$badge  = 'info';
+				$status_ = $status[$level][$idStatus];
+				$badge   = 'light';
 				break;
 			case 2:
-				$status = 'Mulai dikerjakan';
-				$badge  = 'warning';
+				$status_ = $status[$level][$idStatus];
+				$badge   = 'light';
 				break;
 			case 3:
-				$status = 'Selesai didesain';
-				$badge  = 'light';
+				$status_ = $status[$level][$idStatus];
+				$badge   = 'info';
 				break;
 			case 4:
-				$status = 'Review hasil';
-				$badge  = 'light';
+				$status_ = $status[$level][$idStatus];
+				$badge   = 'info';
 				break;
 			case 5:
+				if ($level === 'designer')
+					$status_ = $status[$level][5];
+				else
+					$status_ = $status[$level][$idStatus];
+				$badge   = 'info';
+				break;
 			case 6:
+				if ($level === 'designer')
+					$status_ = $status[$level][5];
+				else
+					$status_ = $status[$level][$idStatus];
+				$badge  = 'warning';
+				break;
 			case 7:
-				$status = 'Desain disetujui';
+				if ($level === 'designer')
+					$status_ = $status[$level][5];
+				else
+					$status_ = $status[$level][$idStatus];
 				$badge  = 'success';
 				break;
 			case 8:
-				$status = 'Cancel';
+				if ($level === 'designer')
+					$status_ = $status[$level][6];
+				else
+					$status_ = $status[$level][$idStatus];
 				$badge  = 'danger';
 				break;
 			default:
-				$status = 'Unknown';
-				$badge  = 'light';
+				$status_ = 'Unknown';
+				$badge   = 'light';
 				break;
 		}
 
-		// <span class="$float? $badge"> $status </span>
+		// <span class='$float? $badge'> $status_ </span>
 		$floatClass = $float ? 'float-right' : ' ';
 
-		echo "<span class=\"$floatClass badge badge-$badge\" style=\"font-size:unset\"> $status </span>";
-	}
-}
-
-/**
- * 
- * Halaman-halaman yang memanggil function cetakStatusLengkap():
- * - dashboard 2x
- * - lihatrequest 
- * - detilrequest
- * - lihat diskusi
- * - diskusi
- * 
- */
-
-if ( ! function_exists('cetakStatusLengkap')) {
-	/**
-	 * Function untuk mencetak badge status request
-	 * 
-	 * @param String id status dari request
-	 * @param boolean badge status mau float ke kanan atau tidak?
-	 * 
-	 */
-	function cetakStatusLengkap(int $idStatus, bool $float=true)
-	{
-		switch($idStatus){
-			case 0:
-				$status = "Pending";
-				$badge  = "light";
-				break;
-			case 1:
-				$status = "Telah didiskusikan";
-				$badge  = "light";
-				break;
-			case 2:
-				$status = "Mulai dikerjakan desainer";
-				$badge  = "light";
-				break;
-			case 3:
-				$status = "Selesai didesain";
-				$badge  = "info";
-				break;
-			case 4:
-				$status = "Review hasil";
-				$badge  = "info";
-				break;
-			case 5:
-				$status = "Desain disetujui";
-				$badge  = "info";
-				break;
-			case 6:
-				$status = "Belum dibayar";
-				$badge  = "warning";
-				break;
-			case 7:
-				$status = "Lunas";
-				$badge  = "success";
-				break;
-			case 8:
-				$status = "Cancel";
-				$badge  = "danger";
-				break;
-			default:
-				$status = "Pending";
-				$badge  = "light";
-				break;
-		}
-
-		// <span class="$float? $badge"> $status </span>
-		$floatClass = $float ? 'float-right' : ' ';
-
-		echo "<span class=\"$floatClass badge badge-$badge\" style=\"font-size:unset\"> $status </span>";
+		return '<span class="'.$floatClass.' badge badge-'.$badge.'" style="font-size:unset;">'.$status_.'</span>';
 	}
 }
 

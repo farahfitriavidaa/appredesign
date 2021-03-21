@@ -39,11 +39,12 @@ class Request extends CI_Controller {
 			$data = array(
 				'has_request'	=> true,
 				'requests'		=> $daftar_request,
-				'produks'		=> $daftar_produk
+				'produks'		=> $daftar_produk,
+				'level'			=> $this->session->level
 			);
 		}
 
-		$this->load->helper('status_helper');
+		$this->load->helper(array('text', 'status_helper'));
 		$this->load->view('umkm/lihatrequest', $data);
 	}
 
@@ -200,43 +201,44 @@ class Request extends CI_Controller {
 
 	public function detilRequest($id_pesan = '0')
 	{
-		if ($id_pesan!=='0') {
-			$id_pesan		= 'PS'.str_pad($id_pesan, 4, '0', STR_PAD_LEFT);
-			$id_umkm		= $this->session->id_umkm;
+		if ($id_pesan !== '0') {
+			$id_pesan       = 'PS'.str_pad($id_pesan, 4, '0', STR_PAD_LEFT);
+			$id_umkm        = $this->session->id_umkm;
 
-			$detil_request	= $this->Model_umkm->getRequest($id_umkm, $id_pesan);
+			$detil_request  = $this->Model_umkm->getRequest($id_umkm, $id_pesan);
 
 			if(is_null($detil_request)) {
 				$_SESSION['alert'] = array(
 					'jenis' => 'alert-danger',
-					'isi'	=> 'Request tidak diketahui.'
+					'isi'   => 'Request tidak diketahui.'
 				);
 				$this->session->mark_as_flash('alert');
 
 				redirect('umkm/request');
 			}// else {
 
-			$id_data_umkm	= $detil_request->IDDataUMKM;
-			$data_produk	= $this->Model_umkm->getUmkmData($id_data_umkm);
+			$id_data_umkm   = $detil_request->IDDataUMKM;
+			$data_produk    = $this->Model_umkm->getUmkmData($id_data_umkm);
 
-			$data_desainer	= array();
+			$data_desainer  = array();
 			if(is_null($detil_request->IDDesigner)){
-				$data_desainer['desainer']	= 'Ditentukan Pengelola';
-				$data_desainer['ada']		= FALSE;
+				$data_desainer['desainer']  = 'Ditentukan Pengelola';
+				$data_desainer['ada']       = FALSE;
 			}
 			else{
-				$desainer 					= $this->Model_umkm->getNamaDesainer($detil_request->IDDesigner);
-				$data_desainer['desainer']	= $desainer->Nama_lengkap;
-				$data_desainer['ada']		= TRUE;
+				$desainer                   = $this->Model_umkm->getNamaDesainer($detil_request->IDDesigner);
+				$data_desainer['desainer']  = $desainer->Nama_lengkap;
+				$data_desainer['ada']       = TRUE;
 			}
 
-			$data			= array(
-				'detil_request'	=> $detil_request,
-				'data_produk'	=> $data_produk,
-				'desainer'		=> $data_desainer
+			$data = array(
+				'detil_request' => $detil_request,
+				'data_produk'   => $data_produk,
+				'desainer'      => $data_desainer,
+				'level'         => $this->session->level
 			);
 
-			$this->load->helper( array('my_helper', 'status_helper') );
+			$this->load->helper( array('my_helper', 'status_helper', 'text') );
 			$this->load->view('umkm/detilrequest', $data);
 			//} // end of else
 		} else {
