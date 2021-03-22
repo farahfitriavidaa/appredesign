@@ -240,7 +240,7 @@ class Create extends CI_Controller {
 
 			if( $cek->Level === 'Pengelola' ) {
 				$this->session->user  = $user;
-				$this->session->level = 'pengelola';
+				$this->session->level = 'admin';
 
 				$data = array(
 					'akun'          => $cek,

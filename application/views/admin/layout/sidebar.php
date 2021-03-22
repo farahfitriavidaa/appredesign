@@ -55,10 +55,10 @@
                         <a href="<?=base_url()?>admin/Order/kelolaOrderDesigner">Designer</a>
                     </li>
                     <li>
-                        <a href="<?=base_url()?>admin/Diskusi/lihatDiskum">Diskusi UMKM</a>
+                        <a href="<?=base_url()?>admin/diskum/lihatDiskusi">Diskusi UMKM</a>
                     </li>
                     <li>
-                        <a href="<?=base_url()?>admin/Diskusi/lihatDispro">Diskusi Produk</a>
+                        <a href="<?=base_url()?>admin/dispro/lihatDiskusi">Diskusi Produk</a>
                     </li>
                 </ul>
             </li>

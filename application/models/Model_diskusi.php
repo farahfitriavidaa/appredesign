@@ -1,28 +1,62 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
-/**
- * Model untuk mengolah data diskusi
- *
- *
- */
+<?php
+
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Model_diskusi extends CI_Model {
 	
+	/**
+	 * Ambil satu baris data pemesanan dari tb_pemesanan join tb_umkm_data
+	 * 
+	 * @param    String    $id_pesan    IDPesan
+	 * @param    String    $id_level    IDPengelola/IDDesigner/IDUMKM
+	 * @param    String    $level       Level pengguna (admin/designer/umkm)
+	 */
 	public function getPemesanan($id_pesan, $id_level, $level)
 	{
-		if ($level=='pengelola')
+		if ($level === 'admin')
 			return $this->db->query("SELECT * FROM tb_pemesanan JOIN tb_umkm_data USING(IDDataUMKM) WHERE IDPesan='$id_pesan' AND IDPengelola='$id_level'")->row();
 
-		elseif ($level=='designer')
+		elseif ($level === 'designer')
 			return $this->db->query("SELECT * FROM tb_pemesanan JOIN tb_umkm_data USING(IDDataUMKM) WHERE IDPesan='$id_pesan' AND IDDesigner='$id_level'")->row();
 
-		elseif ($level=='umkm')
+		elseif ($level === 'umkm')
 			return $this->db->query("SELECT * FROM tb_pemesanan JOIN tb_umkm_data USING(IDDataUMKM) WHERE IDPesan='$id_pesan' AND IDUMKM='$id_level'")->row();
     }
+
+	/**
+	 * Ambil id pengguna berdasarkan level (IDPengelola/IDDesigner/IDUMKM)
+	 * 
+	 * @param    String    $username    Username
+	 * @param    String    $level       Level (admin/designer/umkm)
+	 */
+	public function getIdLevel($username, $level)
+	{
+		if ($level === 'admin')
+			return $this->db->query("SELECT IDPengelola AS IDLevel FROM tb_pengelola JOIN tb_user USING(IDUser) WHERE Username='$username'")->row();
+
+		elseif ($level === 'designer')
+			return $this->db->query("SELECT IDDesigner AS IDLevel FROM tb_desainer JOIN tb_user USING(IDUser) WHERE Username='$username'")->row();
+
+		elseif ($level === 'umkm')
+			return $this->db->query("SELECT IDUMKM AS IDLevel FROM tb_umkm JOIN tb_user USING(IDUser) WHERE Username='$username'")->row();
+	}
 
     public function getNamaDesainer($id_desainer)
 	{
 		return $this->db->query("SELECT Nama_lengkap FROM tb_user JOIN tb_desainer USING(IDUser) WHERE IDDesigner='$id_desainer'")->row();
 	}
+
+	public function getAllIdPesan($id_level, $level)
+	{
+		if ($level === 'admin')
+			return $this->db->query("SELECT IDPesan FROM tb_pemesanan WHERE IDPengelola='$id_level'")->result_array();
+
+		elseif ($level === 'designer')
+			return $this->db->query("SELECT IDPesan FROM tb_pemesanan WHERE IDDesigner='$id_level'")->result_array();
+
+		elseif ($level === 'umkm')
+			return $this->db->query("SELECT IDPesan FROM tb_pemesanan JOIN tb_umkm_data USING(IDDataUMKM) WHERE IDUMKM='$id_level'")->result_array();
+    }
 
 	public function getDaftarDiskum($id_pesan, $status, $baris, $limit)
 	{
@@ -110,6 +144,14 @@ class Model_diskusi extends CI_Model {
 		$this->db->where("IDPesan", $id_pesan);
 		$this->db->order_by("dispro.Tanggal_waktu", "DESC");
 		$result = $this->db->get();
+
+		return $result->result();
+	}
+
+	public function getFotoUser($username) {
+		$this->db->select("Foto");
+		$this->db->where("Username", $username);
+		$result = $this->db->get("tb_user");
 
 		return $result->result();
 	}
