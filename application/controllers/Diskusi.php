@@ -88,9 +88,8 @@ class Diskusi extends CI_Controller
 			);
 		}
 
-		$this->load->helper(array('my_helper', 'status_helper'));
+		$this->load->helper(array('my_helper', 'status_helper', 'text'));
 		$this->load->view('diskusi/diskusi', $data);
-		// var_dump($data);
 	}
 
 	/**

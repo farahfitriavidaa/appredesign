@@ -194,79 +194,63 @@
 								<div class="col-12">
 									<div class="mb-4">
 										<div class="mb-4">
-											<strong>Diskusi dengan Pengelola</strong>
+											<?php if(empty($daftar_komentar)): ?>
+												<p>Belum ada diskusi. Mulai diskusi dengan kirim komentar/pesan di bawah.</p>
+											<?php else: ?>
+												<?php
+													$lawan_diskusi = 'Pengelola';
+													if ($level === 'admin')
+														$lawan_diskusi = $jenis_diskusi === 'diskum' ? 'UMKM' : 'designer';
+												?>
+												<strong>Diskusi dengan <?= $lawan_diskusi; ?></strong>
+											<?php endif; ?>
 										</div>
-										<div class="px-2" style="overflow-y: auto; max-height: 120vh">
+
+										<div>
 										<?php foreach($daftar_komentar as $diskusi): ?>
-											<div class="card mb-3">
-												<div class="card-header">
-													<div class="row ml-0">
-														<div class="mr-2">
-															<img src="<?=base_url()?>uploads/foto_user/<?=$diskusi->Foto?>" alt="foto profil" class="img-fluid crop-center rounded-circle" style="width:40px;height:40px;"/>
-														</div>
-														<div>
-															<strong class="d-block"><?=$diskusi->Nama_lengkap?></strong>
-															<span class="text-muted">
+											<div class="row mb-3" style="flex-flow: nowrap; margin-right: 75px;" >
+												<div class="col-auto">
+													<div class="rounded-circle p-1" style="background-color: #ffffff;">
+														<img src="<?=base_url()?>uploads/foto_user/<?=$diskusi->Foto?>" alt="foto profil" class="img-fluid crop-center rounded-circle" style="width: 30px; height: 30px;"/>
+													</div>
+												</div>
+												<div class="card" style="<?=strtolower($diskusi->Level) === $level ? 'background-color: #f5f5ff;' : ''; ?>" >
+													<div class="card-header">
+														<div class="row px-3" style="align-items: baseline;">
+															<strong><?=$diskusi->Nama_lengkap?></strong>
+															<small class="text-muted ml-2">
 																<?php
 																	if ($diskusi->Level === "UMKM")
-																		echo $diskusi->Level." - ".$diskusi->Nama_umkm;
+																		echo "(".$diskusi->Level." - ".character_limiter($diskusi->Nama_umkm, 12).")";
 																	else
-																		echo $diskusi->Level;
+																		echo "(".$diskusi->Level.")";
 																?>
-															</span>
+															</small>
+														</div>
+													</div>
+													<div class="card-body" style="padding: 0.5rem 1.25rem;">
+														<?php if (property_exists($diskusi, 'Foto_diskum')): ?>
+															<?php if ( ! is_null($diskusi->Foto_diskum)): ?>
+																<a href="<?=base_url();?>uploads/foto_diskum/<?=$diskusi->Foto_diskum?>" class="btn btn-secondary" download>Download gambar</a>
+																<img src="<?=base_url();?>uploads/foto_diskum/<?=$diskusi->Foto_diskum?>" alt="foto untuk diskusi" class="img-thumbnail d-block img-diskusi">
+															<?php endif; ?>
+														<?php else: ?>
+															<?php if ( ! is_null($diskusi->Foto_dispro)): ?>
+																<a href="<?=base_url();?>uploads/foto_dispro/<?=$diskusi->Foto_dispro?>" class="btn btn-secondary" download>Download gambar</a>
+																<img src="<?=base_url();?>uploads/foto_dispro/<?=$diskusi->Foto_dispro?>" alt="foto untuk diskusi" class="img-thumbnail d-block img-diskusi">
+															<?php endif; ?>
+														<?php endif; ?>
+
+														<p class="mt-2 mb-2"><?=$diskusi->Komentar?></p>
+
+														<div class="w-100 mt-2">
+															<small class="text-13 text-muted float-right"><?= cetakWaktu($diskusi->Tanggal_waktu); ?></small>
 														</div>
 													</div>
 												</div>
-												<div class="card-body">
-													<?php if (property_exists($diskusi, 'Foto_diskum')): ?>
-														<?php if ( ! is_null($diskusi->Foto_diskum)): ?>
-															<a href="<?=base_url();?>uploads/foto_diskum/<?=$diskusi->Foto_diskum?>" class="btn btn-secondary" download>Download gambar</a>
-															<img src="<?=base_url();?>uploads/foto_diskum/<?=$diskusi->Foto_diskum?>" alt="foto untuk diskusi" class="img-thumbnail d-block" style="max-width: 240px; max-height: 480px;">
-														<?php endif; ?>
-													<?php else: ?>
-														<?php if ( ! is_null($diskusi->Foto_dispro)): ?>
-															<a href="<?=base_url();?>uploads/foto_dispro/<?=$diskusi->Foto_dispro?>" class="btn btn-secondary" download>Download gambar</a>
-															<img src="<?=base_url();?>uploads/foto_dispro/<?=$diskusi->Foto_dispro?>" alt="foto untuk diskusi" class="img-thumbnail d-block" style="max-width: 240px; max-height: 480px;">
-														<?php endif; ?>
-													<?php endif; ?>
-
-													<p class="mt-2 mb-2"><?=$diskusi->Komentar?></p>
-												</div>
-												<div class="card-footer">
-													<span class="text-13 text-muted float-right"><?= cetakWaktu($diskusi->Tanggal_waktu); ?></span>
-												</div>
+												<!-- <div style="width: 75px; flex-shrink: 0;"></div> -->
 											</div>
 										<?php endforeach; ?>
-
-										</div>
-
-										<!-- Bagian input komentar -->
-										<div class="card mt-4">
-											<div id="preview-wrapper" style="display: none; height: 0;">
-												<button class="btn btn-secondary position-absolute" id="hapus-foto" aria-label="Close" style="top: 24px; right: 24px; background-color: #fff;">
-													Hapus Foto
-												</button>
-												<img src="" alt="foto yang di upload" class="img-thumbnail" id="foto-upload" style="max-height: 320px;">
-											</div>
-
-											<?php $action = $level.'/'.$jenis_diskusi.'/tambahKomentar'; ?>
-
-											<?=form_open_multipart($action, ['class' => 'mb-0', 'autocomplete' => 'off']);?>
-												<div style="display: flex; flex-flow: row nowrap; padding: 8px 16px;">
-													<div class="form-group" style="display:inline; padding:0; margin: 0; flex: auto">
-														<input type="hidden" name="np" value="<?= $id_pesan; ?>">
-														<input type="text" name="komentar" placeholder="Masukan pesan..." class="form-control" style="display: unset;">
-													</div>
-													<label for="foto" class="mx-3 mb-0" style="font-size: 1.4em; cursor: pointer">
-                                                        <i class="mdi mdi-camera"></i>
-                                                        <input type="file" name="foto-komentar" id="foto" style="display:none">
-                                                    </label>
-                                                    <label for="submit-button" class="btn btn-primary">
-                                                        <i class="mdi mdi-send"></i>
-                                                        <input type="submit" id="submit-button" value="Kirim" style="display: none;">
-                                                    </label>
-												</div>
-											<?=form_close();?>
 										</div>
 									</div>
 
@@ -281,7 +265,36 @@
 
 				</div> <!-- content -->
 
-				<footer class="footer">
+				<!-- Bagian input komentar -->
+				<div class="card" id="input-komentar">
+					<div id="preview-wrapper" style="display: none; height: 0;">
+						<button class="btn btn-secondary position-absolute" id="hapus-foto" aria-label="Close" style="top: 24px; right: 24px; background-color: #fff;">
+							Hapus Foto
+						</button>
+						<img src="" alt="foto yang di upload" class="img-thumbnail" id="foto-upload" style="max-height: 320px;">
+					</div>
+
+					<?php $action = $level.'/'.$jenis_diskusi.'/tambahKomentar'; ?>
+
+					<?=form_open_multipart($action, ['class' => 'mb-0', 'autocomplete' => 'off']);?>
+						<div style="display: flex; flex-flow: row nowrap; padding: 8px 16px;">
+							<div class="form-group" style="display:inline; padding:0; margin: 0; flex: auto">
+								<input type="hidden" name="np" value="<?= $id_pesan; ?>">
+								<input type="text" name="komentar" placeholder="Masukan pesan..." class="form-control" style="display: unset;">
+							</div>
+							<label for="foto" class="mx-3 mb-0" style="font-size: 1.4em; cursor: pointer">
+								<i class="mdi mdi-camera"></i>
+								<input type="file" name="foto-komentar" id="foto" style="display:none">
+							</label>
+							<label for="submit-button" class="btn btn-primary">
+								<i class="mdi mdi-send"></i>
+								<input type="submit" id="submit-button" value="Kirim" style="display: none;">
+							</label>
+						</div>
+					<?=form_close();?>
+				</div>
+
+				<footer class="footer" style="z-index: 10;">
 					© 2018 Urora by Mannatthemes.
 				</footer>
 
@@ -292,43 +305,6 @@
 		<!-- END wrapper -->
 
 		<!-- Custom script untuk menampilkan preview gambar -->
-		<script>
-			const input = document.getElementById('foto');
-			input.addEventListener('change', tampilPreview);
-
-			function tampilPreview(e) {
-				let wrapper = document.getElementById('preview-wrapper');
-				wrapper.style.height= 'auto';
-				wrapper.style.display= 'block';
-				wrapper.classList.add('p-3');
-
-				let preview = document.getElementById('foto-upload');
-				preview.src = URL.createObjectURL(event.target.files[0]);
-				preview.onload = function(){
-					URL.revokeObjectURL(preview.src);
-				}
-
-				let label = document.getElementById('label');
-				label.innerText = 'Ganti Foto';
-			}
-
-			const hapus = document.getElementById('hapus-foto');
-			hapus.addEventListener('click', hapusFoto);
-
-			function hapusFoto() {
-				input.value = '';
-
-				let preview = document.getElementById('foto-upload');
-				preview.src = '';
-
-				let wrapper = document.getElementById('preview-wrapper');
-				wrapper.style.height= '0';
-				wrapper.style.display= 'none';
-				wrapper.classList.remove('p-3');
-
-				let label = document.getElementById('label');
-				label.innerText = 'Tambahkan Foto';
-			}
-		</script>
+		<script src="<?=base_url();?>asset/admin/pages/diskusi.js"></script>
 
 		<?php $this->load->view('diskusi/layouts/footer') ?>
