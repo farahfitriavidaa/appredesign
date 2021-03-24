@@ -3699,8 +3699,17 @@ body.fixed-left .side-menu.left {
 
 .img-diskusi {
   width: 100%;
-  max-width: 230px;
+  max-width: 240px;
   max-height: 480px;
+}
+
+.btn-download {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 14px;
+  background-color: #ffffff;
+  opacity: 0.75;
 }
 
 /*

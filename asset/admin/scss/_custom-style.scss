@@ -38,3 +38,12 @@
     max-width: 240px;
     max-height: 480px;
 }
+
+.btn-download {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-size: 14px;
+    background-color: $white;
+    opacity: 0.75;
+}

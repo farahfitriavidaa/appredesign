@@ -34,3 +34,16 @@ function hapusFoto() {
     let label = document.getElementById('label');
     label.innerText = 'Tambahkan Foto';
 }
+
+const img_diskusi = document.getElementsByClassName('img-diskusi');
+for (let i = 0; i < img_diskusi.length; i++) {
+    img_diskusi[i].addEventListener('click', tampilTombolDownload);
+    img_diskusi[i].d_index = i;
+}
+
+function tampilTombolDownload(e) {
+    let index = e.currentTarget.d_index;
+    let tombol = document.getElementsByClassName('btn-download')[index];
+
+    tombol.classList.toggle('d-none');
+}

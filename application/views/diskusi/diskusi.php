@@ -214,7 +214,7 @@
 														<img src="<?=base_url()?>uploads/foto_user/<?=$diskusi->Foto?>" alt="foto profil" class="img-fluid crop-center rounded-circle" style="width: 30px; height: 30px;"/>
 													</div>
 												</div>
-												<div class="card" style="<?=strtolower($diskusi->Level) === $level ? 'background-color: #f5f5ff;' : ''; ?>" >
+												<div class="card" style="<?=strtolower($diskusi->Level) === $level ? 'background-color: #cacaff;' : ''; ?>" >
 													<div class="card-header">
 														<div class="row px-3" style="align-items: baseline;">
 															<strong><?=$diskusi->Nama_lengkap?></strong>
@@ -231,15 +231,20 @@
 													<div class="card-body" style="padding: 0.5rem 1.25rem;">
 														<?php if (property_exists($diskusi, 'Foto_diskum')): ?>
 															<?php if ( ! is_null($diskusi->Foto_diskum)): ?>
-																<a href="<?=base_url();?>uploads/foto_diskum/<?=$diskusi->Foto_diskum?>" class="btn btn-secondary" download>Download gambar</a>
-																<img src="<?=base_url();?>uploads/foto_diskum/<?=$diskusi->Foto_diskum?>" alt="foto untuk diskusi" class="img-thumbnail d-block img-diskusi">
+																<div class="position-relative img-diskusi">
+																	<img src="<?=base_url();?>uploads/foto_diskum/<?=$diskusi->Foto_diskum?>" alt="foto untuk diskusi" class="img-thumbnail d-block">
+																	<a href="<?=base_url();?>uploads/foto_diskum/<?=$diskusi->Foto_diskum?>" class="btn btn-download d-none" download>Download gambar</a>
+																</div>
 															<?php endif; ?>
 														<?php else: ?>
 															<?php if ( ! is_null($diskusi->Foto_dispro)): ?>
-																<a href="<?=base_url();?>uploads/foto_dispro/<?=$diskusi->Foto_dispro?>" class="btn btn-secondary" download>Download gambar</a>
-																<img src="<?=base_url();?>uploads/foto_dispro/<?=$diskusi->Foto_dispro?>" alt="foto untuk diskusi" class="img-thumbnail d-block img-diskusi">
+																<div class="position-relative img-diskusi">
+																	<img src="<?=base_url();?>uploads/foto_dispro/<?=$diskusi->Foto_dispro?>" alt="foto untuk diskusi" class="img-thumbnail d-block">
+																	<a href="<?=base_url();?>uploads/foto_dispro/<?=$diskusi->Foto_dispro?>" class="btn btn-download d-none" download>Download gambar</a>
+																</div>
 															<?php endif; ?>
 														<?php endif; ?>
+
 
 														<p class="mt-2 mb-2"><?=$diskusi->Komentar?></p>
 
@@ -248,7 +253,6 @@
 														</div>
 													</div>
 												</div>
-												<!-- <div style="width: 75px; flex-shrink: 0;"></div> -->
 											</div>
 										<?php endforeach; ?>
 										</div>
