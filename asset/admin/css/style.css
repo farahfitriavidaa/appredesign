@@ -3689,6 +3689,20 @@ body.fixed-left .side-menu.left {
   background-color: rgba(63, 81, 181, 0.1);
 }
 
+#input-komentar {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 240px;
+  z-index: 99;
+}
+
+.img-diskusi {
+  width: 100%;
+  max-width: 230px;
+  max-height: 480px;
+}
+
 /*
 File: Responsive
 */
@@ -3776,6 +3790,10 @@ File: Responsive
 
   .app-search {
     margin-left: 60px;
+  }
+
+  #input-komentar {
+    left: 0;
   }
 }
 @media (max-width: 767px) {

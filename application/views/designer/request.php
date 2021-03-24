@@ -83,7 +83,7 @@
                                             </p>
                                             <strong class="d-block">Status</strong>
                                             <p>
-                                                <?php cetakStatus($request->Status, false); ?>    
+                                                <?= cetakStatus($request->Status, $level, false); ?>    
                                             </p>
                                             <strong class="d-block">Tanggal Mulai Desain</strong>
                                             <p>
@@ -150,7 +150,9 @@
                                 <div class="col-lg-6 mb-4">
                                     <div class="card" style="height:100%;">
                                         <div class="card-body">
-                                            <?php if($status_rq<5): ?>
+                                            <?php $status_rq = $request->Status; ?>
+
+                                            <?php if ($status_rq < 5): ?>
 
                                             <?=form_open_multipart('designer/request/uploadDesain', ['autocomplete' => 'off']);?>
 
@@ -159,7 +161,7 @@
                                                     <strong class="mb-0">Unggah <?=$status_rq <= 3 ? 'hasil desain' : 'revisi'?></strong>
                                                     <p class="text-muted">
                                                     <?php
-                                                        if($status_rq <= 3)
+                                                        if ($status_rq <= 3)
                                                             echo 'Dengan mengunggah hasil desain maka akan mengubah status request menjadi "Selesai didesain".'
                                                     ?>
                                                     </p>
@@ -186,7 +188,7 @@
                                             <?php 
                                                 else:
                                                     $hasil_design = explode(',', $hasil_design); ?>
-                                                    <?php if($status_rq<=3): ?>
+                                                    <?php if ($status_rq <= 3): ?>
                                                         <button class="btn btn-danger" data-toggle="modal" data-target="#konfirmasi-hapus-hasil">Hapus hasil desain</button>
                                                         <!-- Modal -->
                                                         <div class="modal fade" id="konfirmasi-hapus-hasil" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmModal" aria-hidden="true">
@@ -219,7 +221,7 @@
                                             <?php
                                                 else: 
                                                     $revisi = explode(',', $revisi)?>
-                                                    <?php if($status_rq==4): ?>
+                                                    <?php if ($status_rq == 4): ?>
                                                         <button class="btn btn-danger" data-toggle="modal" data-target="#konfirmasi-hapus-revisi">Hapus revisi</button>
                                                         <!-- Modal -->
                                                         <div class="modal fade" id="konfirmasi-hapus-revisi" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmModal" aria-hidden="true">

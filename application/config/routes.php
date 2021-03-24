@@ -53,11 +53,42 @@ $route['default_controller'] = 'Landingpage';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+$route['admin'] = 'admin/dashboard';
+
 $route['umkm'] = 'umkm/dasbor';
 $route['umkm/logout'] = 'umkm/dasbor/logout';
-$route['umkm/diskusi/(:num)'] = 'umkm/diskusi/index/$1';
 
 $route['designer'] = 'designer/dasbor';
 $route['designer/logout'] = 'designer/dasbor/logout';
 $route['designer/request/(:num)'] = 'designer/request/index/$1';
-$route['designer/diskusi/(:num)'] = 'designer/diskusi/index/$1';
+
+/* --- Route Diskusi --- */
+
+$route['admin/diskum/(:num)'] = 'diskusi/index/diskum/$1';
+$route['admin/dispro/(:num)'] = 'diskusi/index/dispro/$1';
+
+$route['admin/diskum/lihatDiskusi'] = 'diskusi/lihatDiskusi/diskum/belum-selesai/1';
+$route['admin/diskum/lihatDiskusi/(:any)'] = 'diskusi/lihatDiskusi/diskum/$1/1';
+$route['admin/diskum/lihatDiskusi/(:any)/(:num)'] = 'diskusi/lihatDiskusi/diskum/$1/$2';
+
+$route['admin/dispro/lihatDiskusi'] = 'diskusi/lihatDiskusi/dispro/belum-selesai/1';
+$route['admin/dispro/lihatDiskusi/(:any)'] = 'diskusi/lihatDiskusi/dispro/$1/1';
+$route['admin/dispro/lihatDiskusi/(:any)/(:num)'] = 'diskusi/lihatDiskusi/dispro/$1/$2';
+
+$route['admin/diskum/tambahKomentar'] = 'diskusi/tambahKomentar/diskum';
+$route['admin/dispro/tambahKomentar'] = 'diskusi/tambahKomentar/dispro';
+
+
+
+$route['umkm/diskusi/(:num)'] = 'diskusi/index/diskum/$1';
+$route['umkm/diskusi/lihatDiskusi'] = 'diskusi/lihatDiskusi/diskum/belum-selesai/1';
+$route['umkm/diskusi/lihatDiskusi/(:any)'] = 'diskusi/lihatDiskusi/diskum/$1/1';
+$route['umkm/diskusi/lihatDiskusi/(:any)/(:num)'] = 'diskusi/lihatDiskusi/diskum/$1/$2';
+$route['umkm/diskum/tambahKomentar'] = 'diskusi/tambahKomentar/diskum';
+
+$route['designer/diskusi/(:num)'] = 'diskusi/index/dispro/$1';
+$route['designer/diskusi/lihatDiskusi'] = 'diskusi/lihatDiskusi/dispro/belum-selesai/1';
+$route['designer/diskusi/lihatDiskusi/(:any)'] = 'diskusi/lihatDiskusi/dispro/$1/1';
+$route['designer/diskusi/lihatDiskusi/(:any)/(:num)'] = 'diskusi/lihatDiskusi/dispro/$1/$2';
+$route['designer/dispro/tambahKomentar'] = 'diskusi/tambahKomentar/dispro';
+

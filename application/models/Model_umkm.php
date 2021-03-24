@@ -22,11 +22,6 @@ class Model_umkm extends CI_Model {
 		return $this->db->query("SELECT IDDataUMKM FROM tb_umkm_data WHERE IDUMKM='$id_umkm'")->result_array();
 	}
 
-	public function getAllIdPesan($id_umkm)
-	{
-		return $this->db->query("SELECT IDPesan FROM tb_pemesanan JOIN tb_umkm_data USING(IDDataUMKM) WHERE IDUMKM='$id_umkm'")->result_array();
-	}
-
 	public function getIdDataUmkmFromIdPesan($id_pesan)
 	{
 		return $this->db->query("SELECT IDDataUMKM FROM tb_pemesanan WHERE IDPesan='$id_pesan'")->row();

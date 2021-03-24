@@ -48,11 +48,11 @@
                             ?>
                                 <div class="row">
                                     <div class="col-12">
-                                        <div class="alert <?=$alert['jenis']?> alert-dismissible fade show mb-0 mt-3" role="alert">
+                                        <div class="alert <?=$alert['jenis'];?> alert-dismissible fade show mb-0 mt-3" role="alert">
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
-                                            <?=$alert['isi']?>
+                                            <?=$alert['isi'];?>
                                         </div>
                                     </div>
                                 </div>
@@ -69,7 +69,7 @@
                             <!-- end page title end breadcrumb -->
                             <div class="row">
                                 <div class="col-12">
-                                    <?php if(!$has_request): ?>
+                                    <?php if ( ! $has_request): ?>
                                         <p>Tidak ada daftar request, Anda belum membuat request.</p>
                                         <a class="btn btn-raised btn-primary" href="<?=base_url();?>umkm/request/buatRequest">
                                         <i class="mdi mdi-plus"></i>
@@ -105,23 +105,16 @@
                                                     <tbody>
                                                     <?php
                                                         $no = 1;
-                                                        for ($i=count($requests)-1; $i >= 0 ;$i--):
+                                                        $count = count($requests)-1;
+                                                        for ($i = $count; $i >= 0 ; $i--):
                                                     ?>
                                                         <tr>
-                                                            <td><?=$no++?></td>
-                                                            <td><?=$produks[$i]->Nama_produk?></td>
-                                                            <td><?php
-                                                                $tambahan = strlen($requests[$i]->Keterangan_design)>=47?'...':'';
-                                                                echo substr($requests[$i]->Keterangan_design, '0', '47').$tambahan;
-                                                            ?></td>
+                                                            <td><?= $no++; ?></td>
+                                                            <td><?= $produks[$i]->Nama_produk; ?></td>
+                                                            <td><?= character_limiter($requests[$i]->Keterangan_design, 47); ?></td>
+                                                            <td><?= cetakStatus($requests[$i]->Status, $level); ?></td>
                                                             <td>
-                                                            <?php cetakStatusLengkap($requests[$i]->Status) ?>
-                                                            </td>
-                                                            <td>
-                                                            <?php
-                                                                $path   = $requests[$i]->IDPesan;
-                                                                $path   = trimId('PS', $path);
-                                                            ?>
+                                                            <?php $path   = trimId('PS', $requests[$i]->IDPesan); ?>
                                                             <a class="btn btn-raised btn-primary" href="<?=base_url();?>umkm/request/detilRequest/<?=$path;?>">Lihat Detil</a>
                                                             <?php if($requests[$i]->Status < 5): ?>
                                                                 <a class="btn btn-raised btn-secondary" href="<?=base_url();?>umkm/request/editRequest/<?=$path;?>">Edit</a>

@@ -44,7 +44,7 @@
                                     <div class="page-title-box">
                                         <div class="btn-group float-right">
                                             <ol class="breadcrumb hide-phone p-0 m-0">
-                                                <li class="breadcrumb-item active"><?=date('d M Y')?></li>
+                                                <li class="breadcrumb-item active"><?=date('d M Y');?></li>
                                             </ol>
                                         </div>
                                         <h4 class="page-title">Dashboard</h4>
@@ -76,16 +76,13 @@
                                                 <a href="<?=base_url();?>umkm/diskusi/<?=trimId('PS',$diskusi->IDPesan);?>" class="list-diskusi mb-2">
                                                     <div class="card" style="box-shadow:unset;border:1px solid #e5e5e5;">
                                                         <div class="card-body">
-                                                            <strong><?=$diskusi->Nama_produk?></strong>
-                                                            <p>
-                                                                <?php
-                                                                    $tambahan = strlen($diskusi->Komentar)>=37?'...':'';
-                                                                    echo substr($diskusi->Komentar, '0', '37').$tambahan;
-                                                                ?>
-                                                            </p>
+                                                            <strong><?= character_limiter($diskusi->Nama_produk, 37); ?></strong>
+
+                                                            <p><?= character_limiter($diskusi->Komentar, 37); ?></p>
+
                                                             <div class="mt-2">
-                                                                <span class="text-muted"><?=cetakWaktu($diskusi->Tanggal_waktu)?></span>
-                                                                <?php cetakStatusLengkap($diskusi->Status) ?>                                                                
+                                                                <span class="text-muted"><?= cetakWaktu($diskusi->Tanggal_waktu); ?></span>
+                                                                <?= cetakStatus($diskusi->Status, $level); ?>                                                                
                                                             </div>
                                                         </div>
                                                     </div>
@@ -101,7 +98,7 @@
                                         <div class="card-body">
                                             <h5 class="header-title mt-0 pb-3">Request Saya</h5>
 
-                                            <?php if(empty($request_terbaru)): ?>
+                                            <?php if (empty($request_terbaru)): ?>
                                                 <p>Belum ada request yang telah Anda buat.</p>
                                                 <p>Request adalah pesanan Anda untuk melakukan <i title="desain ulang">redesign</i> kemasan.</p>
                                                 <a class="btn btn-raised btn-primary" href="<?=base_url();?>umkm/request/buatRequest">Buat Request Baru</a>
@@ -110,14 +107,10 @@
                                                 <a href="<?=base_url();?>umkm/diskusi/<?=trimId('PS',$request->IDPesan);?>" class="list-diskusi mb-2">
                                                     <div class="card" style="box-shadow:unset;border:1px solid #e5e5e5;">
                                                         <div class="card-body">
-                                                            <strong>
-                                                                <?php
-                                                                    $tambahan = strlen($request->Nama_produk)>=37?'...':'';
-                                                                    echo substr($request->Nama_produk, '0', '37').$tambahan;
-                                                                ?>
-                                                            </strong>
+                                                            <strong><?= character_limiter($request->Nama_produk, 37); ?></strong>
+
                                                             <div class="mt-2">
-                                                                <?php cetakStatusLengkap($request->Status) ?>
+                                                                <?= cetakStatus($request->Status, $level); ?>
                                                             </div>
                                                         </div>
                                                     </div>

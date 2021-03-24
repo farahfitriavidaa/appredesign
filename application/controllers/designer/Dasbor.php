@@ -34,18 +34,19 @@ class Dasbor extends CI_Controller {
 			$this->session->foto_profil	= $foto_profil->Foto;
 		}
 
-		$id_designer	 	= $this->session->id_designer;
-		$ringkasan_request	= $this->Model_designer->getSumRequest($id_designer);
-		$komen_terakhir		= $this->Model_designer->getKomenTerakhir($id_designer);
-		$request_terbaru	= $this->Model_designer->getRequestTerbaru($id_designer);
+		$id_designer        = $this->session->id_designer;
+		$ringkasan_request  = $this->Model_designer->getSumRequest($id_designer);
+		$komen_terakhir     = $this->Model_designer->getKomenTerakhir($id_designer);
+		$request_terbaru    = $this->Model_designer->getRequestTerbaru($id_designer);
 
-		$data	= array(
-			'ringkasan' 		=> $ringkasan_request,
-			'diskusi_terakhir'	=> $komen_terakhir,
-			'request_terbaru'	=> $request_terbaru
+		$data = array(
+			'ringkasan'         => $ringkasan_request,
+			'diskusi_terakhir'  => $komen_terakhir,
+			'request_terbaru'   => $request_terbaru,
+			'level'				=> $this->session->level
 		);
 
-		$this->load->helper(array('my_helper', 'status_helper'));
+		$this->load->helper(array('my_helper', 'status_helper', 'text'));
 		$this->load->view('designer/dashboard', $data);
     }
 

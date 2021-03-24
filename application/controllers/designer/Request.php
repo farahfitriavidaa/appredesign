@@ -24,12 +24,12 @@ class Request extends CI_Controller {
 			return http_response_code(400);
 		}
 
-		$id_pesan		= 'PS'.str_pad($id_pesan, 4, '0', STR_PAD_LEFT);
-		$detil_request	= $this->Model_designer->getRequest($id_pesan, $this->session->id_designer);
+		$id_pesan       = 'PS'.str_pad($id_pesan, 4, '0', STR_PAD_LEFT);
+		$detil_request  = $this->Model_designer->getRequest($id_pesan, $this->session->id_designer);
 
 		if(is_null($detil_request)){
 			$data = array(
-				'detil_request'	=> null
+				'detil_request' => null
 			);
 
 			$_SESSION['alert'] = 'Data request tidak ditemukan';
@@ -37,8 +37,9 @@ class Request extends CI_Controller {
 			redirect('designer/request/lihatRequest');
 		}
 
-		$data			= array(
-			'request'	=> $detil_request
+		$data = array(
+			'request' => $detil_request,
+			'level'   => $this->session->level
 		);
 
 		// print_r($data);
@@ -48,8 +49,8 @@ class Request extends CI_Controller {
 
     public function lihatRequest()
 	{
-		$id_designer	= $this->session->id_designer;
-		$daftar_request	= $this->Model_designer->getAllRequest($id_designer);
+		$id_designer    = $this->session->id_designer;
+		$daftar_request = $this->Model_designer->getAllRequest($id_designer);
 
 		if( empty($daftar_request) ) {
 			$data = array(
@@ -58,12 +59,13 @@ class Request extends CI_Controller {
 		}
 		else {
 			$data = array(
-				'has_request'		=> true,
-				'daftar_request'	=> $daftar_request,
+				'has_request'    => true,
+				'daftar_request' => $daftar_request,
+				'level'          => $this->session->level
 			);
 		}
 
-		$this->load->helper(array('my_helper', 'status_helper'));
+		$this->load->helper(array('my_helper', 'status_helper', 'text'));
 		$this->load->view('designer/lihatrequest', $data);
 	}
 

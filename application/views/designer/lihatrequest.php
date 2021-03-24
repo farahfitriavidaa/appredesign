@@ -99,23 +99,20 @@
                                                         foreach ($daftar_request as $request):
                                                     ?>
                                                         <tr>
-                                                            <td><?=$no++?></td>
-                                                            <td><?=$request->Nama_produk?></td>
-                                                            <td><?php
-                                                                $tambahan = strlen($request->Keterangan_design)>=37?'...':'';
-                                                                echo substr($request->Keterangan_design, '0', '47').$tambahan;
-                                                            ?></td>
+                                                            <td><?= $no++; ?></td>
+                                                            <td><?= $request->Nama_produk; ?></td>
+                                                            <td><?= character_limiter($request->Keterangan_design, 47); ?></td>
                                                             <td><?php
                                                                 $tgl_order  = $request->Tgl_akhir;
-                                                                if(!is_null($tgl_order)){
+                                                                if( ! is_null($tgl_order)){
                                                                     $tgl_order  = strtotime($tgl_order);
                                                                     echo date('d M Y', $tgl_order);
                                                                 }
                                                                 else
-                                                                    echo "Belum ditentukan"
+                                                                    echo "Belum ditentukan";
                                                             ?></td>
                                                             <td>
-                                                                <?php cetakStatus($request->Status, false); ?>
+                                                                <?= cetakStatus($request->Status, $level, false); ?>
                                                             </td>
                                                             <td>
                                                                 <a class="btn btn-raised btn-primary" href="<?=base_url();?>designer/request/<?=trimId('PS', $request->IDPesan);?>">Lihat Detail</a>

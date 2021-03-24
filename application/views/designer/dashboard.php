@@ -43,7 +43,7 @@
                                 <div class="col-sm-12">
                                     <div class="page-title-box">
                                         <div class="float-right">
-                                            <span class="breadcrumb-item"><?=date('l, d M Y');?></span>
+                                            <span class="breadcrumb-item"><?= date('l, d M Y'); ?></span>
                                         </div>
                                         <h4 class="page-title">Dashboard</h4>
                                     </div>
@@ -65,7 +65,7 @@
                                                 </div>
                                                 <div class="col-8 ml-auto align-self-center text-center">
                                                     <div class="m-l-10 text-white float-right">
-                                                        <h5 class="mt-0 round-inner"><?=$ringkasan['total']?></h5>
+                                                        <h5 class="mt-0 round-inner"><?= $ringkasan['total']; ?></h5>
                                                         <p class="mb-0 ">Total Request yang didapatkan</p>
                                                     </div>
                                                 </div>
@@ -86,7 +86,7 @@
                                                 </div>
                                                 <div class="col-8 ml-auto align-self-center text-center">
                                                     <div class="m-l-10 text-white float-right">
-                                                        <h5 class="mt-0 round-inner"><?=$ringkasan['selesai']?></h5>
+                                                        <h5 class="mt-0 round-inner"><?= $ringkasan['selesai']; ?></h5>
                                                         <p class="mb-0">Request diselesaikan</p>
                                                     </div>
                                                 </div>
@@ -107,7 +107,7 @@
                                                 </div>
                                                 <div class="col-8 ml-auto align-self-center text-center">
                                                     <div class="m-l-10 text-white float-right">
-                                                        <h5 class="mt-0 round-inner"><?=$ringkasan['belum']?></h5>
+                                                        <h5 class="mt-0 round-inner"><?= $ringkasan['belum']; ?></h5>
                                                         <p class="mb-0">Request <br>belum selesai</p>
                                                     </div>
                                                 </div>
@@ -124,7 +124,7 @@
                                         <div class="card-body">
                                             <h5 class="header-title mt-0 pb-3">Diskusi Terakhir</h5>
 
-                                            <?php if ( empty($diskusi_terakhir) ): ?>
+                                            <?php if (empty($diskusi_terakhir)): ?>
                                                 <p>Belum ada diskusi. Anda akan melihat daftar diskusi terkahir di sini jika ada request yang Anda atau Pengelola komentari.</p>
                                                 <a href="<?=base_url();?>designer/request/lihatRequest" class="btn btn-primary">Lihat Request dan Beri Komentar</a>
                                             <?php else:
@@ -132,16 +132,12 @@
                                                 <a href="<?=base_url();?>designer/diskusi/<?=trimId('PS',$diskusi->IDPesan);?>" class="list-diskusi mb-2">
                                                     <div class="card" style="box-shadow:unset;border:1px solid #e5e5e5;">
                                                         <div class="card-body">
-                                                            <strong><?=$diskusi->Nama_produk?></strong>
-                                                            <p>
-                                                                <?php
-                                                                    $tambahan = strlen($diskusi->Komentar)>=37?'...':'';
-                                                                    echo substr($diskusi->Komentar, '0', '37').$tambahan;
-                                                                ?>
-                                                            </p>
+                                                            <strong><?= character_limiter($diskusi->Nama_produk, 37); ?></strong>
+                                                            <p><?= character_limiter($diskusi->Komentar, 37); ?></p>
+
                                                             <div class="mt-2">
                                                                 <span class="text-muted"><?=cetakWaktu($diskusi->Tanggal_waktu)?></span>
-                                                                <?php cetakStatus($diskusi->Status); ?>
+                                                                <?=cetakStatus($diskusi->Status, $level); ?>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -167,14 +163,10 @@
                                                 <a href="<?=base_url();?>designer/diskusi/<?=trimId('PS',$request->IDPesan);?>" class="list-diskusi mb-2">
                                                     <div class="card" style="box-shadow:unset;border:1px solid #e5e5e5;">
                                                         <div class="card-body">
-                                                            <strong>
-                                                                <?php
-                                                                    $tambahan = strlen($request->Nama_produk)>=37?'...':'';
-                                                                    echo substr($request->Nama_produk, '0', '37').$tambahan;
-                                                                ?>
-                                                            </strong>
+                                                            <strong><?= character_limiter($request->Nama_produk, 37); ?></strong>
+
                                                             <div class="mt-2">
-                                                                <?php cetakStatus($request->Status); ?>
+                                                                <?=cetakStatus($request->Status, $level); ?>
                                                             </div>
                                                         </div>
                                                     </div>

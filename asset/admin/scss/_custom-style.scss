@@ -24,3 +24,17 @@
         }
     }
 }
+
+#input-komentar {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 240px;
+    z-index: 99;
+}
+
+.img-diskusi {
+    width: 100%;
+    max-width: 240px;
+    max-height: 480px;
+}
