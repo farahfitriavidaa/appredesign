@@ -14,8 +14,7 @@ class Diskusi extends CI_Controller
 			redirect('Create/login');
 		}
 
-		if ($this->uri->segment(1) !== $this->session->level && $this->uri->segment(1) !== 'admin') {
-			// redirect ke dasbor masing-masing
+		if ($this->uri->segment(1) !== $this->session->level) {
 			redirect('Create/logout');
 		}
 
