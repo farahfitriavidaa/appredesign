@@ -214,7 +214,7 @@
 														<img src="<?=base_url()?>uploads/foto_user/<?=$diskusi->Foto?>" alt="foto profil" class="img-fluid crop-center rounded-circle" style="width: 30px; height: 30px;"/>
 													</div>
 												</div>
-												<div class="card" style="<?=strtolower($diskusi->Level) === $level ? 'background-color: #f5f5ff;' : ''; ?>" >
+												<div class="card" style="<?=strtolower($diskusi->Level) === $level ? 'background-color: #cacaff;' : ''; ?>" >
 													<div class="card-header">
 														<div class="row px-3" style="align-items: baseline;">
 															<strong><?=$diskusi->Nama_lengkap?></strong>
