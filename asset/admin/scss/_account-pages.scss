@@ -2,14 +2,13 @@
   Account Pages
 ===================*/
 .accountbg {
-    background: url("../images/background.jpeg");
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    background-position: center center;
-    background-size: cover;
+  background: url("../images/background.jpeg");
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-position: center center;
+  background-size: cover;
 }
-
 
 .wrapper-page {
   max-width: 100%;
@@ -53,4 +52,19 @@
     line-height: 150px;
     text-shadow: rgb(64, 192, 195) 1px 1px, rgb(63, 81, 181) 2px 2px, rgb(30, 81, 164) 3px 3px;
   }
+}
+
+// Additional style for _account-pages
+
+.accountbg-custom {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-image: url("/asset/admin/images/background.jpeg");
+  background-size: cover;
+}
+
+.card {
+  border: 7px groove $primary;
+  border-radius: 10px;
 }

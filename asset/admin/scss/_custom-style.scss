@@ -25,6 +25,24 @@
     }
 }
 
+#hal-pertama, #hal-kedua {
+    overflow: hidden;
+    transition: height .25s ease-out;
+}
+
+.sembunyi {
+    height: 0;
+    visibility: hidden;
+}
+
+.error-input-file {
+    color: $danger;
+}
+
+.list-file-error {
+    padding-left: 20px;
+}
+
 #input-komentar {
     position: fixed;
     right: 0;

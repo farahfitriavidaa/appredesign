@@ -294,6 +294,149 @@ class Create extends CI_Controller {
 		}
 	}
 
+	public function buatRequest()
+	{
+		if ($this->input->method() === 'get') {
+			$this->load->helper('my_helper');
+			$this->load->view('buatrequest');
+		}
+		elseif ($this->input->method() === 'post')
+		{
+			// TODO: test ini
+			$nama_produk        = $this->input->post('nama-produk');
+			$keterangan_produk  = $this->input->post('keterangan-produk');
+			$keterangan_desain  = $this->input->post('keterangan-desain');
+
+			$data_umkm          = array();
+			$alert              = ['sukses','sukses','sukses'];
+
+			$this->load->helper('my_helper');
+			$this->load->library('upload');
+
+			if( $_FILES['foto-produk']['error'] != 4 ) {
+				$config['upload_path']		= './uploads/foto_produk/';
+				$config['allowed_types']	= 'png|jpg|jpeg';
+				$config['max_size']			= '32000';
+
+				$this->upload->initialize($config);
+
+				if ( ! $this->upload->do_upload('foto-produk') ) {
+					$alert[0]	= $this->upload->display_errors('<span>', '</span>').
+						' ('.$this->upload->data('file_name').')';
+				}
+				else {
+					$data_umkm	+= array(
+						'Foto_produk' => $this->upload->data('file_name')
+					);
+				}
+			}
+
+			if( $_FILES['logo-produk']['error'] != 4 ) {
+				$config['upload_path']		= './uploads/logo_produk/';
+				$config['allowed_types']	= 'png|jpg|jpeg';
+				$config['max_size']			= '32000';
+
+				$this->upload->initialize($config);
+
+				if ( ! $this->upload->do_upload('logo-produk') ) {
+					$alert[1]	= $this->upload->display_errors('<span>', '</span>').
+						' ('.$this->upload->data('file_name').')';
+				}
+				else {
+					$data_umkm	+= array(
+						'Logo_produk' => $this->upload->data('file_name')
+					);
+				}
+			}
+
+			if( $_FILES['kemasan-produk']['error'] != 4 ) {
+				$files			= $_FILES['kemasan-produk'];
+				$jumlah_file	= count($files['name']);
+				$upload			= true;
+				$foto_kemasan_lama	= '';
+
+				for ($i = 0; $i < $jumlah_file; ++$i) {
+					$config['upload_path']		= './uploads/foto_kemasan_lama/';
+					$config['allowed_types']	= 'png|jpg|jpeg';
+					$config['max_size']			= '65000';
+		
+					$this->upload->initialize($config);
+		
+					$_FILES['file']['name']		= $files['name'][$i];
+					$_FILES['file']['type']		= $files['type'][$i];
+					$_FILES['file']['tmp_name']	= $files['tmp_name'][$i];
+					$_FILES['file']['error']	= $files['error'][$i];
+					$_FILES['file']['size']		= $files['size'][$i];
+		
+					if ( ! $this->upload->do_upload('file')) {
+
+						$alert[2]	= $this->upload->display_errors('<span>', '</span>').
+						' ('.$this->upload->data('file_name').')';
+
+						$upload = false;
+						break;
+					}
+					else {
+						$komah = $i == $jumlah_file-1 ? '' : ',';
+						$foto_kemasan_lama .= $this->upload->data('file_name').$komah;
+					}
+				}
+
+				if ($upload) {
+					$data_umkm	+= array(
+						'Kemasan_produk' => $foto_kemasan_lama
+					);
+				}
+			}
+
+			if( $alert[0]==='sukses' && $alert[1]==='sukses' && $alert[2]==='sukses'){
+
+				$this->load->model('Model_created');
+
+				$id_data_umkm		= $this->Model_created->idDataUMKM();
+				$id_umkm			= $this->session->id_umkm;
+
+				$data_umkm		+= array(
+					'IDDataUMKM'		=> $id_data_umkm,
+					'IDUMKM'			=> $id_umkm,
+					'Nama_produk'		=> $nama_produk,
+					'Keterangan'		=> $keterangan_produk
+				);
+
+				// $this->Model_umkm->createUmkmData($data_umkm);
+
+				$id_pesan		= $this->Model_created->idPesan();
+				$id_designer	= $this->input->post('desainer');
+				$id_designer	= $id_designer==='0'?NULL:'DG'.str_pad($id_designer, 4, '0', STR_PAD_LEFT);
+				$status			= '0';
+				$tanggal_order	= date('Y-m-d');
+
+				$data_pemesanan	= array(
+					'IDPesan'			=> $id_pesan,
+					'IDDataUMKM'		=> $id_data_umkm,
+					'IDDesigner'		=> $id_designer,
+					'Status'			=> $status,
+					'Keterangan_design'	=> $keterangan_desain,
+					'Tgl_order'			=> $tanggal_order
+				);
+
+				// $this->Model_umkm->createPemesanan($data_pemesanan);
+
+				$_SESSION['alert'] = array (
+					'jenis'	=> 'alert-primary',
+					'isi'	=> 'Request berhasil dibuat dan sekarang menunggu respon dari Pengelola.'
+				);
+				$this->session->mark_as_flash('alert');
+				redirect('umkm/request');
+			}
+			else{
+				$_SESSION['alert'] = $alert;
+				$this->session->mark_as_flash('alert');
+				redirect('umkm/request/buatRequest');
+			}
+		}
+	}
+
 	public function logout()
 	{
 		session_destroy();

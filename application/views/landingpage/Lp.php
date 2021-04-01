@@ -49,7 +49,7 @@
               <div class="optin">
                 <div class="row">
                   <div class="col md-6">
-                    <h3 class="optin__title">Yuk segera memulai bergabung bersama kami😊😊</h3>
+                    <h3 class="optin__title">Yuk segera memulai bergabung bersama kami 😊😊</h3>
                   </div>
                   <div>
                     <button class="optin__btn btn btn--md btn--color btn--button">
@@ -60,6 +60,24 @@
               </div>
             </div>
           </div>
+
+          <div class="row justify-content-center mt-4">
+            <div class="col-lg-10">
+              <div class="optin">
+                <div class="row">
+                  <div class="col md-6">
+                    <h3 class="optin__title">Buat <i lang="en">request</i> desain kemasan 🎨🎨</h3>
+                  </div>
+                  <div>
+                    <button class="optin__btn btn btn--md btn--color btn--button">
+                      <a href="<?=base_url()?>Create/buatRequest" style="color:white">Klik disini</a>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </section> <!-- end hero -->
 
