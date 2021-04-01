@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <?php $this->load->view('cdc/layout/head'); ?>
+    <?php $this->load->view('cdc/layout/Head'); ?>
 
     <body class="fixed-left">
 
@@ -18,7 +18,7 @@
                     </div>
                 </div>
 
-              <?php $this->load->view('cdc/layout/sidebar') ?>
+              <?php $this->load->view('cdc/layout/Sidebar') ?>
 
             </div>
 
@@ -28,7 +28,7 @@
                 <div class="content">
 
 
-                    <?php $this->load->view('cdc/layout/navbar') ?>
+                    <?php $this->load->view('cdc/layout/Navbar') ?>
 
                     <div class="page-content-wrapper dashborad-v">
 
@@ -57,7 +57,7 @@
                                                     <br><br>
                                                     <div class="general-label">
                                                         <?=validation_errors('<div class="error">'.'</div>'); ?>
-                                                        <?=form_open_multipart('Admin/editPemesanan/'.$akun->IDUser, ['class' => 'mb-0']);?>
+                                                        <?=form_open_multipart('cdc/Profil/editProfil/'.$akun->IDUser, ['class' => 'mb-0']);?>
 
                                                           <div class="form-group">
                                                               <img src="<?=base_url()?>uploads/foto_user/<?=$akun->Foto?>" width="100px">
@@ -124,4 +124,4 @@
         <!-- END wrapper -->
 
 
-        <?php $this->load->view('cdc/layout/footer') ?>
+        <?php $this->load->view('cdc/layout/Footer') ?>

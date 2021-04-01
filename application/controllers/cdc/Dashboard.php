@@ -22,7 +22,7 @@ class Dashboard extends CI_Controller {
         'pemesanan'       => $this->Model_cdc->dataPemesanan(),
         'umkm'            => $this->Model_cdc->dataUMKM()
   		);
-  		$this->load->view('cdc/dashboard',$data);
+  		$this->load->view('cdc/Dashboard',$data);
   	}
 
   }

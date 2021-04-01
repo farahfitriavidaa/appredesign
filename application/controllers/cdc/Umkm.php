@@ -17,7 +17,7 @@ class Umkm extends CI_Controller {
         'akun' => $cek,
         'verifikasi' => $this->Model_cdc->getDataVerifikasi()
       );
-      $this->load->view('cdc/kelolaverifikasi',$data);
+      $this->load->view('cdc/Kelolaverifikasi',$data);
     }
 
     public function statusAktif($id)
@@ -45,7 +45,7 @@ class Umkm extends CI_Controller {
         'akun' => $cek,
         'umkm' => $this->Model_cdc->getDataUMKM()
       );
-      $this->load->view('cdc/kelolaumkm',$data);
+      $this->load->view('cdc/Kelolaumkm',$data);
     }
 }
 

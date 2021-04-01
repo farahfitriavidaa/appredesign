@@ -16,7 +16,7 @@ class Profil extends CI_Controller {
       $data = array(
         'akun' => $cek,
       );
-      $this->load->view('cdc/kelolaprofil',$data);
+      $this->load->view('cdc/Kelolaprofil',$data);
     }
 
     public function editProfil($id)

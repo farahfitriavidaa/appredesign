@@ -17,7 +17,7 @@ class Report extends CI_Controller {
         'akun' => $cek,
         'orderpemesanan' => $this->Model_cdc->getOrderOnGoing()
       );
-      $this->load->view('cdc/kelolaongoing',$data);
+      $this->load->view('cdc/Kelolaongoing',$data);
     }
 
     public function kelolaOrderSelesai()
@@ -27,7 +27,7 @@ class Report extends CI_Controller {
         'akun' => $cek,
         'orderpemesanan' => $this->Model_cdc->getOrderSelesai()
       );
-      $this->load->view('cdc/kelolaselesai',$data);
+      $this->load->view('cdc/Kelolaselesai',$data);
     }
 
     public function kelolaOrderTransaksi()
@@ -37,7 +37,7 @@ class Report extends CI_Controller {
         'akun' => $cek,
         'orderpemesanan' => $this->Model_cdc->getOrderTransaksi()
       );
-      $this->load->view('cdc/kelolatransaksi',$data);
+      $this->load->view('cdc/Kelolatransaksi',$data);
     }
 
     public function statusLunas($id)

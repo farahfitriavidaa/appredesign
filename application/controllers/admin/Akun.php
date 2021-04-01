@@ -18,7 +18,7 @@ class Akun extends CI_Controller {
     $data = array(
       'akun' => $cek,
     );
-    $this->load->view('admin/kelolaprofil',$data);
+    $this->load->view('admin/Kelolaprofil',$data);
   }
 
   public function editProfil($id)

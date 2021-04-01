@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <?php $this->load->view('cdc/layout/head'); ?>
+    <?php $this->load->view('cdc/layout/Head'); ?>
 
     <body class="fixed-left">
 
@@ -21,7 +21,7 @@
                     </div>
                 </div>
 
-              <?php $this->load->view('cdc/layout/sidebar') ?>
+              <?php $this->load->view('cdc/layout/Sidebar') ?>
                 <!-- end sidebarinner -->
             </div>
             <!-- Left Sidebar End -->
@@ -33,7 +33,7 @@
                 <div class="content">
 
                     <!-- Top Bar Start -->
-                    <?php $this->load->view('cdc/layout/navbar') ?>
+                    <?php $this->load->view('cdc/layout/Navbar') ?>
                     <!-- Top Bar End -->
 
                     <div class="page-content-wrapper dashborad-v">
@@ -220,4 +220,4 @@
         <?php } ?>
 
 
-        <?php $this->load->view('cdc/layout/footer') ?>
+        <?php $this->load->view('cdc/layout/Footer') ?>

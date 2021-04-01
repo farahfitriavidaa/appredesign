@@ -277,7 +277,7 @@ class Create extends CI_Controller {
 					'umkm'          => $this->Model_cdc->dataUMKM()
 				);
 
-				$this->load->view('cdc/dashboard',$data);
+				$this->load->view('cdc/Dashboard',$data);
 			}
 			elseif( $cek->Level === 'Designer' ) {
 				$this->session->user  = $user;
