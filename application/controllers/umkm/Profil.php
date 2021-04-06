@@ -116,16 +116,10 @@ class Profil extends CI_Controller {
 		}
 
 		$this->load->library('form_validation');
-		$this->load->language('form_validation','indonesian');
 
 		$this->form_validation->set_rules('password-lama', 'Password Lama', 'htmlspecialchars|required');
 		$this->form_validation->set_rules('password-baru', 'Password Baru', 'htmlspecialchars|required|min_length[5]|differs[password-lama]');
 		$this->form_validation->set_rules('konfirmasi', 'Konfirmasi Password Baru', 'htmlspecialchars|required|min_length[5]|matches[password-baru]');
-
-		$this->form_validation->set_message('required', $this->lang->line('form_validation_required'));
-		$this->form_validation->set_message('min_length', $this->lang->line('form_validation_min_length'));
-		$this->form_validation->set_message('matches', $this->lang->line('form_validation_matches'));
-		$this->form_validation->set_message('differs', $this->lang->line('form_validation_differs'));
 
 		if ($this->form_validation->run() == FALSE)
 		{
