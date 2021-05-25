@@ -61,6 +61,7 @@
                                 </div>
                             </div>
 
+                            <!-- Daftar portofolio -->
                             <h3 class="h6 my-4">Daftar Portofolio</h3>
 
                             <?php if(empty($daftar_portofolio)): ?>
@@ -96,6 +97,37 @@
                                 <?php endforeach; ?>
                             </div>
                             <?php endif; ?>
+
+                            <!-- Hasil pekerjaan -->
+
+                            <?php if (! empty($hasil_desain) && ! empty($hasil_desain[0]->Hasil_design)): ?>
+                                <h3 class="h6 my-4">Hasil Desain yang Pernah Dibuat</h3>
+
+                                <div class="card">
+                                    <div class="card-body">
+                                        <?php foreach($hasil_desain as $desains): ?>
+                                            <?php
+                                                if(! empty($desains->Hasil_design)):
+                                                    $desain = explode(',', $desains->Hasil_design); ?>
+                                                <?php foreach($desain as $d): ?>
+                                                    <img src="<?=base_url('uploads/hasil_design/'.$d);?>" alt="Hasil desain" class="img-grid img-thumbnail crop-center m-2">
+                                                <?php endforeach; ?>
+                                            <?php endif; ?>
+
+                                            <?php
+                                                if(! empty($desains->Revisi_design)):
+                                                    $desain = explode(',', $desains->Revisi_design); ?>
+                                                <?php foreach($desain as $d): ?>
+                                                    <img src="<?=base_url('uploads/revisi_design/'.$d);?>" alt="Revisi desain" class="img-grid img-thumbnail crop-center m-2">
+                                                <?php endforeach; ?>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
+                                    </div>
+                                </div>
+
+                            <?php endif; ?>
+
+                            <div class="pb-4"></div>
 
                         </div><!-- container -->
 

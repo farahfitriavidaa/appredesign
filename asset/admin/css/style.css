@@ -3703,6 +3703,11 @@ body.fixed-left .side-menu.left {
   max-height: 480px;
 }
 
+.img-grid {
+  width: 200px;
+  height: 200px;
+}
+
 /*
 File: Responsive
 */

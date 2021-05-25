@@ -119,15 +119,15 @@ class Request extends CI_Controller {
 					$config['upload_path']		= './uploads/foto_kemasan_lama/';
 					$config['allowed_types']	= 'png|jpg|jpeg';
 					$config['max_size']			= '65000';
-		
+
 					$this->upload->initialize($config);
-		
+
 					$_FILES['file']['name']		= $files['name'][$i];
 					$_FILES['file']['type']		= $files['type'][$i];
 					$_FILES['file']['tmp_name']	= $files['tmp_name'][$i];
 					$_FILES['file']['error']	= $files['error'][$i];
 					$_FILES['file']['size']		= $files['size'][$i];
-		
+
 					if ( ! $this->upload->do_upload('file')) {
 
 						$alert[2]	= $this->upload->display_errors('<span>', '</span>').
@@ -352,15 +352,15 @@ class Request extends CI_Controller {
 					$config['upload_path']		= './uploads/foto_kemasan_lama/';
 					$config['allowed_types']	= 'png|jpg|jpeg';
 					$config['max_size']			= '65000';
-		
+
 					$this->upload->initialize($config);
-		
+
 					$_FILES['file']['name']		= $files['name'][$i];
 					$_FILES['file']['type']		= $files['type'][$i];
 					$_FILES['file']['tmp_name']	= $files['tmp_name'][$i];
 					$_FILES['file']['error']	= $files['error'][$i];
 					$_FILES['file']['size']		= $files['size'][$i];
-		
+
 					if ( ! $this->upload->do_upload('file')) {
 
 						$alert[2]	= $this->upload->display_errors('<span>', '</span>').
@@ -469,17 +469,19 @@ class Request extends CI_Controller {
 			redirect('umkm');
 		}
 
-		$id_designer_asli	= 'DG'.str_pad($id_designer, 4, '0', STR_PAD_LEFT);
+		$id_designer_asli  = 'DG'.str_pad($id_designer, 4, '0', STR_PAD_LEFT);
 
 		$this->load->model('Model_designer');
-		$daftar_portofolio	= $this->Model_designer->getDaftarPortofolio($id_designer_asli);
-		$daftar_designer	= $this->Model_umkm->getDaftarDesainer();
-		$data_designer		= $this->Model_umkm->getDesainer($id_designer_asli);
+		$daftar_portofolio = $this->Model_designer->getDaftarPortofolio($id_designer_asli);
+		$daftar_designer   = $this->Model_umkm->getDaftarDesainer();
+		$data_designer     = $this->Model_umkm->getDesainer($id_designer_asli);
+		$hasil_desain     = $this->Model_designer->getHasilDesain($id_designer_asli);
 
-		$data				= array(
-			'designer'			=> $data_designer,
-			'daftar_portofolio'	=> $daftar_portofolio,
-			'daftar_designer'	=> $daftar_designer
+		$data = array(
+			'designer'          => $data_designer,
+			'daftar_portofolio' => $daftar_portofolio,
+			'daftar_designer'   => $daftar_designer,
+			'hasil_desain'      => $hasil_desain
 		);
 
 		$this->load->helper('my_helper');

@@ -15,13 +15,16 @@ class Portofolio extends CI_Controller {
 
     public function index()
 	{
-		$id_designer		= $this->session->id_designer;
-		$daftar_portofolio	= $this->Model_designer->getDaftarPortofolio($id_designer);
-		$detil_designer		= $this->Model_designer->getSimpleDesigner($id_designer);
+		$id_designer       = $this->session->id_designer;
 
-		$data				= array(
-			'designer'			=> $detil_designer,
-			'daftar_portofolio'	=> $daftar_portofolio
+		$daftar_portofolio = $this->Model_designer->getDaftarPortofolio($id_designer);
+		$detil_designer    = $this->Model_designer->getSimpleDesigner($id_designer);
+		$hasil_desain      = $this->Model_designer->getHasilDesain($id_designer);
+
+		$data = array(
+			'designer'          => $detil_designer,
+			'daftar_portofolio' => $daftar_portofolio,
+			'hasil_desain'      => $hasil_desain
 		);
 
 		$this->load->helper('my_helper');

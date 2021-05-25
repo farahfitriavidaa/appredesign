@@ -37,6 +37,11 @@ class Model_designer extends CI_Model {
 		return $this->db->query("SELECT * FROM tb_portofolio WHERE IDPortofolio='$id_portofolio' AND IDDesigner='$id_designer'")->row();
 	}
 
+	public function getHasilDesain($id_designer)
+	{
+		return $this->db->query("SELECT Hasil_design, Revisi_design FROM tb_pemesanan WHERE IDDesigner='$id_designer'")->result();
+	}
+
 	public function getAllRequest($id_designer)
 	{
 		return $this->db->query("SELECT IDPesan, IDDataUMKM, IDDesigner, Status, Tgl_akhir, Keterangan_design, Nama_produk
