@@ -5,11 +5,12 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
         <title>Log in</title>
-        <meta content="Admin Dashboard" name="description" />
         <meta content="Mannatthemes" name="author" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-        <link rel="shortcut icon" href="<?=base_url()?>asset/admin/images/favicon.ico">
+        <link rel="shortcut icon" href="<?= base_url(); ?>asset/logos/favicons/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="192x192"  href="<?= base_url(); ?>asset/logos/favicons/android-icon-192x192.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="<?= base_url(); ?>asset/logos/favicons/apple-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="<?= base_url(); ?>asset/logos/favicons/apple-icon-180x180.png">
 
         <link href="<?=base_url()?>asset/admin/plugins/animate/animate.css" rel="stylesheet" type="text/css">
         <link href="<?=base_url()?>asset/admin/css/bootstrap-material-design.min.css" rel="stylesheet" type="text/css">
