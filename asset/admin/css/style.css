@@ -3094,6 +3094,14 @@ select.custom-file-control:not([size]):not([multiple]), select.form-control:not(
   background-size: cover;
 }
 
+.accountbg-custom {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-image: url("../images/background2.png");
+  background-size: cover;
+}
+
 .wrapper-page {
   max-width: 100%;
   position: relative;

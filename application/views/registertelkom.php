@@ -24,22 +24,16 @@
     <body class="fixed-left">
 
         <!-- Begin page -->
-        <div class="accountbg" style="
-            background:url('<?=base_url()?>asset/admin/images/background.jpeg');
-            position: absolute;
-            height: 100%;
-            width: 100%;
-            background-position: center center;
-            background-size: cover;"></div>
+        <div class="accountbg-custom"></div>
         <div class="wrapper-page">
             <div class="display-table">
                 <div class="display-table-cell">
                     <diV class="container">
-                        <div class="row">
-                            <div class="col-md-6">
+                        <div class="row justify-content-between">
+                            <div class="col-md-4">
                                 <img src="<?=base_url()?>asset/admin/images/icon.png" alt="" class="img-fluid">
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-8 col-lg-6">
                                 <div class="card">
                                     <div class="card-body">
 
